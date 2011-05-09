@@ -1,0 +1,40 @@
+{
+	"version":"1.0.0",
+	"levels":[
+		{
+			"id":1,
+			"levelName":"prairie",
+			"numberOfKeys":1,
+			"areaOnMap":[50, 50, 50, 50]
+					
+		},
+		{
+			"id":2,
+			"levelName":"bois",
+			"numberOfKeys":2,
+			"areaOnMap":[150, 50, 50, 50]		
+			
+		},
+		{
+			"id":3,
+			"levelName":"caverne",
+			"numberOfKeys":3,
+			"areaOnMap":[50, 140, 50, 50]		
+			
+		},
+		{
+			"id":4,
+			"levelName":"douve",
+			"numberOfKeys":4,
+			"areaOnMap":[150, 150, 50, 50]		
+			
+		},
+		{
+			"id":5,
+			"levelName":"chateau",
+			"numberOfKeys":3,
+			"areaOnMap":[2000, 50, 50, 50]		
+			
+		}	
+	]
+}

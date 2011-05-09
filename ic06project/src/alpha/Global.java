@@ -1,0 +1,23 @@
+package alpha;
+
+import org.jbox2d.common.Vec2;
+
+public class Global {
+	public final static int WINDOW_WIDTH = 800;
+	public final static int WINDOW_HEIGHT = 600;
+	public final static int GAMEPLAYWIDTH = 800;
+	public final static int GAMEPLAYHEIGHT = 500;
+	public final static String PATH_RESSOURCES = "./ressources/";
+	public final static String PATH_IMAGES_RESSOURCES = PATH_RESSOURCES+"images/";
+	public final static String PATH_SPRITES_RESSOURCES = PATH_RESSOURCES+"sprites/";
+	public final static String PATH_SOUNDS_RESSOURCES = PATH_RESSOURCES+"sounds/";
+	public final static String PATH_MUSICS_RESSOURCES = PATH_RESSOURCES+"musics/";
+	public static String CURRENT_GAME_FILENAME = null;
+	
+	public static Vec2 getWorldCoordinates(float box2dX, float box2dY){
+		return new Vec2(box2dX,box2dY);
+	}
+	public static Vec2 getBox2DCoordinates(int worldX, int worldY){
+		return new Vec2(worldX,Global.GAMEPLAYHEIGHT-worldY);
+	}
+}

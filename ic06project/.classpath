@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/Users/aurelien/Documents/Libraries/Java/JBox2D 05-08-2008/jbox2d-2.0.1-full.jar"/>
+	<classpathentry kind="lib" path="/Library/Java/Extensions/lwjgl.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="/Users/aurelien/Documents/Libraries/Java/lwjgl/native/macosx"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/aurelien/Documents/Libraries/Java/slick/lib/ibxm.jar"/>
+	<classpathentry kind="lib" path="/Users/aurelien/Documents/Libraries/Java/slick/lib/slick.jar" sourcepath="/Users/aurelien/Documents/Libraries/Java/slick/src/">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="/Users/aurelien/Documents/Libraries/Java/slick/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/aurelien/Documents/Libraries/Java/slick/lib/jorbis-0.0.15.jar"/>
+	<classpathentry kind="lib" path="/Users/aurelien/Documents/Libraries/Java/slick/lib/jogg-0.0.7.jar"/>
+	<classpathentry kind="lib" path="/Library/Java/Extensions/jackson-all-1.8.0.jar" sourcepath="/Users/aurelien/Documents/Libraries/Java/jackson-src-1.8.0/src/java/org/codehaus/jackson"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
