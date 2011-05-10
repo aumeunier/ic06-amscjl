@@ -44,6 +44,7 @@ public class Game extends StateBasedGame implements MusicListener {
 	 */
 	public static void main(String[] args) throws SlickException {
 		AppGameContainer app = new AppGameContainer(new Game("Test"));
+		Save.getInstance().loadSave("./saves/test_test2.save");
 	 
 		// Application properties
 		app.setDisplayMode(800, 600, displayFullScreen);

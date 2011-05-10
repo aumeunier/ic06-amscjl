@@ -1,17 +1,15 @@
 package alpha;
 
-
 public class Source extends Sprite {
-	int power;
-	public Source(){
+	Power power;
+	public Source(Power _power){
 		super();
-		power = 1;
-		setImage("pool_hat.png");
+		power = _power;
+		setImage(power.imageForPower());
 	}
-	public Source(int _x, int _y, int _w, int _h){
+	public Source(int _x, int _y, int _w, int _h, Power _power){
 		super(_x,_y,_w,_h);
-		power = 1;
-		setImage("pool_hat.png");
+		power = _power;
+		setImage(power.imageForPower());
 	}
-
 }

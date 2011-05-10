@@ -2,12 +2,12 @@ package alpha;
 
 
 public class Character extends Sprite{
+	private Power power;
 	public boolean isGoingRight;
 	public boolean isGoingLeft;
 	public boolean isFalling;
-	private boolean intangible;
-	private boolean flying;
-	public boolean test;
+	private boolean isDead;
+	private boolean avoidDoubleChangeFlag;
 	public Character(){
 		super();
 		x=0;
@@ -17,19 +17,25 @@ public class Character extends Sprite{
 		isGoingRight=false;
 		isGoingLeft=false;
 		isFalling=false;
-		intangible=false;
-		flying = false;
-		test = true;
+		isDead = false;
+		avoidDoubleChangeFlag=true;
+		power = Power.NONE;
 		setImage("normal.png");
 	}
 	public Character(int _x, int _y, int _w, int _h){
 		super(_x,_y,_w,_h);
+		isGoingRight=false;
+		isGoingLeft=false;
+		isFalling=false;
+		isDead = false;
+		avoidDoubleChangeFlag=true;
+		power = Power.NONE;
 	}
 	public void changeImage(){
-		if(intangible){
+		if(isIntangible()){
 			setImage("invisible.png");
 		}
-		else if(flying){
+		else if(isFlying()){
 			setImage("flying.png");	
 		}
 		else {
@@ -37,22 +43,29 @@ public class Character extends Sprite{
 		}
 	}
 	
-	public void setFlying(boolean flag){
-		flying = flag;
-		if(flying){
-			intangible = false;			
-		}
-	}
-	public void setIntangible(boolean flag){
-		intangible = flag;
-		if(intangible){
-			flying = false;
-		}
-	}
 	public boolean isFlying(){
-		return flying;
+		return power==Power.FLYING;
 	}
 	public boolean isIntangible(){
-		return intangible;
+		return power==Power.INTANGIBLE;
+	}
+	public boolean isDead(){
+		return isDead;
+	}
+	public void setDead(boolean _dead){
+		isDead = _dead;
+	}
+	public Power getPower(){
+		return power;
+	}
+	public void setPower(Power _power){
+		power = _power;
+		changeImage();
+	}
+	public boolean getAvoidDoubleFlag(){
+		return avoidDoubleChangeFlag;
+	}
+	public void changeAvoidDoubleFlagState(){
+		avoidDoubleChangeFlag=!avoidDoubleChangeFlag;
 	}
 }

@@ -91,6 +91,9 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		Input input = gc.getInput();
 		Character char1 = this.currentLevel.getFirstCharacter();
 		Character char2 = this.currentLevel.getSecondCharacter();
+		if(char1.isDead() || char2.isDead()){
+			this.ChooseLevel(1);
+		}
 		boolean char1CanMove = char1.isFlying() || !char1.isFalling;
 		boolean char2CanMove = char2.isFlying() || !char2.isFalling;
 
@@ -169,9 +172,17 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			world.destroyBody(b);
 		}
 		spriteBodies.clear();
+		if(null!=ch1_body){
+			world.destroyBody(ch1_body);
+			ch1_body=null;
+		}
+		if(null!=ch2_body){
+			world.destroyBody(ch2_body);
+			ch2_body=null;
+		}
 	}
 
-	public void addWall(Wall wallData){
+	public Body addWall(Wall wallData){
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.userData = wallData;
 		Vec2 b2dcoord = Global.getBox2DCoordinates(wallData.x, wallData.y);
@@ -185,9 +196,10 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		newBody.createShape(sd);
 		newBody.putToSleep();
 		spriteBodies.add(newBody);
+		return newBody;
 	}
 
-	public void addObstacle(Obstacle obstacleData){
+	public Body addObstacle(Obstacle obstacleData){
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.userData = obstacleData;
 		Vec2 b2dcoord = Global.getBox2DCoordinates(obstacleData.x, obstacleData.y);
@@ -201,8 +213,9 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		newBody.createShape(sd);
 		newBody.putToSleep();
 		spriteBodies.add(newBody);
+		return newBody;
 	}
-	public void addObstacleWithPoints(Obstacle obstacleData, ArrayList<Vec2> list){
+	public Body addObstacleWithPoints(Obstacle obstacleData, ArrayList<Vec2> list){
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.userData = obstacleData;
 		Vec2 b2dcoord = Global.getBox2DCoordinates(obstacleData.x, obstacleData.y);
@@ -219,9 +232,10 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		newBody.createShape(sd);
 		newBody.putToSleep();
 		spriteBodies.add(newBody);
+		return newBody;
 	}
 
-	public void addSource(Source sourceData){
+	public Body addSource(Source sourceData){
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.userData = sourceData;
 		Vec2 b2dcoord = Global.getBox2DCoordinates(sourceData.x, sourceData.y);
@@ -236,10 +250,43 @@ public class GameplayState extends BasicGameState implements MouseListener{
 
 		sd.setAsBox(sourceData.w/2,sourceData.h/2);
 		newBody.createShape(sd);
+		spriteBodies.add(newBody);		
+		return newBody;
+	}
+	
+	public Body addBoutonPressoir(BoutonPressoir bouton){
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.userData = bouton;
+		Vec2 b2dcoord = Global.getBox2DCoordinates(bouton.x, bouton.y);
+		bodyDef.position = new Vec2(b2dcoord.x+bouton.w/2,b2dcoord.y-bouton.h/2);
+		Body newBody = world.createBody(bodyDef);
+		PolygonDef sd = new PolygonDef();		
+		sd.density = 5.0f;
+		sd.friction = 5.0f;
+
+		sd.setAsBox(bouton.w/2,bouton.h/2);
+		newBody.createShape(sd);
 		spriteBodies.add(newBody);
+		return newBody;
+	}
+	
+	public Body addLevier(Levier levier){
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.userData = levier;
+		Vec2 b2dcoord = Global.getBox2DCoordinates(levier.x, levier.y);
+		bodyDef.position = new Vec2(b2dcoord.x+levier.w/2,b2dcoord.y-levier.h/2);
+		Body newBody = world.createBody(bodyDef);
+		PolygonDef sd = new PolygonDef();		
+		sd.density = 5.0f;
+		sd.friction = 5.0f;
+
+		sd.setAsBox(levier.w/2,levier.h/2);
+		newBody.createShape(sd);
+		spriteBodies.add(newBody);
+		return newBody;
 	}
 
-	public void addCharacter(Character characterData){
+	public Body addCharacter(Character characterData){
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.userData = characterData;
 		Vec2 b2dcoord = Global.getBox2DCoordinates(characterData.x, characterData.y);
@@ -263,12 +310,14 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			ch1_body.createShape(sd);
 			ch1_body.createShape(groundSensor);
 			ch1_body.wakeUp();
+			return ch1_body;
 		}
 		else {
 			ch2_body = world.createBody(bodyDef);
 			ch2_body.createShape(sd);
 			ch2_body.createShape(groundSensor);
 			ch2_body.wakeUp();
+			return ch2_body;
 		}
 	}
 
