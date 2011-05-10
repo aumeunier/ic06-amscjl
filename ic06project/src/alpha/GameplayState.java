@@ -155,13 +155,14 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	throws SlickException {
 		ui.render(g);
 		if(currentLevel !=null){
-			currentLevel.render();
+			currentLevel.render(g);
 		}
 	}
 
 	private void createWorld(){
 		Vec2 v = new Vec2(0.0f,-10.0f);
-		AABB aabb = new AABB(new Vec2(0.0f,0.0f), new Vec2((float)Global.GAMEPLAYWIDTH,(float)Global.GAMEPLAYHEIGHT));
+		//AABB aabb = new AABB(new Vec2(0.0f,0.0f), new Vec2((float)Global.GAMEPLAYWIDTH,(float)Global.GAMEPLAYHEIGHT));
+		AABB aabb = new AABB(new Vec2(-10.0f,-10.0f), new Vec2((float)Global.GAMEPLAYWIDTH+10,(float)Global.GAMEPLAYHEIGHT+10));
 		world = new World(aabb,v,false);
 		world.setContactListener(new MyContactListener());
 		world.setContactFilter(new MyContactFilter());
@@ -193,6 +194,24 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		sd.friction = 5.0f;
 
 		sd.setAsBox(wallData.w/2,wallData.h/2);
+		newBody.createShape(sd);
+		newBody.putToSleep();
+		spriteBodies.add(newBody);
+		return newBody;
+	}
+	public Body addWallWithPoints(Wall wallData, ArrayList<Vec2> list){
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.userData = wallData;
+		Vec2 b2dcoord = Global.getBox2DCoordinates(wallData.x, wallData.y);
+		bodyDef.position = new Vec2(b2dcoord.x+wallData.w/2,b2dcoord.y-wallData.h/2);
+		Body newBody = world.createBody(bodyDef);
+		PolygonDef sd = new PolygonDef();		
+		sd.density = 5.0f;
+		sd.friction = 5.0f;
+
+		for(Vec2 v: list){
+			sd.addVertex(v);			
+		}
 		newBody.createShape(sd);
 		newBody.putToSleep();
 		spriteBodies.add(newBody);
@@ -261,8 +280,8 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		bodyDef.position = new Vec2(b2dcoord.x+bouton.w/2,b2dcoord.y-bouton.h/2);
 		Body newBody = world.createBody(bodyDef);
 		PolygonDef sd = new PolygonDef();		
-		sd.density = 5.0f;
-		sd.friction = 5.0f;
+		sd.density = 100.0f;
+		sd.friction = 100.0f;		 
 
 		sd.setAsBox(bouton.w/2,bouton.h/2);
 		newBody.createShape(sd);
@@ -278,7 +297,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		Body newBody = world.createBody(bodyDef);
 		PolygonDef sd = new PolygonDef();		
 		sd.density = 5.0f;
-		sd.friction = 5.0f;
+		sd.friction = 100.0f;
 
 		sd.setAsBox(levier.w/2,levier.h/2);
 		newBody.createShape(sd);

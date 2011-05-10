@@ -47,7 +47,7 @@ public class MyContactFilter implements ContactFilter {
 				}
 			}
 			// Deuxieme cas s2 est ...
-			if(s2.getClass().equals(Character.class)){
+			else if(s2.getClass().equals(Character.class)){
 				if(((Character)s2).isIntangible()
 						&& (s1.getClass().equals(Obstacle.class))){
 					return false;

@@ -13,14 +13,13 @@ public class Level1 extends Level {
 		// Place a ground wall
 		createWall(0,Global.GAMEPLAYHEIGHT-10,Global.GAMEPLAYWIDTH,10);		
 		// Left wall
-		createWall(0,0,10,Global.GAMEPLAYHEIGHT);
+		createWall(-10,0,10,Global.GAMEPLAYHEIGHT);
 		// Right wall
-		createWall(Global.GAMEPLAYWIDTH-10,0,10,Global.GAMEPLAYHEIGHT);
+		createWall(Global.GAMEPLAYWIDTH,0,10,Global.GAMEPLAYHEIGHT);
 		// Celling
-		createWall(0,0,Global.GAMEPLAYWIDTH,10);
+		createWall(0,-10,Global.GAMEPLAYWIDTH,10);
 		
-		
-		// Flower
+		// Flowers
 		ArrayList<Vec2> temp = new ArrayList<Vec2>();
 		temp.add(new Vec2(-100,50));
 		temp.add(new Vec2(+100,50));
@@ -28,10 +27,21 @@ public class Level1 extends Level {
 		Obstacle o = createObstacleWithPoints(600,200,200,150,temp);
 		o.setImage("fleur9_mur.png");
 		
-		createWall(10,Global.GAMEPLAYHEIGHT-85,70,75);
-		createWall(310,Global.GAMEPLAYHEIGHT-85,100,75);
-		createWall(410,Global.GAMEPLAYHEIGHT-65,80,55);
-		createWall(Global.GAMEPLAYWIDTH-80,Global.GAMEPLAYHEIGHT-35,80,25);
+		Wall sol1 = createWall(0,Global.GAMEPLAYHEIGHT-85,80,75); // Sol 1
+		Wall sol2 = createWall(310,Global.GAMEPLAYHEIGHT-85,100,75); // Sol 2 (apres l'eau)
+		//*
+		ArrayList<Vec2> sol3Points = new ArrayList<Vec2>();
+		sol3Points.add(new Vec2(-40,-27));
+		sol3Points.add(new Vec2(40,-27));
+		sol3Points.add(new Vec2(-40,27));
+		Wall sol3 = createWallWithPoints(410,Global.GAMEPLAYHEIGHT-65,80,55,sol3Points); // Sol 3
+		/*/
+		Wall sol3 = createWall(410,Global.GAMEPLAYHEIGHT-65,80,55); // Sol 3
+		//*/
+		sol3.addPointToShape(410,Global.GAMEPLAYHEIGHT-10);
+		sol3.addPointToShape(410+80,Global.GAMEPLAYHEIGHT-10);
+		sol3.addPointToShape(410,Global.GAMEPLAYHEIGHT-65);
+		Wall sol4 = createWall(Global.GAMEPLAYWIDTH-80,Global.GAMEPLAYHEIGHT-35,80,25); // Sol 4 (en dessous perso 2)
 		
 		//Plateform
 		Wall o1 = createWall(10,75,(int)(148/1.3),(int)(42/1.3));
@@ -40,10 +50,10 @@ public class Level1 extends Level {
 		o2.setImage("fleur2.png");
 		
 		//la cage
-		Wall o4 = createWall(300,10,10,75);
+		Wall o4 = createWall(300,0,10,85);
 		Wall o5 = createWall(300,85,70,10);
 		Wall o6 = createWall(430,85,75,10);
-		Wall o7 = createWall(495,10,10,75);
+		Wall o7 = createWall(495,0,10,85);
 		
 		//l'arrivée
 		Wall o8 = createWall(Global.GAMEPLAYWIDTH-160,75,150,10);
@@ -60,17 +70,31 @@ public class Level1 extends Level {
 		BoutonPressoir bouton = createBoutonPressoir(85,185,30,15,oMurLevierBody);
 		
 		// Place un mur devant la sortie
-		Obstacle oMurSortie = new Obstacle(Global.GAMEPLAYWIDTH-160,10,20,65);
+		Obstacle oMurSortie = new Obstacle(Global.GAMEPLAYWIDTH-160,0,20,75);
 		sprites.add(oMurSortie);
 		Body oMurSortieBody = myState.addObstacle(oMurSortie);
 		
 		// Créé un levier qui ouvre ce mur
 		Levier levier = createLevier(Global.GAMEPLAYWIDTH-70,210,30,15,oMurSortieBody);
 		
+		// Place l'eau
+		SourceMortelle s = createSourceMortelle(80,Global.GAMEPLAYHEIGHT-60,50,50);
+		s.setImage("blur9.jpg");
+		s.setAnimation("waves.png", 300, 300);
+		SourceMortelle s2 = createSourceMortelle(130,Global.GAMEPLAYHEIGHT-60,50,50);
+		s2.setImage("blur9.jpg");
+		s2.setAnimation("waves2.png", 300, 300);
+		SourceMortelle s3 = createSourceMortelle(180,Global.GAMEPLAYHEIGHT-60,50,50);
+		s3.setImage("blur9.jpg");
+		s3.setAnimation("waves.png", 300, 300);
+		SourceMortelle s4 = createSourceMortelle(230,Global.GAMEPLAYHEIGHT-60,50,50);
+		s4.setImage("blur9.jpg");
+		s4.setAnimation("waves2.png", 300, 300);
+		SourceMortelle s5 = createSourceMortelle(280,Global.GAMEPLAYHEIGHT-60,50,50);
+		s5.setImage("blur9.jpg");
+		s5.setAnimation("waves.png", 300, 300);
 		
 		// Place sources
-		SourceMortelle s = createSourceMortelle(80,Global.GAMEPLAYHEIGHT-60,230,50);
-		s.setImage("blur9.jpg");
 		createSource(500,Global.GAMEPLAYHEIGHT-20,20,20,Power.FLYING);
 		createSource(Global.GAMEPLAYWIDTH-180,Global.GAMEPLAYHEIGHT-30,20,20,Power.INTANGIBLE);
 		

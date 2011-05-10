@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
@@ -44,6 +45,19 @@ public class Level {
 		
 		// Create the wall body
 		myState.addWall(wall);
+		
+		return wall;
+	}
+	protected Wall createWallWithPoints(int x, int y, int w, int h, ArrayList<Vec2> point){
+		
+		// Create a wall object
+		Wall wall = new Wall(x,y,w,h);
+		
+		// Add it to the list of sprites of the level
+		sprites.add(wall);
+		
+		// Create the wall body
+		myState.addWallWithPoints(wall, point);
 		
 		return wall;
 	}
@@ -147,14 +161,14 @@ public class Level {
 		return this.character2;
 	}
 	
-	public void render(){
+	public void render(Graphics g){
 		backgroundImage.draw(0,0,Global.GAMEPLAYWIDTH,Global.GAMEPLAYHEIGHT);
-		character1.draw();
-		character2.draw();
+		character1.draw(g);
+		character2.draw(g);
 		for(int i = 0 ; i < sprites.size() ; ++i){
 			Sprite s = sprites.get(i);
 			if(!s.getClass().equals(Obstacle.class) || !((Obstacle)s).isHidden()){
-				sprites.get(i).draw();
+				sprites.get(i).draw(g);
 			}
 		}
 	}
