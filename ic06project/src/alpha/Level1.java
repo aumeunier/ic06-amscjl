@@ -8,6 +8,7 @@ import org.jbox2d.dynamics.Body;
 public class Level1 extends Level {
 	public Level1(GameplayState state, LevelSave model){	
 		super(state,model);
+		this.levelID = 1;
 		this.setBackgroundImage("blur15.jpg");
 		
 		// Place a ground wall

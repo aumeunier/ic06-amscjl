@@ -22,7 +22,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	final static int SPEED_JUMP = 400;
 	final static int MENU_X = Global.WINDOW_WIDTH/2-40;
 	final static int MENU_Y = Global.WINDOW_HEIGHT-20;
-	final static int MENU_W = 85;
+	final static int MENU_W =85;
 	final static int MENU_H = 15;
 	private int stateID;
 	private int selection;
@@ -31,17 +31,27 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	private Body ch1_body;
 	private Body ch2_body;
 	private ArrayList<Body> spriteBodies;
-	protected GameplayUI ui;
+	private UIGameplay uiGameplay;
+	private UIDeath uiDeath;
+	private UIPause uiPause;
+	private boolean isPaused;
+	private boolean startAgain;
+	private boolean alwaysStartAgain;
 
 	public GameplayState(int id){
 		super();
 		this.stateID = id;
-		this.ui = new GameplayUI();
+		this.uiGameplay = new UIGameplay();
+		this.uiPause = new UIPause();
+		this.uiDeath = new UIDeath();
+		this.isPaused = false;
+		this.startAgain = false;
+		this.alwaysStartAgain = false;
 	}
 
 	public void ChooseLevel(int levelIndex){
 		LevelSave save = Save.getInstance().levelSaveForLevelID(levelIndex);
-		this.ui.setLevelInformation(save.getName(), save.getUnlockableKeys(), save.getUnlockedKeys());
+		this.uiGameplay.setLevelInformation(save.getName(), save.getUnlockableKeys(), save.getUnlockedKeys());
 		this.cleanAllBodies();
 		switch(levelIndex){
 		case 1:
@@ -71,6 +81,9 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		Input i = container.getInput();
 		i.clearKeyPressedRecord();
 		this.selection = -1;
+		this.isPaused = false;
+		this.startAgain = false;
+		this.alwaysStartAgain = false;
 	}
 
 	@Override
@@ -82,18 +95,33 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 	throws SlickException {
+		
+		// Si un changement d'état a été demandée, l'effectuer
 		if(this.selection != -1){
 			sbg.enterState(selection);			
 		}
+		
+		// Si aucun niveau n'est chargé, aucun intérêt à faire des calculs
 		if(this.currentLevel == null){
 			return;
 		}
-		Input input = gc.getInput();
+		
+		// Si les joueurs étaient morts et veulent recommencer le niveau
+		if(this.startAgain || this.alwaysStartAgain){
+			this.ChooseLevel(this.currentLevel.getLevelID());
+			return;
+		}
+		
 		Character char1 = this.currentLevel.getFirstCharacter();
 		Character char2 = this.currentLevel.getSecondCharacter();
-		if(char1.isDead() || char2.isDead()){
-			this.ChooseLevel(1);
+		
+		// Si un des personnages est mort ou que le menu a été demandé, ne pas faire tourner les calculs
+		if(char1.isDead() || char2.isDead() || this.isPaused){			
+			return;
 		}
+		
+		// Sinon effectuer les traitements d'inputs et l'update du world / des sprites
+		Input input = gc.getInput();
 		boolean char1CanMove = char1.isFlying() || !char1.isFalling;
 		boolean char2CanMove = char2.isFlying() || !char2.isFalling;
 
@@ -153,9 +181,19 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 	throws SlickException {
-		ui.render(g);
+		uiGameplay.render(g);
 		if(currentLevel !=null){
 			currentLevel.render(g);
+			
+			// Si un des personnages est mort, afficher le menu de mort
+			if(this.currentLevel.getFirstCharacter().isDead() || this.currentLevel.getSecondCharacter().isDead()){	
+				this.uiDeath.render(g);
+			}
+		}
+
+		// Si le menu de pause a été demandé, l'afficher
+		if(this.isPaused){	
+			this.uiPause.render(g);
 		}
 	}
 

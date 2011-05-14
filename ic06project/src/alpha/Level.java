@@ -19,6 +19,7 @@ public class Level {
 	protected Character character2;
 	protected LevelSave levelModel;
 	protected Image backgroundImage;
+	protected int levelID;
 	
 	public Level(GameplayState state, LevelSave model){
 		this.myState = state;
@@ -159,6 +160,9 @@ public class Level {
 	}
 	public Character getSecondCharacter(){
 		return this.character2;
+	}
+	public int getLevelID(){
+		return this.levelID;
 	}
 	
 	public void render(Graphics g){

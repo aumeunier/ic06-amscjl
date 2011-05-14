@@ -1,6 +1,8 @@
 package alpha;
 
 import org.jbox2d.common.Vec2;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 public class Global {
 	public final static int WINDOW_WIDTH = 800;
@@ -19,5 +21,14 @@ public class Global {
 	}
 	public static Vec2 getBox2DCoordinates(int worldX, int worldY){
 		return new Vec2(worldX,Global.GAMEPLAYHEIGHT-worldY);
+	}
+
+	public static Image setImage(String filename){
+		try {
+			return new Image(Global.PATH_IMAGES_RESSOURCES+filename);
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
