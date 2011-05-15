@@ -18,6 +18,7 @@ public class Sprite {
 	protected Animation animation = null;
 	protected Polygon shape = null;
 	protected boolean shouldBeDestroy=false;
+	protected Color colorFilter = Color.white;
 	
 	public Sprite(){
 		this.x=0;
@@ -25,6 +26,10 @@ public class Sprite {
 		this.w=40;
 		this.h=40;
 	}	
+	public Sprite(int _x, int _y){
+		this.x = _x;
+		this.y = _y;
+	}
 	public Sprite(int _x, int _y, int _w, int _h){
 		this.x = _x;
 		this.y = _y;
@@ -47,7 +52,7 @@ public class Sprite {
 	}
 	protected void setAnimation(String filename, int tw, int th){
 		try {
-			SpriteSheet ss = new SpriteSheet(Global.PATH_IMAGES_RESSOURCES+filename,tw,th);
+			SpriteSheet ss = new SpriteSheet(Global.PATH_SPRITES_RESSOURCES+filename,tw,th);
 			this.animation = new Animation(ss,1000);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
@@ -56,6 +61,9 @@ public class Sprite {
 	}
 	public void setTexture(String filename){
 		//this.image.setTexture(new Texture());
+	}
+	protected void setFilter(Color _colorFilter){
+		this.colorFilter = _colorFilter;
 	}
 	public void addPointToShape(int x, int y){
 		if(shape==null){
@@ -66,7 +74,7 @@ public class Sprite {
 	
 	public void draw(Graphics g){
 		if(animation!=null){
-			animation.draw(x, y, w, h);
+			animation.draw(x, y, w, h, colorFilter);
 		}
 		else if(shape!=null){
 			g.setColor(Color.red);

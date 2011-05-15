@@ -74,8 +74,8 @@ public class UIPause implements UIInterface {
 			state.setPaused(false);				
 		}
 		else if((x >= BUTTON_X && x <= (BUTTON_X + BUTTON_W)) 
-				&&	(y >= PAUSE_Y+PAUSE_H-BUTTON_H-BUTTON_SPACE 
-						&& y <= (PAUSE_Y+PAUSE_H-BUTTON_H-BUTTON_SPACE + BUTTON_H))){
+				&&	(y >= BUTTON_Y_INIT+BUTTON_H+BUTTON_SPACE  
+						&& y <= (BUTTON_Y_INIT+BUTTON_H+BUTTON_SPACE + BUTTON_H))){
 			state.setPaused(false);	
 			result = Game.MAINMENU_STATE;
 		}

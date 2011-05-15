@@ -177,9 +177,7 @@ public class Level {
 	
 	protected Character addCharacter(int x, int y){
 		// Create a new character and add it to the panel
-		Character ch = new Character();
-		ch.x = x;
-		ch.y = y;
+		Character ch = new Character(x,y);
 		
 		// Create the body definition
 		myState.addCharacter(ch);

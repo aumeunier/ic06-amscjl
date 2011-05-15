@@ -4,6 +4,7 @@
 		{
 			"id":1,
 			"levelName":"prairie",
+			"music":"gmz_-_Between_Me_and_Myself.ogg",
 			"numberOfKeys":1,
 			"areaOnMap":[50, 50, 50, 50]
 					
@@ -11,6 +12,7 @@
 		{
 			"id":2,
 			"levelName":"bois",
+			"music":"gmz_-_Between_Me_and_Myself.ogg",
 			"numberOfKeys":2,
 			"areaOnMap":[150, 50, 50, 50]		
 			
@@ -18,6 +20,7 @@
 		{
 			"id":3,
 			"levelName":"caverne",
+			"music":"gmz_-_Between_Me_and_Myself.ogg",
 			"numberOfKeys":3,
 			"areaOnMap":[50, 140, 50, 50]		
 			
@@ -25,6 +28,7 @@
 		{
 			"id":4,
 			"levelName":"douve",
+			"music":"gmz_-_Between_Me_and_Myself.ogg",
 			"numberOfKeys":4,
 			"areaOnMap":[150, 150, 50, 50]		
 			
@@ -32,6 +36,7 @@
 		{
 			"id":5,
 			"levelName":"chateau",
+			"music":"gmz_-_Between_Me_and_Myself.ogg",
 			"numberOfKeys":3,
 			"areaOnMap":[2000, 50, 50, 50]		
 			

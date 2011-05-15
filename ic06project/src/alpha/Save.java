@@ -58,6 +58,7 @@ public class Save {
 				JsonNode lvl = itr.next(); 
 				int tempId = lvl.path("id").getIntValue();
 				String tempName = lvl.path("levelName").getValueAsText();
+				String musicFilename = lvl.path("music").getValueAsText();
 				int tempKeys = lvl.path("numberOfKeys").getIntValue();
 				Iterator<JsonNode> it = lvl.path("areaOnMap").getElements();
 				int[] tempArea = new int[4];
@@ -66,7 +67,7 @@ public class Save {
 					tempArea[i] = it.next().getIntValue();
 					i++;
 				}
-				LevelSave newLevel = new LevelSave(tempId, tempName, tempKeys, tempArea);
+				LevelSave newLevel = new LevelSave(tempId, tempName, musicFilename, tempKeys, tempArea);
 				levels.add(newLevel);
 				totalNumberOfKeys+=tempKeys;
 			}

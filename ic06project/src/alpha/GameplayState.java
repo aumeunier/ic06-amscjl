@@ -419,7 +419,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		PolygonDef sd = new PolygonDef();
 		sd.density = 5.0f;
 		sd.friction = 0.0f;
-		sd.setAsBox(25, 25);
+		sd.setAsBox(Character.CHAR_W_BODY/2, Character.CHAR_H_BODY/2);
 		// Ajoute un Sensor pour savoir si le character est au sol
 		PolygonDef groundSensor = new PolygonDef();
 		groundSensor.isSensor=true;
@@ -469,5 +469,8 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	}
 	public boolean arePlayersDead(){
 		return (this.currentLevel.getFirstCharacter().isDead() || this.currentLevel.getSecondCharacter().isDead());
+	}
+	public LevelSave getCurrentLevelModel(){
+		return this.currentLevel.levelModel;
 	}
 }

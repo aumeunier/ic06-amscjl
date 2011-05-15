@@ -7,15 +7,17 @@ public class LevelSave {
 	boolean isUnlocked;
 	boolean isFinished;
 	String levelName;
+	String musicFilename;
 	int[] areaOnMap;
 	/**
 	 * Default constructor
 	 */
-	public LevelSave(int id, String name, int unlockable, int[] area){
+	public LevelSave(int id, String name, String music, int unlockable, int[] area){
 		super();
 		levelID = id;
 		unlockableKeys = unlockable;
 		levelName = name;
+		musicFilename = music;
 		areaOnMap = area;
 		isUnlocked = false;
 		isFinished = false;
@@ -36,6 +38,9 @@ public class LevelSave {
 	}
 	public String getName(){
 		return levelName;
+	}
+	public String getMusicName(){
+		return musicFilename;
 	}
 	public int getUnlockableKeys(){
 		return unlockableKeys;

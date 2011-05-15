@@ -16,6 +16,8 @@ public class Game extends StateBasedGame implements MusicListener {
 	public static final int OPTIONSGAME_STATE = 4;
 	public static final int GO_TO_NEXT_LEVEL = -100;
 	public static final int SHOULD_RESTART = -200;
+	
+	private final static String MENUS_MUSIC = "duckett_-_Pequennas_Alas_(PC_TA_mix).ogg";
 
 	public static boolean displayFullScreen = false;
 	static final boolean displayFPS = false;
@@ -78,19 +80,27 @@ public class Game extends StateBasedGame implements MusicListener {
 		super.enterState(id);
 		int currentID = this.getCurrentStateID();
 		if(id==MAINMENU_STATE && currentID!=NEWGAME_STATE && currentID!=LOADGAME_STATE && currentID!=OPTIONSGAME_STATE){
-			changeMusic("onlymeith_-_Dance_of_Light_Pixies-4.ogg");
+			changeMusic(MENUS_MUSIC);
 			loopMusic();
 		}
 		else if(id==GAMEPLAY_STATE){
-			changeMusic("test.mod");	
+			changeMusic(((GameplayState)this.getState(id)).getCurrentLevelModel().getMusicName());	
 			loopMusic();		
 		}
 	}
 
 	@Override
 	public void musicEnded(Music arg0) {
-		changeMusic("onlymeith_-_Dance_of_Light_Pixies-4.ogg");	
-		loopMusic();
+		int currentID = this.getCurrentStateID();
+		if(currentID==MAINMENU_STATE || currentID==NEWGAME_STATE 
+				|| currentID==LOADGAME_STATE || currentID==OPTIONSGAME_STATE){
+			changeMusic(MENUS_MUSIC);
+			loopMusic();
+		}
+		else if(currentID==GAMEPLAY_STATE){
+			changeMusic(((GameplayState)this.getCurrentState()).getCurrentLevelModel().getMusicName());	
+			loopMusic();		
+		}
 	}
 
 	@Override
