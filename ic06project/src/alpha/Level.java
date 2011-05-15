@@ -43,9 +43,13 @@ public class Level {
 		
 		// Create a wall object
 		Wall wall = new Wall(x,y,w,h);
+		//Sprite S2 = new Sprite(x,y-25,w,50);
+		//S2.setImage("herbe3.png");
+		
 		
 		// Add it to the list of sprites of the level
 		sprites.add(wall);
+		//sprites.add(S2);
 		
 		// Create the wall body
 		myState.addWall(wall);

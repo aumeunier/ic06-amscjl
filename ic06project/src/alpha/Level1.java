@@ -91,8 +91,8 @@ public class Level1 extends Level {
 		s5.setAnimation("waves.png", 300, 300);
 		
 		// Place sources
-		createSource(500,Global.GAMEPLAYHEIGHT-20,20,20,Power.FLYING);
-		createSource(Global.GAMEPLAYWIDTH-180,Global.GAMEPLAYHEIGHT-30,20,20,Power.INTANGIBLE);
+		createSource(500,Global.GAMEPLAYHEIGHT-42,49,42,Power.FLYING);
+		createSource(Global.GAMEPLAYWIDTH-180,Global.GAMEPLAYHEIGHT-42,49,42,Power.INTANGIBLE);
 		
 		//place SOrtie
 		Exit exit = createExit(760,10,45,65);

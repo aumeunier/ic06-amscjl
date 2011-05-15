@@ -16,10 +16,10 @@ public enum Power {
 			result = "blur11.jpg";
 			break;
 		case INTANGIBLE:
-			result = "pool_hat.png";
+			result = "powerMur.png";
 			break;
 		case FLYING:
-			result = "pool_bird.png";
+			result = "powerFlying.png";
 			break;
 		}
 		return result;
