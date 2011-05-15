@@ -20,10 +20,6 @@ import org.newdawn.slick.state.StateBasedGame;
 public class GameplayState extends BasicGameState implements MouseListener{
 	final static int SPEED_X = 20;
 	final static int SPEED_JUMP = 400;
-	final static int MENU_X = Global.WINDOW_WIDTH/2-40;
-	final static int MENU_Y = Global.WINDOW_HEIGHT-20;
-	final static int MENU_W =85;
-	final static int MENU_H = 15;
 	private int stateID;
 	private int selection;
 	private Level currentLevel;
@@ -41,9 +37,6 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	public GameplayState(int id){
 		super();
 		this.stateID = id;
-		this.uiGameplay = new UIGameplay();
-		this.uiPause = new UIPause();
-		this.uiDeath = new UIDeath();
 		this.isPaused = false;
 		this.startAgain = false;
 		this.alwaysStartAgain = false;
@@ -73,6 +66,9 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	public void init(GameContainer gc, StateBasedGame sbg)
 	throws SlickException {
 		spriteBodies = new ArrayList<Body>();
+		this.uiGameplay = new UIGameplay(gc);
+		this.uiPause = new UIPause(gc);
+		this.uiDeath = new UIDeath(gc);
 		this.createWorld();
 	}
 
@@ -114,9 +110,11 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		
 		Character char1 = this.currentLevel.getFirstCharacter();
 		Character char2 = this.currentLevel.getSecondCharacter();
+		Input input = gc.getInput();
 		
 		// Si un des personnages est mort ou que le menu a ŽtŽ demandŽ, ne pas faire tourner les calculs
-		if(char1.isDead() || char2.isDead() || this.isPaused){			
+		if(char1.isDead() || char2.isDead() || this.isPaused){	
+			input.consumeEvent();
 			return;
 		}
 		
@@ -135,7 +133,6 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		}
 		
 		// Sinon effectuer les traitements d'inputs et l'update du world / des sprites
-		Input input = gc.getInput();
 		boolean char1CanMove = char1.isFlying() || !char1.isFalling;
 		boolean char2CanMove = char2.isFlying() || !char2.isFalling;
 
@@ -195,19 +192,19 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 	throws SlickException {
-		uiGameplay.render(g);
+		uiGameplay.render(gc, g);
 		if(currentLevel !=null){
 			currentLevel.render(g);
 			
 			// Si un des personnages est mort, afficher le menu de mort
 			if(this.currentLevel.getFirstCharacter().isDead() || this.currentLevel.getSecondCharacter().isDead()){	
-				this.uiDeath.render(g);
+				this.uiDeath.render(gc, g);
 			}
 		}
 
 		// Si le menu de pause a ŽtŽ demandŽ, l'afficher
 		if(this.isPaused){	
-			this.uiPause.render(g);
+			this.uiPause.render(gc, g);
 		}
 	}
 
@@ -408,16 +405,17 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			return ch2_body;
 		}
 	}
-
-
-	public void mouseMoved(int oldx, int oldy, int newX, int newY){
-		// do nothing
-	}
- 
+	
+	@Override
 	public void mouseClicked(int button, int x, int y, int clickCount){
-		if((x >= MENU_X && x <= (MENU_X + MENU_W)) 
-				&&	(y >= MENU_Y && y <= (MENU_Y + MENU_H))){
-			selection = Game.MAINMENU_STATE;
+		if(this.isPaused){
+			selection = this.uiPause.mouseClicked(button, x, y, clickCount, this);
 		}
+		else if(y >= Global.GAMEPLAYHEIGHT){
+			selection = this.uiGameplay.mouseClicked(button, x, y, clickCount, this);
+		}
+	}
+	public void setPaused(boolean _paused){
+		this.isPaused = _paused;
 	}
 }
