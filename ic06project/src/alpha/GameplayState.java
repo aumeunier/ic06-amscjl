@@ -146,16 +146,19 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			ch1_body.m_linearVelocity.x = -SPEED_X;			
 			char1.isGoingRight = false;
 			char1.isGoingLeft = true;
+			char1.changeDirection();
 		}
 		else if((input.isKeyDown(Input.KEY_D)) && char1CanMove){
 			ch1_body.m_linearVelocity.x = SPEED_X;			
 			char1.isGoingRight = true;
 			char1.isGoingLeft = false;
+			char1.changeDirection();
 		}
 		else if(!char1.isFalling){
 			ch1_body.m_linearVelocity.x = 0;			
 			char1.isGoingRight = false;
-			char1.isGoingLeft = false;			
+			char1.isGoingLeft = false;	
+			//char1.changeDirection();
 		}
 		char1.setCoordinatesFromBody(ch1_body);
 
@@ -167,16 +170,19 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			ch2_body.m_linearVelocity.x = -SPEED_X;			
 			char2.isGoingRight = false;
 			char2.isGoingLeft = true;
+			char2.changeDirection();
 		}
 		else if((input.isKeyDown(Input.KEY_RIGHT)) && char1CanMove){
 			ch2_body.m_linearVelocity.x = SPEED_X;			
 			char2.isGoingRight = true;
 			char2.isGoingLeft = false;
+			char2.changeDirection();
 		}
 		else if(!char2.isFalling){
 			ch2_body.m_linearVelocity.x = 0;			
 			char2.isGoingRight = false;
-			char2.isGoingLeft = false;			
+			char2.isGoingLeft = false;
+			//char2.changeDirection();
 		}
 		char2.setCoordinatesFromBody(ch2_body);	
 
@@ -435,7 +441,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		PolygonDef groundSensor = new PolygonDef();
 		groundSensor.isSensor=true;
 		groundSensor.userData="groundsensor";
-		groundSensor.setAsBox((float)(characterData.w/2.0*0.9), 2, new Vec2(0,-characterData.h/2), 0);
+		groundSensor.setAsBox((float)(Character.CHAR_W_BODY/2.0*0.9), 2, new Vec2(0,-Character.CHAR_H_BODY/2), 0);
 		if(ch1_body == null){
 			ch1_body = world.createBody(bodyDef);
 			ch1_body.createShape(sd);

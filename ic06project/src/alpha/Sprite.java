@@ -53,7 +53,7 @@ public class Sprite {
 	protected void setAnimation(String filename, int tw, int th){
 		try {
 			SpriteSheet ss = new SpriteSheet(Global.PATH_SPRITES_RESSOURCES+filename,tw,th);
-			this.animation = new Animation(ss,1000);
+			this.animation = new Animation(ss,100);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

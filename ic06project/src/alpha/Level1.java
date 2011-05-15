@@ -95,7 +95,7 @@ public class Level1 extends Level {
 		createSource(Global.GAMEPLAYWIDTH-180,Global.GAMEPLAYHEIGHT-30,20,20,Power.INTANGIBLE);
 		
 		//place SOrtie
-		Exit exit = createExit(755,10,45,65);
+		Exit exit = createExit(760,10,45,65);
 		exit.setImage("porte.png");
 		
 		//place bonus
