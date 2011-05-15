@@ -113,7 +113,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		Input input = gc.getInput();
 		
 		// Si un des personnages est mort ou que le menu a ŽtŽ demandŽ, ne pas faire tourner les calculs
-		if(char1.isDead() || char2.isDead() || this.isPaused){	
+		if(this.arePlayersDead() || this.isPaused){	
 			input.consumeEvent();
 			return;
 		}
@@ -442,11 +442,21 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		if(this.isPaused){
 			selection = this.uiPause.mouseClicked(button, x, y, clickCount, this);
 		}
+		else if(this.arePlayersDead()){
+			selection = this.uiDeath.mouseClicked(button, x, y, clickCount, this);
+			if(selection == UIDeath.SHOULD_RESTART){
+				this.ChooseLevel(this.currentLevel.getLevelID());
+				selection = -1;
+			}
+		}
 		else if(y >= Global.GAMEPLAYHEIGHT){
 			selection = this.uiGameplay.mouseClicked(button, x, y, clickCount, this);
 		}
 	}
 	public void setPaused(boolean _paused){
 		this.isPaused = _paused;
+	}
+	public boolean arePlayersDead(){
+		return (this.currentLevel.getFirstCharacter().isDead() || this.currentLevel.getSecondCharacter().isDead());
 	}
 }

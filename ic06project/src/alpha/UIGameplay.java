@@ -25,8 +25,11 @@ public class UIGameplay implements UIInterface {
 	protected Image rightPlayerBackgroundImage;
 	protected Image rightPlayerImage;
 	protected Image menuBackgroundImage;
+	
 	private Display display;
 	protected Label levelLabel;
+	protected Label unlockableKeysLabel;
+	protected Label unlockedKeysLabel;
 	
 	protected int x, y, w, h;
 	protected int nbUnlockableKeys, nbUnlockedKeys;
@@ -67,17 +70,36 @@ public class UIGameplay implements UIInterface {
 		levelLabel.pack();
 		this.display.add(levelLabel);
 
-		Image keysTotalLabelImage = labelImage.getScaledCopy(MENU_X-(BUBBLE_X+BUBBLE_W+10), MENU_H);
-		levelLabel = new Label(levelLabelImage,null);
-		levelLabel.setBounds(BUBBLE_X+BUBBLE_W, Global.WINDOW_HEIGHT-MENU_H, MENU_X-(BUBBLE_X+BUBBLE_W+10), MENU_H);
-		levelLabel.setForeground(Color.black);
-		levelLabel.setHorizontalAlignment(Label.RIGHT_ALIGNMENT);
-		levelLabel.updateAppearance();
-		levelLabel.pack();
-		this.display.add(levelLabel);
+		Image keysTotalLabelImage = labelImage.getScaledCopy(MENU_W/2, MENU_H);
+		Label allKeysLabel = new Label(keysTotalLabelImage,"Nombre total de clees: "+
+				Save.getInstance().getTotalNumberOfUnlockedKeys()+"/"+Save.getInstance().getTotalNumberOfKeys());
+		allKeysLabel.setBounds(MENU_X+MENU_W+10, Global.WINDOW_HEIGHT-MENU_H, MENU_X-(BUBBLE_X+BUBBLE_W+10), MENU_H);
+		allKeysLabel.setForeground(Color.black);
+		allKeysLabel.setHorizontalAlignment(Label.LEFT_ALIGNMENT);
+		allKeysLabel.updateAppearance();
+		allKeysLabel.pack();
+		this.display.add(allKeysLabel);
+		allKeysLabel.setImage(null);
 
+		Image keyLabelImage = labelImage.getScaledCopy(MENU_W/2, 25);
+		unlockedKeysLabel = new Label(keyLabelImage,null);
+		unlockedKeysLabel.setBounds(MENU_X-(MENU_W/2+10), Global.GAMEPLAYHEIGHT+40, MENU_W/2, MENU_H);
+		unlockedKeysLabel.setForeground(Color.black);
+		unlockedKeysLabel.setHorizontalAlignment(Label.RIGHT_ALIGNMENT);
+		unlockedKeysLabel.updateAppearance();
+		unlockedKeysLabel.pack();
+		this.display.add(unlockedKeysLabel);
+
+		unlockableKeysLabel = new Label(keyLabelImage,null);
+		unlockableKeysLabel.setBounds(MENU_X+(MENU_W+10), Global.GAMEPLAYHEIGHT+40, MENU_W/2, MENU_H);
+		unlockableKeysLabel.setForeground(Color.black);
+		unlockableKeysLabel.setHorizontalAlignment(Label.LEFT_ALIGNMENT);
+		unlockableKeysLabel.updateAppearance();
+		unlockableKeysLabel.pack();
+		this.display.add(unlockableKeysLabel);
+		
 		// Buttons
-		Image menuImage = labelImage.getScaledCopy(MENU_W, 25);
+		Image menuImage = labelImage.getScaledCopy(MENU_W, MENU_H);
 		Label menuLabel = new Label(menuImage,"Menu"); //TODO: button
 		menuLabel.setBounds(MENU_X,MENU_Y,MENU_W,MENU_H);
 		menuLabel.pack();
@@ -85,25 +107,20 @@ public class UIGameplay implements UIInterface {
 		
 	}
 	public void setLevelInformation(String _levelName, int _nbUnlockableKeys, int _nbUnlockedKeys){
-		this.levelLabel.setText(_levelName);
+		levelLabel.setText(_levelName);
 		levelLabel.setImage(null);
-		this.nbUnlockableKeys = _nbUnlockableKeys;
-		this.nbUnlockedKeys = _nbUnlockedKeys;
+		unlockedKeysLabel.setText("Unlocked keys:"+_nbUnlockedKeys);
+		unlockedKeysLabel.setImage(null);
+		unlockableKeysLabel.setText("Unlockable keys:"+_nbUnlockableKeys);
+		unlockableKeysLabel.setImage(null);
 	}
 	
 	@Override
 	public void render(GameContainer gc, Graphics g) {
 		backgroundImage.draw(x,y,w,h);
-		int ratio = leftBubbleBackgroundImage.getWidth()/leftBubbleBackgroundImage.getHeight();
 		
 		// Left bubble
 		leftBubbleBackgroundImage.draw(BUBBLE_X,y,BUBBLE_W,BUBBLE_H);
-
-		// Middle part
-		g.setColor(Color.black);
-		g.drawString(""+nbUnlockedKeys, w/2-20-20, y+20);
-		g.drawString(""+nbUnlockableKeys, w/2+20+20, y+20);
-		g.drawString("Clés:"+Save.getInstance().getTotalNumberOfUnlockedKeys()+"/"+Save.getInstance().getTotalNumberOfKeys(), 500, y+h-20);
 		
 		// Right bubble
 		rightBubbleBackgroundImage.draw(w-(BUBBLE_W+BUBBLE_X),y,BUBBLE_W,BUBBLE_H);
