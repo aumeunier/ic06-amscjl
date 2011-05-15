@@ -11,6 +11,10 @@ import org.newdawn.slick.Image;
 public class UIPause implements UIInterface {
 	
 	// Interface generale
+	final static int BACKGROUND_X = 0;
+	final static int BACKGROUND_Y = 0;
+	final static int BACKGROUND_W = 800;
+	final static int BACKGROUND_H = 600;
 	final static int PAUSE_X = 200;
 	final static int PAUSE_Y = 100;
 	final static int PAUSE_W = (Global.WINDOW_WIDTH/2-PAUSE_X)*2;
@@ -33,7 +37,7 @@ public class UIPause implements UIInterface {
 		this.display = new Display(gc);
 		
 		// Background image
-		this.menuBackgroundImage = Global.setImage("06_wood_artshare_ru.jpg");
+		this.menuBackgroundImage = Global.setImage("menupause.png");
 
 		// Back to game button //TODO: Button
 		Image buttonImage = Global.setImage("blur11.jpg").getScaledCopy(BUTTON_W, BUTTON_H);
@@ -44,7 +48,7 @@ public class UIPause implements UIInterface {
 		
 		// Back to menu button //TODO: Button
 		Label backToMenuLabel = new Label(buttonImage,"Retour au menu principal");
-		backToMenuLabel.setBounds(BUTTON_X,PAUSE_Y+PAUSE_H-BUTTON_H-BUTTON_SPACE,BUTTON_W,BUTTON_H);
+		backToMenuLabel.setBounds(BUTTON_X,BUTTON_Y_INIT+BUTTON_H+BUTTON_SPACE,BUTTON_W,BUTTON_H);
 		backToMenuLabel.pack();
 		this.display.add(backToMenuLabel);
 	}
@@ -55,9 +59,9 @@ public class UIPause implements UIInterface {
 		g.setColor(new Color(0.0f,0.0f,0.0f,backgroundTransparency));
 		g.fillRect(0,0,Global.WINDOW_WIDTH,Global.WINDOW_HEIGHT);
 		// Menu
-		this.menuBackgroundImage.draw(PAUSE_X,PAUSE_Y,PAUSE_W,PAUSE_H);
+		this.menuBackgroundImage.draw(BACKGROUND_X,BACKGROUND_Y,BACKGROUND_W,BACKGROUND_H);
 		g.setColor(new Color(0.0f,0.0f,0.0f,menuBackgroundTransparency));
-		g.fillRect(PAUSE_X,PAUSE_Y,PAUSE_W,PAUSE_H);
+		g.fillRect(BACKGROUND_X,BACKGROUND_Y,BACKGROUND_W,BACKGROUND_H);
 		// Boutons
 		display.render(gc, g);
 	}
