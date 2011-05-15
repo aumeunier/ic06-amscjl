@@ -21,6 +21,7 @@ public class Level {
 	protected LevelSave levelModel;
 	protected Image backgroundImage;
 	protected int levelID;
+	protected int nbBonus=0;
 	
 	public Level(GameplayState state, LevelSave model){
 		this.myState = state;
@@ -160,6 +161,20 @@ public class Level {
 		return levier;
 	}
 	
+	protected Bonus createBonus(int x, int y, int w, int h){
+		
+		// Create a bonus object
+		Bonus bonus = new Bonus(x,y,w,h);
+		
+		// Add it to the list of sprites of this level
+		sprites.add(bonus);
+		
+		// Create the source body
+		myState.addBonus(bonus);
+		
+		return bonus;
+	}
+	
 	protected Character addCharacter(int x, int y){
 		// Create a new character and add it to the panel
 		Character ch = new Character();
@@ -183,6 +198,9 @@ public class Level {
 	}
 	public ArrayList<Exit> getExit(){
 		return this.listeExit;
+	}
+	public void removeSpriteFromList(Sprite s){
+		this.sprites.remove(s);
 	}
 	
 	public void render(Graphics g){

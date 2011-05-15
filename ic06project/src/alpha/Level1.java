@@ -98,6 +98,10 @@ public class Level1 extends Level {
 		Exit exit = createExit(755,10,45,65);
 		exit.setImage("porte.png");
 		
+		//place bonus
+		Bonus bonus1 = createBonus(50,Global.GAMEPLAYHEIGHT-150,25,25);
+		bonus1.setImage("cerise_rouge.png");
+		
 		// Place the first character
 		this.character1 = addCharacter(440,Global.GAMEPLAYHEIGHT-90);		
 		this.character2 = addCharacter(Global.GAMEPLAYWIDTH-50,Global.GAMEPLAYHEIGHT-90);

@@ -17,6 +17,7 @@ public class Sprite {
 	protected Image image = null;
 	protected Animation animation = null;
 	protected Polygon shape = null;
+	protected boolean shouldBeDestroy=false;
 	
 	public Sprite(){
 		this.x=0;
@@ -74,6 +75,14 @@ public class Sprite {
 		else if(image!=null){
 			image.draw(x, y, w, h);
 		}
+	}
+	
+	public boolean getShouldBeDestroy(){
+		return shouldBeDestroy;
+	}
+	
+	public void setShouldBeDestroy(){
+		 shouldBeDestroy=true;
 	}
 	/*public boolean collision(Sprite s1){
 		System.out.println("  x:" + x +"  x+w:"+(x+w)+"  y:"+y+"  y+h:"+(y+h)+"  s1.x:"+s1.x+"  s1.x+s1.w:"+(s1.x+s1.w)+"  s1.y:"+s1.y+"  s1.y+s1.h:"+(s1.y+s1.h));

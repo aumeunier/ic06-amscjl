@@ -182,11 +182,23 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		world.step((float)delta/100, 100);
 
 		// Update the screen and the model values
+		ArrayList<Integer> tempList = new ArrayList<Integer>();
 		for(int i = 0 ; i < spriteBodies.size() ; ++i){
 			Body tempBody = spriteBodies.get(i);
 			Sprite theSprite = (Sprite)tempBody.getUserData();
-			theSprite.setCoordinatesFromBody(tempBody);
-		}		
+			if (theSprite.getShouldBeDestroy()){
+				currentLevel.sprites.remove(theSprite);
+				currentLevel.nbBonus++;
+				//System.out.println("bonus :"+currentLevel.nbBonus);
+				tempList.add(i);
+			}
+			else theSprite.setCoordinatesFromBody(tempBody);
+		}	
+		for(int i = 0 ; i < tempList.size() ; ++i){
+			Body tempBody = spriteBodies.get((tempList.get(i))-i);
+			this.spriteBodies.remove(tempBody);
+			this.world.destroyBody(tempBody);
+		}
 	}
 
 	@Override
@@ -318,6 +330,25 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		newBody.createShape(sd);
 		spriteBodies.add(newBody);
 		newBody.putToSleep();
+		return newBody;
+	}
+	
+	public Body addBonus(Bonus bonusData){
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.userData = bonusData;
+		Vec2 b2dcoord = Global.getBox2DCoordinates(bonusData.x, bonusData.y);
+		bodyDef.position = new Vec2(b2dcoord.x+bonusData.w/2,b2dcoord.y-bonusData.h/2);
+		MassData md = new MassData();
+		md.mass = 100.0f;
+		bodyDef.massData = md;
+		Body newBody = world.createBody(bodyDef);
+		
+		PolygonDef sd = new PolygonDef();		
+		sd.density = 5000.0f;
+		sd.friction = 5.0f;
+		sd.setAsBox(bonusData.w/2,bonusData.h/2);
+		newBody.createShape(sd);
+		spriteBodies.add(newBody);
 		return newBody;
 	}
 

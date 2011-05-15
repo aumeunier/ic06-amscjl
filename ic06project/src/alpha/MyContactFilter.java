@@ -49,6 +49,9 @@ public class MyContactFilter implements ContactFilter {
 				else if(s2.getClass().equals(BoutonPressoir.class)||s2.getClass().equals(Levier.class)){
 					((Declencheur)s2).activate();
 				}
+				else if(s2.getClass().equals(Bonus.class)){
+					s2.setShouldBeDestroy();
+				}
 			}
 			// Deuxieme cas s2 est ...
 			else if(s2.getClass().equals(Character.class)){
@@ -82,6 +85,9 @@ public class MyContactFilter implements ContactFilter {
 				}
 				else if(s1.getClass().equals(BoutonPressoir.class)||s1.getClass().equals(Levier.class)){
 					((Declencheur)s1).activate();
+				}
+				else if(s1.getClass().equals(Bonus.class)){
+					s1.setShouldBeDestroy();
 				}
 			}
 		}
