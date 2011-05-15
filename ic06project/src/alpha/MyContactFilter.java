@@ -50,7 +50,7 @@ public class MyContactFilter implements ContactFilter {
 					((Declencheur)s2).activate();
 				}
 				else if(s2.getClass().equals(Bonus.class)){
-					s2.setShouldBeDestroy();
+					((Bonus)s2).obtained();
 				}
 			}
 			// Deuxieme cas s2 est ...
@@ -87,7 +87,7 @@ public class MyContactFilter implements ContactFilter {
 					((Declencheur)s1).activate();
 				}
 				else if(s1.getClass().equals(Bonus.class)){
-					s1.setShouldBeDestroy();
+					((Bonus)s1).obtained();
 				}
 			}
 		}

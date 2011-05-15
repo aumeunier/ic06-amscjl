@@ -34,5 +34,8 @@ public class Exit extends Sprite {
 			isReady=false;
 		}
 		cpt--;
+		if(cpt <0){
+			cpt=0;
+		}
 	}
 }

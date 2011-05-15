@@ -114,6 +114,9 @@ public class UIGameplay implements UIInterface {
 		unlockableKeysLabel.setText("Unlockable keys:"+_nbUnlockableKeys);
 		unlockableKeysLabel.setImage(null);
 	}
+	public void setTempLevelInformation(String powerPlayer1, String powerPlayer2, int _nbUnlockedKeys){
+		unlockedKeysLabel.setText("Unlocked keys:"+_nbUnlockedKeys);
+	}
 	
 	@Override
 	public void render(GameContainer gc, Graphics g) {

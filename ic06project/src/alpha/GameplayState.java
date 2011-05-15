@@ -23,6 +23,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	private int stateID;
 	private int selection;
 	private Level currentLevel;
+	private LevelState currentLevelState;
 	private World world;
 	private Body ch1_body;
 	private Body ch2_body;
@@ -43,6 +44,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		this.startAgain = false;
 		this.alwaysStartAgain = false;
 		this.isFinished = false;
+		this.currentLevelState = new LevelState();
 	}
 
 	public void ChooseLevel(int levelIndex){
@@ -187,18 +189,27 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			Body tempBody = spriteBodies.get(i);
 			Sprite theSprite = (Sprite)tempBody.getUserData();
 			if (theSprite.getShouldBeDestroy()){
+				if(theSprite instanceof Bonus && ((Bonus)theSprite).isObtained()){
+					currentLevel.nbBonus++;
+					this.currentLevelState.setNbKeysUnlocked(currentLevel.nbBonus);
+				}
 				currentLevel.sprites.remove(theSprite);
-				currentLevel.nbBonus++;
-				//System.out.println("bonus :"+currentLevel.nbBonus);
 				tempList.add(i);
 			}
-			else theSprite.setCoordinatesFromBody(tempBody);
+			else {
+				theSprite.setCoordinatesFromBody(tempBody);
+			}
 		}	
 		for(int i = 0 ; i < tempList.size() ; ++i){
 			Body tempBody = spriteBodies.get((tempList.get(i))-i);
 			this.spriteBodies.remove(tempBody);
 			this.world.destroyBody(tempBody);
-		}
+		}		
+		this.currentLevelState.setPlayer1Power(((Character)ch1_body.getUserData()).getPower());
+		this.currentLevelState.setPlayer2Power(((Character)ch2_body.getUserData()).getPower());
+		this.uiGameplay.setTempLevelInformation(currentLevelState.getPlayer1Power(),
+				currentLevelState.getPlayer2Power(), 
+				currentLevel.nbBonus);
 	}
 
 	@Override
