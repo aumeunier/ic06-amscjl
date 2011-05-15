@@ -96,17 +96,17 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 	throws SlickException {
 		
-		// Si un changement d'état a été demandée, l'effectuer
+		// Si un changement d'≈Ωtat a ≈Ωt≈Ω demand≈Ωe, l'effectuer
 		if(this.selection != -1){
 			sbg.enterState(selection);			
 		}
 		
-		// Si aucun niveau n'est chargé, aucun intérêt à faire des calculs
+		// Si aucun niveau n'est charg≈Ω, aucun int≈ΩrÔøΩt ÀÜ faire des calculs
 		if(this.currentLevel == null){
 			return;
 		}
 		
-		// Si les joueurs étaient morts et veulent recommencer le niveau
+		// Si les joueurs ≈Ωtaient morts et veulent recommencer le niveau
 		if(this.startAgain || this.alwaysStartAgain){
 			this.ChooseLevel(this.currentLevel.getLevelID());
 			return;
@@ -115,9 +115,23 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		Character char1 = this.currentLevel.getFirstCharacter();
 		Character char2 = this.currentLevel.getSecondCharacter();
 		
-		// Si un des personnages est mort ou que le menu a été demandé, ne pas faire tourner les calculs
+		// Si un des personnages est mort ou que le menu a ≈Ωt≈Ω demand≈Ω, ne pas faire tourner les calculs
 		if(char1.isDead() || char2.isDead() || this.isPaused){			
 			return;
+		}
+		
+		for(int i=0;i<currentLevel.getExit().size();i++){
+			if(currentLevel.getExit().get(i).isReady())
+			{
+				System.out.println("niveau2 ok");
+			}
+			/*else if(currentLevel.getExit().get(i).getCpt()==1){
+				if(!(char1.collision(currentLevel.getExit().get(i)))&&!(char2.collision(currentLevel.getExit().get(i))))
+				{
+					currentLevel.getExit().get(i).supprCollision();
+					System.out.println("suppr");
+				}
+			}*/
 		}
 		
 		// Sinon effectuer les traitements d'inputs et l'update du world / des sprites
@@ -191,7 +205,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			}
 		}
 
-		// Si le menu de pause a été demandé, l'afficher
+		// Si le menu de pause a ≈Ωt≈Ω demand≈Ω, l'afficher
 		if(this.isPaused){	
 			this.uiPause.render(g);
 		}
@@ -227,10 +241,10 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		Vec2 b2dcoord = Global.getBox2DCoordinates(wallData.x, wallData.y);
 		bodyDef.position = new Vec2(b2dcoord.x+wallData.w/2,b2dcoord.y-wallData.h/2);
 		Body newBody = world.createBody(bodyDef);
+		
 		PolygonDef sd = new PolygonDef();		
 		sd.density = 5.0f;
 		sd.friction = 5.0f;
-
 		sd.setAsBox(wallData.w/2,wallData.h/2);
 		newBody.createShape(sd);
 		newBody.putToSleep();
@@ -289,6 +303,24 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		newBody.createShape(sd);
 		newBody.putToSleep();
 		spriteBodies.add(newBody);
+		return newBody;
+	}
+	
+	public Body addExit(Exit exitData){
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.userData = exitData;
+		Vec2 b2dcoord = Global.getBox2DCoordinates(exitData.x, exitData.y);
+		bodyDef.position = new Vec2(b2dcoord.x+exitData.w/2,b2dcoord.y-exitData.h/2);
+		Body newBody = world.createBody(bodyDef);
+		
+		PolygonDef sd = new PolygonDef();		
+		sd.density = 5000.0f;
+		sd.friction = 5.0f;
+		sd.setAsBox(exitData.w/2,exitData.h/2);
+		sd.isSensor=true;
+		newBody.createShape(sd);
+		spriteBodies.add(newBody);
+		newBody.putToSleep();
 		return newBody;
 	}
 
@@ -356,7 +388,6 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		sd.density = 5.0f;
 		sd.friction = 0.0f;
 		sd.setAsBox(25, 25);
-
 		// Ajoute un Sensor pour savoir si le character est au sol
 		PolygonDef groundSensor = new PolygonDef();
 		groundSensor.isSensor=true;

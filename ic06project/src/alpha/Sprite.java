@@ -75,4 +75,15 @@ public class Sprite {
 			image.draw(x, y, w, h);
 		}
 	}
+	/*public boolean collision(Sprite s1){
+		System.out.println("  x:" + x +"  x+w:"+(x+w)+"  y:"+y+"  y+h:"+(y+h)+"  s1.x:"+s1.x+"  s1.x+s1.w:"+(s1.x+s1.w)+"  s1.y:"+s1.y+"  s1.y+s1.h:"+(s1.y+s1.h));
+		if ((((x>s1.x)&&(x<(s1.x+s1.w))  ) || (((x+w)>s1.x)&&((x+w)<=(s1.x+s1.w)))) && (  (  (y>s1.y)&&(y<(s1.y+s1.h))  ) || (((y+h)>s1.y)&&((y+h)<(s1.y+s1.h))))){
+			System.out.println("collision pour" + x +" "+y);
+			return true;
+		}
+		else{
+			System.out.println("pas de collision pour" + x +" "+y);
+			return false;
+		}
+	}*/
 }

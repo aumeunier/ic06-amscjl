@@ -80,24 +80,23 @@ public class Level1 extends Level {
 		
 		// Place l'eau
 		SourceMortelle s = createSourceMortelle(80,Global.GAMEPLAYHEIGHT-60,50,50);
-		s.setImage("blur9.jpg");
 		s.setAnimation("waves.png", 300, 300);
 		SourceMortelle s2 = createSourceMortelle(130,Global.GAMEPLAYHEIGHT-60,50,50);
-		s2.setImage("blur9.jpg");
 		s2.setAnimation("waves2.png", 300, 300);
 		SourceMortelle s3 = createSourceMortelle(180,Global.GAMEPLAYHEIGHT-60,50,50);
-		s3.setImage("blur9.jpg");
 		s3.setAnimation("waves.png", 300, 300);
 		SourceMortelle s4 = createSourceMortelle(230,Global.GAMEPLAYHEIGHT-60,50,50);
-		s4.setImage("blur9.jpg");
 		s4.setAnimation("waves2.png", 300, 300);
 		SourceMortelle s5 = createSourceMortelle(280,Global.GAMEPLAYHEIGHT-60,50,50);
-		s5.setImage("blur9.jpg");
 		s5.setAnimation("waves.png", 300, 300);
 		
 		// Place sources
 		createSource(500,Global.GAMEPLAYHEIGHT-20,20,20,Power.FLYING);
 		createSource(Global.GAMEPLAYWIDTH-180,Global.GAMEPLAYHEIGHT-30,20,20,Power.INTANGIBLE);
+		
+		//place SOrtie
+		Exit exit = createExit(755,10,45,65);
+		exit.setImage("porte.png");
 		
 		// Place the first character
 		this.character1 = addCharacter(440,Global.GAMEPLAYHEIGHT-90);		

@@ -41,7 +41,7 @@ public class MyContactListener implements ContactListener {
 	@Override
 	public void remove(ContactPoint point) {
 		Object o1 = point.shape1.getUserData();
-		Object o2 = point.shape1.getUserData();
+		Object o2 = point.shape2.getUserData();
 		if (o1 == "groundsensor"){
 			Sprite s = (Sprite)point.shape2.getBody().getUserData();
 			if((s instanceof Wall) || (s instanceof Obstacle)){
@@ -62,6 +62,15 @@ public class MyContactListener implements ContactListener {
 			}
 			else if(s1 instanceof Character && s2 instanceof BoutonPressoir){
 				((BoutonPressoir)s2).desactivate();
+			}
+			
+			else if(s1 instanceof Exit && s2 instanceof Character){
+				((Exit)s1).supprCollision();
+				System.out.println("suppr");
+			}
+			else if(s1 instanceof Character && s2 instanceof Exit){
+				((Exit)s2).supprCollision();
+				System.out.println("suppr");
 			}
 
 		}

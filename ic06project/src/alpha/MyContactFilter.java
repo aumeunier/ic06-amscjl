@@ -22,6 +22,10 @@ public class MyContactFilter implements ContactFilter {
 				else if(s2.getClass().equals(SourceMortelle.class)){
 					((Character)(s1)).setDead(true);
 				}
+				else if(s2.getClass().equals(Exit.class)&&shape1.getUserData()!="groundsensor"){
+					((Exit)s2).ajoutCollision();
+					System.out.println("debug1");
+				}
 				else if(s2.getClass().equals(Source.class)){
 					Source source = (Source)s2;
 					Character character = (Character)s1;
@@ -54,6 +58,10 @@ public class MyContactFilter implements ContactFilter {
 				}
 				else if(s1.getClass().equals(SourceMortelle.class)){
 					((Character)(s2)).setDead(true);					
+				}
+				else if(s1.getClass().equals(Exit.class)&&shape2.getUserData()!="groundsensor"){
+					((Exit)s1).ajoutCollision();
+					System.out.println("debug2");
 				}
 				else if(s1.getClass().equals(Source.class)){
 					Source source = (Source)s1;

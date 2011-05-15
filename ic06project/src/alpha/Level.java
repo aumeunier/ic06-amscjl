@@ -15,6 +15,7 @@ public class Level {
 	protected final static int CH2_INIT_Y = Global.GAMEPLAYHEIGHT-50;
 	protected GameplayState myState;
 	protected ArrayList<Sprite> sprites;
+	protected ArrayList<Exit> listeExit;
 	protected Character character1;
 	protected Character character2;
 	protected LevelSave levelModel;
@@ -24,6 +25,7 @@ public class Level {
 	public Level(GameplayState state, LevelSave model){
 		this.myState = state;
 		this.sprites = new ArrayList<Sprite>();
+		this.listeExit = new ArrayList<Exit>();
 		this.levelModel = model;
 	}
 
@@ -90,6 +92,21 @@ public class Level {
 		return obstacle;
 	}
 
+	protected Exit createExit(int x, int y, int w, int h){
+		
+		// Create a wall object
+		Exit exit = new Exit(x,y,w,h);
+
+		// Add it to the list of sprites of the level
+		//sprites.add(exit);
+		listeExit.add(exit);
+		
+		// Create the obstacle body
+		myState.addExit(exit);
+		
+		return exit;
+	}
+	
 	protected Source createSource(int x, int y, int w, int h, Power _power){
 		
 		// Create a source object
@@ -164,15 +181,21 @@ public class Level {
 	public int getLevelID(){
 		return this.levelID;
 	}
+	public ArrayList<Exit> getExit(){
+		return this.listeExit;
+	}
 	
 	public void render(Graphics g){
 		backgroundImage.draw(0,0,Global.GAMEPLAYWIDTH,Global.GAMEPLAYHEIGHT);
+		for(int i = 0 ; i < listeExit.size() ; ++i){
+			listeExit.get(i).draw(g);
+			}
 		character1.draw(g);
 		character2.draw(g);
 		for(int i = 0 ; i < sprites.size() ; ++i){
 			Sprite s = sprites.get(i);
 			if(!s.getClass().equals(Obstacle.class) || !((Obstacle)s).isHidden()){
-				sprites.get(i).draw(g);
+				s.draw(g);
 			}
 		}
 	}

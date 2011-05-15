@@ -58,6 +58,7 @@ public class Character extends Sprite{
 	public Power getPower(){
 		return power;
 	}
+
 	public void setPower(Power _power){
 		power = _power;
 		changeImage();
