@@ -30,7 +30,9 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	private UIGameplay uiGameplay;
 	private UIDeath uiDeath;
 	private UIPause uiPause;
+	private UILevelCompleted uiWin;
 	private boolean isPaused;
+	private boolean isFinished;
 	private boolean startAgain;
 	private boolean alwaysStartAgain;
 
@@ -40,12 +42,14 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		this.isPaused = false;
 		this.startAgain = false;
 		this.alwaysStartAgain = false;
+		this.isFinished = false;
 	}
 
 	public void ChooseLevel(int levelIndex){
 		LevelSave save = Save.getInstance().levelSaveForLevelID(levelIndex);
 		this.uiGameplay.setLevelInformation(save.getName(), save.getUnlockableKeys(), save.getUnlockedKeys());
 		this.cleanAllBodies();
+		this.isFinished = false;
 		switch(levelIndex){
 		case 1:
 			this.currentLevel = new Level1(this,save);
@@ -69,6 +73,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		this.uiGameplay = new UIGameplay(gc);
 		this.uiPause = new UIPause(gc);
 		this.uiDeath = new UIDeath(gc);
+		this.uiWin = new UILevelCompleted(gc);
 		this.createWorld();
 	}
 
@@ -92,19 +97,20 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 	throws SlickException {
 		
-		// Si un changement d'Žtat a ŽtŽ demandŽe, l'effectuer
+		// Si un changement d'etat a ete demande, l'effectuer
 		if(this.selection != -1){
 			sbg.enterState(selection);			
 		}
 		
-		// Si aucun niveau n'est chargŽ, aucun intŽr�t ˆ faire des calculs
-		if(this.currentLevel == null){
+		// Si aucun niveau n'est charge ou que le niveau est fini, aucun interet a faire des calculs
+		if(this.currentLevel == null || this.isFinished){
 			return;
 		}
 		
-		// Si les joueurs Žtaient morts et veulent recommencer le niveau
-		if(this.startAgain || this.alwaysStartAgain){
+		// Si les joueurs etaient morts et veulent recommencer le niveau
+		if(this.arePlayersDead() && (this.startAgain || this.alwaysStartAgain)){
 			this.ChooseLevel(this.currentLevel.getLevelID());
+			this.startAgain = false;
 			return;
 		}
 		
@@ -112,7 +118,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		Character char2 = this.currentLevel.getSecondCharacter();
 		Input input = gc.getInput();
 		
-		// Si un des personnages est mort ou que le menu a ŽtŽ demandŽ, ne pas faire tourner les calculs
+		// Si un des personnages est mort ou que le menu a ete demande, ne pas faire tourner les calculs
 		if(this.arePlayersDead() || this.isPaused){	
 			input.consumeEvent();
 			return;
@@ -121,15 +127,9 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		for(int i=0;i<currentLevel.getExit().size();i++){
 			if(currentLevel.getExit().get(i).isReady())
 			{
-				System.out.println("niveau2 ok");
+				this.isFinished = true;
+				return;
 			}
-			/*else if(currentLevel.getExit().get(i).getCpt()==1){
-				if(!(char1.collision(currentLevel.getExit().get(i)))&&!(char2.collision(currentLevel.getExit().get(i))))
-				{
-					currentLevel.getExit().get(i).supprCollision();
-					System.out.println("suppr");
-				}
-			}*/
 		}
 		
 		// Sinon effectuer les traitements d'inputs et l'update du world / des sprites
@@ -214,8 +214,12 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			}
 		}
 
-		// Si le menu de pause a ŽtŽ demandŽ, l'afficher
-		if(this.isPaused){	
+		// Si le niveau est complete, afficher un ecran de victoire
+		if(this.isFinished){
+			this.uiWin.render(gc, g);
+		}
+		// Si le menu de pause a ete demande, l'afficher
+		else if(this.isPaused){	
 			this.uiPause.render(gc, g);
 		}
 	}
@@ -439,12 +443,19 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	
 	@Override
 	public void mouseClicked(int button, int x, int y, int clickCount){
-		if(this.isPaused){
+		if(this.isFinished){
+			selection = this.uiWin.mouseClicked(button, x, y, clickCount, this);
+			if(selection == Game.GO_TO_NEXT_LEVEL){
+				this.ChooseLevel(this.currentLevel.getLevelID()+1);
+				selection = -1;
+			}			
+		}
+		else if(this.isPaused){
 			selection = this.uiPause.mouseClicked(button, x, y, clickCount, this);
 		}
-		else if(this.arePlayersDead()){
+		else if(this.currentLevel!=null && this.arePlayersDead()){
 			selection = this.uiDeath.mouseClicked(button, x, y, clickCount, this);
-			if(selection == UIDeath.SHOULD_RESTART){
+			if(selection == Game.SHOULD_RESTART){
 				this.ChooseLevel(this.currentLevel.getLevelID());
 				selection = -1;
 			}

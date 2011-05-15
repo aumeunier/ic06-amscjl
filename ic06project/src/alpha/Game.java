@@ -14,6 +14,8 @@ public class Game extends StateBasedGame implements MusicListener {
 	public static final int NEWGAME_STATE = 2;
 	public static final int LOADGAME_STATE = 3;
 	public static final int OPTIONSGAME_STATE = 4;
+	public static final int GO_TO_NEXT_LEVEL = -100;
+	public static final int SHOULD_RESTART = -200;
 
 	public static boolean displayFullScreen = false;
 	static final boolean displayFPS = false;

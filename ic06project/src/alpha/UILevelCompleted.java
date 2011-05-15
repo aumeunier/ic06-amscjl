@@ -8,39 +8,40 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
-public class UIDeath implements UIInterface {
+public class UILevelCompleted implements UIInterface {
 	
 	// Interface generale
-	final static int DEATH_X = 200;
-	final static int DEATH_Y = 100;
-	final static int DEATH_W = (Global.WINDOW_WIDTH/2-DEATH_X)*2;
-	final static int DEATH_H = (Global.WINDOW_HEIGHT/2-DEATH_Y)*2;
+	final static int WIN_X = 200;
+	final static int WIN_Y = 100;
+	final static int WIN_W = (Global.WINDOW_WIDTH/2-WIN_X)*2;
+	final static int WIN_H = (Global.WINDOW_HEIGHT/2-WIN_Y)*2;
 	final static int BUTTON_SPACE = 20;
-	final static int BUTTON_W = (int) ((DEATH_W-3*BUTTON_SPACE)/2);
+	final static int BUTTON_W = (int) ((WIN_W-3*BUTTON_SPACE)/2);
 	final static int BUTTON_H = 25;
-	final static int BUTTON_X = DEATH_X+BUTTON_SPACE;
-	final static int BUTTON_Y = DEATH_Y+DEATH_H-BUTTON_SPACE-BUTTON_H;
+	final static int BUTTON_X = WIN_X+BUTTON_SPACE;
+	final static int BUTTON_Y = WIN_Y+WIN_H-BUTTON_SPACE-BUTTON_H;
 
 	protected float backgroundTransparency;
 	protected float menuBackgroundTransparency;	
 	protected Image menuBackgroundImage;
 	
 	private Display display;	
+	
+	public UILevelCompleted(GameContainer gc){
 
-	public UIDeath(GameContainer gc){
 		this.backgroundTransparency = 0.7f;
 		this.menuBackgroundTransparency = 0.3f;
 		this.display = new Display(gc);
 		
 		// Background image
-		this.menuBackgroundImage = Global.setImage("blur20.jpg");	
+		this.menuBackgroundImage = Global.setImage("blur1.jpg");	
 
 		// Restart button //TODO: Button
 		Image buttonImage = Global.setImage("blur11.jpg").getScaledCopy(BUTTON_W, BUTTON_H);
-		Label restartLabel = new Label(buttonImage,"Recommencer");
-		restartLabel.setBounds(BUTTON_X,BUTTON_Y,BUTTON_W,BUTTON_H);
-		restartLabel.pack();
-		this.display.add(restartLabel);
+		Label nextLabel = new Label(buttonImage,"Niveau suivant");
+		nextLabel.setBounds(BUTTON_X,BUTTON_Y,BUTTON_W,BUTTON_H);
+		nextLabel.pack();
+		this.display.add(nextLabel);
 		
 		// Back button //TODO: Button
 		Label backToMenuLabel = new Label(buttonImage,"Menu principal");
@@ -55,21 +56,22 @@ public class UIDeath implements UIInterface {
 		g.setColor(new Color(0.0f,0.0f,0.0f,backgroundTransparency));
 		g.fillRect(0,0,Global.WINDOW_WIDTH,Global.WINDOW_HEIGHT);
 		// Menu
-		this.menuBackgroundImage.draw(DEATH_X,DEATH_Y,DEATH_W,DEATH_H);
+		this.menuBackgroundImage.draw(WIN_X,WIN_Y,WIN_W,WIN_H);
 		g.setColor(new Color(0.0f,0.0f,0.0f,menuBackgroundTransparency));
-		g.fillRect(DEATH_X,DEATH_Y,DEATH_W,DEATH_H);
+		g.fillRect(WIN_X,WIN_Y,WIN_W,WIN_H);
 		// Boutons
-		display.render(gc, g);		
+		display.render(gc, g);
 	}
 
 	@Override
-	public int mouseClicked(int button, int x, int y, int clickCount, GameplayState state) {
+	public int mouseClicked(int button, int x, int y, int clickCount,
+			GameplayState state) {
 		int result = -1;
-		// Click on the restart button
+		// Click on the next button
 		if((x >= BUTTON_X && x <= (BUTTON_X + BUTTON_W)) 
 				&&	(y >= BUTTON_Y && y <= (BUTTON_Y + BUTTON_H))){
 			state.setPaused(false);
-			result = Game.SHOULD_RESTART;
+			result = Game.GO_TO_NEXT_LEVEL;
 		}
 		// Click on the main menu button
 		else if((x >= BUTTON_X+BUTTON_W+BUTTON_SPACE  && x <= (BUTTON_X+BUTTON_W+BUTTON_SPACE + BUTTON_W)) 
@@ -79,4 +81,5 @@ public class UIDeath implements UIInterface {
 		}		
 		return result;
 	}
+
 }
