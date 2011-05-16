@@ -54,7 +54,7 @@ public class LoadGameState extends BasicGameState implements MouseListener {
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1)
 			throws SlickException {
-		backgroundImage = new Image(Global.PATH_IMAGES_RESSOURCES+"main_page_background.jpg");
+		backgroundImage = new Image(Global.PATH_IMAGES_RESSOURCES+"9191582_s.jpg");
 		saves = new ArrayList<String>();
 		getSaves();
 		selection = -1;
@@ -63,7 +63,7 @@ public class LoadGameState extends BasicGameState implements MouseListener {
 	@Override
 	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2)
 			throws SlickException {
-		arg2.setColor(Color.white);
+		arg2.setColor(Color.black);
 		backgroundImage.draw(0,0,800,600);
 		arg2.drawString("Retour", BACK_X, BACK_Y);
 		int startX = SAVE_OFFSET_X, startY = SAVE_OFFSET_Y;

@@ -67,7 +67,7 @@ public class NewGameState extends BasicGameState implements MouseListener {
 		name1textField.setConsumeEvents(true);
 		name2textField = new TextField(arg0, arg0.getDefaultFont(), NAMEFIELD2_X, NAMEFIELD2_Y, 
 				NAMEFIELD_W, NAMEFIELD_H);
-		backgroundImage = new Image(Global.PATH_IMAGES_RESSOURCES+"main_page_background.jpg");
+		backgroundImage = new Image(Global.PATH_IMAGES_RESSOURCES+"9191582_s.jpg");
 		selection = -1;
 		hasError = false;
 		errorString = null;
@@ -76,7 +76,7 @@ public class NewGameState extends BasicGameState implements MouseListener {
 	@Override
 	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2)
 			throws SlickException {
-		arg2.setColor(Color.white);
+		arg2.setColor(Color.black);
 		backgroundImage.draw(0,0,800,600);
 		arg2.drawString("Retour", BACK_X, BACK_Y);
 		arg2.drawString("Quel est le nom du premier joueur ?", NAMETEXT1_X, NAMETEXT1_Y);
