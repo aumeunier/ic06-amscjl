@@ -437,6 +437,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		sd.density = 5.0f;
 		sd.friction = 0.0f;
 		sd.setAsBox(Character.CHAR_W_BODY/2, Character.CHAR_H_BODY/2);
+		
 		// Ajoute un Sensor pour savoir si le character est au sol
 		PolygonDef groundSensor = new PolygonDef();
 		groundSensor.isSensor=true;

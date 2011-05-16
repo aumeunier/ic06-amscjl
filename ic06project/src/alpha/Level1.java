@@ -77,7 +77,7 @@ public class Level1 extends Level {
 		Body oMurSortieBody = myState.addObstacle(oMurSortie);
 		
 		// CrŽŽ un levier qui ouvre ce mur
-		Levier levier = createLevier(Global.GAMEPLAYWIDTH-70,210,30,15,oMurSortieBody);
+		Levier levier = createLevier(Global.GAMEPLAYWIDTH-70,200,25,25,oMurSortieBody);
 		
 		// Place l'eau
 		SourceMortelle s = createSourceMortelle(80,Global.GAMEPLAYHEIGHT-60,50,50);
@@ -104,6 +104,7 @@ public class Level1 extends Level {
 		bonus1.setImage("cerise_rouge.png");
 		
 		// Place the first character
+
 		this.character1 = addCharacter(330,Global.GAMEPLAYHEIGHT-Character.CHAR_H-100);		
 		this.character2 = addCharacter(Global.GAMEPLAYWIDTH-Character.CHAR_W-10,
 				Global.GAMEPLAYHEIGHT-Character.CHAR_H-40);

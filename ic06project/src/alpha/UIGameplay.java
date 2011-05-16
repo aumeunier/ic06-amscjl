@@ -30,6 +30,7 @@ public class UIGameplay implements UIInterface {
 	protected Label levelLabel;
 	protected Label unlockableKeysLabel;
 	protected Label unlockedKeysLabel;
+	protected Label allKeysLabel;
 	
 	protected int x, y, w, h;
 	protected int nbUnlockableKeys, nbUnlockedKeys;
@@ -71,7 +72,7 @@ public class UIGameplay implements UIInterface {
 		this.display.add(levelLabel);
 
 		Image keysTotalLabelImage = labelImage.getScaledCopy(MENU_W/2, MENU_H);
-		Label allKeysLabel = new Label(keysTotalLabelImage,"Nombre total de clees: "+
+		allKeysLabel = new Label(keysTotalLabelImage,"Nombre total de cles: "+
 				Save.getInstance().getTotalNumberOfUnlockedKeys()+"/"+Save.getInstance().getTotalNumberOfKeys());
 		allKeysLabel.setBounds(MENU_X+MENU_W+10, Global.WINDOW_HEIGHT-MENU_H, MENU_X-(BUBBLE_X+BUBBLE_W+10), MENU_H);
 		allKeysLabel.setForeground(Color.black);
@@ -116,6 +117,7 @@ public class UIGameplay implements UIInterface {
 	}
 	public void setTempLevelInformation(String powerPlayer1, String powerPlayer2, int _nbUnlockedKeys){
 		unlockedKeysLabel.setText("Unlocked keys:"+_nbUnlockedKeys);
+		allKeysLabel.setText("Nombre total de cles: "+	(Save.getInstance().getTotalNumberOfUnlockedKeys()+_nbUnlockedKeys)+"/"+Save.getInstance().getTotalNumberOfKeys());
 	}
 	
 	@Override
