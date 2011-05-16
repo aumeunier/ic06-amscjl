@@ -11,15 +11,15 @@ import org.newdawn.slick.Image;
 public class UIDeath implements UIInterface {
 	
 	// Interface generale
-	final static int DEATH_X = 200;
-	final static int DEATH_Y = 100;
-	final static int DEATH_W = (Global.WINDOW_WIDTH/2-DEATH_X)*2;
-	final static int DEATH_H = (Global.WINDOW_HEIGHT/2-DEATH_Y)*2;
-	final static int BUTTON_SPACE = 20;
+	final static int DEATH_W = (int) (401*1.5);//(Global.WINDOW_WIDTH/2-DEATH_X)*2;
+	final static int DEATH_H = (int) (283*1.5);//(Global.WINDOW_HEIGHT/2-DEATH_Y)*2;
+	final static int DEATH_X = (800-DEATH_W)/2;
+	final static int DEATH_Y = (600-DEATH_H)/3;
+	final static int BUTTON_SPACE = 60;
 	final static int BUTTON_W = (int) ((DEATH_W-3*BUTTON_SPACE)/2);
 	final static int BUTTON_H = 25;
 	final static int BUTTON_X = DEATH_X+BUTTON_SPACE;
-	final static int BUTTON_Y = DEATH_Y+DEATH_H-BUTTON_SPACE-BUTTON_H;
+	final static int BUTTON_Y = (int) (DEATH_Y+DEATH_H*0.7);
 
 	protected float backgroundTransparency;
 	protected float menuBackgroundTransparency;	
@@ -33,7 +33,16 @@ public class UIDeath implements UIInterface {
 		this.display = new Display(gc);
 		
 		// Background image
-		this.menuBackgroundImage = Global.setImage("blur20.jpg");	
+		this.menuBackgroundImage = Global.setImage("1770925_s.jpg");		
+		
+		// You lost label
+		Image gameOverImage = Global.setImage("blur11.jpg").getScaledCopy(DEATH_W-2*BUTTON_SPACE, BUTTON_H);
+		Label gameOver = new Label(gameOverImage,"Vous etes morts!\n");
+		gameOver.setBounds(BUTTON_X,DEATH_Y+DEATH_H/3-BUTTON_H,DEATH_W-2*BUTTON_SPACE,BUTTON_H);
+		gameOver.setForeground(Color.black);
+		gameOver.pack();
+		this.display.add(gameOver);
+		gameOver.setImage(null);
 
 		// Restart button //TODO: Button
 		Image buttonImage = Global.setImage("blur11.jpg").getScaledCopy(BUTTON_W, BUTTON_H);

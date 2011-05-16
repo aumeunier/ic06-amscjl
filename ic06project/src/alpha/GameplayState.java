@@ -488,6 +488,9 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		return (this.currentLevel.getFirstCharacter().isDead() || this.currentLevel.getSecondCharacter().isDead());
 	}
 	public LevelSave getCurrentLevelModel(){
+		if(this.currentLevel == null){
+			return null;
+		}
 		return this.currentLevel.levelModel;
 	}
 }

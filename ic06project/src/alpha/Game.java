@@ -84,8 +84,11 @@ public class Game extends StateBasedGame implements MusicListener {
 			loopMusic();
 		}
 		else if(id==GAMEPLAY_STATE){
-			changeMusic(((GameplayState)this.getState(id)).getCurrentLevelModel().getMusicName());	
-			loopMusic();		
+			LevelSave s = ((GameplayState)this.getState(id)).getCurrentLevelModel();
+			if(s!=null){
+				changeMusic(s.getMusicName());	
+				loopMusic();	
+			}	
 		}
 	}
 
