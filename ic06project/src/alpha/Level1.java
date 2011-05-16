@@ -29,8 +29,9 @@ public class Level1 extends Level {
 		Obstacle o = createObstacleWithPoints(600,200,200,150,temp);
 		o.setImage("fleur9_mur.png");
 		
-		Wall sol1 = createWall(0,Global.GAMEPLAYHEIGHT-85,80,75); // Sol 1
-		Wall sol2 = createWall(310,Global.GAMEPLAYHEIGHT-85,100,75); // Sol 2 (apres l'eau)
+		createGround(0,Global.GAMEPLAYHEIGHT-85,80,75); // Sol 1
+		createGround(310,Global.GAMEPLAYHEIGHT-85,100,75); // Sol 2 (apres l'eau)
+		createGround(Global.GAMEPLAYWIDTH-80,Global.GAMEPLAYHEIGHT-85,80,75); // Sol 4 (en dessous perso 2)
 		//*
 		ArrayList<Vec2> sol3Points = new ArrayList<Vec2>();
 		sol3Points.add(new Vec2(-40,-27));
@@ -43,7 +44,7 @@ public class Level1 extends Level {
 		sol3.addPointToShape(410,Global.GAMEPLAYHEIGHT-10);
 		sol3.addPointToShape(410+80,Global.GAMEPLAYHEIGHT-10);
 		sol3.addPointToShape(410,Global.GAMEPLAYHEIGHT-65);
-		Wall sol4 = createWall(Global.GAMEPLAYWIDTH-80,Global.GAMEPLAYHEIGHT-35,80,25); // Sol 4 (en dessous perso 2)
+		
 		
 		//Plateform
 		Wall o1 = createWall(10,75,(int)(148/1.3),(int)(42/1.3));
@@ -77,7 +78,7 @@ public class Level1 extends Level {
 		Body oMurSortieBody = myState.addObstacle(oMurSortie);
 		
 		// CrŽŽ un levier qui ouvre ce mur
-		Levier levier = createLevier(Global.GAMEPLAYWIDTH-70,200,25,25,oMurSortieBody);
+		Levier levier = createLevier(Global.GAMEPLAYWIDTH-70,210,30,15,oMurSortieBody);
 		
 		// Place l'eau
 		SourceMortelle s = createSourceMortelle(80,Global.GAMEPLAYHEIGHT-60,50,50);
@@ -104,9 +105,8 @@ public class Level1 extends Level {
 		bonus1.setImage("cerise_rouge.png");
 		
 		// Place the first character
-
 		this.character1 = addCharacter(330,Global.GAMEPLAYHEIGHT-Character.CHAR_H-100);		
-		this.character2 = addCharacter(Global.GAMEPLAYWIDTH-Character.CHAR_W-10,
+		this.character2 = addCharacter(Global.GAMEPLAYWIDTH-Character.CHAR_W-100,
 				Global.GAMEPLAYHEIGHT-Character.CHAR_H-40);
 	}
 }

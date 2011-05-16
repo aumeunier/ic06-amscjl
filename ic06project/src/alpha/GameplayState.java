@@ -281,6 +281,23 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		spriteBodies.add(newBody);
 		return newBody;
 	}
+	
+	public Body addGround(Ground groundData){
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.userData = groundData;
+		Vec2 b2dcoord = Global.getBox2DCoordinates(groundData.x, groundData.y);
+		bodyDef.position = new Vec2(b2dcoord.x+groundData.w/2,b2dcoord.y-groundData.h/2);
+		Body newBody = world.createBody(bodyDef);
+		
+		PolygonDef sd = new PolygonDef();		
+		sd.density = 5.0f;
+		sd.friction = 5.0f;
+		sd.setAsBox(groundData.w/2,groundData.h/2);
+		newBody.createShape(sd);
+		newBody.putToSleep();
+		spriteBodies.add(newBody);
+		return newBody;
+	}
 	public Body addWallWithPoints(Wall wallData, ArrayList<Vec2> list){
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.userData = wallData;

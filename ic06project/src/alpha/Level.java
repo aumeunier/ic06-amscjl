@@ -56,6 +56,25 @@ public class Level {
 		
 		return wall;
 	}
+	
+	protected Ground createGround(int x, int y, int w, int h){
+		
+		// Create a wall object
+		Ground ground = new Ground(x,y,w,h);
+		//Sprite S2 = new Sprite(x,y-25,w,50);
+		//S2.setImage("herbe3.png");
+		
+		
+		// Add it to the list of sprites of the level
+		sprites.add(ground);
+		//sprites.add(S2);
+		
+		// Create the wall body
+		myState.addGround(ground);
+		
+		return ground;
+	}
+	
 	protected Wall createWallWithPoints(int x, int y, int w, int h, ArrayList<Vec2> point){
 		
 		// Create a wall object
