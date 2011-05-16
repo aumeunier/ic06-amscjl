@@ -9,8 +9,8 @@ public class Level1 extends Level {
 	public Level1(GameplayState state, LevelSave model){	
 		super(state,model);
 		this.levelID = 1;
-		this.setBackgroundImage("blur15.jpg");
-		//this.setBackgroundImage("6362779_s.jpg");
+		//this.setBackgroundImage("blur15.jpg");
+		this.setBackgroundImage("6362779_s.jpg");
 		
 		// Place a ground wall
 		createWall(0,Global.GAMEPLAYHEIGHT-10,Global.GAMEPLAYWIDTH,10);		
