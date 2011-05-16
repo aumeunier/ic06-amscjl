@@ -6,20 +6,20 @@ public class BoutonPressoir extends Declencheur {
 	
 	public BoutonPressoir(int _x, int _y, int _w, int _h, Body b){
 		super(_x, _y, _w, _h, b);
-		this.setImage("blur20.jpg");
+		this.setImage("blur20test.gif");
 	}
 
 	@Override
 	public void activate() {
 		this.setActivated(true);
 		((Obstacle)(relatedBody.getUserData())).setHidden(true);
-		this.setImage("blur1.jpg");
+		this.setImage("blur1test.gif");
 	}
 
 	@Override
 	public void desactivate() {
 		this.setActivated(false);
 		((Obstacle)(relatedBody.getUserData())).setHidden(false);
-		this.setImage("blur20.jpg");
+		this.setImage("blur20test.gif");
 	}
 }

@@ -69,7 +69,7 @@ public class Level1 extends Level {
 		Body oMurLevierBody = myState.addObstacle(oMurLevier);
 		
 		// CrŽŽ un bouton pressoir qui ouvre ce mur
-		BoutonPressoir bouton = createBoutonPressoir(85,185,30,15,oMurLevierBody);
+		BoutonPressoir bouton = createBoutonPressoir(85,185,30,18,oMurLevierBody);
 		
 		// Place un mur devant la sortie
 		Obstacle oMurSortie = new Obstacle(Global.GAMEPLAYWIDTH-160,0,20,75);
