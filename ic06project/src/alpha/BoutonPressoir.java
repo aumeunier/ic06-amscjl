@@ -20,6 +20,6 @@ public class BoutonPressoir extends Declencheur {
 	public void desactivate() {
 		this.setActivated(false);
 		((Obstacle)(relatedBody.getUserData())).setHidden(false);
-		this.setImage("blur20test.gif");
+		this.setImage("blur20test.png");
 	}
 }
