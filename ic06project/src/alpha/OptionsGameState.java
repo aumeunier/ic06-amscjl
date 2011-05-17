@@ -24,7 +24,7 @@ public class OptionsGameState extends BasicGameState implements MouseListener {
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1)
 			throws SlickException {
-		backgroundImage = new Image(Global.PATH_IMAGES_RESSOURCES+"main_page_background.jpg");
+		backgroundImage = new Image(Global.PATH_IMAGES_RESSOURCES+"7711466_s.jpg");
 		selection = -1;		
 	}
 

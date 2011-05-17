@@ -143,6 +143,13 @@ public class Save {
 	private boolean hasUnlockedLevel(LevelSave level){
 		return (levels.contains(level) && level.isUnlocked());
 	}
+	public int getFinishedStateForLevelID(int index){
+		LevelSave lvl = this.getLevelWithID(index);
+		byte b1 = (byte)((lvl.isUnlocked)?1:0);
+		byte b2 = (byte)((lvl.isFinished)?1:0);
+		// 00 == Non disponible, non fini ; 01 == disponible, non fini ; 10 == non disponible, fini ; 11 == disponible, fini
+		return (b2 << 1) + b1;
+	}
 	public int[] getAllIds(){
 		int[] temp = new int[levels.size()];
 		int i = 0;

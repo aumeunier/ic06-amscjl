@@ -14,7 +14,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class MainMenuGameState extends BasicGameState implements MouseListener {
-	static final boolean optionsActivated = true;
+	static final boolean optionsActivated = false;
 	static final float SCALE_DOWN_W = 300.0f/500.0f;
 	static final int NEWGAME_X = 50;
 	static final int NEWGAME_Y = 50;
@@ -32,37 +32,42 @@ public class MainMenuGameState extends BasicGameState implements MouseListener {
 	int selection;
 	int levelSelection;
 	Image backgroundImage;
-	//Image topBackgroundImage;
 	Image newGameImage;
 	Image loadGameImage;
 	Image optionsImage;
 	Image titleImage;
 	Image mapImage;
-	Image mapLvlImage;	
-	
+	Image mapLvlDefaultImage;	
+	Image mapLvlUnlockedImage;	
+	Image mapLvlUnlockedFinishedImage;	
+	Image mapLvlFinishedImage;	
+
 	public MainMenuGameState(int id){
 		super();
 		stateID = id;
 		selection = -1;
 		levelSelection = -1;
 	}
-	
+
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
-			throws SlickException {
+	throws SlickException {
 		// Images
 		backgroundImage = new Image(Global.PATH_IMAGES_RESSOURCES+"papyrus_page.png");
 		backgroundImage.rotate(90);
 		mapImage = new Image(Global.PATH_IMAGES_RESSOURCES+"scroll_background_page_horizontal.png");
-		mapLvlImage = new Image(Global.PATH_IMAGES_RESSOURCES+"map.jpeg");
-		
+		mapLvlDefaultImage = new Image(Global.PATH_IMAGES_RESSOURCES+"bloque_niveau.png");
+		mapLvlUnlockedImage = new Image(Global.PATH_IMAGES_RESSOURCES+"debut_niveau.png");
+		mapLvlUnlockedFinishedImage = new Image(Global.PATH_IMAGES_RESSOURCES+"fin_niveau.png");
+		mapLvlFinishedImage = new Image(Global.PATH_IMAGES_RESSOURCES+"fin_niveau.png");
+
 		// Labels
 		newGameImage = Global.setImage("main_menu_nouvelle_partie.png");
 		newGameImage = newGameImage.getScaledCopy((int) (newGameImage.getWidth()*SCALE_DOWN_W),newGameImage.getHeight());
 
 		loadGameImage = Global.setImage("main_menu_charger_partie.png");
 		loadGameImage = loadGameImage.getScaledCopy((int) (loadGameImage.getWidth()*SCALE_DOWN_W),loadGameImage.getHeight());
-		
+
 		if(optionsActivated){
 			optionsImage = Global.setImage("main_menu_options.png");
 			optionsImage = optionsImage.getScaledCopy((int) (optionsImage.getWidth()*SCALE_DOWN_W),optionsImage.getHeight());
@@ -74,16 +79,18 @@ public class MainMenuGameState extends BasicGameState implements MouseListener {
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
-			throws SlickException {
+	throws SlickException {
 		g.setColor(Color.black);
-		
+
 		// Top part
 		backgroundImage.draw(-backgroundImage.getWidth()/8,-backgroundImage.getHeight()/8,300,800);
 		//titleImage.draw(TITLE_X,TITLE_Y);
 		newGameImage.draw(NEWGAME_X,NEWGAME_Y);
 		loadGameImage.draw(LOADGAME_X,LOADGAME_Y);
-		optionsImage.draw(OPTIONS_X,OPTIONS_Y);
-		
+		if(this.optionsActivated){
+			optionsImage.draw(OPTIONS_X,OPTIONS_Y);
+		}
+
 		// Map part
 		mapImage.draw(MAP_X,MAP_Y,800-2*MAP_X,600-MAP_Y);
 		Save s = Save.getInstance();
@@ -91,14 +98,29 @@ public class MainMenuGameState extends BasicGameState implements MouseListener {
 		for(int i = 0 ; i < ids.length ; i++){
 			int[] mapLvl = s.mapPointForLevelID(ids[i]);
 			if(mapLvl!=null){
-				mapLvlImage.draw(MAP_X+mapLvl[0],MAP_Y+mapLvl[1],mapLvl[2],mapLvl[3]);
+				switch(Save.getInstance().getFinishedStateForLevelID(ids[i])){
+				case 0:
+					mapLvlDefaultImage.draw(MAP_X+mapLvl[0],MAP_Y+mapLvl[1],mapLvl[2],mapLvl[3]);
+					break;
+				case 1:
+					mapLvlUnlockedImage.draw(MAP_X+mapLvl[0],MAP_Y+mapLvl[1],mapLvl[2],mapLvl[3]);
+					break;
+				case 2:
+					mapLvlFinishedImage.draw(MAP_X+mapLvl[0],MAP_Y+mapLvl[1],mapLvl[2],mapLvl[3]);
+					break;
+				case 3:
+					mapLvlUnlockedFinishedImage.draw(MAP_X+mapLvl[0],MAP_Y+mapLvl[1],mapLvl[2],mapLvl[3]);
+					break;
+				default:
+					break;
+				}
 			}
 		}
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
-			throws SlickException {
+	throws SlickException {
 		if(selection > -1){
 			if(selection == Game.GAMEPLAY_STATE){
 				((GameplayState)(sbg.getState(Game.GAMEPLAY_STATE))).ChooseLevel(levelSelection);	
@@ -112,10 +134,11 @@ public class MainMenuGameState extends BasicGameState implements MouseListener {
 	public int getID() {
 		return stateID;
 	}
-	
+
 	public void mouseMoved(int oldx, int oldy, int newX, int newY){
 	}
- 
+
+	@SuppressWarnings("unused")
 	public void mouseClicked(int button, int x, int y, int clickCount){
 		if((x >= NEWGAME_X && x <= (NEWGAME_X + newGameImage.getWidth())) 
 				&&	(y >= NEWGAME_Y && y <= (NEWGAME_Y + newGameImage.getHeight()))){

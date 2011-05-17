@@ -106,8 +106,14 @@ public class Level1 extends Level {
 		bonus1.setImage("cerise_rouge.png");
 		
 		// Place the first character
+		//*
+		this.character1 = addCharacterWithPoints(330,Global.GAMEPLAYHEIGHT-Character.CHAR_H-100);		
+		this.character2 = addCharacterWithPoints(Global.GAMEPLAYWIDTH-Character.CHAR_W-100,
+				Global.GAMEPLAYHEIGHT-Character.CHAR_H-40);
+		/*/
 		this.character1 = addCharacter(330,Global.GAMEPLAYHEIGHT-Character.CHAR_H-100);		
 		this.character2 = addCharacter(Global.GAMEPLAYWIDTH-Character.CHAR_W-100,
 				Global.GAMEPLAYHEIGHT-Character.CHAR_H-40);
+		//*/
 	}
 }

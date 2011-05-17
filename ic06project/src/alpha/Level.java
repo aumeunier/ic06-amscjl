@@ -197,13 +197,37 @@ public class Level {
 		
 		return bonus;
 	}
-	
+
 	protected Character addCharacter(int x, int y){
 		// Create a new character and add it to the panel
 		Character ch = new Character(x,y);
 		
 		// Create the body definition
-		myState.addCharacter(ch);
+		myState.addCharacter(ch,null);
+
+		return ch;
+	}
+	protected Character addCharacterWithPoints(int x, int y){
+		// Create a new character and add it to the panel
+		Character ch = new Character(x,y);
+		
+		// Create the body definition
+		ArrayList<Vec2> tempArray = new ArrayList<Vec2>();
+		Vec2 v = new Vec2(-Character.CHAR_W_BODY/2,Character.CHAR_H_BODY/2);	
+		tempArray.add(v);
+		v = new Vec2(-Character.CHAR_W_BODY/2,-0.15f*Character.CHAR_H_BODY/2);
+		//tempArray.add(v);
+		v = new Vec2(-Character.CHAR_W_BODY/8,-Character.CHAR_H_BODY/2);
+		tempArray.add(v);
+		v = new Vec2(Character.CHAR_W_BODY/8,-Character.CHAR_H_BODY/2);
+		tempArray.add(v);
+		v = new Vec2(Character.CHAR_W_BODY/2,0.15f*Character.CHAR_H_BODY/2);
+		//tempArray.add(v);
+		v = new Vec2(Character.CHAR_W_BODY/2,Character.CHAR_H_BODY/2);
+		tempArray.add(v);
+		
+		
+		myState.addCharacter(ch,tempArray);
 
 		return ch;
 	}

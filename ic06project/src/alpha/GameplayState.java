@@ -274,7 +274,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		
 		PolygonDef sd = new PolygonDef();		
 		sd.density = 5.0f;
-		sd.friction = 5.0f;
+		sd.friction = 0.5f;
 		sd.setAsBox(wallData.w/2,wallData.h/2);
 		newBody.createShape(sd);
 		newBody.putToSleep();
@@ -291,7 +291,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		
 		PolygonDef sd = new PolygonDef();		
 		sd.density = 5.0f;
-		sd.friction = 5.0f;
+		sd.friction = 0.5f;
 		sd.setAsBox(groundData.w/2,groundData.h/2);
 		newBody.createShape(sd);
 		newBody.putToSleep();
@@ -306,7 +306,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		Body newBody = world.createBody(bodyDef);
 		PolygonDef sd = new PolygonDef();		
 		sd.density = 5.0f;
-		sd.friction = 5.0f;
+		sd.friction = 0.5f;
 
 		for(Vec2 v: list){
 			sd.addVertex(v);			
@@ -325,7 +325,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		Body newBody = world.createBody(bodyDef);
 		PolygonDef sd = new PolygonDef();		
 		sd.density = 5000.0f;
-		sd.friction = 5.0f;
+		sd.friction = 0.5f;
 
 		sd.setAsBox(obstacleData.w/2,obstacleData.h/2);
 		newBody.createShape(sd);
@@ -341,7 +341,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		Body newBody = world.createBody(bodyDef);
 		PolygonDef sd = new PolygonDef();		
 		sd.density = 5000.0f;
-		sd.friction = 5.0f;
+		sd.friction = 0.5f;
 
 		for(Vec2 v: list){
 			sd.addVertex(v);			
@@ -441,7 +441,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		return newBody;
 	}
 
-	public Body addCharacter(Character characterData){
+	public Body addCharacter(Character characterData, ArrayList<Vec2> list){
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.userData = characterData;
 		Vec2 b2dcoord = Global.getBox2DCoordinates(characterData.x, characterData.y);
@@ -452,8 +452,15 @@ public class GameplayState extends BasicGameState implements MouseListener{
 
 		PolygonDef sd = new PolygonDef();
 		sd.density = 5.0f;
-		sd.friction = 0.0f;
-		sd.setAsBox(Character.CHAR_W_BODY/2, Character.CHAR_H_BODY/2);
+		sd.friction = 0.1f;
+		if(list!=null){
+			for(Vec2 v: list){
+				sd.addVertex(v);				
+			}
+		}
+		else {
+			sd.setAsBox(Character.CHAR_W_BODY/2, Character.CHAR_H_BODY/2);
+		}
 		
 		// Ajoute un Sensor pour savoir si le character est au sol
 		PolygonDef groundSensor = new PolygonDef();

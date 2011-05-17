@@ -67,7 +67,7 @@ public class NewGameState extends BasicGameState implements MouseListener {
 		name1textField.setConsumeEvents(true);
 		name2textField = new TextField(arg0, arg0.getDefaultFont(), NAMEFIELD2_X, NAMEFIELD2_Y, 
 				NAMEFIELD_W, NAMEFIELD_H);
-		backgroundImage = new Image(Global.PATH_IMAGES_RESSOURCES+"9191582_s.jpg");
+		backgroundImage = new Image(Global.PATH_IMAGES_RESSOURCES+"7711466_s.jpg");
 		selection = -1;
 		hasError = false;
 		errorString = null;

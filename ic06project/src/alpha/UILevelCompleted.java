@@ -14,7 +14,7 @@ public class UILevelCompleted implements UIInterface {
 	final static int WIN_X = 200;
 	final static int WIN_Y = 100;
 	final static int WIN_W = (Global.WINDOW_WIDTH/2-WIN_X)*2;
-	final static int WIN_H = (Global.WINDOW_HEIGHT/2-WIN_Y)*2;
+	final static int WIN_H = (Global.WINDOW_HEIGHT/3-WIN_Y/2)*2;
 	final static int BUTTON_SPACE = 20;
 	final static int BUTTON_W = (int) ((WIN_W-3*BUTTON_SPACE)/2);
 	final static int BUTTON_H = 25;
@@ -30,11 +30,19 @@ public class UILevelCompleted implements UIInterface {
 	public UILevelCompleted(GameContainer gc){
 
 		this.backgroundTransparency = 0.7f;
-		this.menuBackgroundTransparency = 0.3f;
+		this.menuBackgroundTransparency = 0.15f;
 		this.display = new Display(gc);
 		
 		// Background image
-		this.menuBackgroundImage = Global.setImage("blur1.jpg");	
+		this.menuBackgroundImage = Global.setImage("9191582_s.jpg");	
+		
+		// Texte
+		Image textImage = Global.setImage("blur11.jpg").getScaledCopy(2*BUTTON_W+BUTTON_SPACE, BUTTON_H);
+		Label winLabel = new Label(textImage,"Niveau termine! Felicitations!");
+		winLabel.setBounds(BUTTON_X,WIN_Y+WIN_H/3,2*BUTTON_W+BUTTON_SPACE,BUTTON_H);
+		winLabel.pack();
+		this.display.add(winLabel);		
+		winLabel.setImage(null);
 
 		// Restart button //TODO: Button
 		Image buttonImage = Global.setImage("blur11.jpg").getScaledCopy(BUTTON_W, BUTTON_H);
