@@ -110,10 +110,13 @@ public class NewGameState extends BasicGameState implements MouseListener {
 	public void mouseClicked(int button, int x, int y, int clickCount){
 		if((x >= OK_X && x <= (OK_X + 75)) 
 				&&	(y >= OK_Y && y <= (OK_Y + 25))){
-			if(name1textField.getText().length() > 0 && name2textField.getText().length() > 0){
-				if(isNameAvailable(name1textField.getText()+"_"+name2textField.getText())){
+			String name1 = name1textField.getText();
+			String name2= name2textField.getText();
+			if(name1.length() > 0 && name2.length() > 0){
+				if(isNameAvailable(name1+"_"+name2)){
 					selection = Game.GAMEPLAY_STATE;
 					hasError = false;	
+					Save.getInstance().createSave(Global.PATH_SAVES+name1+"_"+name2+".save");
 				}
 				else {
 					selection = -1;

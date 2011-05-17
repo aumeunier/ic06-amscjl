@@ -17,6 +17,8 @@ public class UIGameplay implements UIInterface {
 	final static int BUBBLE_Y = 0;
 	final static int BUBBLE_W = Global.WINDOW_HEIGHT - Global.GAMEPLAYHEIGHT - 40;
 	final static int BUBBLE_H = Global.WINDOW_HEIGHT - Global.GAMEPLAYHEIGHT - 40;
+	final static int IMAGE_W = BUBBLE_W/2;
+	final static int IMAGE_H = BUBBLE_H/2;
 	protected Image backgroundImage;
 	protected Image leftBubbleBackgroundImage;
 	protected Image leftPlayerBackgroundImage;
@@ -34,11 +36,14 @@ public class UIGameplay implements UIInterface {
 	
 	protected int x, y, w, h;
 	protected int nbUnlockableKeys, nbUnlockedKeys;
+	protected Power p1power = Power.NONE, p2power = Power.NONE;
 	
 	public UIGameplay(GameContainer gc) {
 		backgroundImage = Global.setImage("06_wood_artshare_ru.jpg");
 		leftBubbleBackgroundImage = Global.setImage("bubble.jpg");
 		rightBubbleBackgroundImage = Global.setImage("bubble.jpg");
+		leftPlayerImage = null;
+		rightPlayerImage = null;
 		menuBackgroundImage = Global.setImage("blur11.jpg");
 		this.x = 0; this.y = Global.GAMEPLAYHEIGHT;
 		this.w = Global.WINDOW_WIDTH; this.h = Global.WINDOW_HEIGHT-Global.GAMEPLAYHEIGHT;
@@ -107,6 +112,10 @@ public class UIGameplay implements UIInterface {
 		this.display.add(menuLabel);
 		
 	}
+	public void onEnter(){
+		leftPlayerImage = null;
+		rightPlayerImage = null;
+	}
 	public void setLevelInformation(String _levelName, int _nbUnlockableKeys, int _nbUnlockedKeys){
 		levelLabel.setText(_levelName);
 		levelLabel.setImage(null);
@@ -115,9 +124,48 @@ public class UIGameplay implements UIInterface {
 		unlockableKeysLabel.setText("Unlockable keys:"+_nbUnlockableKeys);
 		unlockableKeysLabel.setImage(null);
 	}
-	public void setTempLevelInformation(String powerPlayer1, String powerPlayer2, int _nbUnlockedKeys){
+	public void setTempLevelInformation(Power powerPlayer1, Power powerPlayer2, int _nbUnlockedKeys){
 		unlockedKeysLabel.setText("Unlocked keys:"+_nbUnlockedKeys);
-		allKeysLabel.setText("Nombre total de cles: "+	(Save.getInstance().getTotalNumberOfUnlockedKeys()+_nbUnlockedKeys)+"/"+Save.getInstance().getTotalNumberOfKeys());
+		allKeysLabel.setText("Nombre total de cles: "+	(Save.getInstance().getTotalNumberOfUnlockedKeys()+_nbUnlockedKeys)
+				+"/"+Save.getInstance().getTotalNumberOfKeys());
+		if(powerPlayer1.compareTo(p1power)!=0){
+			switch(powerPlayer1){
+			case NONE:
+				leftPlayerImage = null;
+				break;
+			case DEATHLY:
+				leftPlayerImage = null;
+				break;
+			case INTANGIBLE:
+				leftPlayerImage = Global.setImage("powerMur.png");
+				break;
+			case FLYING:
+				leftPlayerImage = Global.setImage("powerFlying.png");
+				break;
+			default:
+				break;
+			}
+			this.p1power = powerPlayer1;
+		}
+		if(powerPlayer2.compareTo(p1power)!=0){
+			switch(powerPlayer2){
+			case NONE:
+				rightPlayerImage = null;
+				break;
+			case DEATHLY:
+				rightPlayerImage = null;
+				break;
+			case INTANGIBLE:
+				rightPlayerImage = Global.setImage("powerMur.png");
+				break;
+			case FLYING:
+				rightPlayerImage = Global.setImage("powerFlying.png");
+				break;
+			default:
+				break;
+			}
+			this.p2power = powerPlayer2;
+		}
 	}
 	
 	@Override
@@ -125,10 +173,17 @@ public class UIGameplay implements UIInterface {
 		backgroundImage.draw(x,y,w,h);
 		
 		// Left bubble
-		leftBubbleBackgroundImage.draw(BUBBLE_X,y,BUBBLE_W,BUBBLE_H);
+		leftBubbleBackgroundImage.draw(BUBBLE_X,y+BUBBLE_Y,BUBBLE_W,BUBBLE_H);
+		if(leftPlayerImage != null){
+			leftPlayerImage.draw(BUBBLE_X+(BUBBLE_W-IMAGE_W)/2,y+BUBBLE_Y+(BUBBLE_H-IMAGE_H)/2,BUBBLE_W/2,BUBBLE_H/2);
+		}
 		
 		// Right bubble
-		rightBubbleBackgroundImage.draw(w-(BUBBLE_W+BUBBLE_X),y,BUBBLE_W,BUBBLE_H);
+		rightBubbleBackgroundImage.draw(w-(BUBBLE_W+BUBBLE_X),y+BUBBLE_Y,BUBBLE_W,BUBBLE_H);
+		if(rightPlayerImage != null){
+			rightPlayerImage.draw(w-(BUBBLE_X+(BUBBLE_W-IMAGE_W)/2+IMAGE_W),y+BUBBLE_Y+(BUBBLE_H-IMAGE_H)/2,
+					BUBBLE_W/2,BUBBLE_H/2);			
+		}
 		
 		// Labels and buttons
 		this.display.render(gc, g);

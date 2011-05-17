@@ -22,7 +22,7 @@
 			"levelName":"caverne",
 			"music":"gmz_-_Between_Me_and_Myself.ogg",
 			"numberOfKeys":3,
-			"areaOnMap":[50, 140, 50, 50]		
+			"areaOnMap":[250, 100, 50, 50]		
 			
 		},
 		{
@@ -30,7 +30,7 @@
 			"levelName":"douve",
 			"music":"gmz_-_Between_Me_and_Myself.ogg",
 			"numberOfKeys":4,
-			"areaOnMap":[150, 150, 50, 50]		
+			"areaOnMap":[350, 150, 50, 50]		
 			
 		},
 		{

@@ -1,0 +1,36 @@
+{
+	 "name1":"null",
+	 "name2":"null",
+	 "levels":[
+		{
+			"id":1,
+			"keys":0,
+			"unlocked":true,
+			"finished":false
+		},
+		{
+			"id":2,
+			"keys":0,
+			"unlocked":false,
+			"finished":false
+		},
+		{
+			"id":3,
+			"keys":0,
+			"unlocked":false,
+			"finished":false
+		},
+		{
+			"id":4,
+			"keys":0,
+			"unlocked":false,
+			"finished":false
+		},
+		{
+			"id":5,
+			"keys":0,
+			"unlocked":false,
+			"finished":false
+		}
+	 ]
+}

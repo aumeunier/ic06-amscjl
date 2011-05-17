@@ -9,6 +9,7 @@ public class Global {
 	public final static int WINDOW_HEIGHT = 600;
 	public final static int GAMEPLAYWIDTH = 800;
 	public final static int GAMEPLAYHEIGHT = 500;
+	public final static String PATH_SAVES = "./saves/";
 	public final static String PATH_RESSOURCES = "./ressources/";
 	public final static String PATH_IMAGES_RESSOURCES = PATH_RESSOURCES+"images/";
 	public final static String PATH_SPRITES_RESSOURCES = PATH_RESSOURCES+"sprites/";

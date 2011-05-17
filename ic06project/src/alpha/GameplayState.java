@@ -52,6 +52,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		this.uiGameplay.setLevelInformation(save.getName(), save.getUnlockableKeys(), save.getUnlockedKeys());
 		this.cleanAllBodies();
 		this.isFinished = false;
+		this.uiGameplay.onEnter();
 		switch(levelIndex){
 		case 1:
 			this.currentLevel = new Level1(this,save);
@@ -87,6 +88,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		this.isPaused = false;
 		this.startAgain = false;
 		this.alwaysStartAgain = false;
+		this.uiGameplay.onEnter();
 	}
 
 	@Override
@@ -486,6 +488,9 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	@Override
 	public void mouseClicked(int button, int x, int y, int clickCount){
 		if(this.isFinished){
+			Save.getInstance().levelSaveForLevelID(this.currentLevel.getLevelID()).
+				setSavedLevelData(this.currentLevelState.getNbKeys(), true, true);
+			Save.getInstance().save();
 			selection = this.uiWin.mouseClicked(button, x, y, clickCount, this);
 			if(selection == Game.GO_TO_NEXT_LEVEL){
 				this.ChooseLevel(this.currentLevel.getLevelID()+1);

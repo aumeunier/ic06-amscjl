@@ -66,11 +66,9 @@ public class MyContactListener implements ContactListener {
 			
 			else if(s1 instanceof Exit && s2 instanceof Character){
 				((Exit)s1).supprCollision();
-				System.out.println("suppr1");
 			}
 			else if(s1 instanceof Character && s2 instanceof Exit){
 				((Exit)s2).supprCollision();
-				System.out.println("suppr2");
 			}
 
 		}

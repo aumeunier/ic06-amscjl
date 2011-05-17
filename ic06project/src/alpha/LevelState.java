@@ -19,11 +19,11 @@ public class LevelState {
 	public void setNbKeysUnlocked(int nb){
 		nbKeysUnlocked = nb;
 	}
-	public String getPlayer1Power(){
-		return player1power.toString();
+	public Power getPlayer1Power(){
+		return player1power;
 	}
-	public String getPlayer2Power(){
-		return player2power.toString();
+	public Power getPlayer2Power(){
+		return player2power;
 	}
 	public int getNbKeys(){
 		return nbKeysUnlocked;

@@ -26,8 +26,10 @@ public class MainMenuGameState extends BasicGameState implements MouseListener {
 	static final int TITLE_Y = 100;
 	static final int MAP_X = 0;
 	static final int MAP_Y = 300;
-	static final int MAP_W = 0;
-	static final int MAP_H = 300;
+	static final int ERROR_X = 150;
+	static final int ERROR_Y = 350;
+	static final int ERROR_W = 150;
+	static final int ERROR_H = 40;
 	private int stateID;
 	int selection;
 	int levelSelection;
@@ -40,7 +42,9 @@ public class MainMenuGameState extends BasicGameState implements MouseListener {
 	Image mapLvlDefaultImage;	
 	Image mapLvlUnlockedImage;	
 	Image mapLvlUnlockedFinishedImage;	
-	Image mapLvlFinishedImage;	
+	Image mapLvlFinishedImage;
+	Display display;
+	Label mapErrorLabel;	
 
 	public MainMenuGameState(int id){
 		super();
@@ -75,6 +79,16 @@ public class MainMenuGameState extends BasicGameState implements MouseListener {
 
 		//titleImage = Global.setImage("main_menu_options.png");
 		//titleImage = titleImage.getScaledCopy((int) (titleImage.getWidth()*SCALE_DOWN_W),titleImage.getHeight());
+
+		display = new Display(gc);
+		Image labelImage = Global.setImage("blur11.jpg");
+		Image playerImage = labelImage.getScaledCopy(150,25);
+		mapErrorLabel = new Label(playerImage,"");
+		mapErrorLabel.setForeground(Color.red);
+		mapErrorLabel.setBounds(800-ERROR_X-ERROR_W,ERROR_Y,ERROR_W,ERROR_H);
+		mapErrorLabel.pack();
+		this.display.add(mapErrorLabel);
+		mapErrorLabel.setImage(null);
 	}
 
 	@Override
@@ -94,28 +108,32 @@ public class MainMenuGameState extends BasicGameState implements MouseListener {
 		// Map part
 		mapImage.draw(MAP_X,MAP_Y,800-2*MAP_X,600-MAP_Y);
 		Save s = Save.getInstance();
-		int[] ids = s.getAllIds();
-		for(int i = 0 ; i < ids.length ; i++){
-			int[] mapLvl = s.mapPointForLevelID(ids[i]);
-			if(mapLvl!=null){
-				switch(Save.getInstance().getFinishedStateForLevelID(ids[i])){
-				case 0:
-					mapLvlDefaultImage.draw(MAP_X+mapLvl[0],MAP_Y+mapLvl[1],mapLvl[2],mapLvl[3]);
-					break;
-				case 1:
-					mapLvlUnlockedImage.draw(MAP_X+mapLvl[0],MAP_Y+mapLvl[1],mapLvl[2],mapLvl[3]);
-					break;
-				case 2:
-					mapLvlFinishedImage.draw(MAP_X+mapLvl[0],MAP_Y+mapLvl[1],mapLvl[2],mapLvl[3]);
-					break;
-				case 3:
-					mapLvlUnlockedFinishedImage.draw(MAP_X+mapLvl[0],MAP_Y+mapLvl[1],mapLvl[2],mapLvl[3]);
-					break;
-				default:
-					break;
+		if(s.hasSaveLoaded()){
+			int[] ids = s.getAllIds();
+			for(int i = 0 ; i < ids.length ; i++){
+				int[] mapLvl = s.mapPointForLevelID(ids[i]);
+				if(mapLvl!=null){
+					switch(s.getFinishedStateForLevelID(ids[i])){
+					case 0:
+						mapLvlDefaultImage.draw(MAP_X+mapLvl[0],MAP_Y+mapLvl[1],mapLvl[2],mapLvl[3]);
+						break;
+					case 1:
+						mapLvlUnlockedImage.draw(MAP_X+mapLvl[0],MAP_Y+mapLvl[1],mapLvl[2],mapLvl[3]);
+						break;
+					case 2:
+						mapLvlFinishedImage.draw(MAP_X+mapLvl[0],MAP_Y+mapLvl[1],mapLvl[2],mapLvl[3]);
+						break;
+					case 3:
+						mapLvlUnlockedFinishedImage.draw(MAP_X+mapLvl[0],MAP_Y+mapLvl[1],mapLvl[2],mapLvl[3]);
+						break;
+					default:
+						break;
+					}
 				}
 			}
 		}
+
+		display.render(gc, g);
 	}
 
 	@Override
@@ -154,9 +172,15 @@ public class MainMenuGameState extends BasicGameState implements MouseListener {
 		}
 		else {
 			int id = Save.getInstance().levelIdForPoint(x-MAP_X, y-MAP_Y);
-			if(id > -1){
-				selection = Game.GAMEPLAY_STATE;
-				levelSelection = id;
+			if(id > -1 && Save.getInstance().hasSaveLoaded()){
+				if(!Save.getInstance().hasUnlockedLevelWithID(id)){
+					mapErrorLabel.setText("Niveau pas encore debloque!");
+				}
+				else {
+					selection = Game.GAMEPLAY_STATE;
+					levelSelection = id;
+					mapErrorLabel.setText("");
+				}
 			}
 		}
 	}

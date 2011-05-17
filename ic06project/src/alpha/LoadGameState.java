@@ -30,6 +30,11 @@ public class LoadGameState extends BasicGameState implements MouseListener {
 	public int getID() {
 		return stateID;
 	}
+	
+	@Override
+	public void enter(GameContainer container, StateBasedGame game) {
+		getSaves();
+	}
 
 	public LoadGameState(int id){
 		super();
@@ -37,7 +42,8 @@ public class LoadGameState extends BasicGameState implements MouseListener {
 	}
 
 	private ArrayList<String> getSaves(){
-		String stringPath = "./saves";	
+		this.saves.clear();
+		String stringPath = Global.PATH_SAVES;	
 		File path = new File(stringPath);
 	    File files[]; 
 	    files = path.listFiles();

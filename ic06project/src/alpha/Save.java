@@ -130,6 +130,11 @@ public class Save {
 			e.printStackTrace();
 		}
 	}
+	public void createSave(String filename){
+		this.saveFilename = filename;
+		getLevelWithID(1).setSavedLevelData(0, true, false);
+		save();
+	}
 	
 	/////// *** Getters *** ///////
 	private LevelSave getLevelWithID(int id){
@@ -139,9 +144,6 @@ public class Save {
 			}
 		}
 		return null;
-	}
-	private boolean hasUnlockedLevel(LevelSave level){
-		return (levels.contains(level) && level.isUnlocked());
 	}
 	public int getFinishedStateForLevelID(int index){
 		LevelSave lvl = this.getLevelWithID(index);
@@ -221,11 +223,7 @@ public class Save {
 				&& (y >= coordinates[1] && y <= coordinates[1]+coordinates[3]));
 	}
 	private int[] mapPointForLevel(LevelSave level){
-		if(!hasUnlockedLevel(level)){
-			return null;
-		}
-		int temp[] = level.getAreaOnMap();
-		return temp;		
+		return level.getAreaOnMap();		
 	}
 	public int levelIdForPoint(int x, int y){
 		for(LevelSave level: levels){
@@ -241,5 +239,12 @@ public class Save {
 	}
 	public LevelSave levelSaveForLevelID(int id){
 		return getLevelWithID(id);
+	}
+	public boolean hasUnlockedLevelWithID(int id){
+		LevelSave level = this.getLevelWithID(id);
+		return (levels.contains(level) && level.isUnlocked());
+	}
+	public boolean hasSaveLoaded(){
+		return (this.saveFilename!=null);
 	}
 }
