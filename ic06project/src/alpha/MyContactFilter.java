@@ -10,6 +10,24 @@ public class MyContactFilter implements ContactFilter {
 	public boolean shouldCollide(Shape shape1, Shape shape2) {
 		Body b1 = shape1.getBody();
 		Body b2 = shape2.getBody();
+		
+		/* Collisions concernant le groundsensor */
+		// Premier cas b1 est le groundsensor
+		if(shape1.getUserData()==GameplayState.GROUND_SENSOR_NAME){
+			Sprite s2 = (Sprite)b2.getUserData();
+			if(s2.getClass().equals(BoutonPressoir.class)){
+				((BoutonPressoir)s2).activate();					
+			}
+		}
+		// Deuxieme cas b2 est le groundsensor
+		else if(shape2.getUserData()==GameplayState.GROUND_SENSOR_NAME){
+			Sprite s1 = (Sprite)b1.getUserData();
+			if(s1.getClass().equals(BoutonPressoir.class)){
+				((BoutonPressoir)s1).activate();					
+			}				
+		}
+		
+		/* Collisions concernant le personnage */
 		if(b1.getUserData()!=null && b2.getUserData()!=null){
 			Sprite s1 = (Sprite)b1.getUserData();
 			Sprite s2 = (Sprite)b2.getUserData();
@@ -22,7 +40,7 @@ public class MyContactFilter implements ContactFilter {
 				else if(s2.getClass().equals(SourceMortelle.class)){
 					((Character)(s1)).setDead(true);
 				}
-				else if(s2.getClass().equals(Exit.class)&&shape1.getUserData()!="groundsensor"){
+				else if(s2.getClass().equals(Exit.class)&&shape1.getUserData()!=GameplayState.GROUND_SENSOR_NAME){
 					((Exit)s2).ajoutCollision();
 				}
 				else if(s2.getClass().equals(Source.class)){
@@ -44,6 +62,7 @@ public class MyContactFilter implements ContactFilter {
 				}
 				else if(s2.getClass().equals(Levier.class)){
 					((Levier)s2).activate();
+					return false;
 				}
 				else if(s2.getClass().equals(Bonus.class)){
 					((Bonus)s2).obtained();
@@ -58,7 +77,7 @@ public class MyContactFilter implements ContactFilter {
 				else if(s1.getClass().equals(SourceMortelle.class)){
 					((Character)(s2)).setDead(true);					
 				}
-				else if(s1.getClass().equals(Exit.class)&&shape2.getUserData()!="groundsensor"){
+				else if(s1.getClass().equals(Exit.class)&&shape2.getUserData()!=GameplayState.GROUND_SENSOR_NAME){
 					((Exit)s1).ajoutCollision();
 				}
 				else if(s1.getClass().equals(Source.class)){
@@ -77,25 +96,13 @@ public class MyContactFilter implements ContactFilter {
 				}
 				else if(s1.getClass().equals(Levier.class)){
 					((Levier)s1).activate();
+					return false;
 				}
 				else if(s1.getClass().equals(Bonus.class)){
 					((Bonus)s1).obtained();
 				}
 			}
 			
-			/* Collisions concernant le groundsensor */
-			// Premier cas s1 est le groundsensor
-			else if(shape1.getUserData()!="groundsensor"){
-				if(s2.getClass().equals(BoutonPressoir.class)){
-					((BoutonPressoir)s2).activate();					
-				}
-			}
-			// Deuxieme cas s2 est le groundsensor
-			else if(shape2.getUserData()!="groundsensor"){
-				if(s1.getClass().equals(BoutonPressoir.class)){
-					((BoutonPressoir)s1).activate();					
-				}				
-			}
 		}
 		return true;
 	}

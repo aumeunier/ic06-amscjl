@@ -18,8 +18,10 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class GameplayState extends BasicGameState implements MouseListener{
+	public final static float LOW_BODY_CHARACTER_RATIO = 1.0f/8.0f;
 	final static int SPEED_X = 20;
 	final static int SPEED_JUMP = 400;
+	public static final String GROUND_SENSOR_NAME = "groundsensor";
 	private int stateID;
 	private int selection;
 	private Level currentLevel;
@@ -252,7 +254,6 @@ public class GameplayState extends BasicGameState implements MouseListener{
 
 	private void createWorld(){
 		Vec2 v = new Vec2(0.0f,-10.0f);
-		//AABB aabb = new AABB(new Vec2(0.0f,0.0f), new Vec2((float)Global.GAMEPLAYWIDTH,(float)Global.GAMEPLAYHEIGHT));
 		AABB aabb = new AABB(new Vec2(-10.0f,-10.0f), new Vec2((float)Global.GAMEPLAYWIDTH+10,(float)Global.GAMEPLAYHEIGHT+10));
 		world = new World(aabb,v,false);
 		world.setContactListener(new MyContactListener());
@@ -475,8 +476,14 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		// Ajoute un Sensor pour savoir si le character est au sol
 		PolygonDef groundSensor = new PolygonDef();
 		groundSensor.isSensor=true;
-		groundSensor.userData="groundsensor";
-		groundSensor.setAsBox((float)(Character.CHAR_W_BODY/2.0*0.9), 2, new Vec2(0,-Character.CHAR_H_BODY/2), 0);
+		groundSensor.userData=GROUND_SENSOR_NAME;
+		if(list!=null){
+			groundSensor.setAsBox((float)((Character.CHAR_W_BODY*LOW_BODY_CHARACTER_RATIO)*1.1),
+					2, new Vec2(0,-Character.CHAR_H_BODY/2), 0);
+		}
+		else {
+			groundSensor.setAsBox((float)((Character.CHAR_W_BODY/2.0)*1.1), 2, new Vec2(0,-Character.CHAR_H_BODY/2), 0);
+		}
 		if(ch1_body == null){
 			ch1_body = world.createBody(bodyDef);
 			ch1_body.createShape(sd);

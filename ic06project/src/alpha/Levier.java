@@ -6,14 +6,14 @@ public class Levier extends Declencheur {
 
 	public Levier(int _x, int _y, int _w, int _h, Body b){
 		super(_x, _y, _w, _h, b);
-		this.setImage("levier1.png");
+		this.setImage("levier-1.png");
 	}
 
 	@Override
 	public void activate() {
 		this.setActivated(true);
 		((Obstacle)(relatedBody.getUserData())).setHidden(true);
-		this.setImage("levier2.png");
+		this.setImage("levier-2.png");
 	}
 
 	@Override

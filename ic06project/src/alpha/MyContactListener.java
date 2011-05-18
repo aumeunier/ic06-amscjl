@@ -8,13 +8,13 @@ public class MyContactListener implements ContactListener {
 
 	@Override
 	public void add(ContactPoint point) {
-		if (point.shape1.getUserData() == "groundsensor"){
+		if (point.shape1.getUserData() == GameplayState.GROUND_SENSOR_NAME){
 			Sprite s = (Sprite)point.shape2.getBody().getUserData();
 			if((s instanceof Wall) || (s instanceof Obstacle)||(s instanceof Ground)|| (s instanceof Declencheur)){
 				((Character) point.shape1.getBody().getUserData()).isFalling = false;
 			}
 		}
-		if (point.shape2.getUserData()=="groundsensor"){
+		if (point.shape2.getUserData() == GameplayState.GROUND_SENSOR_NAME){
 			Sprite s = (Sprite)point.shape1.getBody().getUserData();
 			if((s instanceof Wall) || (s instanceof Obstacle)||(s instanceof Ground)|| (s instanceof Declencheur)){
 				((Character) point.shape2.getBody().getUserData()).isFalling = false;
@@ -24,13 +24,13 @@ public class MyContactListener implements ContactListener {
 
 	@Override
 	public void persist(ContactPoint point) {
-		if (point.shape1.getUserData() == "groundsensor"){
+		if (point.shape1.getUserData() == GameplayState.GROUND_SENSOR_NAME){
 			Sprite s = (Sprite)point.shape2.getBody().getUserData();
 			if((s instanceof Wall) || (s instanceof Obstacle)|| (s instanceof Ground)|| (s instanceof Declencheur)){
 				((Character) point.shape1.getBody().getUserData()).isFalling = false;
 			}
 		}
-		if (point.shape2.getUserData()=="groundsensor"){
+		if (point.shape2.getUserData() == GameplayState.GROUND_SENSOR_NAME){
 			Sprite s = (Sprite)point.shape1.getBody().getUserData();
 			if((s instanceof Wall) || (s instanceof Obstacle)||(s instanceof Ground)|| (s instanceof Declencheur)){
 				((Character) point.shape2.getBody().getUserData()).isFalling = false;
@@ -42,13 +42,13 @@ public class MyContactListener implements ContactListener {
 	public void remove(ContactPoint point) {
 		Object o1 = point.shape1.getUserData();
 		Object o2 = point.shape2.getUserData();
-		if (o1 == "groundsensor"){
+		if (o1 == GameplayState.GROUND_SENSOR_NAME){
 			Sprite s = (Sprite)point.shape2.getBody().getUserData();
 			if((s instanceof Wall) || (s instanceof Obstacle)||(s instanceof Ground)|| (s instanceof Declencheur)){
 				((Character) point.shape1.getBody().getUserData()).isFalling = true;
 			}
 		}
-		else if (o2 =="groundsensor"){
+		else if (o2 == GameplayState.GROUND_SENSOR_NAME){
 			Sprite s = (Sprite)point.shape1.getBody().getUserData();
 			if((s instanceof Wall) || (s instanceof Obstacle)||(s instanceof Ground)|| (s instanceof Declencheur)){
 				((Character) point.shape2.getBody().getUserData()).isFalling = true;

@@ -80,7 +80,7 @@ public class Level1 extends Level {
 		Body oMurSortieBody = myState.addObstacle(oMurSortie);
 		
 		// CrŽŽ un levier qui ouvre ce mur
-		Levier levier = createLevier(Global.GAMEPLAYWIDTH-70,210,30,15,oMurSortieBody);
+		createLevier(Global.GAMEPLAYWIDTH-70,195,30,30,oMurSortieBody);
 		
 		// Place l'eau
 		SourceMortelle s = createSourceMortelle(80,Global.GAMEPLAYHEIGHT-60,50,50);
