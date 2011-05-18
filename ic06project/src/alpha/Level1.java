@@ -30,9 +30,10 @@ public class Level1 extends Level {
 		Obstacle o = createObstacleWithPoints(600,200,200,150,temp);
 		o.setImage("fleur9_mur.png");
 		
+		// Sols
 		createGround(0,Global.GAMEPLAYHEIGHT-85,80,75); // Sol 1
 		createGround(310,Global.GAMEPLAYHEIGHT-85,100,75); // Sol 2 (apres l'eau)
-		createGround(Global.GAMEPLAYWIDTH-80,Global.GAMEPLAYHEIGHT-85,80,75); // Sol 4 (en dessous perso 2)
+		createGround(Global.GAMEPLAYWIDTH-80,Global.GAMEPLAYHEIGHT-45,80,35); // Sol 4 (en dessous perso 2)
 		//*
 		ArrayList<Vec2> sol3Points = new ArrayList<Vec2>();
 		sol3Points.add(new Vec2(-40,-27));
@@ -54,16 +55,16 @@ public class Level1 extends Level {
 		o2.setImage("fleur2.png");
 		
 		//la cage
-		Wall o4 = createWall(300,0,10,85);
-		Wall o5 = createWall(300,85,70,10);
-		Wall o6 = createWall(430,85,75,10);
-		Wall o7 = createWall(495,0,10,85);
+		createWall(300,0,10,85);
+		createWall(300,85,70,10);
+		createWall(430,85,75,10);
+		createWall(495,0,10,85);
 		
 		//l'arrivée
-		Wall o8 = createWall(Global.GAMEPLAYWIDTH-160,75,150,10);
+		createWall(Global.GAMEPLAYWIDTH-160,75,150,10);
 
 		// Place un mur pour séparer les deux personnages
-		Obstacle oMur = createObstacle(Global.GAMEPLAYWIDTH-250,Global.GAMEPLAYHEIGHT-120,40,110);
+		createObstacle(Global.GAMEPLAYWIDTH-200,Global.GAMEPLAYHEIGHT-220,40,210);
 		
 		// Place un mur pour empecher l'acces au levier
 		Obstacle oMurLevier = new Obstacle(Global.GAMEPLAYWIDTH-130,85,20,135);
@@ -71,7 +72,7 @@ public class Level1 extends Level {
 		Body oMurLevierBody = myState.addObstacle(oMurLevier);
 		
 		// Créé un bouton pressoir qui ouvre ce mur
-		BoutonPressoir bouton = createBoutonPressoir(85,185,30,18,oMurLevierBody);
+		createBoutonPressoir(85,185,30,18,oMurLevierBody);
 		
 		// Place un mur devant la sortie
 		Obstacle oMurSortie = new Obstacle(Global.GAMEPLAYWIDTH-160,0,20,75);
@@ -95,21 +96,21 @@ public class Level1 extends Level {
 		
 		// Place sources
 		createSource(500,Global.GAMEPLAYHEIGHT-42,49,42,Power.FLYING);
-		createSource(Global.GAMEPLAYWIDTH-180,Global.GAMEPLAYHEIGHT-42,49,42,Power.INTANGIBLE);
+		createSource(Global.GAMEPLAYWIDTH-50,Global.GAMEPLAYHEIGHT-87,49,42,Power.INTANGIBLE);
 		
 		//place SOrtie
 		Exit exit = createExit(760,10,45,65);
 		exit.setImage("porte.png");
 		
 		//place bonus
-		Bonus bonus1 = createBonus(50,Global.GAMEPLAYHEIGHT-150,25,25);
+		Bonus bonus1 = createBonus(50,Global.GAMEPLAYHEIGHT-110,25,25);
 		bonus1.setImage("cerise_rouge.png");
 		
 		// Place the first character
 		//*
-		this.character1 = addCharacterWithPoints(330,Global.GAMEPLAYHEIGHT-Character.CHAR_H-100);		
-		this.character2 = addCharacterWithPoints(Global.GAMEPLAYWIDTH-Character.CHAR_W-100,
-				Global.GAMEPLAYHEIGHT-Character.CHAR_H-40);
+		this.character1 = addCharacterWithPoints(330,Global.GAMEPLAYHEIGHT-Character.CHAR_H-76);		
+		this.character2 = addCharacterWithPoints(Global.GAMEPLAYWIDTH-Character.CHAR_W-80,
+				Global.GAMEPLAYHEIGHT-Character.CHAR_H-10);
 		/*/
 		this.character1 = addCharacter(330,Global.GAMEPLAYHEIGHT-Character.CHAR_H-100);		
 		this.character2 = addCharacter(Global.GAMEPLAYWIDTH-Character.CHAR_W-100,

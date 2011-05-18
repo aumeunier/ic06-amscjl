@@ -2,10 +2,12 @@ package alpha;
 
 
 import org.newdawn.slick.AppGameContainer;
+import org.newdawn.slick.Font;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.MusicListener;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class Game extends StateBasedGame implements MusicListener {
@@ -40,6 +42,11 @@ public class Game extends StateBasedGame implements MusicListener {
 		changeMusic("108316_Corsica_S_welcome_to_our_fairy_world.ogg");
 		playMusic();
 		this.music.addListener(this);
+		/*
+		UnicodeFont t = new UnicodeFont();
+		Font font = new Font("./ressources/divers/carolingia.ttf");
+		gc.setDefaultFont(font);
+		//*/
 	}
 
 	/**

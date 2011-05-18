@@ -4,9 +4,9 @@
 	 "levels":[
 		{
 			"id":1,
-			"keys":0,
+			"keys":1,
 			"unlocked":true,
-			"finished":false
+			"finished":true
 		},
 		{
 			"id":2,

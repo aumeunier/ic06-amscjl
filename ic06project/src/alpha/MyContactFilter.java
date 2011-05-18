@@ -29,10 +29,7 @@ public class MyContactFilter implements ContactFilter {
 					Source source = (Source)s2;
 					Character character = (Character)s1;
 					if(source.power == Power.INTANGIBLE){
-						if(character.getAvoidDoubleFlag()){
-							character.setPower((character.isIntangible())?Power.NONE:Power.INTANGIBLE);
-						}
-						character.changeAvoidDoubleFlagState();
+						character.setPower(Power.INTANGIBLE);
 					}
 					else if(source.power == Power.FLYING){
 						character.setPower(Power.FLYING);
@@ -45,8 +42,8 @@ public class MyContactFilter implements ContactFilter {
 				else if(s2.getClass().equals(Obstacle.class) && ((Obstacle)s2).isHidden()){
 					return false;
 				}
-				else if(s2.getClass().equals(BoutonPressoir.class)||s2.getClass().equals(Levier.class)){
-					((Declencheur)s2).activate();
+				else if(s2.getClass().equals(Levier.class)){
+					((Levier)s2).activate();
 				}
 				else if(s2.getClass().equals(Bonus.class)){
 					((Bonus)s2).obtained();
@@ -68,10 +65,7 @@ public class MyContactFilter implements ContactFilter {
 					Source source = (Source)s1;
 					Character character = (Character)s2;
 					if(source.power == Power.INTANGIBLE){
-						if(character.getAvoidDoubleFlag()){
-							character.setPower((character.isIntangible())?Power.NONE:Power.INTANGIBLE);
-						}
-						character.changeAvoidDoubleFlagState();
+						character.setPower(Power.INTANGIBLE);
 					}
 					else if(source.power == Power.FLYING){
 						character.setPower(Power.FLYING);
@@ -81,12 +75,26 @@ public class MyContactFilter implements ContactFilter {
 				else if(s1.getClass().equals(Obstacle.class) && ((Obstacle)s1).isHidden()){
 					return false;
 				}
-				else if(s1.getClass().equals(BoutonPressoir.class)||s1.getClass().equals(Levier.class)){
-					((Declencheur)s1).activate();
+				else if(s1.getClass().equals(Levier.class)){
+					((Levier)s1).activate();
 				}
 				else if(s1.getClass().equals(Bonus.class)){
 					((Bonus)s1).obtained();
 				}
+			}
+			
+			/* Collisions concernant le groundsensor */
+			// Premier cas s1 est le groundsensor
+			else if(shape1.getUserData()!="groundsensor"){
+				if(s2.getClass().equals(BoutonPressoir.class)){
+					((BoutonPressoir)s2).activate();					
+				}
+			}
+			// Deuxieme cas s2 est le groundsensor
+			else if(shape2.getUserData()!="groundsensor"){
+				if(s1.getClass().equals(BoutonPressoir.class)){
+					((BoutonPressoir)s1).activate();					
+				}				
 			}
 		}
 		return true;

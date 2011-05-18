@@ -84,11 +84,18 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	public void enter(GameContainer container, StateBasedGame game) {
 		Input i = container.getInput();
 		i.clearKeyPressedRecord();
+		i.consumeEvent();
 		this.selection = -1;
 		this.isPaused = false;
 		this.startAgain = false;
 		this.alwaysStartAgain = false;
 		this.uiGameplay.onEnter();
+		if(ch1_body!=null){
+			this.ch1_body.setLinearVelocity(new Vec2(0,0));
+		}
+		if(ch2_body!=null){
+			this.ch2_body.setLinearVelocity(new Vec2(0,0));
+		}
 	}
 
 	@Override
@@ -455,6 +462,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		PolygonDef sd = new PolygonDef();
 		sd.density = 5.0f;
 		sd.friction = 0.1f;
+		sd.restitution = 0.0f; 
 		if(list!=null){
 			for(Vec2 v: list){
 				sd.addVertex(v);				

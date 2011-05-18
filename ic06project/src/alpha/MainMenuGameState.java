@@ -17,13 +17,13 @@ public class MainMenuGameState extends BasicGameState implements MouseListener {
 	static final boolean optionsActivated = false;
 	static final float SCALE_DOWN_W = 300.0f/500.0f;
 	static final int NEWGAME_X = 50;
-	static final int NEWGAME_Y = 50;
+	static final int NEWGAME_Y = 75;
 	static final int LOADGAME_X = 50;
-	static final int LOADGAME_Y = 120;
+	static final int LOADGAME_Y = 145;
 	static final int OPTIONS_X = 50;
-	static final int OPTIONS_Y = 190;
-	static final int TITLE_X = 450;
-	static final int TITLE_Y = 100;
+	static final int OPTIONS_Y = 215;
+	static final int TITLE_X = 250;
+	static final int TITLE_Y = 0;
 	static final int MAP_X = 0;
 	static final int MAP_Y = 300;
 	static final int ERROR_X = 150;
@@ -77,8 +77,8 @@ public class MainMenuGameState extends BasicGameState implements MouseListener {
 			optionsImage = optionsImage.getScaledCopy((int) (optionsImage.getWidth()*SCALE_DOWN_W),optionsImage.getHeight());
 		}
 
-		//titleImage = Global.setImage("main_menu_options.png");
-		//titleImage = titleImage.getScaledCopy((int) (titleImage.getWidth()*SCALE_DOWN_W),titleImage.getHeight());
+		titleImage = Global.setImage("main_menu_title.png");
+		titleImage = titleImage.getScaledCopy((int) (titleImage.getWidth()*SCALE_DOWN_W*1.5),titleImage.getHeight());
 
 		display = new Display(gc);
 		Image labelImage = Global.setImage("blur11.jpg");
@@ -98,7 +98,7 @@ public class MainMenuGameState extends BasicGameState implements MouseListener {
 
 		// Top part
 		backgroundImage.draw(-backgroundImage.getWidth()/8,-backgroundImage.getHeight()/8,300,800);
-		//titleImage.draw(TITLE_X,TITLE_Y);
+		titleImage.draw(TITLE_X,TITLE_Y);
 		newGameImage.draw(NEWGAME_X,NEWGAME_Y);
 		loadGameImage.draw(LOADGAME_X,LOADGAME_Y);
 		if(this.optionsActivated){
