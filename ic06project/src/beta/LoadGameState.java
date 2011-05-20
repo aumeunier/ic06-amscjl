@@ -79,6 +79,11 @@ public class LoadGameState extends BasicGameState implements MouseListener {
 				arg2.drawString(saveName, startX, startY);
 				startY+=SAVE_SPACE_Y+SAVE_TEXT_Y;
 			}			
+			else if(save.contains("\\")){
+				String saveName = save.substring(save.lastIndexOf('\\')+1, save.lastIndexOf(".save"));
+				arg2.drawString(saveName, startX, startY);
+				startY+=SAVE_SPACE_Y+SAVE_TEXT_Y;
+			}			
 		}
 	}
 
