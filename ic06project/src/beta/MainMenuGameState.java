@@ -161,8 +161,7 @@ public class MainMenuGameState extends BasicGameState implements MouseListener {
 	public void mouseClicked(int button, int x, int y, int clickCount){
 		if((x >= NEWGAME_X && x <= (NEWGAME_X + newGameImage.getWidth())) 
 				&&	(y >= NEWGAME_Y && y <= (NEWGAME_Y + newGameImage.getHeight()))){
-			//selection = Game.NEWGAME_STATE;
-			selection = Game.NARRATIVE_STATE;
+			selection = Game.NEWGAME_STATE;
 		}
 		else if((x >= LOADGAME_X && x <= (LOADGAME_X + loadGameImage.getWidth())) 
 				&&	(y >= LOADGAME_Y && y <= (LOADGAME_Y + loadGameImage.getHeight()))){
