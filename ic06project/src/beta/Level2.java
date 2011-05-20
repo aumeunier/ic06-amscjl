@@ -34,19 +34,7 @@ public class Level2 extends Level {
 		createGround(0,Global.GAMEPLAYHEIGHT-85,80,75); // Sol 1
 		createGround(310,Global.GAMEPLAYHEIGHT-85,100,75); // Sol 2 (apres l'eau)
 		createGround(Global.GAMEPLAYWIDTH-80,Global.GAMEPLAYHEIGHT-45,80,35); // Sol 4 (en dessous perso 2)
-		//*
-		ArrayList<Vec2> sol3Points = new ArrayList<Vec2>();
-		sol3Points.add(new Vec2(-40,-27));
-		sol3Points.add(new Vec2(40,-27));
-		sol3Points.add(new Vec2(-40,27));
-		Wall sol3 = createWallWithPoints(410,Global.GAMEPLAYHEIGHT-65,80,55,sol3Points); // Sol 3
-		/*/
-		Wall sol3 = createWall(410,Global.GAMEPLAYHEIGHT-65,80,55); // Sol 3
-		//*/
-		sol3.addPointToShape(410,Global.GAMEPLAYHEIGHT-10);
-		sol3.addPointToShape(410+80,Global.GAMEPLAYHEIGHT-10);
-		sol3.addPointToShape(410,Global.GAMEPLAYHEIGHT-65);
-		
+	
 		
 		//Plateform
 		Wall o1 = createWall(10,75,(int)(148/1.3),(int)(42/1.3));
@@ -97,8 +85,8 @@ public class Level2 extends Level {
 		s5.setAnimation("waves.png", 300, 300);
 		
 		// Place sources
-	//	createSource(500,Global.GAMEPLAYHEIGHT-42,49,42,Power.FLYING);
-	//	createSource(Global.GAMEPLAYWIDTH-50,Global.GAMEPLAYHEIGHT-87,49,42,Power.INTANGIBLE);
+		createSource(500,Global.GAMEPLAYHEIGHT-42,49,42,Power.FLYING);
+		createSource(Global.GAMEPLAYWIDTH-50,Global.GAMEPLAYHEIGHT-87,49,42,Power.INTANGIBLE);
 		
 		//place SOrtie
 		Exit exit = createExit(Global.GAMEPLAYWIDTH-65,10,45,65);

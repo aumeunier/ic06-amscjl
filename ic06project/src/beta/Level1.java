@@ -34,18 +34,18 @@ public class Level1 extends Level {
 		createGround(0,Global.GAMEPLAYHEIGHT-85,80,75); // Sol 1
 		createGround(310,Global.GAMEPLAYHEIGHT-85,100,75); // Sol 2 (apres l'eau)
 		createGround(Global.GAMEPLAYWIDTH-80,Global.GAMEPLAYHEIGHT-45,80,35); // Sol 4 (en dessous perso 2)
-		//*
+		/*
 		ArrayList<Vec2> sol3Points = new ArrayList<Vec2>();
 		sol3Points.add(new Vec2(-40,-27));
 		sol3Points.add(new Vec2(40,-27));
 		sol3Points.add(new Vec2(-40,27));
 		Wall sol3 = createWallWithPoints(410,Global.GAMEPLAYHEIGHT-65,80,55,sol3Points); // Sol 3
 		/*/
-		Wall sol3 = createWall(410,Global.GAMEPLAYHEIGHT-65,80,55); // Sol 3
+		//Wall sol3 = createWall(410,Global.GAMEPLAYHEIGHT-65,80,55); // Sol 3
 		//*/
-		sol3.addPointToShape(410,Global.GAMEPLAYHEIGHT-10);
-		sol3.addPointToShape(410+80,Global.GAMEPLAYHEIGHT-10);
-		sol3.addPointToShape(410,Global.GAMEPLAYHEIGHT-65);
+		//sol3.addPointToShape(410,Global.GAMEPLAYHEIGHT-10);
+	//	sol3.addPointToShape(410+80,Global.GAMEPLAYHEIGHT-10);
+		//sol3.addPointToShape(410,Global.GAMEPLAYHEIGHT-65);
 		
 		
 		//Plateform
