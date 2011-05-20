@@ -45,7 +45,7 @@ public class Character extends Sprite{
 		}
 	}
 	
-	public void changeDirection(){
+	private void changeDirection(){
 		if(isGoingRight){
 			setAnimation("feeRight.png",FEE_PNG_W,FEE_PNG_H);
 		}
@@ -54,6 +54,30 @@ public class Character extends Sprite{
 		}
 		else {
 			setAnimation("fee2.png",FEE_PNG_W,FEE_PNG_H);
+		}
+	}
+	
+	public void goLeft(){
+		if(!isGoingLeft){			
+			isGoingRight = false;
+			isGoingLeft = true;
+			changeDirection();
+		}
+	}
+	
+	public void goRight(){
+		if(!isGoingRight){			
+			isGoingRight = true;
+			isGoingLeft = false;
+			changeDirection();
+		}
+	}
+	
+	public void straight(){
+		if(isGoingRight || isGoingLeft){			
+			isGoingRight = false;
+			isGoingLeft = false;
+			changeDirection();
 		}
 	}
 	

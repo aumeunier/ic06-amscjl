@@ -157,21 +157,15 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		}
 		else if((input.isKeyDown(Input.KEY_Q)) && char1CanMove){
 			ch1_body.m_linearVelocity.x = -SPEED_X;			
-			char1.isGoingRight = false;
-			char1.isGoingLeft = true;
-			char1.changeDirection();
+			char1.goLeft();
 		}
 		else if((input.isKeyDown(Input.KEY_D)) && char1CanMove){
 			ch1_body.m_linearVelocity.x = SPEED_X;			
-			char1.isGoingRight = true;
-			char1.isGoingLeft = false;
-			char1.changeDirection();
+			char1.goRight();
 		}
 		else if(!char1.isFalling){
 			ch1_body.m_linearVelocity.x = 0;			
-			char1.isGoingRight = false;
-			char1.isGoingLeft = false;	
-			//char1.changeDirection();
+			char1.straight();
 		}
 		char1.setCoordinatesFromBody(ch1_body);
 
@@ -181,21 +175,15 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		}
 		else if((input.isKeyDown(Input.KEY_LEFT)) && char2CanMove){
 			ch2_body.m_linearVelocity.x = -SPEED_X;			
-			char2.isGoingRight = false;
-			char2.isGoingLeft = true;
-			char2.changeDirection();
+			char2.goLeft();
 		}
 		else if((input.isKeyDown(Input.KEY_RIGHT)) && char1CanMove){
 			ch2_body.m_linearVelocity.x = SPEED_X;			
-			char2.isGoingRight = true;
-			char2.isGoingLeft = false;
-			char2.changeDirection();
+			char2.goRight();
 		}
 		else if(!char2.isFalling){
 			ch2_body.m_linearVelocity.x = 0;			
-			char2.isGoingRight = false;
-			char2.isGoingLeft = false;
-			//char2.changeDirection();
+			char2.straight();
 		}
 		char2.setCoordinatesFromBody(ch2_body);	
 
