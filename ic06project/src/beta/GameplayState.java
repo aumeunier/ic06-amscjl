@@ -121,8 +121,16 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		}
 		
 		// Si aucun niveau n'est charge ou que le niveau est fini, aucun interet a faire des calculs
-		if(this.currentLevel == null || this.isFinished){
+		if(this.currentLevel == null){
 			return;
+		}
+		
+		if(this.isFinished){
+			LevelSave lvlSave = Save.getInstance().levelSaveForLevelID(this.currentLevel.getLevelID());
+			lvlSave.setSavedLevelData(currentLevel.nbBonus, true, true);
+			LevelSave nextLvlSave = Save.getInstance().levelSaveForLevelID(this.currentLevel.getLevelID()+1);
+			nextLvlSave.setSavedLevelData(0, true, false);
+			return;			
 		}
 		
 		// Si les joueurs etaient morts et veulent recommencer le niveau

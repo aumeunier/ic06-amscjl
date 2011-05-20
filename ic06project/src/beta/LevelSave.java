@@ -29,12 +29,9 @@ public class LevelSave {
 	 * @param levelFinished
 	 */
 	public void setSavedLevelData(int unlocked, boolean levelUnlocked, boolean levelFinished){
-		if(unlockableKeys < unlocked){
-			unlocked = unlockableKeys;
-		}
-		unlockedKeys = unlocked;
-		isUnlocked = levelUnlocked;
-		isFinished = levelFinished;
+		unlockedKeys = (unlockableKeys >= unlocked)?unlockableKeys:unlocked;
+		isUnlocked = isUnlocked || levelUnlocked;
+		isFinished = isFinished || levelFinished;
 	}
 	public String getName(){
 		return levelName;
