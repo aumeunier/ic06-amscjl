@@ -50,6 +50,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	}
 
 	public void ChooseLevel(int levelIndex){
+		System.out.println("Index:"+levelIndex);
 		LevelSave save = Save.getInstance().levelSaveForLevelID(levelIndex);
 		this.uiGameplay.setLevelInformation(save.getName(), save.getUnlockableKeys(), save.getUnlockedKeys());
 		this.cleanAllBodies();
@@ -58,6 +59,10 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		switch(levelIndex){
 		case 1:
 			this.currentLevel = new Level1(this,save);
+			break;
+			
+		case 2:
+			this.currentLevel= new Level2(this,save);
 			break;
 
 		default:
@@ -231,6 +236,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	throws SlickException {
 		uiGameplay.render(gc, g);
 		if(currentLevel !=null){
+
 			currentLevel.render(g);
 			
 			// Si un des personnages est mort, afficher le menu de mort
@@ -241,6 +247,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 
 		// Si le niveau est complete, afficher un ecran de victoire
 		if(this.isFinished){
+
 			this.uiWin.render(gc, g);
 		}
 		// Si le menu de pause a ete demande, l'afficher
