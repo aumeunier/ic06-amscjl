@@ -40,9 +40,6 @@ public class MyContactFilter implements ContactFilter {
 				else if(s2.getClass().equals(SourceMortelle.class)){
 					((Character)(s1)).setDead(true);
 				}
-				else if((s2 instanceof Exit)&& (s1 instanceof Character)){
-					//((Character)s1).setAtExit(true);
-				}
 				else if(s2.getClass().equals(Source.class)){
 					Source source = (Source)s2;
 					Character character = (Character)s1;
@@ -76,9 +73,6 @@ public class MyContactFilter implements ContactFilter {
 				}
 				else if(s1.getClass().equals(SourceMortelle.class)){
 					((Character)(s2)).setDead(true);					
-				}
-				else if((s1 instanceof Exit)&& (s2 instanceof Character)){
-					//((Character)s2).setAtExit(true);
 				}
 				else if(s1.getClass().equals(Source.class)){
 					Source source = (Source)s1;

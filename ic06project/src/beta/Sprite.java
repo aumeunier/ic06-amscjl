@@ -60,6 +60,7 @@ public class Sprite {
 		}
 	}
 	public void setTexture(String filename){
+		// TODO:
 		//this.image.setTexture(new Texture());
 	}
 	protected void setFilter(Color _colorFilter){
@@ -97,11 +98,9 @@ public class Sprite {
 				|| (((this.x + this.w) >= other.x) && ((this.x + this.w) <= (other.x+other.w))))
 			&& (((this.y >= other.y) && (this.y <= (other.y+other.h))) 
 					|| (((this.y + this.h) >= other.y) && ((this.y + this.h) <= (other.y+other.h))))){
-			System.out.println("collision pour" + x +" "+y);
 			return true;
 		}
 		else{
-			System.out.println("pas de collision pour" + x +" "+y);
 			return false;
 		}
 	}
