@@ -108,8 +108,8 @@ public class Level1 extends Level {
 		
 		// Place the first character
 		//*
-		this.character1 = addCharacterWithPoints(330,Global.GAMEPLAYHEIGHT-Character.CHAR_H-76);		
-		this.character2 = addCharacterWithPoints(Global.GAMEPLAYWIDTH-Character.CHAR_W-80,
-				Global.GAMEPLAYHEIGHT-Character.CHAR_H-10);		
+		this.character1 = addCharacterWithPoints(330,Global.GAMEPLAYHEIGHT-65-76,1.0f);		
+		this.character2 = addCharacterWithPoints(Global.GAMEPLAYWIDTH-87-80,
+				Global.GAMEPLAYHEIGHT-65-10,1.0f);		
 	}
 }

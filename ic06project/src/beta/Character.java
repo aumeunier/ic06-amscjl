@@ -13,10 +13,10 @@ public class Character extends Sprite{
 	private boolean avoidDoubleChangeFlag = true;
 	private final static int FEE_PNG_W = 348;
 	private final static int FEE_PNG_H = 260;
-	public final static int CHAR_W = (int) (FEE_PNG_W/4);
-	public final static int CHAR_H = (int) (FEE_PNG_H/4);
-	public final static int CHAR_W_BODY = (int) (CHAR_W/2);
-	public final static int CHAR_H_BODY = (int) (FEE_PNG_H/4);
+	private final static int CHAR_W = (int) (FEE_PNG_W/4);
+	private final static int CHAR_H = (int) (FEE_PNG_H/4);
+	private final static float CHAR_W_BODY_RATIO = 0.5f;
+	private final static float CHAR_H_BODY_RATIO = 1.0f;
 	
 	public Character(){
 		super(0,0,CHAR_W,CHAR_H);
@@ -26,8 +26,8 @@ public class Character extends Sprite{
 		super(_x,_y,CHAR_W,CHAR_H);
 		setAnimation("fee2.png",FEE_PNG_W,FEE_PNG_H);
 	}
-	public Character(int _x, int _y, int _w, int _h){
-		super(_x,_y,_w,_h);
+	public Character(int _x, int _y, float ratio){
+		super(_x,_y,(int)(CHAR_W*ratio),(int)(CHAR_H*ratio));
 		setAnimation("fee2.png",FEE_PNG_W,FEE_PNG_H);
 	}
 	public void changePower(){
@@ -101,6 +101,18 @@ public class Character extends Sprite{
 	}
 	public void setAtExit(boolean b){
 		isAtExit = b;
+	}
+	public int getCharWidth(){
+		return this.w;
+	}
+	public int getCharHeight(){
+		return this.h;
+	}
+	public int getCharBodyWidth(){
+		return (int) (this.w*CHAR_W_BODY_RATIO);		
+	}
+	public int getCharBodyHeight(){
+		return (int) (this.h*CHAR_H_BODY_RATIO);		
 	}
 	
 	public void setPower(Power _power){

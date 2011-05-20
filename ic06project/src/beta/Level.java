@@ -2,8 +2,11 @@ package beta;
 
 import java.util.ArrayList;
 
+import mdes.slick.sui.Display;
+
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -16,18 +19,30 @@ public class Level {
 	protected GameplayState myState;
 	protected ArrayList<Sprite> sprites;
 	protected ArrayList<Exit> listeExit;
+	protected ArrayList<InGameIndication> indications;
 	protected Character character1;
 	protected Character character2;
 	protected LevelSave levelModel;
 	protected Image backgroundImage;
 	protected int levelID;
 	protected int nbBonus=0;
+	private Display display;
 	
 	public Level(GameplayState state, LevelSave model){
 		this.myState = state;
 		this.sprites = new ArrayList<Sprite>();
 		this.listeExit = new ArrayList<Exit>();
+		this.indications = new ArrayList<InGameIndication>();
 		this.levelModel = model;
+	}
+	
+	public void setDisplay(GameContainer gc){
+		this.display = new Display(gc);
+	}
+	
+	protected void addIndication(int x, int y, String text){
+		InGameIndication indication = new InGameIndication(x,y,text);
+		indications.add(indication);
 	}
 
 	protected void setBackgroundImage(String filename){
@@ -198,28 +213,28 @@ public class Level {
 		return bonus;
 	}
 
-	protected Character addCharacter(int x, int y){
+	protected Character addCharacter(int x, int y, float ratio){
 		// Create a new character and add it to the panel
-		Character ch = new Character(x,y);
+		Character ch = new Character(x,y,ratio);
 		
 		// Create the body definition
 		myState.addCharacter(ch,null);
 
 		return ch;
 	}
-	protected Character addCharacterWithPoints(int x, int y){
+	protected Character addCharacterWithPoints(int x, int y, float ratio){
 		// Create a new character and add it to the panel
-		Character ch = new Character(x,y);
+		Character ch = new Character(x,y,ratio);
 		
 		// Create the body definition
 		ArrayList<Vec2> tempArray = new ArrayList<Vec2>();
-		Vec2 v = new Vec2(-Character.CHAR_W_BODY/2,Character.CHAR_H_BODY/2);	
+		Vec2 v = new Vec2(-ch.getCharBodyWidth()/2,ch.getCharBodyHeight()/2);	
 		tempArray.add(v);
-		v = new Vec2(-Character.CHAR_W_BODY*GameplayState.LOW_BODY_CHARACTER_RATIO,-Character.CHAR_H_BODY/2);
+		v = new Vec2(-ch.getCharBodyWidth()*GameplayState.LOW_BODY_CHARACTER_RATIO,-ch.getCharBodyHeight()/2);
 		tempArray.add(v);
-		v = new Vec2(Character.CHAR_W_BODY*GameplayState.LOW_BODY_CHARACTER_RATIO,-Character.CHAR_H_BODY/2);
+		v = new Vec2(ch.getCharBodyWidth()*GameplayState.LOW_BODY_CHARACTER_RATIO,-ch.getCharBodyHeight()/2);
 		tempArray.add(v);
-		v = new Vec2(Character.CHAR_W_BODY/2,Character.CHAR_H_BODY/2);
+		v = new Vec2(ch.getCharBodyWidth()/2,ch.getCharBodyHeight()/2);
 		tempArray.add(v);
 		
 		
@@ -244,7 +259,7 @@ public class Level {
 		this.sprites.remove(s);
 	}
 	
-	public void render(Graphics g){
+	public void render(GameContainer gc, Graphics g){
 		backgroundImage.draw(0,0,Global.GAMEPLAYWIDTH,Global.GAMEPLAYHEIGHT);
 		for(int i = 0 ; i < listeExit.size() ; ++i){
 			listeExit.get(i).draw(g);
@@ -256,6 +271,9 @@ public class Level {
 			if(!s.getClass().equals(Obstacle.class) || !((Obstacle)s).isHidden()){
 				s.draw(g);
 			}
+		}
+		for(InGameIndication indication: indications){
+			indication.render(gc, g);
 		}
 	}
 }

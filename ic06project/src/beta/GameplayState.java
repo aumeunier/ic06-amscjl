@@ -38,6 +38,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	private boolean isFinished;
 	private boolean startAgain;
 	private boolean alwaysStartAgain;
+	private boolean levelJustCreated;
 
 	public GameplayState(int id){
 		super();
@@ -46,6 +47,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		this.startAgain = false;
 		this.alwaysStartAgain = false;
 		this.isFinished = false;
+		this.levelJustCreated = true;
 		this.currentLevelState = new LevelState();
 	}
 
@@ -69,6 +71,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			this.currentLevel = null;
 			break;
 		}
+		levelJustCreated = true;
 	}
 
 	@Override
@@ -123,6 +126,10 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		// Si aucun niveau n'est charge ou que le niveau est fini, aucun interet a faire des calculs
 		if(this.currentLevel == null){
 			return;
+		}
+		else if(this.levelJustCreated){
+			this.levelJustCreated = false;
+			this.currentLevel.setDisplay(gc);
 		}
 		
 		if(this.isFinished){
@@ -234,7 +241,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		uiGameplay.render(gc, g);
 		if(currentLevel !=null){
 
-			currentLevel.render(g);
+			currentLevel.render(gc, g);
 			
 			// Si un des personnages est mort, afficher le menu de mort
 			if(this.currentLevel.getFirstCharacter().isDead() || this.currentLevel.getSecondCharacter().isDead()){	
@@ -471,7 +478,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			}
 		}
 		else {
-			sd.setAsBox(Character.CHAR_W_BODY/2, Character.CHAR_H_BODY/2);
+			sd.setAsBox(characterData.getCharBodyWidth()/2, characterData.getCharBodyHeight()/2);
 		}
 		
 		// Ajoute un Sensor pour savoir si le character est au sol
@@ -479,11 +486,12 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		groundSensor.isSensor=true;
 		groundSensor.userData=GROUND_SENSOR_NAME;
 		if(list!=null){
-			groundSensor.setAsBox((float)((Character.CHAR_W_BODY*LOW_BODY_CHARACTER_RATIO)*1.1),
-					2, new Vec2(0,-Character.CHAR_H_BODY/2), 0);
+			groundSensor.setAsBox((float)((characterData.getCharBodyWidth()*LOW_BODY_CHARACTER_RATIO)*1.1),
+					2, new Vec2(0,-characterData.getCharBodyHeight()/2), 0);
 		}
 		else {
-			groundSensor.setAsBox((float)((Character.CHAR_W_BODY/2.0)*1.1), 2, new Vec2(0,-Character.CHAR_H_BODY/2), 0);
+			groundSensor.setAsBox((float)((characterData.getCharBodyWidth()/2.0)*1.1), 2, 
+					new Vec2(0,-characterData.getCharBodyHeight()/2), 0);
 		}
 		if(ch1_body == null){
 			ch1_body = world.createBody(bodyDef);
