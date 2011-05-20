@@ -52,7 +52,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	public void ChooseLevel(int levelIndex){
 		LevelSave save = Save.getInstance().levelSaveForLevelID(levelIndex);
 		this.currentLevelState = new LevelState();
-		this.uiGameplay.setLevelInformation(save.getName(), save.getUnlockableKeys(), save.getUnlockedKeys());
+		this.uiGameplay.setLevelInformation(save.getName(), 0, save.getUnlockableKeys());
 		this.cleanAllBodies();
 		this.isFinished = false;
 		this.uiGameplay.onEnter();
@@ -130,6 +130,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			lvlSave.setSavedLevelData(currentLevel.nbBonus, true, true);
 			LevelSave nextLvlSave = Save.getInstance().levelSaveForLevelID(this.currentLevel.getLevelID()+1);
 			nextLvlSave.setSavedLevelData(0, true, false);
+			Save.getInstance().save();
 			return;			
 		}
 		

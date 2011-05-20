@@ -88,6 +88,7 @@ public class Save {
 	 */
 	public void loadSave(String filename){
 		saveFilename = filename;
+		totalNumberOfUnlockedKeys = 0;
 		try {
 			JsonNode rootNode = loadJson(filename);
 			player1name = rootNode.path("name1").getValueAsText();
@@ -103,6 +104,7 @@ public class Save {
 				LevelSave level = getLevelWithID(tempId);
 				if(level != null){
 					level.setSavedLevelData(tempKeys, tempUnlocked, tempFinished);
+					totalNumberOfUnlockedKeys+=level.getUnlockedKeys();
 				}
 			}			
 		} catch (JsonParseException e) {
@@ -120,6 +122,10 @@ public class Save {
 	 * Save the current game
 	 */
 	public void save(){
+		totalNumberOfUnlockedKeys = 0;
+		for(LevelSave lvlSave: levels){
+			totalNumberOfUnlockedKeys+=lvlSave.getUnlockedKeys();
+		}
 	    File file = new File(saveFilename);
 	    try {
 		    BufferedWriter output = new BufferedWriter(new FileWriter(file));

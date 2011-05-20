@@ -15,6 +15,7 @@ public class LevelSave {
 	public LevelSave(int id, String name, String music, int unlockable, int[] area){
 		super();
 		levelID = id;
+		unlockedKeys = 0;
 		unlockableKeys = unlockable;
 		levelName = name;
 		musicFilename = music;
@@ -29,7 +30,7 @@ public class LevelSave {
 	 * @param levelFinished
 	 */
 	public void setSavedLevelData(int unlocked, boolean levelUnlocked, boolean levelFinished){
-		unlockedKeys = (unlockableKeys >= unlocked)?unlockableKeys:unlocked;
+		unlockedKeys = (unlockedKeys >= unlocked)?unlockedKeys:unlocked;
 		isUnlocked = isUnlocked || levelUnlocked;
 		isFinished = isFinished || levelFinished;
 	}

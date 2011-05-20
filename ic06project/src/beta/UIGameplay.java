@@ -121,7 +121,7 @@ public class UIGameplay implements UIInterface {
 		leftPlayerImage = null;
 		rightPlayerImage = null;
 	}
-	public void setLevelInformation(String _levelName, int _nbUnlockableKeys, int _nbUnlockedKeys){
+	public void setLevelInformation(String _levelName, int _nbUnlockedKeys, int _nbUnlockableKeys){
 		levelLabel.setText(_levelName);
 		levelLabel.setImage(null);
 		unlockedKeysLabel.setText("Unlocked keys:"+_nbUnlockedKeys);
@@ -130,7 +130,6 @@ public class UIGameplay implements UIInterface {
 		unlockableKeysLabel.setImage(null);
 	}
 	public void setTempLevelInformation(Power powerPlayer1, Power powerPlayer2, int _nbUnlockedKeys){
-		System.out.println("setTempLevelInformation");
 		unlockedKeysLabel.setText("Unlocked keys:"+_nbUnlockedKeys);
 		allKeysLabel.setText("Nombre total de cles: "+	(Save.getInstance().getTotalNumberOfUnlockedKeys()+_nbUnlockedKeys)
 				+"/"+Save.getInstance().getTotalNumberOfKeys());

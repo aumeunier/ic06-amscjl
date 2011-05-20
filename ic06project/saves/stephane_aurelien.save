@@ -4,20 +4,20 @@
 	 "levels":[
 		{
 			"id":1,
-			"keys":0,
+			"keys":1,
 			"unlocked":true,
 			"finished":true
 		},
 		{
 			"id":2,
-			"keys":0,
-			"unlocked":false,
-			"finished":false
+			"keys":1,
+			"unlocked":true,
+			"finished":true
 		},
 		{
 			"id":3,
 			"keys":0,
-			"unlocked":false,
+			"unlocked":true,
 			"finished":false
 		},
 		{
