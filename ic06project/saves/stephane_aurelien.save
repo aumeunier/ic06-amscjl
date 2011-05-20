@@ -1,10 +1,10 @@
 {
-	 "name1":"null",
-	 "name2":"null",
+	 "name1":"Stephane",
+	 "name2":"Aurelien",
 	 "levels":[
 		{
 			"id":1,
-			"keys":1,
+			"keys":0,
 			"unlocked":true,
 			"finished":true
 		},

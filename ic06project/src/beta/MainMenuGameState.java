@@ -1,4 +1,4 @@
-package alpha;
+package beta;
 
 
 import mdes.slick.sui.Display;
@@ -57,13 +57,13 @@ public class MainMenuGameState extends BasicGameState implements MouseListener {
 	public void init(GameContainer gc, StateBasedGame sbg)
 	throws SlickException {
 		// Images
-		backgroundImage = new Image(Global.PATH_IMAGES_RESSOURCES+"papyrus_page.png");
+		backgroundImage = Global.setImage("papyrus_page.png");
 		backgroundImage.rotate(90);
-		mapImage = new Image(Global.PATH_IMAGES_RESSOURCES+"scroll_background_page_horizontal.png");
-		mapLvlDefaultImage = new Image(Global.PATH_IMAGES_RESSOURCES+"bloque_niveau.png");
-		mapLvlUnlockedImage = new Image(Global.PATH_IMAGES_RESSOURCES+"debut_niveau.png");
-		mapLvlUnlockedFinishedImage = new Image(Global.PATH_IMAGES_RESSOURCES+"fin_niveau.png");
-		mapLvlFinishedImage = new Image(Global.PATH_IMAGES_RESSOURCES+"fin_niveau.png");
+		mapImage = Global.setImage("scroll_background_page_horizontal.png");
+		mapLvlDefaultImage = Global.setImage("bloque_niveau.png");
+		mapLvlUnlockedImage = Global.setImage("debut_niveau.png");
+		mapLvlUnlockedFinishedImage = Global.setImage("fin_niveau.png");
+		mapLvlFinishedImage = Global.setImage("fin_niveau.png");
 
 		// Labels
 		newGameImage = Global.setImage("main_menu_nouvelle_partie.png");
@@ -141,7 +141,8 @@ public class MainMenuGameState extends BasicGameState implements MouseListener {
 	throws SlickException {
 		if(selection > -1){
 			if(selection == Game.GAMEPLAY_STATE){
-				((GameplayState)(sbg.getState(Game.GAMEPLAY_STATE))).ChooseLevel(levelSelection);	
+				((GameplayState)(sbg.getState(Game.GAMEPLAY_STATE))).ChooseLevel(levelSelection);
+				selection = Game.NARRATIVE_STATE;
 			}
 			sbg.enterState(selection);				
 		}
@@ -160,7 +161,8 @@ public class MainMenuGameState extends BasicGameState implements MouseListener {
 	public void mouseClicked(int button, int x, int y, int clickCount){
 		if((x >= NEWGAME_X && x <= (NEWGAME_X + newGameImage.getWidth())) 
 				&&	(y >= NEWGAME_Y && y <= (NEWGAME_Y + newGameImage.getHeight()))){
-			selection = Game.NEWGAME_STATE;
+			//selection = Game.NEWGAME_STATE;
+			selection = Game.NARRATIVE_STATE;
 		}
 		else if((x >= LOADGAME_X && x <= (LOADGAME_X + loadGameImage.getWidth())) 
 				&&	(y >= LOADGAME_Y && y <= (LOADGAME_Y + loadGameImage.getHeight()))){
