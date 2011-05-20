@@ -8,7 +8,7 @@ import org.jbox2d.dynamics.Body;
 public class Level2 extends Level {
 	public Level2(GameplayState state, LevelSave model){	
 		super(state,model);
-		this.levelID = 1;
+		this.levelID = 2; // Do not forget to update that !!
 		this.setBackgroundImage("6362779_s.jpg");
 		this.backgroundImage = this.backgroundImage.getSubImage(0, 0, 
 				this.backgroundImage.getWidth(), this.backgroundImage.getHeight()*Global.GAMEPLAYHEIGHT/Global.WINDOW_HEIGHT);
@@ -101,11 +101,5 @@ public class Level2 extends Level {
 		this.character1 = addCharacterWithPoints(330,Global.GAMEPLAYHEIGHT-Character.CHAR_H-76);		
 		this.character2 = addCharacterWithPoints(Global.GAMEPLAYWIDTH-Character.CHAR_W-80,
 				Global.GAMEPLAYHEIGHT-Character.CHAR_H-10);
-		/*/
-		this.character1 = addCharacter(330,Global.GAMEPLAYHEIGHT-Character.CHAR_H-100);		
-		this.character2 = addCharacter(Global.GAMEPLAYWIDTH-Character.CHAR_W-100,
-				Global.GAMEPLAYHEIGHT-Character.CHAR_H-40);
-		//*/
-		
 	}
 }

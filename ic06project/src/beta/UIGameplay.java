@@ -130,6 +130,7 @@ public class UIGameplay implements UIInterface {
 		unlockableKeysLabel.setImage(null);
 	}
 	public void setTempLevelInformation(Power powerPlayer1, Power powerPlayer2, int _nbUnlockedKeys){
+		System.out.println("setTempLevelInformation");
 		unlockedKeysLabel.setText("Unlocked keys:"+_nbUnlockedKeys);
 		allKeysLabel.setText("Nombre total de cles: "+	(Save.getInstance().getTotalNumberOfUnlockedKeys()+_nbUnlockedKeys)
 				+"/"+Save.getInstance().getTotalNumberOfKeys());

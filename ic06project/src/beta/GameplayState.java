@@ -62,7 +62,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			break;
 			
 		case 2:
-			this.currentLevel= new Level2(this,save);
+			this.currentLevel = new Level2(this,save);
 			break;
 
 		default:

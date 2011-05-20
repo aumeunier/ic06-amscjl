@@ -8,7 +8,7 @@ import org.jbox2d.dynamics.Body;
 public class Level1 extends Level {
 	public Level1(GameplayState state, LevelSave model){	
 		super(state,model);
-		this.levelID = 1;
+		this.levelID = 1; // Do not forget to update that !!
 		this.setBackgroundImage("6362779_s.jpg");
 		this.backgroundImage = this.backgroundImage.getSubImage(0, 0, 
 				this.backgroundImage.getWidth(), this.backgroundImage.getHeight()*Global.GAMEPLAYHEIGHT/Global.WINDOW_HEIGHT);
