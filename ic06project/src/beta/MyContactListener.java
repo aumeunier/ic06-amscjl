@@ -39,7 +39,20 @@ public class MyContactListener implements ContactListener {
 	}
 
 	@Override
-	public void persist(ContactPoint point) {	}
+	public void persist(ContactPoint point) {
+		if (point.shape1.getUserData() == GameplayState.GROUND_SENSOR_NAME){
+			Sprite s = (Sprite)point.shape2.getBody().getUserData();
+			if((s instanceof Wall) || (s instanceof Obstacle)||(s instanceof Ground)|| (s instanceof Declencheur)){
+				((Character) point.shape1.getBody().getUserData()).isFalling = false;
+			}
+		}
+		else if (point.shape2.getUserData() == GameplayState.GROUND_SENSOR_NAME){
+			Sprite s = (Sprite)point.shape1.getBody().getUserData();
+			if((s instanceof Wall) || (s instanceof Obstacle)||(s instanceof Ground)|| (s instanceof Declencheur)){
+				((Character) point.shape2.getBody().getUserData()).isFalling = false;
+			}
+		}
+	}
 
 	@Override
 	public void remove(ContactPoint point) {
