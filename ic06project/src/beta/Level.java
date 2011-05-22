@@ -49,7 +49,8 @@ public class Level {
 
 	protected void setBackgroundImage(String filename){
 		try {
-			this.backgroundImage = new Image(Global.PATH_IMAGES_RESSOURCES+filename);
+			this.backgroundImage = new Image(Global.PATH_IMAGES_RESSOURCES+filename).
+				getScaledCopy(Global.WINDOW_WIDTH, Global.WINDOW_HEIGHT);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -326,6 +327,7 @@ public class Level {
 			}	  
 			// Normal drawing
 	        g.setDrawMode(Graphics.MODE_ALPHA_BLEND); 
+			backgroundImage.draw();
 			for(int i = 0 ; i < listeExit.size() ; ++i){
 				listeExit.get(i).draw(g);
 				}
@@ -344,6 +346,7 @@ public class Level {
 		}
 		// If no darkness we draw as usual
 		else {
+			backgroundImage.draw();
 			for(int i = 0 ; i < listeExit.size() ; ++i){
 				listeExit.get(i).draw(g);
 				}
