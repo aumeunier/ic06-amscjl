@@ -44,12 +44,6 @@ public class Game extends StateBasedGame implements MusicListener {
 		changeMusic("108316_Corsica_S_welcome_to_our_fairy_world.ogg");
 		playMusic();
 		this.music.addListener(this);
-		/*
-		//TODO:
-		UnicodeFont t = new UnicodeFont();
-		Font font = new Font("./ressources/divers/carolingia.ttf");
-		gc.setDefaultFont(font);
-		//*/
 	}
 
 	/**
@@ -57,8 +51,8 @@ public class Game extends StateBasedGame implements MusicListener {
 	 * @throws SlickException 
 	 */
 	public static void main(String[] args) throws SlickException {
-		AppGameContainer app = new AppGameContainer(new Game("Test"));
-		Save.getInstance().loadSave("./saves/stephane_aurelien.save"); //TODO: automatically load last one ?
+		AppGameContainer app = new AppGameContainer(new Game("Super Fairy Bros"));
+		Save.getInstance().loadSave("./saves/cheat_cheater.save"); //TODO: automatically load last one ?
 	 
 		// Application properties
 		app.setDisplayMode(800, 600, displayFullScreen);

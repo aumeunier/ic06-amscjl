@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 
-public class Level1 extends Level {
-	public Level1(GameplayState state, LevelSave model){	
+public class Level4 extends Level {
+
+	public Level4(GameplayState state, LevelSave model) {
 		super(state,model);
-		this.levelID = 1; // Do not forget to update that !!
+		this.levelID = 4;
+		this.inTheDarkness = true;
 		this.setBackgroundImage("6362779_s.jpg");
 		this.backgroundImage = this.backgroundImage.getSubImage(0, 0, 
 				this.backgroundImage.getWidth(), this.backgroundImage.getHeight()*Global.GAMEPLAYHEIGHT/Global.WINDOW_HEIGHT);
@@ -70,21 +72,17 @@ public class Level1 extends Level {
 		Obstacle oMurLevier = new Obstacle(Global.GAMEPLAYWIDTH-130,85,20,135);
 		sprites.add(oMurLevier);
 		Body oMurLevierBody = myState.addObstacle(oMurLevier);
-		ArrayList<Body> b1 = new ArrayList<Body>();
-		b1.add(oMurLevierBody);
 		
 		// CrŽŽ un bouton pressoir qui ouvre ce mur
-		createBoutonPressoir(85,185,30,18,b1);
+		//createBoutonPressoir(85,185,30,18,oMurLevierBody);
 		
 		// Place un mur devant la sortie
 		Obstacle oMurSortie = new Obstacle(Global.GAMEPLAYWIDTH-160,0,20,75);
 		sprites.add(oMurSortie);
 		Body oMurSortieBody = myState.addObstacle(oMurSortie);
-		ArrayList<Body> b2 = new ArrayList<Body>();
-		b2.add(oMurSortieBody);
 		
 		// CrŽŽ un levier qui ouvre ce mur
-		createLevier(Global.GAMEPLAYWIDTH-70,195,30,30,b2);
+		//createLevier(Global.GAMEPLAYWIDTH-70,195,30,30,oMurSortieBody);
 		
 		// Place l'eau
 		SourceMortelle s = createSourceMortelle(80,Global.GAMEPLAYHEIGHT-60,50,50);
@@ -105,6 +103,7 @@ public class Level1 extends Level {
 		//place SOrtie
 		Exit exit = createExit(Global.GAMEPLAYWIDTH-65,10,45,65);
 		exit.setImage("porte.png");
+		exit.setLightSize(100);
 		
 		//place bonus
 		Bonus bonus1 = createBonus(50,Global.GAMEPLAYHEIGHT-110,25,25);
@@ -114,6 +113,9 @@ public class Level1 extends Level {
 		//*
 		this.character1 = addCharacterWithPoints(330,Global.GAMEPLAYHEIGHT-65-76,1.0f);		
 		this.character2 = addCharacterWithPoints(Global.GAMEPLAYWIDTH-87-80,
-				Global.GAMEPLAYHEIGHT-65-10,1.0f);		
+				Global.GAMEPLAYHEIGHT-65-10,1.0f);	
+		this.character1.setLightSize(this.character1.h*2);
+		this.character2.setLightSize(this.character2.h*2);
 	}
+
 }

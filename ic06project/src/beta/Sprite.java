@@ -21,6 +21,9 @@ public class Sprite {
 	protected boolean shouldChangeSize=false;
 	protected Color colorFilter = Color.white;
 	protected boolean isHidden=false;
+	protected boolean lightInDarkness=false;
+	protected int lightSize=50;
+	protected Image lightImage=Global.setImage(Global.DEFAULT_LIGHT_IMAGE);
 	
 	public Sprite(){
 		this.x=0;
@@ -74,7 +77,7 @@ public class Sprite {
 		}
 		shape.addPoint(x, y);
 	}
-	
+
 	public void draw(Graphics g){
 		if(animation!=null){
 			animation.draw(x, y, w, h, colorFilter);
@@ -85,6 +88,15 @@ public class Sprite {
 		else if(image!=null){
 			image.draw(x, y, w, h);
 		}
+	}
+	public void drawLight(Graphics g){
+		lightImage.draw(x+w/2-lightSize/2, y+w/2-lightSize/2);
+		//g.drawImage(lightImage, x+w/2-lightSize/2, y+w/2-lightSize/2);
+	}
+	public void setLightSize(int _lightSize){
+		this.lightInDarkness = true;
+		this.lightSize = _lightSize;
+		this.lightImage = Global.setImage(Global.DEFAULT_LIGHT_IMAGE).getScaledCopy(lightSize, lightSize);
 	}
 	
 	public boolean getShouldBeDestroy(){

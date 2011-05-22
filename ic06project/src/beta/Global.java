@@ -16,6 +16,7 @@ public class Global {
 	public final static String PATH_SOUNDS_RESSOURCES = PATH_RESSOURCES+"sounds/";
 	public final static String PATH_MUSICS_RESSOURCES = PATH_RESSOURCES+"musics/";
 	public final static String BUTTON_STANDARD_IMAGE = "blur11.jpg";
+	public final static String DEFAULT_LIGHT_IMAGE = "test.png";
 	public static String CURRENT_GAME_FILENAME = null;
 	
 	public static Vec2 getWorldCoordinates(float box2dX, float box2dY){

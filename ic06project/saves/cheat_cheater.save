@@ -1,0 +1,36 @@
+{
+	 "name1":"cheat",
+	 "name2":"cheater",
+	 "levels":[
+		{
+			"id":1,
+			"keys":0,
+			"unlocked":true,
+			"finished":true
+		},
+		{
+			"id":2,
+			"keys":0,
+			"unlocked":true,
+			"finished":true
+		},
+		{
+			"id":3,
+			"keys":0,
+			"unlocked":true,
+			"finished":true
+		},
+		{
+			"id":4,
+			"keys":0,
+			"unlocked":true,
+			"finished":true
+		},
+		{
+			"id":5,
+			"keys":0,
+			"unlocked":true,
+			"finished":true
+		}
+	 ]
+}

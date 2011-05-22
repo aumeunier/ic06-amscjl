@@ -26,7 +26,9 @@ public class Level {
 	protected Image backgroundImage;
 	protected int levelID;
 	protected int nbBonus=0;
-	private Display display;
+	protected Display display;
+	protected boolean inTheDarkness=false;
+	protected Image lightImage = Global.setImage(Global.DEFAULT_LIGHT_IMAGE);
 	
 	public Level(GameplayState state, LevelSave model){
 		this.myState = state;
@@ -301,20 +303,61 @@ public class Level {
 	}
 	
 	public void render(GameContainer gc, Graphics g){
-		backgroundImage.draw(0,0,Global.GAMEPLAYWIDTH,Global.GAMEPLAYHEIGHT);
-		for(int i = 0 ; i < listeExit.size() ; ++i){
-			listeExit.get(i).draw(g);
+		// If the map is plunged in the darkness
+		if(this.inTheDarkness){
+			g.clearAlphaMap();
+			// Light drawing
+			g.setDrawMode(Graphics.MODE_ALPHA_MAP);
+			lightImage.draw(character1.x,character1.y,character1.w,character1.h);
+			if(character1.lightInDarkness){
+				character1.drawLight(g);	
 			}
-		character1.draw(g);
-		character2.draw(g);
-		for(int i = 0 ; i < sprites.size() ; ++i){
-			Sprite s = sprites.get(i);
-			if(!s.isHidden()){
-				s.draw(g);
+			if(character2.lightInDarkness){
+				character2.drawLight(g);				
 			}
+			for(int i = 0 ; i < sprites.size() ; ++i){
+				Sprite s = sprites.get(i);
+				if(s.lightInDarkness){
+					s.drawLight(g);				
+				}
+			}
+			for(InGameIndication indication: indications){
+				indication.render(gc, g);
+			}	  
+			// Normal drawing
+	        g.setDrawMode(Graphics.MODE_ALPHA_BLEND); 
+			for(int i = 0 ; i < listeExit.size() ; ++i){
+				listeExit.get(i).draw(g);
+				}
+			character1.draw(g);
+			character2.draw(g);
+			for(int i = 0 ; i < sprites.size() ; ++i){
+				Sprite s = sprites.get(i);
+				if(!s.isHidden()){
+					s.draw(g);
+				}
+			}
+			for(InGameIndication indication: indications){
+				indication.render(gc, g);
+			}	    
+	        g.setDrawMode(Graphics.MODE_NORMAL); 			
 		}
-		for(InGameIndication indication: indications){
-			indication.render(gc, g);
+		// If no darkness we draw as usual
+		else {
+			for(int i = 0 ; i < listeExit.size() ; ++i){
+				listeExit.get(i).draw(g);
+				}
+			character1.draw(g);
+			character2.draw(g);
+			for(int i = 0 ; i < sprites.size() ; ++i){
+				Sprite s = sprites.get(i);
+				if(!s.isHidden()){
+					s.draw(g);
+				}
+			}
+			for(InGameIndication indication: indications){
+				indication.render(gc, g);
+			}				
 		}
 	}
 }
