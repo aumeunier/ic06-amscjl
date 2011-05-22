@@ -80,8 +80,7 @@ public class Sprite {
 			animation.draw(x, y, w, h, colorFilter);
 		}
 		else if(shape!=null){
-			g.setColor(Color.red);
-			g.fill(shape);
+			g.texture(shape, image, true);
 		}
 		else if(image!=null){
 			image.draw(x, y, w, h);
