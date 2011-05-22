@@ -185,7 +185,7 @@ public class Level {
 		
 		return source;
 	}
-	protected BoutonPressoir createBoutonPressoir(int x, int y, int w, int h, Body b){
+	protected BoutonPressoir createBoutonPressoir(int x, int y, int w, int h, ArrayList<Body> b){
 		
 		// Create a boutonpressoir object
 		BoutonPressoir bouton = new BoutonPressoir(x,y,w,h,b,1);
@@ -198,7 +198,7 @@ public class Level {
 		
 		return bouton;
 	}
-	protected BoutonPressoir createBoutonPressoir(int x, int y, int w, int h, Body b, int p){
+	protected BoutonPressoir createBoutonPressoir(int x, int y, int w, int h, ArrayList<Body> b, int p){
 		
 		// Create a boutonpressoir object
 		BoutonPressoir bouton = new BoutonPressoir(x,y,w,h,b,p);
@@ -212,7 +212,7 @@ public class Level {
 		return bouton;
 	}
 	
-	protected BoutonElevator createBoutonElevator(int x, int y, int w, int h, Body b, int p){
+	protected BoutonElevator createBoutonElevator(int x, int y, int w, int h, ArrayList<Body> b, int p){
 		
 		// Create a boutonelevator object
 		BoutonElevator bouton = new BoutonElevator(x,y,w,h,b,p);
@@ -226,7 +226,7 @@ public class Level {
 		return bouton;
 	}
 	
-	protected Levier createLevier(int x, int y, int w, int h, Body b){
+	protected Levier createLevier(int x, int y, int w, int h, ArrayList<Body> b){
 		
 		// Create a levier object
 		Levier levier = new Levier(x,y,w,h,b);

@@ -70,17 +70,21 @@ public class Level1 extends Level {
 		Obstacle oMurLevier = new Obstacle(Global.GAMEPLAYWIDTH-130,85,20,135);
 		sprites.add(oMurLevier);
 		Body oMurLevierBody = myState.addObstacle(oMurLevier);
+		ArrayList<Body> b1 = new ArrayList<Body>();
+		b1.add(oMurLevierBody);
 		
 		// CrŽŽ un bouton pressoir qui ouvre ce mur
-		createBoutonPressoir(85,185,30,18,oMurLevierBody);
+		createBoutonPressoir(85,185,30,18,b1);
 		
 		// Place un mur devant la sortie
 		Obstacle oMurSortie = new Obstacle(Global.GAMEPLAYWIDTH-160,0,20,75);
 		sprites.add(oMurSortie);
 		Body oMurSortieBody = myState.addObstacle(oMurSortie);
+		ArrayList<Body> b2 = new ArrayList<Body>();
+		b2.add(oMurSortieBody);
 		
 		// CrŽŽ un levier qui ouvre ce mur
-		createLevier(Global.GAMEPLAYWIDTH-70,195,30,30,oMurSortieBody);
+		createLevier(Global.GAMEPLAYWIDTH-70,195,30,30,b2);
 		
 		// Place l'eau
 		SourceMortelle s = createSourceMortelle(80,Global.GAMEPLAYHEIGHT-60,50,50);

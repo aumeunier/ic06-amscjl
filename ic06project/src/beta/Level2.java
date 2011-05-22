@@ -22,6 +22,8 @@ public class Level2 extends Level {
 		// Celling
 		createWall(0,-10,Global.GAMEPLAYWIDTH,10);
 		
+		
+		
 		createGround(100,440,200,50); // Sol 3
 		createGround(100,390,10,50); // Sol 2
 		createGround(100,200,200,190); // Sol 1/4
@@ -57,10 +59,26 @@ public class Level2 extends Level {
 
 		//addIndication(200,100,"Tu peux maintenant voler!");
 		
+		//mur levier
+		Obstacle oMurLevier = new Obstacle(500,435,10,55);
+		oMurLevier.Hidden(true);
+		sprites.add(oMurLevier);
+		Body oMurLevierBody = myState.addObstacle(oMurLevier);
+		ArrayList<Body> b1 = new ArrayList<Body>();
+		b1.add(oMurLevierBody);
+		//levier qui ouvre le mur
+		createLevier(460,295,30,30,b1);
+		
+		//place l'eau
+		SourceMortelle s = createSourceMortelle(0,Global.GAMEPLAYHEIGHT-60,50,50);
+		s.setAnimation("waves.png", 300, 300);
+		SourceMortelle s2 = createSourceMortelle(50,Global.GAMEPLAYHEIGHT-60,50,50);
+		s2.setAnimation("waves2.png", 300, 300);
+		
 		
 		// Place the first character
-		this.character1 = addCharacterWithPoints(400,400,0.75f);		
-		this.character2 = addCharacterWithPoints(400,400,0.75f);	
+		this.character1 = addCharacterWithPoints(550,450,0.75f);		
+		this.character2 = addCharacterWithPoints(550,450,0.75f);	
 		/*Body b = state.getBodyForUserData(this.character1);
 		state.modifyBodySize(b, 0.5f, 0.5f);
 		Body b2 = state.getBodyForUserData(this.character2);

@@ -1,12 +1,13 @@
 package beta;
 
 import org.jbox2d.dynamics.Body;
+import java.util.ArrayList;
 
 public abstract class Declencheur extends Sprite {
-	protected Body relatedBody;
+	protected ArrayList<Body> relatedBody;
 	protected boolean isActivated;
 	
-	public Declencheur(int _x, int _y, int _w, int _h, Body b){
+	public Declencheur(int _x, int _y, int _w, int _h, ArrayList<Body> b){
 		this.x = _x;
 		this.y = _y;
 		this.w = _w;

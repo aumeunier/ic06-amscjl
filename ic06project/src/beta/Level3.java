@@ -37,15 +37,19 @@ public class Level3 extends Level {
 		Source sourceG = createSource(455,270,40,40,Power.FAT);
 		createSource(500,450,40,40,Power.FIRE);
 		Body sourceGBody = state.getBodyForUserData(sourceG);
-		Levier levier1 = createLevier(280,295,30,30,sourceGBody);
+		ArrayList<Body> b1 = new ArrayList<Body>();
+		b1.add(sourceGBody);
+		Levier levier1 = createLevier(280,295,30,30,b1);
 		levier1.activate();
 		
 		Ground solMouvant = createGround(570,393,50,7); // plateforme mouvante
 		Body bodyMouvant = state.getBodyForUserData(solMouvant);
+		ArrayList<Body> b2 = new ArrayList<Body>();
+		b2.add(bodyMouvant);
 		MassData md = new MassData();
 		md.mass = 100.0f;
 		bodyMouvant.setMass(md);
-		createBoutonElevator(680, 382, 30, 18, bodyMouvant, 2);
+		createBoutonElevator(680, 382, 30, 18, b2, 2);
 		createGround(565,395,5,5);//cale1
 		createGround(620,395,5,5);//cale2
 		
