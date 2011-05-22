@@ -6,7 +6,6 @@ import org.newdawn.slick.geom.Shape;
 
 
 public class Obstacle extends Sprite{
-	private boolean isHidden;
 	public Obstacle(){
 		setImage("bricks.jpg");
 		isHidden = false;
@@ -16,10 +15,5 @@ public class Obstacle extends Sprite{
 		setImage("bricks.jpg");
 		isHidden = false;
 	}
-	public boolean isHidden(){
-		return isHidden;
-	}
-	public void setHidden(boolean shouldBeHidden){
-		isHidden = shouldBeHidden;
-	}
+
 }

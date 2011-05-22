@@ -14,19 +14,15 @@ public class Levier extends Declencheur {
 		isActivated=!isActivated;
 		if(isActivated)
 		{
-			((Obstacle)(relatedBody.getUserData())).setHidden(true);
+			((Sprite)(relatedBody.getUserData())).Hidden(true);
 			this.setImage("levier-2.png");	
 		}
 		else{
-			((Obstacle)(relatedBody.getUserData())).setHidden(false);
+			((Sprite)(relatedBody.getUserData())).Hidden(false);
 			this.setImage("levier-1.png");
 		}
 	}
-
-	@Override
-	public void desactivate() {
-		this.setActivated(false);
-		((Obstacle)(relatedBody.getUserData())).setHidden(false);
-		this.setImage("blur20.jpg");
+	public void desactivate(){
 	}
+
 }

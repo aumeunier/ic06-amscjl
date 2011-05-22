@@ -9,17 +9,15 @@ public class BoutonPressoir extends Declencheur {
 		this.setImage("blur20test.png");
 	}
 
-	@Override
-	public void activate() {
+	public void activate(){
 		this.setActivated(true);
-		((Obstacle)(relatedBody.getUserData())).setHidden(true);
+		((Sprite)(relatedBody.getUserData())).Hidden(true);
 		this.setImage("blur1test.png");
 	}
 
-	@Override
-	public void desactivate() {
+	public void desactivate(){
 		this.setActivated(false);
-		((Obstacle)(relatedBody.getUserData())).setHidden(false);
+		((Sprite)(relatedBody.getUserData())).Hidden(false);
 		this.setImage("blur20test.png");
 	}
 }

@@ -232,12 +232,12 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		
 		
 		if((char1.isFat())&&(char1.shouldChangeSize)){
-			modifyBodySize(getBodyForUserData(char1),1,2);
+			modifyBodySize(getBodyForUserData(char1),1,(float)1.1);
 			System.out.println("test");
 			char1.shouldChangeSize=false;
 		}
 		if((char2.isFat())&&(char2.shouldChangeSize)){
-			modifyBodySize(getBodyForUserData(char2),1,2);
+			modifyBodySize(getBodyForUserData(char2),1,(float)1.1);
 			System.out.println("test");
 			char2.shouldChangeSize=false;
 		}

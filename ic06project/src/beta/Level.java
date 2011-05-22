@@ -281,7 +281,7 @@ public class Level {
 		character2.draw(g);
 		for(int i = 0 ; i < sprites.size() ; ++i){
 			Sprite s = sprites.get(i);
-			if(!s.getClass().equals(Obstacle.class) || !((Obstacle)s).isHidden()){
+			if(!s.isHidden()){
 				s.draw(g);
 			}
 		}

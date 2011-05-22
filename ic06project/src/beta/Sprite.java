@@ -100,13 +100,8 @@ public class Sprite {
 		 return isHidden;
 	}
 	
-	public void Hidden(){
-		 isHidden=!isHidden;
-		 if(isHidden)
-		 {
-			 image=null;
-			 animation=null;
-		 }
+	public void Hidden(boolean hideOrNot){
+		 isHidden=hideOrNot;
 	}
 	
 	public boolean rectCollideWithOther(Sprite other){
@@ -120,4 +115,5 @@ public class Sprite {
 			return false;
 		}
 	}
+
 }

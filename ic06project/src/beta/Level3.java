@@ -31,15 +31,23 @@ public class Level3 extends Level {
 		createGround(310,310,50,2); // plateforme levier 2
 		createGround(370,325,50,2); // plateforme levier 3
 		createGround(430,310,50,2); // plateforme source
-		Ground solMouvant = createGround(570,395,50,5); // plateforme mouvante
-		//Body bodyMouvant = state.getBodyForUserData(solMouvant);
-		//createBoutonPressoir(680, 382, 30, 18, bodyMouvant);
-		createGround(0,240,550,10); // plateforme 
-		createGround(650,50,150,10); // plateforme arrivée
+	
 		
 		Source sourceG = createSource(455,270,40,40,Power.FAT);
 		createSource(500,450,40,40,Power.FIRE);
-		sourceG.Hidden();
+		Body sourceGBody = state.getBodyForUserData(sourceG);
+		Levier levier1 = createLevier(260,295,30,30,sourceGBody);
+		levier1.activate();
+		
+		Ground solMouvant = createGround(570,395,50,5); // plateforme mouvante
+		Body bodyMouvant = state.getBodyForUserData(solMouvant);
+		createBoutonPressoir(680, 382, 30, 18, bodyMouvant);
+		
+		createGround(0,240,550,10); // plateforme 
+		
+		createGround(650,50,150,10); // plateforme arrivée
+		
+
 		//addIndication(200,100,"Tu peux maintenant voler!");
 		
 		
