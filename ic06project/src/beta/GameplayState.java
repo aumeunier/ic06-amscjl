@@ -72,6 +72,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		case 3:
 			this.currentLevel = new Level3(this,save);
 			break;
+			
 
 		default:
 			this.currentLevel = null;
@@ -197,11 +198,11 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			ch1_body.applyImpulse(new Vec2(0, SPEED_JUMP), ch1_body.getWorldCenter());	
 			char1.isFalling = true;
 		}
-		else if((input.isKeyDown(Input.KEY_Q)) && char1CanMove){
+		else if((input.isKeyDown(Input.KEY_Q)) /*&& char1CanMove*/){
 			ch1_body.m_linearVelocity.x = -SPEED_X;			
 			char1.goLeft();
 		}
-		else if((input.isKeyDown(Input.KEY_D)) && char1CanMove){
+		else if((input.isKeyDown(Input.KEY_D)) /*&& char1CanMove*/){
 			ch1_body.m_linearVelocity.x = SPEED_X;			
 			char1.goRight();
 		}
@@ -215,11 +216,11 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			ch2_body.applyImpulse(new Vec2(0, SPEED_JUMP), ch2_body.getWorldCenter());	
 			char2.isFalling = true;
 		}
-		else if((input.isKeyDown(Input.KEY_LEFT)) && char2CanMove){
+		else if((input.isKeyDown(Input.KEY_LEFT)) /*&& char2CanMove*/){
 			ch2_body.m_linearVelocity.x = -SPEED_X;			
 			char2.goLeft();
 		}
-		else if((input.isKeyDown(Input.KEY_RIGHT)) && char2CanMove){
+		else if((input.isKeyDown(Input.KEY_RIGHT)) /*&& char2CanMove*/){
 			ch2_body.m_linearVelocity.x = SPEED_X;			
 			char2.goRight();
 		}
