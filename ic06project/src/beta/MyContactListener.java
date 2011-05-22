@@ -48,18 +48,12 @@ public class MyContactListener implements ContactListener {
 		if (o1 == GameplayState.GROUND_SENSOR_NAME){
 			Sprite s = (Sprite)point.shape2.getBody().getUserData();
 			if((s instanceof Wall) || (s instanceof Obstacle)||(s instanceof Ground)|| (s instanceof Declencheur)){
-				System.out.println("le perso perd un contact");
-				((Character) point.shape1.getBody().getUserData()).decContact(s);
-				if(((Character) point.shape1.getBody().getUserData()).isEmpty())
 				((Character) point.shape1.getBody().getUserData()).isFalling = true;
 			}
 		}
 		else if (o2 == GameplayState.GROUND_SENSOR_NAME){
 			Sprite s = (Sprite)point.shape1.getBody().getUserData();
 			if((s instanceof Wall) || (s instanceof Obstacle)||(s instanceof Ground)|| (s instanceof Declencheur)){
-				System.out.println("le perso perd un contact");
-				((Character) point.shape2.getBody().getUserData()).decContact(s);
-				if(((Character) point.shape2.getBody().getUserData()).isEmpty())
 				((Character) point.shape2.getBody().getUserData()).isFalling = true;
 			}
 		}

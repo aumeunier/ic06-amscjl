@@ -24,15 +24,22 @@ public class Level2 extends Level {
 		
 		createGround(100,440,200,50); // Sol 3
 		createGround(100,390,10,50); // Sol 2
-		createGround(100,190,100,200); // Sol 1
-		createGround(200,140,100,250); // Sol 4
+		createGround(100,200,200,190); // Sol 1/4
 		createGround(290,390,10,50); // Sol 32
+		createGround(300,200,200,75); // Sol 5
+		createGround(300,325,200,110); // Sol 6
+		createGround(500,200,10,150); // Sol 7
+		createGround(500,350,10,85); // Sol 7 bis
+
+
+
+
 
 		//addIndication(200,100,"Tu peux maintenant voler!");
 		
 		
 		// Place the first character
-		this.character1 = addCharacterWithPoints(11,400,0.75f);		
-		this.character2 = addCharacterWithPoints(400,400,0.75f);	
+		this.character1 = addCharacterWithPoints(400,400,0.75f);		
+		this.character2 = addCharacterWithPoints(11,400,0.75f);	
 	}
 }

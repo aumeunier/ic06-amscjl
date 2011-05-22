@@ -66,10 +66,6 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		case 2:
 			this.currentLevel = new Level2(this,save);
 			break;
-			
-		case 3:
-			this.currentLevel = new Level3(this,save);
-			break;
 
 		default:
 			this.currentLevel = null;
@@ -180,34 +176,28 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			char1.goLeft();
 		}
 		else if((input.isKeyDown(Input.KEY_D)) && char1CanMove){
-			System.out.println("perso1 va à droite");
 			ch1_body.m_linearVelocity.x = SPEED_X;			
 			char1.goRight();
 		}
 		else if(!char1.isFalling){
-			System.out.println("perso1 va tout droit");
 			ch1_body.m_linearVelocity.x = 0;			
 			char1.straight();
 		}
 		char1.setCoordinatesFromBody(ch1_body);
-		System.out.println(char2.isFalling);
+
 		if((input.isKeyPressed(Input.KEY_UP)) && char2CanMove){
-			System.out.println("perso2 saute");
 			ch2_body.applyImpulse(new Vec2(0, SPEED_JUMP), ch2_body.getWorldCenter());	
 			char2.isFalling = true;
 		}
 		else if((input.isKeyDown(Input.KEY_LEFT)) && char2CanMove){
-			System.out.println("perso2 va à gauche");
 			ch2_body.m_linearVelocity.x = -SPEED_X;			
 			char2.goLeft();
 		}
 		else if((input.isKeyDown(Input.KEY_RIGHT)) && char1CanMove){
-			System.out.println("perso2 va à droite");
 			ch2_body.m_linearVelocity.x = SPEED_X;			
 			char2.goRight();
 		}
 		else if(!char2.isFalling){
-			System.out.println("perso2 va tout droit");
 			ch2_body.m_linearVelocity.x = 0;			
 			char2.straight();
 		}
