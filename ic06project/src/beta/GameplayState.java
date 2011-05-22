@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.jbox2d.collision.AABB;
 import org.jbox2d.collision.MassData;
 import org.jbox2d.collision.PolygonDef;
+import org.jbox2d.collision.PolygonShape;
+import org.jbox2d.collision.Shape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.BodyDef;
@@ -545,6 +547,83 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			ch2_body.wakeUp();
 			return ch2_body;
 		}
+	}
+	public Body modifyBodySize(Body body, float newSize){
+		if(!(body.getUserData() instanceof Sprite)){
+			return null;
+		}
+		
+		Sprite userData = (Sprite)body.getUserData();
+		int newW = (int) (userData.w*newSize);
+		int newH = (int) (userData.h*newSize);
+		userData.x = userData.x - (newW - userData.w)/2;
+		userData.y = userData.y - (newH - userData.h)/2;
+		userData.w = newW;
+		userData.h = newH;
+		
+		Vec2 b2dcoord = Global.getBox2DCoordinates(((Sprite)userData).x, ((Sprite)userData).y);
+		Vec2 b2position = new Vec2(b2dcoord.x+((Sprite)userData).w/2, b2dcoord.y-((Sprite)userData).h/2);
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.userData = userData;
+		bodyDef.position = b2position;
+		MassData md = new MassData();
+		md.mass = body.getMass();
+		bodyDef.massData = md;
+		
+		Body newBody = world.createBody(bodyDef);		
+		Shape shape = body.getShapeList();
+		do {
+			PolygonDef sd = new PolygonDef();
+			sd.density = shape.m_density;
+			sd.friction = shape.getFriction();
+			sd.restitution = shape.getRestitution(); 
+			sd.userData = shape.getUserData();
+			sd.isSensor = shape.isSensor();
+			for(Vec2 v: ((PolygonShape)shape).getVertices()){
+				Vec2 newV = new Vec2(v.x*newSize,v.y*newSize);
+				sd.addVertex(newV);
+			}		
+			newBody.createShape(sd);			
+			shape = shape.getNext();
+		} while(shape!=null);
+		
+		if(ch1_body.equals(body)){
+			ch1_body = newBody;
+		}
+		else if(ch2_body.equals(body)){
+			ch2_body = newBody;
+		}
+		else {
+			for(Body b: spriteBodies){
+				if(b.equals(body)){
+					b = newBody;
+				}
+			}
+		}
+		
+		world.destroyBody(body);
+		body = null;
+		
+		return newBody;
+	}
+	public Body getBodyForUserData(Object userData){
+		if(userData == null){
+			return null;
+		}
+		if(ch1_body.getUserData().equals(userData)){
+			return ch1_body;
+		}
+		else if(ch2_body.getUserData().equals(userData)){
+			return ch2_body;
+		}
+		else {
+			for(Body b: spriteBodies){
+				if(b.getUserData().equals(userData)){
+					return b;
+				}
+			}
+		}		
+		return null;
 	}
 	
 	@Override

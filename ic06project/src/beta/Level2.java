@@ -56,5 +56,7 @@ public class Level2 extends Level {
 		// Place the first character
 		this.character1 = addCharacterWithPoints(400,400,0.75f);		
 		this.character2 = addCharacterWithPoints(200,0,0.75f);	
+		Body b = state.getBodyForUserData(this.character1);
+		state.modifyBodySize(b, 0.5f);
 	}
 }
