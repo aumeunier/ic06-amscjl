@@ -627,13 +627,13 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		if(userData == null){
 			return null;
 		}
-		if(ch1_body.getUserData().equals(userData)){
+		if(ch1_body!=null && ch1_body.getUserData().equals(userData)){
 			return ch1_body;
 		}
-		else if(ch2_body.getUserData().equals(userData)){
+		else if(ch2_body!=null && ch2_body.getUserData().equals(userData)){
 			return ch2_body;
 		}
-		else {
+		else if (spriteBodies!=null){
 			for(Body b: spriteBodies){
 				if(b.getUserData().equals(userData)){
 					return b;
