@@ -188,7 +188,7 @@ public class Level {
 	protected BoutonPressoir createBoutonPressoir(int x, int y, int w, int h, Body b){
 		
 		// Create a boutonpressoir object
-		BoutonPressoir bouton = new BoutonPressoir(x,y,w,h,b);
+		BoutonPressoir bouton = new BoutonPressoir(x,y,w,h,b,1);
 		
 		// Add it to the list of sprites of this level
 		sprites.add(bouton);
@@ -198,6 +198,34 @@ public class Level {
 		
 		return bouton;
 	}
+	protected BoutonPressoir createBoutonPressoir(int x, int y, int w, int h, Body b, int p){
+		
+		// Create a boutonpressoir object
+		BoutonPressoir bouton = new BoutonPressoir(x,y,w,h,b,p);
+		
+		// Add it to the list of sprites of this level
+		sprites.add(bouton);
+		
+		// Create the source body
+		myState.addBoutonPressoir(bouton);
+		
+		return bouton;
+	}
+	
+	protected BoutonElevator createBoutonElevator(int x, int y, int w, int h, Body b, int p){
+		
+		// Create a boutonelevator object
+		BoutonElevator bouton = new BoutonElevator(x,y,w,h,b,p);
+		
+		// Add it to the list of sprites of this level
+		sprites.add(bouton);
+		
+		// Create the source body
+		myState.addBoutonPressoir(bouton);
+		
+		return bouton;
+	}
+	
 	protected Levier createLevier(int x, int y, int w, int h, Body b){
 		
 		// Create a levier object

@@ -16,15 +16,45 @@ public class MyContactFilter implements ContactFilter {
 		// Premier cas b1 est le groundsensor
 		if(shape1.getUserData()==GameplayState.GROUND_SENSOR_NAME){
 			Sprite s2 = (Sprite)b2.getUserData();
-			if(s2.getClass().equals(BoutonPressoir.class)){
-				((BoutonPressoir)s2).activate();					
+			if(s2.getClass().equals(BoutonElevator.class)){
+				if(((BoutonElevator)s2).getPoids()==2)
+				{
+					if(b1.getUserData().getClass().equals(Character.class) && ((Character)b1.getUserData()).isFat())
+						((BoutonElevator)s2).activate();	
+				}
+				else
+					((BoutonElevator)s2).activate();	
+			}
+			else if(s2.getClass().equals(BoutonPressoir.class)){
+				if(((BoutonPressoir)s2).getPoids()==2)
+				{
+					if(b1.getUserData().getClass().equals(Character.class) && ((Character)b1.getUserData()).isFat())
+						((BoutonPressoir)s2).activate();	
+				}
+				else
+					((BoutonPressoir)s2).activate();	
 			}
 		}
 		// Deuxieme cas b2 est le groundsensor
 		else if(shape2.getUserData()==GameplayState.GROUND_SENSOR_NAME){
 			Sprite s1 = (Sprite)b1.getUserData();
+			if(s1.getClass().equals(BoutonElevator.class)){
+				if(((BoutonElevator)s1).getPoids()==2)
+				{
+					if(b2.getUserData().getClass().equals(Character.class) && ((Character)b2.getUserData()).isFat())
+						((BoutonElevator)s1).activate();	
+				}
+				else
+					((BoutonElevator)s1).activate();	
+			}
 			if(s1.getClass().equals(BoutonPressoir.class)){
-				((BoutonPressoir)s1).activate();					
+				if(((BoutonPressoir)s1).getPoids()==2)
+				{
+					if(b2.getUserData().getClass().equals(Character.class) && ((Character)b2.getUserData()).isFat())
+						((BoutonPressoir)s1).activate();	
+				}
+				else
+					((BoutonPressoir)s1).activate();						
 			}				
 		}
 
@@ -39,6 +69,9 @@ public class MyContactFilter implements ContactFilter {
 							&& (s2.getClass().equals(Obstacle.class))){
 						return false;
 					}
+					else if(s2.isHidden()){
+						return false;
+					}
 					else if(s2.getClass().equals(SourceMortelle.class)){
 						((Character)(s1)).setDead(true);
 					}
@@ -51,7 +84,8 @@ public class MyContactFilter implements ContactFilter {
 						else if(source.power == Power.FLYING){
 							character.setPower(Power.FLYING);
 						}
-						else if(source.power == Power.FAT && !source.isHidden()){
+						else if(source.power == Power.FAT){
+							System.out.println("contact avec la source");
 							character.setPower(Power.FAT);
 						}
 						else if(source.power == Power.FIRE){
@@ -68,9 +102,6 @@ public class MyContactFilter implements ContactFilter {
 					else if(s2.getClass().equals(Character.class)){
 						return false;
 					}
-					else if(s2.getClass().equals(Obstacle.class) && ((Obstacle)s2).isHidden()){
-						return false;
-					}
 					else if(s2.getClass().equals(Levier.class)){
 						((Levier)s2).activate();
 						return false;
@@ -85,6 +116,9 @@ public class MyContactFilter implements ContactFilter {
 							&& (s1.getClass().equals(Obstacle.class))){
 						return false;
 					}
+					else if(s1.isHidden()){
+						return false;
+					}
 					else if(s1.getClass().equals(SourceMortelle.class)){
 						((Character)(s2)).setDead(true);					
 					}
@@ -97,7 +131,8 @@ public class MyContactFilter implements ContactFilter {
 						else if(source.power == Power.FLYING){
 							character.setPower(Power.FLYING);
 						}
-						else if(source.power == Power.FAT && !source.isHidden()){
+						else if(source.power == Power.FAT){
+							System.out.println("contact avec la source");
 							character.setPower(Power.FAT);
 						}
 						else if(source.power == Power.FIRE){
@@ -111,9 +146,7 @@ public class MyContactFilter implements ContactFilter {
 						System.out.println("le perso a pour but d'aller au x="+((Character)s2).X_transported+"et au y="+((Character)s2).Y_transported);
 						return true;
 					}
-					else if(s1.getClass().equals(Obstacle.class) && ((Obstacle)s1).isHidden()){
-						return false;
-					}
+
 					else if(s1.getClass().equals(Levier.class)){
 						((Levier)s1).activate();
 						return false;

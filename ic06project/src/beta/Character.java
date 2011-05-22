@@ -42,6 +42,7 @@ public class Character extends Sprite{
 			this.setFilter(new Color(251,185,54,255));
 		}
 		else if(isFat()){
+			System.out.println("souldChangeSize prend vrai");
 			shouldChangeSize=true;
 		}
 		else if(isFire()){

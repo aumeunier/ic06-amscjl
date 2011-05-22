@@ -210,7 +210,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			ch1_body.m_linearVelocity.x = 0;			
 			char1.straight();
 		}
-		char1.setCoordinatesFromBody(ch1_body);
+		
 
 		if((input.isKeyPressed(Input.KEY_UP)) && char2CanMove){
 			ch2_body.applyImpulse(new Vec2(0, SPEED_JUMP), ch2_body.getWorldCenter());	
@@ -228,7 +228,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			ch2_body.m_linearVelocity.x = 0;			
 			char2.straight();
 		}
-		char2.setCoordinatesFromBody(ch2_body);	
+		
 		
 		
 		if((char1.isFat())&&(char1.shouldChangeSize)){
@@ -241,6 +241,9 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			System.out.println("test");
 			char2.shouldChangeSize=false;
 		}
+		
+		char1.setCoordinatesFromBody(ch1_body);
+		char2.setCoordinatesFromBody(ch2_body);	
 		
 		// Simulation sur 0.1s dans notre box2D world
 		world.step((float)delta/100, 100);
@@ -351,7 +354,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		sd.friction = 0.5f;
 		sd.setAsBox(groundData.w/2,groundData.h/2);
 		newBody.createShape(sd);
-		newBody.putToSleep();
+		//newBody.putToSleep();
 		spriteBodies.add(newBody);
 		return newBody;
 	}
@@ -585,7 +588,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		bodyDef.userData = userData;
 		bodyDef.position = b2position;
 		MassData md = new MassData();
-		md.mass = body.getMass()*w;
+		md.mass = body.getMass();
 		bodyDef.massData = md;
 		
 		Body newBody = world.createBody(bodyDef);		

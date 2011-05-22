@@ -27,10 +27,10 @@ public class Level3 extends Level {
 		createGround(550,450,200,50); // Sol 4
 		createGround(750,480,50,20); // Sol 5
 		
-		createGround(250,325,50,2); // plateforme levier 1
-		createGround(310,310,50,2); // plateforme levier 2
-		createGround(370,325,50,2); // plateforme levier 3
-		createGround(430,310,50,2); // plateforme source
+		createGround(270,325,50,2); // plateforme levier 1
+		createGround(330,310,50,2); // plateforme levier 2
+		createGround(390,325,50,2); // plateforme levier 3
+		createGround(450,310,50,2); // plateforme source
 	
 		
 		Source sourceG = createSource(455,270,40,40,Power.FAT);
@@ -41,7 +41,7 @@ public class Level3 extends Level {
 		
 		Ground solMouvant = createGround(570,395,50,5); // plateforme mouvante
 		Body bodyMouvant = state.getBodyForUserData(solMouvant);
-		createBoutonPressoir(680, 382, 30, 18, bodyMouvant);
+		createBoutonElevator(680, 382, 30, 18, bodyMouvant, 2);
 		
 		createGround(0,240,550,10); // plateforme 
 		
