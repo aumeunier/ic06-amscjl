@@ -1,5 +1,7 @@
 package beta;
 
+import java.util.HashSet;
+
 import org.newdawn.slick.Color;
 
 

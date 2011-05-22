@@ -18,13 +18,23 @@ public class MyContactFilter implements ContactFilter {
 			if(s2.getClass().equals(BoutonPressoir.class)){
 				((BoutonPressoir)s2).activate();					
 			}
+			if(s2.getClass().equals(Ground.class)|| s2.getClass().equals(Obstacle.class) || s2.getClass().equals(Declencheur.class) || s2.getClass().equals(Wall.class)){
+				Sprite s1 = (Sprite)b1.getUserData();
+				System.out.println("le perso gagne un contact");
+				((Character)s1).incContact(s2);
+			}
 		}
 		// Deuxieme cas b2 est le groundsensor
 		else if(shape2.getUserData()==GameplayState.GROUND_SENSOR_NAME){
 			Sprite s1 = (Sprite)b1.getUserData();
 			if(s1.getClass().equals(BoutonPressoir.class)){
 				((BoutonPressoir)s1).activate();					
-			}				
+			}	
+			if(s1.getClass().equals(Ground.class)|| s1.getClass().equals(Obstacle.class) || s1.getClass().equals(Declencheur.class) || s1.getClass().equals(Wall.class)){
+				Sprite s2 = (Sprite)b2.getUserData();
+				System.out.println("le perso gagne un contact");
+				((Character)s2).incContact(s1);
+			}
 		}
 
 		/* Collisions concernant le personnage */

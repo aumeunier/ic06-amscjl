@@ -32,7 +32,7 @@ public class Level2 extends Level {
 		
 		
 		// Place the first character
-		this.character1 = addCharacterWithPoints(400,400,0.75f);		
-		this.character2 = addCharacterWithPoints(11,400,0.75f);	
+		this.character1 = addCharacterWithPoints(11,400,0.75f);		
+		this.character2 = addCharacterWithPoints(400,400,0.75f);	
 	}
 }
