@@ -95,6 +95,9 @@ public class Character extends Sprite{
 	public boolean isFat(){
 		return power==Power.FAT;
 	}
+	public boolean isPetit(){
+		return power==Power.PETIT;
+	}
 	public boolean isFire(){
 		return power==Power.FIRE;
 	}
@@ -135,7 +138,7 @@ public class Character extends Sprite{
 	}
 	
 	public void setPower(Power _power){
-		if(_power==Power.FAT && power!=Power.FAT)
+		if((_power==Power.FAT && power!=Power.FAT) || (_power==Power.PETIT && power!=Power.PETIT))
 			shouldChangeSize=true;
 		power = _power;
 		changePower();

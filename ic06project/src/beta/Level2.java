@@ -44,7 +44,7 @@ public class Level2 extends Level {
 		createWall(530,190,300,10); // bois au dessus pour éviter le bug
 
 
-		createSource(500,Global.GAMEPLAYHEIGHT-42,49,42,Power.FLYING);
+		createSource(500,Global.GAMEPLAYHEIGHT-42,49,42,Power.PETIT);
 		//createSource(0,Global.GAMEPLAYHEIGHT-42,49,42,Power.FLYING);
 		createTransporter(790,420,10,42,300,280);
 		createTransporter(300,280,10,42,760,285);
@@ -66,6 +66,12 @@ public class Level2 extends Level {
 		Body oMurLevierBody = myState.addObstacle(oMurLevier);
 		ArrayList<Body> b1 = new ArrayList<Body>();
 		b1.add(oMurLevierBody);
+		
+		Obstacle oMurLevier2 = new Obstacle(200,100,10,55);
+		sprites.add(oMurLevier2);
+		Body oMurLevierBody2 = myState.addObstacle(oMurLevier2);
+		b1.add(oMurLevierBody2);
+		
 		//levier qui ouvre le mur
 		createLevier(460,295,30,30,b1);
 		

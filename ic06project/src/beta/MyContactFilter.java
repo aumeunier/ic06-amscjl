@@ -85,11 +85,13 @@ public class MyContactFilter implements ContactFilter {
 							character.setPower(Power.FLYING);
 						}
 						else if(source.power == Power.FAT){
-							System.out.println("contact avec la source");
 							character.setPower(Power.FAT);
 						}
 						else if(source.power == Power.FIRE){
 							character.setPower(Power.FIRE);
+						}
+						else if(source.power == Power.PETIT){
+							character.setPower(Power.PETIT);
 						}
 						return false;
 					}
@@ -132,11 +134,13 @@ public class MyContactFilter implements ContactFilter {
 							character.setPower(Power.FLYING);
 						}
 						else if(source.power == Power.FAT){
-							System.out.println("contact avec la source");
 							character.setPower(Power.FAT);
 						}
 						else if(source.power == Power.FIRE){
 							character.setPower(Power.FIRE);
+						}
+						else if(source.power == Power.PETIT){
+							character.setPower(Power.PETIT);
 						}
 						return false;
 					}
