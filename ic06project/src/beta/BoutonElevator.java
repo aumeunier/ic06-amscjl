@@ -14,7 +14,7 @@ public class BoutonElevator extends BoutonPressoir {
 	public void activate(){
 		System.out.println("fonction activate");
 		this.setActivated(true);
-		relatedBody.applyImpulse(new Vec2(0, 400), relatedBody.getWorldCenter());
+		relatedBody.applyImpulse(new Vec2(0, 6300), relatedBody.getWorldCenter());
 		this.setImage("blur1test.png");
 	}
 

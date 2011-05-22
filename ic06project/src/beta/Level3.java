@@ -2,6 +2,7 @@ package beta;
 
 import java.util.ArrayList;
 
+import org.jbox2d.collision.MassData;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 
@@ -27,21 +28,27 @@ public class Level3 extends Level {
 		createGround(550,450,200,50); // Sol 4
 		createGround(750,480,50,20); // Sol 5
 		
-		createGround(270,325,50,2); // plateforme levier 1
-		createGround(330,310,50,2); // plateforme levier 2
-		createGround(390,325,50,2); // plateforme levier 3
-		createGround(450,310,50,2); // plateforme source
+		createGround(270,325,50,4); // plateforme levier 1
+		createGround(330,310,50,4); // plateforme levier 2
+		createGround(390,325,50,4); // plateforme levier 3
+		createGround(450,310,50,4); // plateforme source
 	
 		
 		Source sourceG = createSource(455,270,40,40,Power.FAT);
 		createSource(500,450,40,40,Power.FIRE);
 		Body sourceGBody = state.getBodyForUserData(sourceG);
-		Levier levier1 = createLevier(260,295,30,30,sourceGBody);
+		Levier levier1 = createLevier(280,295,30,30,sourceGBody);
 		levier1.activate();
 		
-		Ground solMouvant = createGround(570,395,50,5); // plateforme mouvante
+		Ground solMouvant = createGround(570,393,50,7); // plateforme mouvante
 		Body bodyMouvant = state.getBodyForUserData(solMouvant);
+		MassData md = new MassData();
+		md.mass = 100.0f;
+		bodyMouvant.setMass(md);
 		createBoutonElevator(680, 382, 30, 18, bodyMouvant, 2);
+		createGround(565,395,5,5);//cale1
+		createGround(620,395,5,5);//cale2
+		
 		
 		createGround(0,240,550,10); // plateforme 
 		

@@ -194,6 +194,9 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		boolean char1CanMove = char1.isFlying() || !char1.isFalling;
 		boolean char2CanMove = char2.isFlying() || !char2.isFalling;
 
+		System.out.println(char1.isFalling);
+		System.out.println(char2.isFalling);
+		
 		if((input.isKeyPressed(Input.KEY_Z)) && char1CanMove){
 			ch1_body.applyImpulse(new Vec2(0, SPEED_JUMP), ch1_body.getWorldCenter());	
 			char1.isFalling = true;
@@ -232,12 +235,12 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		
 		
 		if((char1.isFat())&&(char1.shouldChangeSize)){
-			modifyBodySize(getBodyForUserData(char1),1,(float)1.1);
+			modifyBodySize(getBodyForUserData(char1),1,(float)2);
 			System.out.println("test");
 			char1.shouldChangeSize=false;
 		}
 		if((char2.isFat())&&(char2.shouldChangeSize)){
-			modifyBodySize(getBodyForUserData(char2),1,(float)1.1);
+			modifyBodySize(getBodyForUserData(char2),1,(float)2);
 			System.out.println("test");
 			char2.shouldChangeSize=false;
 		}
@@ -354,10 +357,11 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		sd.friction = 0.5f;
 		sd.setAsBox(groundData.w/2,groundData.h/2);
 		newBody.createShape(sd);
-		//newBody.putToSleep();
+		newBody.putToSleep();
 		spriteBodies.add(newBody);
 		return newBody;
 	}
+	
 	public Body addWallWithPoints(Wall wallData, ArrayList<Vec2> list){
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.userData = wallData;
@@ -570,6 +574,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	}
 	public Body modifyBodySize(Body body, float h, float w)//nb : rajout d'un parametre pour pouvoir grossir uniquement
 	{
+		System.out.println("changement de taille");
 		if(!(body.getUserData() instanceof Sprite)){
 			return null;
 		}

@@ -41,10 +41,6 @@ public class Character extends Sprite{
 		else if(isFlying()){
 			this.setFilter(new Color(251,185,54,255));
 		}
-		else if(isFat()){
-			System.out.println("souldChangeSize prend vrai");
-			shouldChangeSize=true;
-		}
 		else if(isFire()){
 			this.setFilter(new Color(255,51,51,255));
 		}
@@ -139,6 +135,8 @@ public class Character extends Sprite{
 	}
 	
 	public void setPower(Power _power){
+		if(_power==Power.FAT && power!=Power.FAT)
+			shouldChangeSize=true;
 		power = _power;
 		changePower();
 	}
