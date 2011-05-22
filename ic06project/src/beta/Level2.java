@@ -44,7 +44,12 @@ public class Level2 extends Level {
 
 		createSource(500,Global.GAMEPLAYHEIGHT-42,49,42,Power.FLYING);
 		//createSource(0,Global.GAMEPLAYHEIGHT-42,49,42,Power.FLYING);
-		createTransporter(0,Global.GAMEPLAYHEIGHT-42,49,42, 300,100);
+		createTransporter(790,420,10,42,300,280);
+		createTransporter(300,280,10,42,760,285);
+		createTransporter(790,270,10,42,105,400);
+		createTransporter(105,400,10,42,750,440);
+		createTransporter(790,340,10,42,600,440);
+
 
 		Exit exit = createExit(600,400,25,25);
 		exit.setImage("porte.png");
@@ -55,8 +60,11 @@ public class Level2 extends Level {
 		
 		// Place the first character
 		this.character1 = addCharacterWithPoints(400,400,0.75f);		
-		this.character2 = addCharacterWithPoints(200,0,0.75f);	
-		Body b = state.getBodyForUserData(this.character1);
+		this.character2 = addCharacterWithPoints(400,400,0.75f);	
+		/*Body b = state.getBodyForUserData(this.character1);
 		state.modifyBodySize(b, 0.5f, 0.5f);
+		Body b2 = state.getBodyForUserData(this.character2);
+		state.modifyBodySize(b2, 0.5f, 0.5f);
+		*/
 	}
 }

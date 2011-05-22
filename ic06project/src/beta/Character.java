@@ -24,15 +24,15 @@ public class Character extends Sprite{
 	
 	public Character(){
 		super(0,0,CHAR_W,CHAR_H);
-		setAnimation("fee2.png",FEE_PNG_W,FEE_PNG_H);
+		setAnimation("www.png",CHAR_W,CHAR_H);
 	}
 	public Character(int _x, int _y){
 		super(_x,_y,CHAR_W,CHAR_H);
-		setAnimation("fee2.png",FEE_PNG_W,FEE_PNG_H);
+		setAnimation("www.png",CHAR_W,CHAR_H);
 	}
 	public Character(int _x, int _y, float ratio){
 		super(_x,_y,(int)(CHAR_W*ratio),(int)(CHAR_H*ratio));
-		setAnimation("fee2.png",FEE_PNG_W,FEE_PNG_H);
+		setAnimation("www.png",CHAR_W,CHAR_H);
 	}
 	public void changePower(){
 		if(isIntangible()){
@@ -45,7 +45,7 @@ public class Character extends Sprite{
 			this.setFilter(new Color(255,51,51,255));
 		}
 		else {
-			setAnimation("fee2.png",FEE_PNG_W,FEE_PNG_H);
+			setAnimation("www.png",CHAR_W,CHAR_H);
 			this.setFilter(Color.white);
 		}
 	}
@@ -58,7 +58,7 @@ public class Character extends Sprite{
 			setAnimation("feeLeft.png",FEE_PNG_W,FEE_PNG_H);
 		}
 		else {
-			setAnimation("fee2.png",FEE_PNG_W,FEE_PNG_H);
+			setAnimation("www.png",CHAR_W,CHAR_H);
 		}
 	}
 	
