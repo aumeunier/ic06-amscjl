@@ -68,6 +68,10 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		case 2:
 			this.currentLevel = new Level2(this,save);
 			break;
+			
+		case 3:
+			this.currentLevel = new Level3(this,save);
+			break;
 
 		default:
 			this.currentLevel = null;
@@ -215,7 +219,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			ch2_body.m_linearVelocity.x = -SPEED_X;			
 			char2.goLeft();
 		}
-		else if((input.isKeyDown(Input.KEY_RIGHT)) && char1CanMove){
+		else if((input.isKeyDown(Input.KEY_RIGHT)) && char2CanMove){
 			ch2_body.m_linearVelocity.x = SPEED_X;			
 			char2.goRight();
 		}
@@ -224,7 +228,19 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			char2.straight();
 		}
 		char2.setCoordinatesFromBody(ch2_body);	
-
+		
+		
+		if((char1.isFat())&&(char1.shouldChangeSize)){
+			modifyBodySize(getBodyForUserData(char1),1,2);
+			System.out.println("test");
+			char1.shouldChangeSize=false;
+		}
+		if((char2.isFat())&&(char2.shouldChangeSize)){
+			modifyBodySize(getBodyForUserData(char2),1,2);
+			System.out.println("test");
+			char2.shouldChangeSize=false;
+		}
+		
 		// Simulation sur 0.1s dans notre box2D world
 		world.step((float)delta/100, 100);
 
@@ -548,16 +564,17 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			return ch2_body;
 		}
 	}
-	public Body modifyBodySize(Body body, float newSize){
+	public Body modifyBodySize(Body body, float h, float w)//nb : rajout d'un parametre pour pouvoir grossir uniquement
+	{
 		if(!(body.getUserData() instanceof Sprite)){
 			return null;
 		}
 		
 		Sprite userData = (Sprite)body.getUserData();
-		int newW = (int) (userData.w*newSize);
-		int newH = (int) (userData.h*newSize);
+		int newW = (int) (userData.w*w);
+		int newH = (int) (userData.h*h);
 		userData.x = userData.x - (newW - userData.w)/2;
-		userData.y = userData.y - (newH - userData.h)/2;
+		userData.y = userData.y - (newH - userData.h); //nb : je ne pense pas qu'il faille diviser par 2(sinon grandit dans le sol)
 		userData.w = newW;
 		userData.h = newH;
 		
@@ -567,7 +584,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		bodyDef.userData = userData;
 		bodyDef.position = b2position;
 		MassData md = new MassData();
-		md.mass = body.getMass();
+		md.mass = body.getMass()*w;
 		bodyDef.massData = md;
 		
 		Body newBody = world.createBody(bodyDef);		
@@ -580,7 +597,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			sd.userData = shape.getUserData();
 			sd.isSensor = shape.isSensor();
 			for(Vec2 v: ((PolygonShape)shape).getVertices()){
-				Vec2 newV = new Vec2(v.x*newSize,v.y*newSize);
+				Vec2 newV = new Vec2(v.x*w,v.y*h);
 				sd.addVertex(newV);
 			}		
 			newBody.createShape(sd);			

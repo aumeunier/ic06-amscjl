@@ -1,7 +1,6 @@
 package beta;
 
-import java.util.HashSet;
-
+import org.jbox2d.collision.Shape;
 import org.newdawn.slick.Color;
 
 
@@ -37,12 +36,16 @@ public class Character extends Sprite{
 	}
 	public void changePower(){
 		if(isIntangible()){
-			setImage("invisible.png");
 			this.setFilter(new Color(129,244,254,100));
 		}
 		else if(isFlying()){
-			setImage("flying.png");	
 			this.setFilter(new Color(251,185,54,255));
+		}
+		else if(isFat()){
+			shouldChangeSize=true;
+		}
+		else if(isFire()){
+			this.setFilter(new Color(255,51,51,255));
 		}
 		else {
 			setAnimation("fee2.png",FEE_PNG_W,FEE_PNG_H);
@@ -91,6 +94,12 @@ public class Character extends Sprite{
 	}
 	public boolean isIntangible(){
 		return power==Power.INTANGIBLE;
+	}
+	public boolean isFat(){
+		return power==Power.FAT;
+	}
+	public boolean isFire(){
+		return power==Power.FIRE;
 	}
 	public boolean isDead(){
 		return isDead;

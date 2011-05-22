@@ -18,7 +18,9 @@ public class Sprite {
 	protected Animation animation = null;
 	protected Polygon shape = null;
 	protected boolean shouldBeDestroy=false;
+	protected boolean shouldChangeSize=false;
 	protected Color colorFilter = Color.white;
+	protected boolean isHidden=false;
 	
 	public Sprite(){
 		this.x=0;
@@ -93,6 +95,20 @@ public class Sprite {
 	public void setShouldBeDestroy(){
 		 shouldBeDestroy=true;
 	}
+	
+	public boolean isHidden(){
+		 return isHidden;
+	}
+	
+	public void Hidden(){
+		 isHidden=!isHidden;
+		 if(isHidden)
+		 {
+			 image=null;
+			 animation=null;
+		 }
+	}
+	
 	public boolean rectCollideWithOther(Sprite other){
 		if((((this.x >= other.x) && (this.x <= (other.x+other.w))) 
 				|| (((this.x + this.w) >= other.x) && ((this.x + this.w) <= (other.x+other.w))))

@@ -51,6 +51,12 @@ public class MyContactFilter implements ContactFilter {
 						else if(source.power == Power.FLYING){
 							character.setPower(Power.FLYING);
 						}
+						else if(source.power == Power.FAT && !source.isHidden()){
+							character.setPower(Power.FAT);
+						}
+						else if(source.power == Power.FIRE){
+							character.setPower(Power.FIRE);
+						}
 						return false;
 					}
 					else if(s2.getClass().equals(Transporter.class)){
@@ -90,6 +96,12 @@ public class MyContactFilter implements ContactFilter {
 						}
 						else if(source.power == Power.FLYING){
 							character.setPower(Power.FLYING);
+						}
+						else if(source.power == Power.FAT && !source.isHidden()){
+							character.setPower(Power.FAT);
+						}
+						else if(source.power == Power.FIRE){
+							character.setPower(Power.FIRE);
 						}
 						return false;
 					}
