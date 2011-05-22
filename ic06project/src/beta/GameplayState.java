@@ -163,6 +163,26 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			return;
 		}
 		
+		if(((Character)this.ch1_body.getUserData()).isTransported() ){
+			System.out.println("doit etre transporté à x="+((Character)ch1_body.getUserData()).X_transported+" et à y="+((Character)ch1_body.getUserData()).Y_transported);
+			Vec2 b2dcoord = Global.getBox2DCoordinates(((Character)ch1_body.getUserData()).X_transported, ((Character)ch1_body.getUserData()).Y_transported);
+			Vec2 position = new Vec2(b2dcoord.x+((Character)ch1_body.getUserData()).w/2, b2dcoord.y-((Character)ch1_body.getUserData()).h/2);
+			ch1_body.setXForm(position,0);
+			System.out.println("test 2");
+			((Character)ch1_body.getUserData()).setTransported(false,0,0);
+			return;
+		}
+		
+		if(((Character)this.ch2_body.getUserData()).isTransported() ){
+			System.out.println("doit etre transporté à x="+((Character)ch2_body.getUserData()).X_transported+" et à y="+((Character)ch2_body.getUserData()).Y_transported);
+			Vec2 b2dcoord = Global.getBox2DCoordinates(((Character)ch2_body.getUserData()).X_transported, ((Character)ch2_body.getUserData()).Y_transported);
+			Vec2 position = new Vec2(b2dcoord.x+((Character)ch2_body.getUserData()).w/2, b2dcoord.y-((Character)ch2_body.getUserData()).h/2);
+			ch2_body.setXForm(position,0);
+			System.out.println("test 2 bis");
+			((Character)ch2_body.getUserData()).setTransported(false,0,0);
+			return;
+		}
+		
 		// Sinon effectuer les traitements d'inputs et l'update du world / des sprites
 		boolean char1CanMove = char1.isFlying() || !char1.isFalling;
 		boolean char2CanMove = char2.isFlying() || !char2.isFalling;
@@ -422,6 +442,24 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		sd.friction = 5.0f;
 
 		sd.setAsBox(sourceData.w/2,sourceData.h/2);
+		newBody.createShape(sd);
+		spriteBodies.add(newBody);		
+		return newBody;
+	}
+	public Body addTransporter(Transporter transporterData){
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.userData = transporterData;
+		Vec2 b2dcoord = Global.getBox2DCoordinates(transporterData.x, transporterData.y);
+		bodyDef.position = new Vec2(b2dcoord.x+transporterData.w/2,b2dcoord.y-transporterData.h/2);
+		MassData md = new MassData();
+		md.mass = 100.0f;
+		bodyDef.massData = md;
+		Body newBody = world.createBody(bodyDef);
+		PolygonDef sd = new PolygonDef();		
+		sd.density = 5.0f;
+		sd.friction = 5.0f;
+
+		sd.setAsBox(transporterData.w/2,transporterData.h/2);
 		newBody.createShape(sd);
 		spriteBodies.add(newBody);		
 		return newBody;

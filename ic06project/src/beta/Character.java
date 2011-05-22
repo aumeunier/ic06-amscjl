@@ -12,6 +12,9 @@ public class Character extends Sprite{
 	public boolean isFalling = false;
 	private boolean isDead = false;
 	private boolean isAtExit = false;
+	private boolean isTransported = false;
+	public int X_transported = 0;
+	public int Y_transported = 0;
 	private boolean avoidDoubleChangeFlag = true;
 	private final static int FEE_PNG_W = 348;
 	private final static int FEE_PNG_H = 260;
@@ -103,6 +106,14 @@ public class Character extends Sprite{
 	}
 	public void setAtExit(boolean b){
 		isAtExit = b;
+	}
+	public boolean isTransported(){
+		return isTransported;
+	}
+	public void setTransported(boolean b, int x, int y){
+		isTransported = b;
+		X_transported=x;
+		Y_transported=y;
 	}
 	public int getCharWidth(){
 		return this.w;

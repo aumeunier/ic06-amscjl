@@ -30,9 +30,24 @@ public class Level2 extends Level {
 		createGround(300,325,200,110); // Sol 6
 		createGround(500,200,10,150); // Sol 7
 		createGround(500,350,10,85); // Sol 7 bis
+		createGround(530,200,10,150); // Sol 8
+		createGround(530,350,10,85); // Sol 8 bis
+		createGround(570,425,250,10); // Sol 11
+		createGround(630,390,190,35); // Sol 10
+		createGround(540,320,90,70); // Sol 12
+		createGround(540,200,90,70); // Sol 13
+		createGround(730,200,90,50); // Sol 15
+		createGround(730,320,90,10); // Sol 15
+		createWall(100,190,410,10); // bois au dessus pour éviter le bug
+		createWall(530,190,300,10); // bois au dessus pour éviter le bug
 
 
+		createSource(500,Global.GAMEPLAYHEIGHT-42,49,42,Power.FLYING);
+		//createSource(0,Global.GAMEPLAYHEIGHT-42,49,42,Power.FLYING);
+		createTransporter(0,Global.GAMEPLAYHEIGHT-42,49,42, 300,100);
 
+		Exit exit = createExit(600,400,25,25);
+		exit.setImage("porte.png");
 
 
 		//addIndication(200,100,"Tu peux maintenant voler!");
@@ -40,6 +55,6 @@ public class Level2 extends Level {
 		
 		// Place the first character
 		this.character1 = addCharacterWithPoints(400,400,0.75f);		
-		this.character2 = addCharacterWithPoints(11,400,0.75f);	
+		this.character2 = addCharacterWithPoints(200,0,0.75f);	
 	}
 }

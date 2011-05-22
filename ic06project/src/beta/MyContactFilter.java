@@ -1,6 +1,7 @@
 package beta;
 
 import org.jbox2d.collision.Shape;
+import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.ContactFilter;
 
@@ -52,6 +53,12 @@ public class MyContactFilter implements ContactFilter {
 						}
 						return false;
 					}
+					else if(s2.getClass().equals(Transporter.class)){
+						System.out.println("new_x="+((Transporter)s2).new_x+"et Ytransported="+((Transporter)s2).new_y);
+						((Character)s1).setTransported(true,((Transporter)s2).new_x,((Transporter)s2).new_y);
+						System.out.println("X_Transported="+((Character)s1).X_transported+"et Ytransported="+((Character)s1).Y_transported);
+						return true;
+					}
 					else if(s2.getClass().equals(Character.class)){
 						return false;
 					}
@@ -85,6 +92,12 @@ public class MyContactFilter implements ContactFilter {
 							character.setPower(Power.FLYING);
 						}
 						return false;
+					}
+					else if(s1.getClass().equals(Transporter.class)){
+						System.out.println("new_x="+((Transporter)s1).new_x+"et Ytransported="+((Transporter)s1).new_y);
+						((Character)s2).setTransported(true,((Transporter)s1).new_x,((Transporter)s1).new_y);
+						System.out.println("le perso a pour but d'aller au x="+((Character)s2).X_transported+"et au y="+((Character)s2).Y_transported);
+						return true;
 					}
 					else if(s1.getClass().equals(Obstacle.class) && ((Obstacle)s1).isHidden()){
 						return false;

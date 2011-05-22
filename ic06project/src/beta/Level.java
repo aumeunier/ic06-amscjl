@@ -159,6 +159,19 @@ public class Level {
 		
 		return source;
 	}
+	protected Transporter createTransporter(int x, int y, int w, int h, int nx, int ny){
+		
+		// Create a source object
+		Transporter transporter = new Transporter(x,y,w,h,nx,ny);
+		
+		// Add it to the list of sprites of this level
+		sprites.add(transporter);
+		
+		// Create the source body
+		myState.addTransporter(transporter);
+		
+		return transporter;
+	}
 	protected SourceMortelle createSourceMortelle(int x, int y, int w, int h){
 		
 		// Create a source mortelle object
