@@ -17,13 +17,11 @@ public class Ground extends Sprite{
 	}
 	
 	public void setSlippery(boolean glisse, String cote){
-		System.out.println("steSlippery"+glisse);
 		slippery=glisse;
 		sens = cote;
 	}
 	
 	public void setSlippery(boolean glisse){
-		System.out.println("steSlippery"+glisse);
 		slippery=glisse;
 	}
 	

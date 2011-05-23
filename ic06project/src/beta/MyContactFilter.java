@@ -16,46 +16,21 @@ public class MyContactFilter implements ContactFilter {
 		// Premier cas b1 est le groundsensor
 		if(shape1.getUserData()==GameplayState.GROUND_SENSOR_NAME){
 			Sprite s2 = (Sprite)b2.getUserData();
-			if(s2.getClass().equals(BoutonElevator.class)){
-				if(((BoutonElevator)s2).getPoids()==2)
-				{
-					if(b1.getUserData().getClass().equals(Character.class) && ((Character)b1.getUserData()).isFat())
-						((BoutonElevator)s2).activate();	
-				}
-				else
-					((BoutonElevator)s2).activate();	
+			if(s2 instanceof BoutonPressoir){
+				((Character)b1.getUserData()).setBouton(((BoutonPressoir)s2).getNum());
+				System.out.println(((BoutonPressoir)s2).getNum());
+				((BoutonPressoir)s2).check();
 			}
-			else if(s2.getClass().equals(BoutonPressoir.class)){
-				if(((BoutonPressoir)s2).getPoids()==2)
-				{
-					if(b1.getUserData().getClass().equals(Character.class) && ((Character)b1.getUserData()).isFat())
-						((BoutonPressoir)s2).activate();	
-				}
-				else
-					((BoutonPressoir)s2).activate();	
-			}
+
 		}
 		// Deuxieme cas b2 est le groundsensor
 		else if(shape2.getUserData()==GameplayState.GROUND_SENSOR_NAME){
 			Sprite s1 = (Sprite)b1.getUserData();
-			if(s1.getClass().equals(BoutonElevator.class)){
-				if(((BoutonElevator)s1).getPoids()==2)
-				{
-					if(b2.getUserData().getClass().equals(Character.class) && ((Character)b2.getUserData()).isFat())
-						((BoutonElevator)s1).activate();	
-				}
-				else
-					((BoutonElevator)s1).activate();	
-			}
-			if(s1.getClass().equals(BoutonPressoir.class)){
-				if(((BoutonPressoir)s1).getPoids()==2)
-				{
-					if(b2.getUserData().getClass().equals(Character.class) && ((Character)b2.getUserData()).isFat())
-						((BoutonPressoir)s1).activate();	
-				}
-				else
-					((BoutonPressoir)s1).activate();						
-			}				
+			if(s1 instanceof BoutonPressoir){
+				((Character)b2.getUserData()).setBouton(((BoutonPressoir)s1).getNum());
+				System.out.println(((BoutonPressoir)s1).getNum());
+				((BoutonPressoir)s1).check();
+			}			
 		}
 
 		/* Collisions concernant le personnage */
@@ -78,30 +53,7 @@ public class MyContactFilter implements ContactFilter {
 					else if(s2.getClass().equals(Source.class)){
 						Source source = (Source)s2;
 						Character character = (Character)s1;
-						if(source.power == Power.INTANGIBLE){
-							character.setPower(Power.INTANGIBLE);
-						}
-						else if(source.power == Power.FLYING){
-							character.setPower(Power.FLYING);
-						}
-						else if(source.power == Power.NAGE){
-							character.setPower(Power.NAGE);
-						}
-						else if(source.power == Power.REBOND){
-							character.setPower(Power.REBOND);
-						}
-						else if(source.power == Power.NAGE){
-							character.setPower(Power.NAGE);
-						}
-						else if(source.power == Power.FAT){
-							character.setPower(Power.FAT);
-						}
-						else if(source.power == Power.FIRE){
-							character.setPower(Power.FIRE);
-						}
-						else if(source.power == Power.PETIT){
-							character.setPower(Power.PETIT);
-						}
+						character.setPower(source.power);
 						return false;
 					}
 					else if(s2.getClass().equals(Transporter.class)){
@@ -109,6 +61,10 @@ public class MyContactFilter implements ContactFilter {
 						return true;
 					}
 					else if(s2.getClass().equals(Character.class)){
+						if(((Character)s1).absorbe())
+							((Character)s1).setPower(((Character)s2).getPower());
+						else if(((Character)s2).absorbe())
+							((Character)s2).setPower(((Character)s1).getPower());
 						return false;
 					}
 					else if(s2.getClass().equals(Levier.class)){
@@ -134,27 +90,7 @@ public class MyContactFilter implements ContactFilter {
 					else if(s1.getClass().equals(Source.class)){
 						Source source = (Source)s1;
 						Character character = (Character)s2;
-						if(source.power == Power.INTANGIBLE){
-							character.setPower(Power.INTANGIBLE);
-						}
-						else if(source.power == Power.FLYING){
-							character.setPower(Power.FLYING);
-						}
-						else if(source.power == Power.REBOND){
-							character.setPower(Power.REBOND);
-						}
-						else if(source.power == Power.FAT){
-							character.setPower(Power.FAT);
-						}
-						else if(source.power == Power.FIRE){
-							character.setPower(Power.FIRE);
-						}
-						else if(source.power == Power.NAGE){
-							character.setPower(Power.NAGE);
-						}
-						else if(source.power == Power.PETIT){
-							character.setPower(Power.PETIT);
-						}
+						character.setPower(source.power);
 						return false;
 					}
 					else if(s1.getClass().equals(Transporter.class)){

@@ -14,6 +14,7 @@ public class Character extends Sprite{
 	private boolean isDead = false;
 	private boolean isAtExit = false;
 	private boolean isTransported = false;
+	private int boutonpressoir = 0;
 	public int X_transported = 0;
 	public int Y_transported = 0;
 	private boolean avoidDoubleChangeFlag = true;
@@ -54,7 +55,14 @@ public class Character extends Sprite{
 			this.setFilter(new Color(55,55,55,255));
 		}
 		else if(isFat()){
+			this.setFilter(Color.white);
 			setAnimation("grosse-vache.png",CHAR_W, CHAR_H);
+		}
+		else if(canTeleport()){
+			this.setFilter(new Color(77,77,77,255));
+		}
+		else if(absorbe()){
+			this.setFilter(new Color(88,88,88,255));
 		}
 		else {
 			setAnimation("fee-de-face.png",CHAR_W,CHAR_H);
@@ -63,7 +71,13 @@ public class Character extends Sprite{
 	}
 	
 	private void changeDirection(){
-		if(isGoingRight && !isFlying()){
+		if(isGoingLeft && isFat()){
+			setAnimation("grosse-vache-incoming.png",CHAR_W,CHAR_H);
+		}
+		else if(isGoingRight && isFat()){
+			setAnimation("grosse-vache-incoming-droite.png",CHAR_W,CHAR_H);
+		}
+		else if(isGoingRight && !isFlying()){
 			setAnimation("fee-marche-droite.png",CHAR_W,CHAR_H);
 		}
 		else if(isGoingLeft && !isFlying()){
@@ -74,12 +88,6 @@ public class Character extends Sprite{
 		}
 		else if(isGoingLeft && isFlying()){
 			setAnimation("fee-vole-gauche-pouvoir.png",CHAR_W,CHAR_H);
-		}
-		else if(isGoingLeft && isFat()){
-			setAnimation("grosse-vache-incoming.png",CHAR_W,CHAR_H);
-		}
-		else if(isGoingRight && isFat()){
-			setAnimation("grosse-vache-incoming-droite.png",CHAR_W,CHAR_H);
 		}
 		else if(isFat()){
 			setAnimation("grosse-vache.png",CHAR_W,CHAR_H);
@@ -141,6 +149,12 @@ public class Character extends Sprite{
 	public boolean isDead(){
 		return isDead;
 	}
+	public boolean canTeleport(){
+		return power==Power.TELEPORTATION;
+	}
+	public boolean absorbe(){
+		return power==Power.ABSORBE;
+	}
 	public void setDead(boolean _dead){
 		isDead = _dead;
 	}
@@ -186,4 +200,13 @@ public class Character extends Sprite{
 	public void changeAvoidDoubleFlagState(){
 		avoidDoubleChangeFlag=!avoidDoubleChangeFlag;
 	}
+	
+	public int getBouton(){
+		return boutonpressoir;
+	}
+	public void setBouton(int n){
+		System.out.println("bouton"+n);
+		boutonpressoir=n;
+	}
+	 
 }

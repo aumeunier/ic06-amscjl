@@ -117,44 +117,12 @@ public class MyContactListener implements ContactListener {
 
 			// Character not on BouttonPressoir anymore
 			if(s1 instanceof BoutonPressoir && s2 instanceof Character){
-				boolean noOneOnButton = true;
-				for(ContactPoint c: contactPoints){
-					Body c1 = c.shape1.getBody();
-					Body c2 = c.shape2.getBody();
-					if(c1!= null && c2!=null){
-						Sprite temp1 = (Sprite)c1.getUserData();
-						Sprite temp2 = (Sprite)c2.getUserData();
-						if(((temp1 instanceof BoutonPressoir && temp2 instanceof Character)
-								&& (temp1!=s1 ||temp2!=s2))
-							|| ((temp2 instanceof BoutonPressoir && temp1 instanceof Character)
-								&& (temp2!=s1 ||temp1!=s2))){
-							noOneOnButton = false;
-						}
-					}			
-				}
-				if(noOneOnButton){
-					((BoutonPressoir)s1).desactivate();
-				}		
+				((Character)s2).setBouton(0);
+				((BoutonPressoir)s1).check();			
 			}
 			else if(s1 instanceof Character && s2 instanceof BoutonPressoir){
-				boolean noOneOnButton = true;
-				for(ContactPoint c: contactPoints){
-					Body c1 = c.shape1.getBody();
-					Body c2 = c.shape2.getBody();
-					if(c1!= null && c2!=null){
-						Sprite temp1 = (Sprite)c1.getUserData();
-						Sprite temp2 = (Sprite)c2.getUserData();
-						if(((temp1 instanceof BoutonPressoir && temp2 instanceof Character)
-								&& (temp1!=s2 || temp2!=s1))
-							|| ((temp2 instanceof BoutonPressoir && temp1 instanceof Character)
-								&& (temp1!=s1 || temp2!=s2))){
-							noOneOnButton = false;
-						}
-					}	
-				}
-				if(noOneOnButton){
-					((BoutonPressoir)s2).desactivate();
-				}		
+				((Character)s1).setBouton(0);
+				((BoutonPressoir)s2).check();		
 			}
 
 			// Character not in Exit body anymore

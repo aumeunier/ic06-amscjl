@@ -195,8 +195,8 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		}
 		
 		// Sinon effectuer les traitements d'inputs et l'update du world / des sprites
-		boolean char1CanJump = (char1.isFlying() || !char1.isFalling);
-		boolean char2CanJump = (char2.isFlying() || !char2.isFalling);
+		boolean char1CanJump = (char1.isFlying() || !char1.isFalling) && !char1.isSlipping;
+		boolean char2CanJump = (char2.isFlying() || !char2.isFalling)&& !char2.isSlipping;
 		boolean char1CanMove = (char1CanJump || !char1.isColliding) && !char1.isSlipping;
 		boolean char2CanMove = (char2CanJump || !char2.isColliding) && !char2.isSlipping;
 		
@@ -211,6 +211,9 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		else if(((input.isKeyDown(Input.KEY_D)) && char1CanMove)||(char1.isGoingRight&&char1.isSlipping)){
 			ch1_body.m_linearVelocity.x = SPEED_X;			
 			char1.goRight();
+		}
+		else if((input.isKeyPressed(Input.KEY_A)) && char1.canTeleport()){
+			char2.setTransported(true, char1.x, char1.y);
 		}
 		else if(!char1.isFalling){
 			ch1_body.m_linearVelocity.x = 0;			
@@ -229,6 +232,9 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		else if(((input.isKeyDown(Input.KEY_RIGHT)) && char2CanMove)||(char2.isGoingRight&&char2.isSlipping)){
 			ch2_body.m_linearVelocity.x = SPEED_X;			
 			char2.goRight();
+		}
+		else if((input.isKeyPressed(Input.KEY_ENTER)) && char2.canTeleport()){
+			char1.setTransported(true, char2.x, char2.y);
 		}
 		else if(!char2.isFalling){
 			ch2_body.m_linearVelocity.x = 0;			
