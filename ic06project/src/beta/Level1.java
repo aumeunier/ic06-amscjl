@@ -46,6 +46,17 @@ public class Level1 extends Level {
 		//*/
 		
 		
+		//herbe liés aux sols 1 2 et 3
+		Wall w1 = createWall(0,Global.GAMEPLAYHEIGHT-90,80,50); // bois au dessus pour éviter le bug
+		w1.setImage("newherbe2.png");
+		w1.image = w1.image.getSubImage(0,15,80,50);
+		Wall w2 = createWall(310,Global.GAMEPLAYHEIGHT-90,100,50); // bois au dessus pour éviter le bug
+		w2.setImage("newherbe2.png");
+		w2.image = w2.image.getSubImage(0,15,100,50);
+		Wall w3 = createWall(Global.GAMEPLAYWIDTH-80,Global.GAMEPLAYHEIGHT-50,80,50); // bois au dessus pour éviter le bug
+		w3.setImage("newherbe2.png");
+		w3.image = w3.image.getSubImage(0,15,80,50);
+		
 		//Plateform
 		Wall o1 = createWall(10,75,(int)(148/1.3),(int)(42/1.3));
 		o1.setImage("fleur2.png");

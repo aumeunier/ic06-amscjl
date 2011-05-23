@@ -38,8 +38,12 @@ public class Level2 extends Level {
 		createGround(540,200,90,70); // Sol 13
 		createGround(730,200,90,50); // Sol 15
 		createGround(730,320,90,10); // Sol 15
-		createWall(100,190,410,10); // bois au dessus pour éviter le bug
-		createWall(530,190,300,10); // bois au dessus pour éviter le bug
+		Wall w1 = createWall(100,190,410,50); // bois au dessus pour éviter le bug
+		w1.setImage("newherbe2.png");
+		w1.image = w1.image.getSubImage(0,15,410,50);
+		Wall w2 = createWall(530,190,300,50); // bois au dessus pour éviter le bug
+		w2.setImage("newherbe2.png");
+		w2.image = w2.image.getSubImage(0,15,300,50);
 
 
 		createSource(500,Global.GAMEPLAYHEIGHT-42,49,42,Power.PETIT);
@@ -80,7 +84,7 @@ public class Level2 extends Level {
 		
 		
 		// Place the first character
-		this.character1 = addCharacterWithPoints(550,450,0.75f);		
+		this.character1 = addCharacterWithPoints(550,0,0.75f);		
 		this.character2 = addCharacterWithPoints(550,450,0.75f);	
 		/*Body b = state.getBodyForUserData(this.character1);
 		state.modifyBodySize(b, 0.5f, 0.5f);
