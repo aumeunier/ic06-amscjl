@@ -24,41 +24,51 @@ public class Character extends Sprite{
 	
 	public Character(){
 		super(0,0,CHAR_W,CHAR_H);
-		setAnimation("www.png",CHAR_W,CHAR_H);
+		setAnimation("fee-de-face.png",CHAR_W,CHAR_H);
 	}
 	public Character(int _x, int _y){
 		super(_x,_y,CHAR_W,CHAR_H);
-		setAnimation("www.png",CHAR_W,CHAR_H);
+		setAnimation("fee-de-face.png",CHAR_W,CHAR_H);
 	}
 	public Character(int _x, int _y, float ratio){
 		super(_x,_y,(int)(CHAR_W*ratio),(int)(CHAR_H*ratio));
-		setAnimation("www.png",CHAR_W,CHAR_H);
+		setAnimation("fee-de-face.png",CHAR_W,CHAR_H);
 	}
 	public void changePower(){
 		if(isIntangible()){
 			this.setFilter(new Color(129,244,254,100));
 		}
 		else if(isFlying()){
-			this.setFilter(new Color(251,185,54,255));
+			this.setFilter(Color.white);
+			setAnimation("fee-de-face-pouvoir-1.png",CHAR_W,CHAR_H);
 		}
 		else if(isFire()){
 			this.setFilter(new Color(255,51,51,255));
 		}
 		else {
-			setAnimation("www.png",CHAR_W,CHAR_H);
+			setAnimation("fee-de-face.png",CHAR_W,CHAR_H);
 			this.setFilter(Color.white);
 		}
 	}
 	
 	private void changeDirection(){
-		if(isGoingRight){
-			setAnimation("feeRight.png",FEE_PNG_W,FEE_PNG_H);
+		if(isGoingRight && !isFlying()){
+			setAnimation("fee-marche-droite.png",CHAR_W,CHAR_H);
 		}
-		else if(isGoingLeft){
-			setAnimation("feeLeft.png",FEE_PNG_W,FEE_PNG_H);
+		else if(isGoingLeft && !isFlying()){
+			setAnimation("fee-marche-gauche.png",CHAR_W,CHAR_H);
 		}
-		else {
-			setAnimation("www.png",CHAR_W,CHAR_H);
+		else if(isGoingRight && isFlying()){
+			setAnimation("fee-vole-droite-pouvoir.png",CHAR_W,CHAR_H);
+		}
+		else if(isGoingLeft && isFlying()){
+			setAnimation("fee-vole-gauche-pouvoir.png",CHAR_W,CHAR_H);
+		}
+		else if(!isFlying()){
+			setAnimation("fee-de-face.png",CHAR_W,CHAR_H);
+		}
+		else if(isFlying()){
+			setAnimation("fee-de-face-pouvoir-1.png",CHAR_W,CHAR_H);
 		}
 	}
 	
