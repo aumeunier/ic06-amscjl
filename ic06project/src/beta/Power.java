@@ -10,6 +10,7 @@ public enum Power {
 	REBOND,
 	NAGE,
 	PETIT,
+	LIGHT,
 	ABSORBE,
 	TELEPORTATION;
 	
@@ -41,6 +42,9 @@ public enum Power {
 			result = "powerFire.png";
 			break;
 		case NAGE:
+			result = "fat.png";
+			break;
+		case LIGHT:
 			result = "fat.png";
 			break;
 		case TELEPORTATION:

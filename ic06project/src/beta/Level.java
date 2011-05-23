@@ -188,7 +188,7 @@ public class Level {
 		Source source = new Source(x,y,w,h,_power);
 		
 		// Add it to the list of sprites of this level
-		sprites.add(source);
+		backgroundSprites.add(source);
 		
 		// Create the source body
 		myState.addSource(source);

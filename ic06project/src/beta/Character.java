@@ -58,6 +58,9 @@ public class Character extends Sprite{
 			this.setFilter(Color.white);
 			setAnimation("grosse-vache.png",CHAR_W, CHAR_H);
 		}
+		else if(isLight()){
+			this.setLightSize(3*this.h);
+		}
 		else if(canTeleport()){
 			this.setFilter(new Color(77,77,77,255));
 		}
@@ -149,6 +152,9 @@ public class Character extends Sprite{
 	public boolean isDead(){
 		return isDead;
 	}
+	public boolean isLight(){
+		return power==Power.LIGHT;
+	}
 	public boolean canTeleport(){
 		return power==Power.TELEPORTATION;
 	}
@@ -189,8 +195,9 @@ public class Character extends Sprite{
 	}
 	
 	public void setPower(Power _power){
-		if((_power==Power.PETIT && power!=Power.PETIT) ||(_power==Power.REBOND && power!=Power.REBOND) ||(power==Power.PETIT && _power!=Power.PETIT))
+		if((_power==Power.PETIT && power!=Power.PETIT) ||(_power==Power.REBOND && power!=Power.REBOND) ||(power==Power.PETIT && _power!=Power.PETIT)){
 			shouldChangeSize=true;
+		}
 		power = _power;
 		changePower();
 	}

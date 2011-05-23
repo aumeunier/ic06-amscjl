@@ -76,7 +76,6 @@ public class Level1 extends Level {
 		//createObstacle(Global.GAMEPLAYWIDTH-200,Global.GAMEPLAYHEIGHT-220,40,210);
 		
 		Obstacle o5 =createObstacle(Global.GAMEPLAYWIDTH-200, Global.GAMEPLAYHEIGHT-220, 35, 210);
-		o5.setImage("arbre-droit.png");
 		o5.image = o5.image.getSubImage(25,10,50,300);
 		
 		// Place un mur pour empecher l'acces au levier
