@@ -90,8 +90,7 @@ public class Sprite {
 		}
 	}
 	public void drawLight(Graphics g){
-		lightImage.draw(x+w/2-lightSize/2, y+w/2-lightSize/2);
-		//g.drawImage(lightImage, x+w/2-lightSize/2, y+w/2-lightSize/2);
+		lightImage.draw(x+w/2-lightSize/2, y+w/2-lightSize/2, new Color(0.0f,0.0f,0.0f,0.5f));
 	}
 	public void setLightSize(int _lightSize){
 		this.lightInDarkness = true;

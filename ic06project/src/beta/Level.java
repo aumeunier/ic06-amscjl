@@ -304,12 +304,11 @@ public class Level {
 	}
 	
 	public void render(GameContainer gc, Graphics g){
+		g.setAntiAlias(true);		
 		// If the map is plunged in the darkness
 		if(this.inTheDarkness){
-			g.clearAlphaMap();
-			// Light drawing
+			g.clearAlphaMap();	        
 			g.setDrawMode(Graphics.MODE_ALPHA_MAP);
-			lightImage.draw(character1.x,character1.y,character1.w,character1.h);
 			if(character1.lightInDarkness){
 				character1.drawLight(g);	
 			}
@@ -321,28 +320,39 @@ public class Level {
 				if(s.lightInDarkness){
 					s.drawLight(g);				
 				}
+			}	  
+			// Alpha blend drawing
+	        g.setDrawMode(Graphics.MODE_ALPHA_BLEND); 
+			backgroundImage.draw();
+			if(!character1.lightInDarkness){
+				character1.draw(g);	
+			}
+			if(!character2.lightInDarkness){
+				character2.draw(g);				
+			}
+			for(int i = 0 ; i < sprites.size() ; ++i){
+				Sprite s = sprites.get(i);
+				if(!s.lightInDarkness){
+					s.draw(g);				
+				}
+			}
+	        // Normal drawing
+	        g.setDrawMode(Graphics.MODE_NORMAL);
+			if(character1.lightInDarkness){
+				character1.draw(g);	
+			}
+			if(character2.lightInDarkness){
+				character2.draw(g);				
+			}
+			for(int i = 0 ; i < sprites.size() ; ++i){
+				Sprite s = sprites.get(i);
+				if(s.lightInDarkness){
+					s.draw(g);				
+				}
 			}
 			for(InGameIndication indication: indications){
 				indication.render(gc, g);
 			}	  
-			// Normal drawing
-	        g.setDrawMode(Graphics.MODE_ALPHA_BLEND); 
-			backgroundImage.draw();
-			for(int i = 0 ; i < listeExit.size() ; ++i){
-				listeExit.get(i).draw(g);
-				}
-			character1.draw(g);
-			character2.draw(g);
-			for(int i = 0 ; i < sprites.size() ; ++i){
-				Sprite s = sprites.get(i);
-				if(!s.isHidden()){
-					s.draw(g);
-				}
-			}
-			for(InGameIndication indication: indications){
-				indication.render(gc, g);
-			}	    
-	        g.setDrawMode(Graphics.MODE_NORMAL); 			
 		}
 		// If no darkness we draw as usual
 		else {
@@ -362,5 +372,6 @@ public class Level {
 				indication.render(gc, g);
 			}				
 		}
+		g.setAntiAlias(false);
 	}
 }
