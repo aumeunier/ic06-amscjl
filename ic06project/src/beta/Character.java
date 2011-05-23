@@ -9,6 +9,7 @@ public class Character extends Sprite{
 	public boolean isGoingRight = false;
 	public boolean isGoingLeft = false;
 	public boolean isFalling = false;
+	public boolean isSlipping = false;
 	private boolean isDead = false;
 	private boolean isAtExit = false;
 	private boolean isTransported = false;

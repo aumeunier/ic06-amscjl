@@ -16,12 +16,20 @@ public class MyContactListener implements ContactListener {
 		if (point.shape1.getUserData() == GameplayState.GROUND_SENSOR_NAME){
 			Sprite s = (Sprite)point.shape2.getBody().getUserData();
 			if((s instanceof Wall) || (s instanceof Obstacle)||(s instanceof Ground)|| (s instanceof Declencheur)){
+				if(s instanceof Ground && ((Ground)s).getSlippery())
+					((Character) point.shape1.getBody().getUserData()).isSlipping = true;
+				else
+					((Character) point.shape1.getBody().getUserData()).isSlipping = false;
 				((Character) point.shape1.getBody().getUserData()).isFalling = false;
 			}
 		}
 		else if (point.shape2.getUserData() == GameplayState.GROUND_SENSOR_NAME){
 			Sprite s = (Sprite)point.shape1.getBody().getUserData();
 			if((s instanceof Wall) || (s instanceof Obstacle)||(s instanceof Ground)|| (s instanceof Declencheur)){
+				if(s instanceof Ground && ((Ground)s).getSlippery())
+					((Character) point.shape2.getBody().getUserData()).isSlipping = true;
+				else
+					((Character) point.shape2.getBody().getUserData()).isSlipping = false;
 				((Character) point.shape2.getBody().getUserData()).isFalling = false;
 			}
 		}

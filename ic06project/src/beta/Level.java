@@ -98,6 +98,20 @@ public class Level {
 		return ground;
 	}
 	
+	protected Ground createGroundWithPoints(int x, int y, int w, int h, ArrayList<Vec2> point){
+		
+		// Create a wall object
+		Ground ground = new Ground(x,y,w,h);
+		
+		// Add it to the list of sprites of the level
+		sprites.add(ground);
+		
+		// Create the wall body
+		myState.addGroundWithPoints(ground, point);
+		
+		return ground;
+	}
+	
 	protected Wall createWallWithPoints(int x, int y, int w, int h, ArrayList<Vec2> point){
 		
 		// Create a wall object
@@ -220,10 +234,10 @@ public class Level {
 		return bouton;
 	}
 	
-	protected BoutonElevator createBoutonElevator(int x, int y, int w, int h, ArrayList<Body> b, int p){
+	protected BoutonElevator createBoutonElevator(int x, int y, int w, int h, ArrayList<Body> b, int p, int pu){
 		
 		// Create a boutonelevator object
-		BoutonElevator bouton = new BoutonElevator(x,y,w,h,b,p);
+		BoutonElevator bouton = new BoutonElevator(x,y,w,h,b,p,pu);
 		
 		// Add it to the list of sprites of this level
 		sprites.add(bouton);

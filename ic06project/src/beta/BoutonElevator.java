@@ -7,17 +7,18 @@ import org.jbox2d.dynamics.Body;
 
 public class BoutonElevator extends BoutonPressoir {
 	
-	protected int poids;
+	protected int puissance;
 	
-	public BoutonElevator(int _x, int _y, int _w, int _h, ArrayList<Body> b, int p){
+	public BoutonElevator(int _x, int _y, int _w, int _h, ArrayList<Body> b, int p, int puiss){
 		super(_x, _y, _w, _h, b, p);
+		puissance=puiss;
 	}
 
 	public void activate(){
 		this.setActivated(true);		
 		for (Body bx : relatedBody) {
 			
-			bx.applyImpulse(new Vec2(0, 6300), bx.getWorldCenter());
+			bx.applyImpulse(new Vec2(0, puissance), bx.getWorldCenter());
 		}
 		this.setImage("blur1test.png");
 	}

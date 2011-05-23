@@ -195,21 +195,18 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		}
 		
 		// Sinon effectuer les traitements d'inputs et l'update du world / des sprites
-		boolean char1CanMove = char1.isFlying() || !char1.isFalling;
-		boolean char2CanMove = char2.isFlying() || !char2.isFalling;
-
-		System.out.println(char1.isFalling);
-		System.out.println(char2.isFalling);
+		boolean char1CanMove = (char1.isFlying() || !char1.isFalling) && !char1.isSlipping;
+		boolean char2CanMove = (char2.isFlying() || !char2.isFalling) && !char2.isSlipping; 
 		
 		if((input.isKeyPressed(Input.KEY_Z)) && char1CanMove){
 			ch1_body.applyImpulse(new Vec2(0, SPEED_JUMP), ch1_body.getWorldCenter());	
 			char1.isFalling = true;
 		}
-		else if((input.isKeyDown(Input.KEY_Q)) /*&& char1CanMove*/){
+		else if((input.isKeyDown(Input.KEY_Q) && !char1.isSlipping)||(char1.isGoingLeft&&char1.isSlipping)) /*&& char1CanMove*/{
 			ch1_body.m_linearVelocity.x = -SPEED_X;			
 			char1.goLeft();
 		}
-		else if((input.isKeyDown(Input.KEY_D)) /*&& char1CanMove*/){
+		else if((input.isKeyDown(Input.KEY_D)&& !char1.isSlipping)||(char1.isGoingRight&&char1.isSlipping)) /*&& char1CanMove*/{
 			ch1_body.m_linearVelocity.x = SPEED_X;			
 			char1.goRight();
 		}
@@ -223,11 +220,11 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			ch2_body.applyImpulse(new Vec2(0, SPEED_JUMP), ch2_body.getWorldCenter());	
 			char2.isFalling = true;
 		}
-		else if((input.isKeyDown(Input.KEY_LEFT)) /*&& char2CanMove*/){
+		else if((input.isKeyDown(Input.KEY_LEFT)&& !char2.isSlipping)||(char2.isGoingLeft&&char2.isSlipping)) /*&& char2CanMove*/{
 			ch2_body.m_linearVelocity.x = -SPEED_X;			
 			char2.goLeft();
 		}
-		else if((input.isKeyDown(Input.KEY_RIGHT)) /*&& char2CanMove*/){
+		else if((input.isKeyDown(Input.KEY_RIGHT)&& !char2.isSlipping)||(char2.isGoingRight&&char2.isSlipping)) /*&& char2CanMove*/{
 			ch2_body.m_linearVelocity.x = SPEED_X;			
 			char2.goRight();
 		}
@@ -368,6 +365,25 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		sd.density = 5.0f;
 		sd.friction = 0.5f;
 		sd.setAsBox(groundData.w/2,groundData.h/2);
+		newBody.createShape(sd);
+		newBody.putToSleep();
+		spriteBodies.add(newBody);
+		return newBody;
+	}
+	
+	public Body addGroundWithPoints(Ground groundData, ArrayList<Vec2> list){
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.userData = groundData;
+		Vec2 b2dcoord = Global.getBox2DCoordinates(groundData.x, groundData.y);
+		bodyDef.position = new Vec2(b2dcoord.x+groundData.w/2,b2dcoord.y-groundData.h/2);
+		Body newBody = world.createBody(bodyDef);
+		PolygonDef sd = new PolygonDef();		
+		sd.density = 5.0f;
+		sd.friction = 0.5f;
+
+		for(Vec2 v: list){
+			sd.addVertex(v);			
+		}
 		newBody.createShape(sd);
 		newBody.putToSleep();
 		spriteBodies.add(newBody);
