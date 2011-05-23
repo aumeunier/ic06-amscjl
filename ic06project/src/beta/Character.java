@@ -53,6 +53,9 @@ public class Character extends Sprite{
 		else if(isRebond()){
 			this.setFilter(new Color(55,55,55,255));
 		}
+		else if(isFat()){
+			setAnimation("grosse-vache.png",CHAR_W, CHAR_H);
+		}
 		else {
 			setAnimation("fee-de-face.png",CHAR_W,CHAR_H);
 			this.setFilter(Color.white);
@@ -71,6 +74,15 @@ public class Character extends Sprite{
 		}
 		else if(isGoingLeft && isFlying()){
 			setAnimation("fee-vole-gauche-pouvoir.png",CHAR_W,CHAR_H);
+		}
+		else if(isGoingLeft && isFat()){
+			setAnimation("grosse-vache-incoming.png",CHAR_W,CHAR_H);
+		}
+		else if(isGoingRight && isFat()){
+			setAnimation("grosse-vache-incoming-droite.png",CHAR_W,CHAR_H);
+		}
+		else if(isFat()){
+			setAnimation("grosse-vache.png",CHAR_W,CHAR_H);
 		}
 		else if(!isFlying()){
 			setAnimation("fee-de-face.png",CHAR_W,CHAR_H);
@@ -163,7 +175,7 @@ public class Character extends Sprite{
 	}
 	
 	public void setPower(Power _power){
-		if((_power==Power.FAT && power!=Power.FAT) || (_power==Power.PETIT && power!=Power.PETIT) ||(_power==Power.REBOND && power!=Power.REBOND))
+		if((_power==Power.PETIT && power!=Power.PETIT) ||(_power==Power.REBOND && power!=Power.REBOND))
 			shouldChangeSize=true;
 		power = _power;
 		changePower();

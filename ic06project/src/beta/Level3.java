@@ -21,13 +21,13 @@ public class Level3 extends Level {
 		// Celling
 		createWall(0,-10,Global.GAMEPLAYWIDTH,10);
 		
-		createGround(0,380,150,120); // Sol 1
-		Wall w1 = createWall(0,380,150,50);
+		createGround(0,380,100,120); // Sol 1
+		Wall w1 = createWall(0,380,100,50);
 		w1.setImage("newherbe2.png");
-		w1.image = w1.image.getSubImage(0,17,150,50);
+		w1.image = w1.image.getSubImage(0,17,100,50);
 		
-		createGround(200,380,550,50); // Sol 2
-		Wall w2 = createWall(200,380,550,50);
+		createGround(150,380,600,50); // Sol 2
+		Wall w2 = createWall(150,380,600,50);
 		w2.setImage("newherbe2.png");
 		w2.image = w2.image.getSubImage(0,17,550,50);
 		
@@ -118,6 +118,7 @@ public class Level3 extends Level {
 		sol42.setSlippery(true, "left");*/
 		
 		createGround(680,70,120,5); // plateforme arrivée
+		createExit(Global.GAMEPLAYWIDTH-45,5,45,65);
 		
 		
 		
