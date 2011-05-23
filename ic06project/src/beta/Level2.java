@@ -10,9 +10,7 @@ public class Level2 extends Level {
 		super(state,model);
 		this.levelID = 2; // Do not forget to update that !!
 		this.setBackgroundImage("6362779_s.jpg");
-		this.backgroundImage = this.backgroundImage.getSubImage(0, 0, 
-				this.backgroundImage.getWidth(), this.backgroundImage.getHeight()*Global.GAMEPLAYHEIGHT/Global.WINDOW_HEIGHT);
-		
+
 		// Place a ground wall
 		createWall(0,Global.GAMEPLAYHEIGHT-10,Global.GAMEPLAYWIDTH,10);		
 		// Left wall
@@ -54,7 +52,6 @@ public class Level2 extends Level {
 
 
 		Exit exit = createExit(600,400,25,25);
-		exit.setImage("porte.png");
 
 
 		//addIndication(200,100,"Tu peux maintenant voler!");

@@ -11,9 +11,7 @@ public class Level3 extends Level {
 		super(state,model);
 		this.levelID = 3; // Do not forget to update that !!
 		this.setBackgroundImage("8298638_s.jpg");
-		this.backgroundImage = this.backgroundImage.getSubImage(0, 0, 
-				this.backgroundImage.getWidth(), this.backgroundImage.getHeight()*Global.GAMEPLAYHEIGHT/Global.WINDOW_HEIGHT);
-		
+
 		// Place a ground wall
 		createWall(0,Global.GAMEPLAYHEIGHT-2,Global.GAMEPLAYWIDTH,2);		
 		// Left wall

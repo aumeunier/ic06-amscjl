@@ -6,6 +6,7 @@ import mdes.slick.sui.Display;
 
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -18,6 +19,7 @@ public class Level {
 	protected final static int CH2_INIT_Y = Global.GAMEPLAYHEIGHT-50;
 	protected GameplayState myState;
 	protected ArrayList<Sprite> sprites;
+	protected ArrayList<Sprite> backgroundSprites;
 	protected ArrayList<Exit> listeExit;
 	protected ArrayList<InGameIndication> indications;
 	protected Character character1;
@@ -33,6 +35,7 @@ public class Level {
 	public Level(GameplayState state, LevelSave model){
 		this.myState = state;
 		this.sprites = new ArrayList<Sprite>();
+		this.backgroundSprites = new ArrayList<Sprite>();
 		this.listeExit = new ArrayList<Exit>();
 		this.indications = new ArrayList<InGameIndication>();
 		this.levelModel = model;
@@ -51,6 +54,8 @@ public class Level {
 		try {
 			this.backgroundImage = new Image(Global.PATH_IMAGES_RESSOURCES+filename).
 				getScaledCopy(Global.WINDOW_WIDTH, Global.WINDOW_HEIGHT);
+			this.backgroundImage = this.backgroundImage.getSubImage(0, 0, this.backgroundImage.getWidth(), 
+						this.backgroundImage.getHeight()*Global.GAMEPLAYHEIGHT/Global.WINDOW_HEIGHT);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -309,21 +314,38 @@ public class Level {
 		if(this.inTheDarkness){
 			g.clearAlphaMap();	        
 			g.setDrawMode(Graphics.MODE_ALPHA_MAP);
+			for(int i = 0 ; i < backgroundSprites.size() ; ++i){
+				Sprite s = backgroundSprites.get(i);
+				if(s.lightInDarkness){
+					s.drawLight(g, true);				
+				}
+			}
 			if(character1.lightInDarkness){
-				character1.drawLight(g);	
+				character1.drawLight(g, true);	
 			}
 			if(character2.lightInDarkness){
-				character2.drawLight(g);				
+				character2.drawLight(g, true);				
 			}
 			for(int i = 0 ; i < sprites.size() ; ++i){
 				Sprite s = sprites.get(i);
 				if(s.lightInDarkness){
-					s.drawLight(g);				
+					s.drawLight(g, true);				
 				}
 			}	  
 			// Alpha blend drawing
 	        g.setDrawMode(Graphics.MODE_ALPHA_BLEND); 
 			backgroundImage.draw();
+			for(int i = 0 ; i < backgroundSprites.size() ; ++i){
+				Sprite s = backgroundSprites.get(i);
+				if(!s.lightInDarkness){
+					s.draw(g);				
+				}
+				else {
+			        g.setDrawMode(Graphics.MODE_NORMAL); 
+					s.draw(g);		
+			        g.setDrawMode(Graphics.MODE_ALPHA_BLEND); 
+				}
+			}
 			if(!character1.lightInDarkness){
 				character1.draw(g);	
 			}
@@ -342,7 +364,7 @@ public class Level {
 				character1.draw(g);	
 			}
 			if(character2.lightInDarkness){
-				character2.draw(g);				
+				character2.draw(g);		
 			}
 			for(int i = 0 ; i < sprites.size() ; ++i){
 				Sprite s = sprites.get(i);
@@ -357,9 +379,12 @@ public class Level {
 		// If no darkness we draw as usual
 		else {
 			backgroundImage.draw();
+			for(int i = 0 ; i < backgroundSprites.size() ; ++i){
+				backgroundSprites.get(i).draw(g);
+			}
 			for(int i = 0 ; i < listeExit.size() ; ++i){
 				listeExit.get(i).draw(g);
-				}
+			}
 			character1.draw(g);
 			character2.draw(g);
 			for(int i = 0 ; i < sprites.size() ; ++i){

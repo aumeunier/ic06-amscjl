@@ -89,7 +89,7 @@ public class Sprite {
 			image.draw(x, y, w, h);
 		}
 	}
-	public void drawLight(Graphics g){
+	public void drawLight(Graphics g, boolean alphaMode){
 		lightImage.draw(x+w/2-lightSize/2, y+w/2-lightSize/2, new Color(0.0f,0.0f,0.0f,0.5f));
 	}
 	public void setLightSize(int _lightSize){

@@ -12,6 +12,7 @@ public class Exit extends Sprite {
 		this.h = _h;
 		cpt=0;
 		isReady=false;
+		this.image = Global.setImage("porte.png");
 	}
 	
 	public boolean isReady(){

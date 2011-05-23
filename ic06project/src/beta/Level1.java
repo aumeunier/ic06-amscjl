@@ -10,9 +10,7 @@ public class Level1 extends Level {
 		super(state,model);
 		this.levelID = 1; // Do not forget to update that !!
 		this.setBackgroundImage("6362779_s.jpg");
-		this.backgroundImage = this.backgroundImage.getSubImage(0, 0, 
-				this.backgroundImage.getWidth(), this.backgroundImage.getHeight()*Global.GAMEPLAYHEIGHT/Global.WINDOW_HEIGHT);
-		
+
 		// Place a ground wall
 		createWall(0,Global.GAMEPLAYHEIGHT-10,Global.GAMEPLAYWIDTH,10);		
 		// Left wall
@@ -104,11 +102,9 @@ public class Level1 extends Level {
 		
 		//place SOrtie
 		Exit exit = createExit(Global.GAMEPLAYWIDTH-65,10,45,65);
-		exit.setImage("porte.png");
 		
 		//place bonus
 		Bonus bonus1 = createBonus(50,Global.GAMEPLAYHEIGHT-110,25,25);
-		bonus1.setImage("cerise_rouge.png");
 		
 		// Place the first character
 		//*

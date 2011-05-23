@@ -8,6 +8,7 @@ public class Bonus extends Sprite {
 		this.y = _y;
 		this.w = _w;
 		this.h = _h;
+		this.image = Global.setImage("cerise_rouge.png");
 	}
 	
 	public void obtained(){

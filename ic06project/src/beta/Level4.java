@@ -10,10 +10,8 @@ public class Level4 extends Level {
 	public Level4(GameplayState state, LevelSave model) {
 		super(state,model);
 		this.levelID = 4;
-		this.inTheDarkness = true;
+		//this.inTheDarkness = true;
 		this.setBackgroundImage("6362779_s.jpg");
-		this.backgroundImage = this.backgroundImage.getSubImage(0, 0, 
-				this.backgroundImage.getWidth(), this.backgroundImage.getHeight()*Global.GAMEPLAYHEIGHT/Global.WINDOW_HEIGHT);
 		
 		// Place a ground wall
 		createWall(0,Global.GAMEPLAYHEIGHT-10,Global.GAMEPLAYWIDTH,10);		
@@ -24,31 +22,26 @@ public class Level4 extends Level {
 		// Celling
 		createWall(0,-10,Global.GAMEPLAYWIDTH,10);
 		
-		// Flowers
-		ArrayList<Vec2> temp = new ArrayList<Vec2>();
-		temp.add(new Vec2(-100,50));
-		temp.add(new Vec2(+100,50));
-		temp.add(new Vec2(-100,+75));
-		Obstacle o = createObstacleWithPoints(600,200,200,150,temp);
-		o.setImage("fleur9_mur.png");
+		// place entree
+		Sprite entree = new Sprite(10,44,32,46);
+		entree.setImage("porte.png");
+		entree.setLightSize(100);
+		this.backgroundSprites.add(entree);
 		
 		// Sols
-		createGround(0,Global.GAMEPLAYHEIGHT-85,80,75); // Sol 1
-		createGround(310,Global.GAMEPLAYHEIGHT-85,100,75); // Sol 2 (apres l'eau)
-		createGround(Global.GAMEPLAYWIDTH-80,Global.GAMEPLAYHEIGHT-45,80,35); // Sol 4 (en dessous perso 2)
-		//*
-		ArrayList<Vec2> sol3Points = new ArrayList<Vec2>();
-		sol3Points.add(new Vec2(-40,-27));
-		sol3Points.add(new Vec2(40,-27));
-		sol3Points.add(new Vec2(-40,27));
-		Wall sol3 = createWallWithPoints(410,Global.GAMEPLAYHEIGHT-65,80,55,sol3Points); // Sol 3
-		sol3.addPointToShape(410,Global.GAMEPLAYHEIGHT-10);
-		sol3.addPointToShape(410+80,Global.GAMEPLAYHEIGHT-10);
-		sol3.addPointToShape(410,Global.GAMEPLAYHEIGHT-65);
-		/*/
-		//Wall sol3 = createWall(410,Global.GAMEPLAYHEIGHT-65,80,55);
-		//*/
+		createGround(0,90,200,20); // En haut a gauche, a cote de l'entree
+		createGround(280,90,200,20); // apres le premier trou, en haut
+		createGround(280,100,20,150); // en dessous
+		createGround(480,70,20,140); // vertical
+		createGround(480,50,160,20); // au dessus
+		createGround(680,50,120,20); // apres le deuxieme trou
+		createGround(550,120,250,20); // en dessous
+		createGround(500,170,20,20); // appui
+		createGround(500,190,180,20); // en dessous
+		createGround(720,190,80,20); // a cote
+		createGround(280,260,520,20); // en dessous
 		
+		/*
 		
 		//Plateform
 		Wall o1 = createWall(10,75,(int)(148/1.3),(int)(42/1.3));
@@ -99,23 +92,20 @@ public class Level4 extends Level {
 		// Place sources
 		createSource(500,Global.GAMEPLAYHEIGHT-42,49,42,Power.FLYING);
 		createSource(Global.GAMEPLAYWIDTH-50,Global.GAMEPLAYHEIGHT-87,49,42,Power.INTANGIBLE);
+		*/
 		
-		//place SOrtie
-		Exit exit = createExit(Global.GAMEPLAYWIDTH-65,10,45,65);
-		exit.setImage("porte.png");
-		exit.setLightSize(100);
+		//place Sortie
+		createExit(Global.GAMEPLAYWIDTH-65,Global.GAMEPLAYHEIGHT-65-10,32,46);
 		
-		//place bonus
-		Bonus bonus1 = createBonus(50,Global.GAMEPLAYHEIGHT-110,25,25);
-		bonus1.setImage("cerise_rouge.png");
+		// Place bonus
+		//createBonus(50,Global.GAMEPLAYHEIGHT-110,25,25);
 		
 		// Place the first character
-		//*
-		this.character1 = addCharacterWithPoints(330,Global.GAMEPLAYHEIGHT-65-76,1.0f);		
+		this.character1 = addCharacterWithPoints(10,10,0.7f);		
 		this.character2 = addCharacterWithPoints(Global.GAMEPLAYWIDTH-87-80,
-				Global.GAMEPLAYHEIGHT-65-10,1.0f);	
-		this.character1.setLightSize(this.character1.h*2);
-		this.character2.setLightSize(this.character2.h*2);
+				Global.GAMEPLAYHEIGHT-65-10,0.7f);	
+		//this.character1.setLightSize(this.character1.h*2);
+		//this.character2.setLightSize(this.character2.h*2);
 	}
 
 }
