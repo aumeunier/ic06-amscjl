@@ -38,6 +38,7 @@ public class Level2 extends Level {
 		createGround(540,200,90,70); // Sol 13
 		createGround(730,200,90,50); // Sol 15
 		createGround(730,320,90,10); // Sol 15
+		createGround(0,400,40,10); // Sol 20 petite plateforme
 		Wall w1 = createWall(100,190,410,50); // bois au dessus pour éviter le bug
 		w1.setImage("newherbe2.png");
 		w1.image = w1.image.getSubImage(0,15,410,50);
@@ -51,8 +52,9 @@ public class Level2 extends Level {
 		createTransporter(790,420,10,42,300,280);
 		createTransporter(300,280,10,42,760,285);
 		createTransporter(790,270,10,42,105,400);
-		createTransporter(105,400,10,42,750,440);
+		createTransporter(130,400,5,42,750,440);
 		createTransporter(790,340,10,42,600,440);
+		createTransporter(545,250,10,42,10,330);
 
 
 		Exit exit = createExit(600,400,25,25);
@@ -82,6 +84,11 @@ public class Level2 extends Level {
 		SourceMortelle s2 = createSourceMortelle(50,Global.GAMEPLAYHEIGHT-60,50,50);
 		s2.setAnimation("waves2.png", 300, 300);
 		
+		
+		//plateforme
+		Wall w3 = createWall(0,190,410,50); 
+		w3.setImage("newherbe2.png");
+		w3.image = w3.image.getSubImage(0,15,410,50);
 		
 		// Place the first character
 		this.character1 = addCharacterWithPoints(550,0,0.75f);		

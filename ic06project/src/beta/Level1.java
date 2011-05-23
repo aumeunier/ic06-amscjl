@@ -73,10 +73,16 @@ public class Level1 extends Level {
 		createWall(Global.GAMEPLAYWIDTH-160,75,150,10);
 
 		// Place un mur pour séparer les deux personnages
-		createObstacle(Global.GAMEPLAYWIDTH-200,Global.GAMEPLAYHEIGHT-220,40,210);
+		//createObstacle(Global.GAMEPLAYWIDTH-200,Global.GAMEPLAYHEIGHT-220,40,210);
+		
+		Obstacle o5 =createObstacle(Global.GAMEPLAYWIDTH-200, Global.GAMEPLAYHEIGHT-220, 35, 210);
+		o5.setImage("arbre-droit.png");
+		o5.image = o5.image.getSubImage(25,10,50,300);
 		
 		// Place un mur pour empecher l'acces au levier
-		Obstacle oMurLevier = new Obstacle(Global.GAMEPLAYWIDTH-130,85,20,135);
+		Obstacle oMurLevier = new Obstacle(Global.GAMEPLAYWIDTH-130,85,30,135);
+		oMurLevier.setImage("arbre-droit.png");
+		oMurLevier.image = oMurLevier.image.getSubImage(25,10,50,325);
 		sprites.add(oMurLevier);
 		Body oMurLevierBody = myState.addObstacle(oMurLevier);
 		ArrayList<Body> b1 = new ArrayList<Body>();
@@ -87,6 +93,8 @@ public class Level1 extends Level {
 		
 		// Place un mur devant la sortie
 		Obstacle oMurSortie = new Obstacle(Global.GAMEPLAYWIDTH-160,0,20,75);
+		oMurSortie.setImage("arbre-droit.png");
+		oMurSortie.image = oMurSortie.image.getSubImage(25,10,50,325);
 		sprites.add(oMurSortie);
 		Body oMurSortieBody = myState.addObstacle(oMurSortie);
 		ArrayList<Body> b2 = new ArrayList<Body>();
