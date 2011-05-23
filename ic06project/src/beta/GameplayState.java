@@ -252,6 +252,14 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			modifyBodySize(getBodyForUserData(char2),(float)0.5,(float)0.5);
 			char2.shouldChangeSize=false;
 		}
+		if((char1.isRebond())&&(char1.shouldChangeSize)){
+			modifyBodyRebond(getBodyForUserData(char1),(float)0.9);
+			char1.shouldChangeSize=false;
+		}
+		if((char2.isRebond())&&(char2.shouldChangeSize)){
+			modifyBodyRebond(getBodyForUserData(char2),(float)0.5);
+			char2.shouldChangeSize=false;
+		}
 		
 		
 		char1.setCoordinatesFromBody(ch1_body);
@@ -599,6 +607,66 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			ch2_body.wakeUp();
 			return ch2_body;
 		}
+	}
+	public Body modifyBodyRebond(Body body, float R)//nb : rajout d'un parametre pour pouvoir grossir uniquement
+	{
+		System.out.println("changement de taille");
+		if(!(body.getUserData() instanceof Sprite)){
+			return null;
+		}
+		
+		Sprite userData = (Sprite)body.getUserData();
+		//int newW = (int) (userData.w*w);
+		//int newH = (int) (userData.h*h);
+		//userData.x = userData.x - (newW - userData.w)/2;
+		//userData.y = userData.y - (newH - userData.h); //nb : je ne pense pas qu'il faille diviser par 2(sinon grandit dans le sol)
+		//userData.w = newW;
+		//userData.h = newH;
+		
+		Vec2 b2dcoord = Global.getBox2DCoordinates(((Sprite)userData).x, ((Sprite)userData).y);
+		Vec2 b2position = new Vec2(b2dcoord.x+((Sprite)userData).w/2, b2dcoord.y-((Sprite)userData).h/2);
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.userData = userData;
+		bodyDef.position = b2position;
+		MassData md = new MassData();
+		md.mass = body.getMass();
+		bodyDef.massData = md;
+		
+		Body newBody = world.createBody(bodyDef);		
+		Shape shape = body.getShapeList();
+		do {
+			PolygonDef sd = new PolygonDef();
+			sd.density = shape.m_density;
+			sd.friction = shape.getFriction();
+			sd.restitution = R; 
+			sd.userData = shape.getUserData();
+			sd.isSensor = shape.isSensor();
+			for(Vec2 v: ((PolygonShape)shape).getVertices()){
+				Vec2 newV = new Vec2(v.x,v.y);
+				sd.addVertex(newV);
+			}		
+			newBody.createShape(sd);			
+			shape = shape.getNext();
+		} while(shape!=null);
+		
+		if(ch1_body.equals(body)){
+			ch1_body = newBody;
+		}
+		else if(ch2_body.equals(body)){
+			ch2_body = newBody;
+		}
+		else {
+			for(Body b: spriteBodies){
+				if(b.equals(body)){
+					b = newBody;
+				}
+			}
+		}
+		
+		world.destroyBody(body);
+		body = null;
+		
+		return newBody;
 	}
 	public Body modifyBodySize(Body body, float h, float w)//nb : rajout d'un parametre pour pouvoir grossir uniquement
 	{

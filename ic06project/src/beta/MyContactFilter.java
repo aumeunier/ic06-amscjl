@@ -84,6 +84,9 @@ public class MyContactFilter implements ContactFilter {
 						else if(source.power == Power.FLYING){
 							character.setPower(Power.FLYING);
 						}
+						else if(source.power == Power.REBOND){
+							character.setPower(Power.REBOND);
+						}
 						else if(source.power == Power.FAT){
 							character.setPower(Power.FAT);
 						}
@@ -132,6 +135,9 @@ public class MyContactFilter implements ContactFilter {
 						}
 						else if(source.power == Power.FLYING){
 							character.setPower(Power.FLYING);
+						}
+						else if(source.power == Power.REBOND){
+							character.setPower(Power.REBOND);
 						}
 						else if(source.power == Power.FAT){
 							character.setPower(Power.FAT);

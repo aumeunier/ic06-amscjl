@@ -7,6 +7,7 @@ public enum Power {
 	FLYING,
 	FAT,
 	FIRE,
+	REBOND,
 	PETIT;
 	
 	public String imageForPower() {
@@ -28,6 +29,9 @@ public enum Power {
 			result = "fat.png";
 			break;
 		case PETIT:
+			result = "fat.png";
+			break;
+		case REBOND:
 			result = "fat.png";
 			break;
 		case FIRE:

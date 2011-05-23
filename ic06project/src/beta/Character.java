@@ -46,6 +46,9 @@ public class Character extends Sprite{
 		else if(isFire()){
 			this.setFilter(new Color(255,51,51,255));
 		}
+		else if(isRebond()){
+			this.setFilter(new Color(55,55,55,255));
+		}
 		else {
 			setAnimation("fee-de-face.png",CHAR_W,CHAR_H);
 			this.setFilter(Color.white);
@@ -112,6 +115,9 @@ public class Character extends Sprite{
 	public boolean isFire(){
 		return power==Power.FIRE;
 	}
+	public boolean isRebond(){
+		return power==Power.REBOND;
+	}
 	public boolean isDead(){
 		return isDead;
 	}
@@ -149,7 +155,7 @@ public class Character extends Sprite{
 	}
 	
 	public void setPower(Power _power){
-		if((_power==Power.FAT && power!=Power.FAT) || (_power==Power.PETIT && power!=Power.PETIT))
+		if((_power==Power.FAT && power!=Power.FAT) || (_power==Power.PETIT && power!=Power.PETIT) ||(_power==Power.REBOND && power!=Power.REBOND))
 			shouldChangeSize=true;
 		power = _power;
 		changePower();

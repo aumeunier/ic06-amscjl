@@ -46,13 +46,15 @@ public class Level2 extends Level {
 		w2.setImage("newherbe2.png");
 		w2.image = w2.image.getSubImage(0,15,300,50);
 
-
-		createSource(500,Global.GAMEPLAYHEIGHT-42,49,42,Power.PETIT);
-		//createSource(0,Global.GAMEPLAYHEIGHT-42,49,42,Power.FLYING);
+		//source
+		createSource(750,150,49,42,Power.PETIT);
+		createSource(750,20,49,42,Power.REBOND);
+		
+		//transporteur
 		createTransporter(790,420,10,42,300,280);
 		createTransporter(300,280,10,42,760,285);
-		createTransporter(790,270,10,42,105,400);
-		createTransporter(130,400,5,42,750,440);
+		createTransporter(790,270,10,42,120,400);
+		createTransporter(120,400,5,42,750,440);
 		createTransporter(790,340,10,42,600,440);
 		createTransporter(545,250,10,42,10,330);
 
@@ -62,21 +64,30 @@ public class Level2 extends Level {
 
 		//addIndication(200,100,"Tu peux maintenant voler!");
 		
-		//mur levier
-		Obstacle oMurLevier = new Obstacle(500,435,10,55);
-		oMurLevier.Hidden(true);
+		//mur levier x
+		Obstacle oMurLevier = new Obstacle(700,0,10,60);
 		sprites.add(oMurLevier);
 		Body oMurLevierBody = myState.addObstacle(oMurLevier);
 		ArrayList<Body> b1 = new ArrayList<Body>();
 		b1.add(oMurLevierBody);
 		
-		Obstacle oMurLevier2 = new Obstacle(200,100,10,55);
+		Obstacle oMurLevier2 = new Obstacle(180,0,10,60);
+		oMurLevier2.Hidden(true);
 		sprites.add(oMurLevier2);
 		Body oMurLevierBody2 = myState.addObstacle(oMurLevier2);
 		b1.add(oMurLevierBody2);
 		
+		//mur levier y
+		Obstacle oMurLevier3 = new Obstacle(180,0,10,60);
+		sprites.add(oMurLevier3);
+		Body oMurLevierBody3 = myState.addObstacle(oMurLevier3);
+		ArrayList<Body> b2 = new ArrayList<Body>();
+		b2.add(oMurLevierBody3);
+		
 		//levier qui ouvre le mur
-		createLevier(460,295,30,30,b1);
+		createLevier(460,295,30,30,b1); //levier x
+		createLevier(250,410,30,30,b2); //levier y
+		//createBoutonPressoir(40,450,30,30,b2); //levier z
 		
 		//place l'eau
 		SourceMortelle s = createSourceMortelle(0,Global.GAMEPLAYHEIGHT-60,50,50);
@@ -86,12 +97,22 @@ public class Level2 extends Level {
 		
 		
 		//plateforme
-		Wall w3 = createWall(0,190,410,50); 
+		Wall w3 = createWall(0,60,200,20); 
 		w3.setImage("newherbe2.png");
 		w3.image = w3.image.getSubImage(0,15,410,50);
 		
+		Wall w4 = createWall(600,60,200,20); 
+		w4.setImage("newherbe2.png");
+		w4.image = w4.image.getSubImage(0,15,410,50);
+		
+		Wall w5 = createWall(380,100,40,10); 
+		w5.setImage("newherbe2.png");
+		w5.image = w5.image.getSubImage(0,15,410,50);
+		
+		createObstacle(420,10,10,90);
+		
 		// Place the first character
-		this.character1 = addCharacterWithPoints(550,0,0.75f);		
+		this.character1 = addCharacterWithPoints(600,0,0.75f);		
 		this.character2 = addCharacterWithPoints(550,450,0.75f);	
 		/*Body b = state.getBodyForUserData(this.character1);
 		state.modifyBodySize(b, 0.5f, 0.5f);
