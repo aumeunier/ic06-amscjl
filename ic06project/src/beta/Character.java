@@ -189,7 +189,7 @@ public class Character extends Sprite{
 	}
 	
 	public void setPower(Power _power){
-		if((_power==Power.PETIT && power!=Power.PETIT) ||(_power==Power.REBOND && power!=Power.REBOND))
+		if((_power==Power.PETIT && power!=Power.PETIT) ||(_power==Power.REBOND && power!=Power.REBOND) ||(power==Power.PETIT && _power!=Power.PETIT))
 			shouldChangeSize=true;
 		power = _power;
 		changePower();
@@ -200,6 +200,7 @@ public class Character extends Sprite{
 	public void changeAvoidDoubleFlagState(){
 		avoidDoubleChangeFlag=!avoidDoubleChangeFlag;
 	}
+
 	
 	public int getBouton(){
 		return boutonpressoir;

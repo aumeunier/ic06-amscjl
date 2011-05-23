@@ -243,14 +243,6 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		
 		
 		
-		if((char1.isFat())&&(char1.shouldChangeSize)){
-			modifyBodySize(getBodyForUserData(char1),1,(float)2);
-			char1.shouldChangeSize=false;
-		}
-		if((char2.isFat())&&(char2.shouldChangeSize)){
-			modifyBodySize(getBodyForUserData(char2),1,(float)2);
-			char2.shouldChangeSize=false;
-		}
 		
 		if((char1.isPetit())&&(char1.shouldChangeSize)){
 			modifyBodySize(getBodyForUserData(char1),(float)0.5,(float)0.5);
@@ -258,6 +250,14 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		}
 		if((char2.isPetit())&&(char2.shouldChangeSize)){
 			modifyBodySize(getBodyForUserData(char2),(float)0.5,(float)0.5);
+			char2.shouldChangeSize=false;
+		}
+		if((!char1.isPetit())&&(char1.shouldChangeSize)){
+			modifyBodySize(getBodyForUserData(char1),(float)2.0,(float)2.0);
+			char1.shouldChangeSize=false;
+		}
+		if((!char2.isPetit())&&(char2.shouldChangeSize)){
+			modifyBodySize(getBodyForUserData(char2),(float)2.0,(float)2.0);
 			char2.shouldChangeSize=false;
 		}
 		if((char1.isRebond())&&(char1.shouldChangeSize)){
@@ -531,6 +531,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 
 		sd.setAsBox(transporterData.w/2,transporterData.h/2);
 		newBody.createShape(sd);
+		newBody.putToSleep();
 		spriteBodies.add(newBody);		
 		return newBody;
 	}
@@ -616,9 +617,8 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			return ch2_body;
 		}
 	}
-	public Body modifyBodyRebond(Body body, float R)//nb : rajout d'un parametre pour pouvoir grossir uniquement
+	public Body modifyBodyRebond(Body body, float R)
 	{
-		System.out.println("changement de taille");
 		if(!(body.getUserData() instanceof Sprite)){
 			return null;
 		}
@@ -678,7 +678,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	}
 	public Body modifyBodySize(Body body, float h, float w)//nb : rajout d'un parametre pour pouvoir grossir uniquement
 	{
-		System.out.println("changement de taille");
+		System.out.println(body.toString());
 		if(!(body.getUserData() instanceof Sprite)){
 			return null;
 		}
@@ -700,9 +700,16 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		md.mass = body.getMass();
 		bodyDef.massData = md;
 		
+		if(body == ch1_body){
+		System.out.println(userData.toString());
+		System.out.println(b2position.toString());
+		System.out.println(body.getMass());
+		}
+		
 		Body newBody = world.createBody(bodyDef);		
 		Shape shape = body.getShapeList();
-		do {
+			
+		while(shape!=null){
 			PolygonDef sd = new PolygonDef();
 			sd.density = shape.m_density;
 			sd.friction = shape.getFriction();
@@ -712,10 +719,10 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			for(Vec2 v: ((PolygonShape)shape).getVertices()){
 				Vec2 newV = new Vec2(v.x*w,v.y*h);
 				sd.addVertex(newV);
-			}		
+			}	
 			newBody.createShape(sd);			
 			shape = shape.getNext();
-		} while(shape!=null);
+		}
 		
 		if(ch1_body.equals(body)){
 			ch1_body = newBody;

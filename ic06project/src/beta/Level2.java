@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
+import org.newdawn.slick.Color;
 
 public class Level2 extends Level {
 	public Level2(GameplayState state, LevelSave model){	
@@ -22,10 +23,11 @@ public class Level2 extends Level {
 		
 		
 		
-		createGround(100,440,200,50); // Sol 3
-		createGround(100,390,10,50); // Sol 2
-		createGround(100,200,200,190); // Sol 1/4
-		createGround(290,390,10,50); // Sol 32
+		createGround(200,410,100,80); // Sol 3
+		createGround(100,410,100,20);
+		createGround(100,360,10,50); // Sol 2 petit a gauche
+		createGround(100,200,200,160); // Sol 1/4 gros en haut
+		createGround(290,360,10,50); // Sol 32 petit a droite
 		createGround(300,200,200,75); // Sol 5
 		createGround(300,325,200,110); // Sol 6
 		createGround(500,200,10,150); // Sol 7
@@ -38,7 +40,7 @@ public class Level2 extends Level {
 		createGround(540,200,90,70); // Sol 13
 		createGround(730,200,90,50); // Sol 15
 		createGround(730,320,90,10); // Sol 15
-		createGround(0,400,40,10); // Sol 20 petite plateforme
+		createGround(0,350,40,10); // Sol 20 petite plateforme
 		Wall w1 = createWall(100,190,410,50); // bois au dessus pour éviter le bug
 		w1.setImage("newherbe2.png");
 		w1.image = w1.image.getSubImage(0,15,410,50);
@@ -52,13 +54,7 @@ public class Level2 extends Level {
 		createSource(300,150,49,42,Power.NAGE);
 		
 		
-		//transporteur
-		createTransporter(790,420,10,42,300,280);
-		createTransporter(300,280,10,42,760,285);
-		createTransporter(790,270,10,42,120,400);
-		createTransporter(120,400,5,42,750,440);
-		createTransporter(790,340,10,42,600,440);
-		createTransporter(545,250,10,42,10,330);
+		
 
 
 		Exit exit = createExit(600,400,25,25);
@@ -86,16 +82,45 @@ public class Level2 extends Level {
 		ArrayList<Body> b2 = new ArrayList<Body>();
 		b2.add(oMurLevierBody3);
 		
+		//mur levier z
+		Obstacle oMurLevier4 = new Obstacle(500,435,10,55);
+		sprites.add(oMurLevier4);
+		Body oMurLevierBody4 = myState.addObstacle(oMurLevier4);
+		ArrayList<Body> b3 = new ArrayList<Body>();
+		b3.add(oMurLevierBody4);
+		
 		//levier qui ouvre le mur
 		createLevier(460,295,30,30,b1); //levier x
-		createLevier(250,410,30,30,b2); //levier y
-		//createBoutonPressoir(40,450,30,30,b2); //levier z
+		createLevier(250,380,30,30,b2); //levier y
+		
 		
 		//place l'eau
-		SourceMortelle s = createSourceMortelle(0,Global.GAMEPLAYHEIGHT-60,50,50);
-		s.setAnimation("waves.png", 300, 300);
-		SourceMortelle s2 = createSourceMortelle(50,Global.GAMEPLAYHEIGHT-60,50,50);
-		s2.setAnimation("waves2.png", 300, 300);
+		createSourceMortelle(0,Global.GAMEPLAYHEIGHT-20,100,10);
+		Sprite s6 = new Sprite(0,Global.GAMEPLAYHEIGHT-60,50,50);
+		sprites.add(s6);
+		s6.setAnimation("waves.png", 300, 300);
+		Sprite s7 = new Sprite(50,Global.GAMEPLAYHEIGHT-60,50,50);
+		sprites.add(s7);
+		s7.setAnimation("waves2.png", 300, 300);
+		
+		createSourceMortelle(100,Global.GAMEPLAYHEIGHT-20,100,10);
+		Sprite s8 = new Sprite(100,Global.GAMEPLAYHEIGHT-60,50,50);
+		sprites.add(s8);
+		s8.setAnimation("waves.png", 300, 300);
+		Sprite s9 = new Sprite(150,Global.GAMEPLAYHEIGHT-60,50,50);
+		sprites.add(s9);
+		s9.setAnimation("waves2.png", 300, 300);
+		
+		createBoutonPressoir(5,460,20,20,b3); //levier z
+		
+		//transporteur
+		createTransporter(790,450,10,42,300,280);
+		createTransporter(300,290,10,42,760,285);
+		createTransporter(790,280,10,42,120,370);
+		createTransporter(130,370,5,42,750,440);
+		createTransporter(790,350,10,42,600,440);
+		createTransporter(545,280,10,42,10,330);
+		createTransporter(170,450,10,42,600,0);
 		
 		
 		//plateforme
