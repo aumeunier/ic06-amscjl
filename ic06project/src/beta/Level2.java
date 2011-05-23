@@ -49,6 +49,8 @@ public class Level2 extends Level {
 		//source
 		createSource(750,150,49,42,Power.PETIT);
 		createSource(750,20,49,42,Power.REBOND);
+		createSource(300,150,49,42,Power.NAGE);
+		
 		
 		//transporteur
 		createTransporter(790,420,10,42,300,280);

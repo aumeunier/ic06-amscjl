@@ -72,7 +72,7 @@ public class MyContactFilter implements ContactFilter {
 					else if(s2.isHidden()){
 						return false;
 					}
-					else if(s2.getClass().equals(SourceMortelle.class)){
+					else if((s2.getClass().equals(SourceMortelle.class))&&(((Character)(s1)).getPower()!= Power.NAGE)){
 						((Character)(s1)).setDead(true);
 					}
 					else if(s2.getClass().equals(Source.class)){
@@ -84,8 +84,14 @@ public class MyContactFilter implements ContactFilter {
 						else if(source.power == Power.FLYING){
 							character.setPower(Power.FLYING);
 						}
+						else if(source.power == Power.NAGE){
+							character.setPower(Power.NAGE);
+						}
 						else if(source.power == Power.REBOND){
 							character.setPower(Power.REBOND);
+						}
+						else if(source.power == Power.NAGE){
+							character.setPower(Power.NAGE);
 						}
 						else if(source.power == Power.FAT){
 							character.setPower(Power.FAT);
@@ -99,9 +105,7 @@ public class MyContactFilter implements ContactFilter {
 						return false;
 					}
 					else if(s2.getClass().equals(Transporter.class)){
-						System.out.println("new_x="+((Transporter)s2).new_x+"et Ytransported="+((Transporter)s2).new_y);
 						((Character)s1).setTransported(true,((Transporter)s2).new_x,((Transporter)s2).new_y);
-						System.out.println("X_Transported="+((Character)s1).X_transported+"et Ytransported="+((Character)s1).Y_transported);
 						return true;
 					}
 					else if(s2.getClass().equals(Character.class)){
@@ -124,7 +128,7 @@ public class MyContactFilter implements ContactFilter {
 					else if(s1.isHidden()){
 						return false;
 					}
-					else if(s1.getClass().equals(SourceMortelle.class)){
+					else if((s1.getClass().equals(SourceMortelle.class)) && (((Character)(s2)).getPower()!= Power.NAGE)){
 						((Character)(s2)).setDead(true);					
 					}
 					else if(s1.getClass().equals(Source.class)){
@@ -145,15 +149,16 @@ public class MyContactFilter implements ContactFilter {
 						else if(source.power == Power.FIRE){
 							character.setPower(Power.FIRE);
 						}
+						else if(source.power == Power.NAGE){
+							character.setPower(Power.NAGE);
+						}
 						else if(source.power == Power.PETIT){
 							character.setPower(Power.PETIT);
 						}
 						return false;
 					}
 					else if(s1.getClass().equals(Transporter.class)){
-						System.out.println("new_x="+((Transporter)s1).new_x+"et Ytransported="+((Transporter)s1).new_y);
 						((Character)s2).setTransported(true,((Transporter)s1).new_x,((Transporter)s1).new_y);
-						System.out.println("le perso a pour but d'aller au x="+((Character)s2).X_transported+"et au y="+((Character)s2).Y_transported);
 						return true;
 					}
 

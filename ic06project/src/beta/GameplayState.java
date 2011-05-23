@@ -698,7 +698,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			PolygonDef sd = new PolygonDef();
 			sd.density = shape.m_density;
 			sd.friction = shape.getFriction();
-			sd.restitution = shape.getRestitution(); 
+			//sd.restitution = shape.getRestitution(); 
 			sd.userData = shape.getUserData();
 			sd.isSensor = shape.isSensor();
 			for(Vec2 v: ((PolygonShape)shape).getVertices()){

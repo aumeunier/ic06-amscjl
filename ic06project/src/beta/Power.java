@@ -8,6 +8,7 @@ public enum Power {
 	FAT,
 	FIRE,
 	REBOND,
+	NAGE,
 	PETIT;
 	
 	public String imageForPower() {
@@ -36,6 +37,9 @@ public enum Power {
 			break;
 		case FIRE:
 			result = "powerFire.png";
+			break;
+		case NAGE:
+			result = "fat.png";
 			break;
 		}
 		return result;

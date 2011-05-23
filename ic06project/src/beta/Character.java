@@ -46,6 +46,9 @@ public class Character extends Sprite{
 		else if(isFire()){
 			this.setFilter(new Color(255,51,51,255));
 		}
+		else if(isNage()){
+			this.setFilter(new Color(33,33,33,255));
+		}
 		else if(isRebond()){
 			this.setFilter(new Color(55,55,55,255));
 		}
@@ -117,6 +120,9 @@ public class Character extends Sprite{
 	}
 	public boolean isRebond(){
 		return power==Power.REBOND;
+	}
+	public boolean isNage(){
+		return power==Power.NAGE;
 	}
 	public boolean isDead(){
 		return isDead;
