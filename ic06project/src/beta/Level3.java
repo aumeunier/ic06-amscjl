@@ -22,7 +22,15 @@ public class Level3 extends Level {
 		createWall(0,-10,Global.GAMEPLAYWIDTH,10);
 		
 		createGround(0,380,150,120); // Sol 1
+		Wall w1 = createWall(0,380,150,50);
+		w1.setImage("newherbe2.png");
+		w1.image = w1.image.getSubImage(0,17,150,50);
+		
 		createGround(200,380,550,50); // Sol 2
+		Wall w2 = createWall(200,380,550,50);
+		w2.setImage("newherbe2.png");
+		w2.image = w2.image.getSubImage(0,17,550,50);
+		
 		createGround(550,430,200,70); // Sol 4
 		createGround(750,480,50,20); // Sol 5
 		

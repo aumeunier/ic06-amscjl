@@ -55,7 +55,7 @@ public class Level1 extends Level {
 		w2.image = w2.image.getSubImage(0,15,100,50);
 		Wall w3 = createWall(Global.GAMEPLAYWIDTH-80,Global.GAMEPLAYHEIGHT-50,80,50); // bois au dessus pour éviter le bug
 		w3.setImage("newherbe2.png");
-		w3.image = w3.image.getSubImage(0,15,80,50);
+		w3.image = w2.image.getSubImage(0,15,80,50);
 		
 		//Plateform
 		Wall o1 = createWall(10,75,(int)(148/1.3),(int)(42/1.3));
