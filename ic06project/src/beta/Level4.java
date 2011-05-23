@@ -10,7 +10,7 @@ public class Level4 extends Level {
 	public Level4(GameplayState state, LevelSave model) {
 		super(state,model);
 		this.levelID = 4;
-		//this.inTheDarkness = true;
+		this.inTheDarkness = true;
 		this.setBackgroundImage("6362779_s.jpg");
 		
 		// Place a ground wall
@@ -109,6 +109,8 @@ public class Level4 extends Level {
 				Global.GAMEPLAYHEIGHT-65-10,0.7f);	
 		this.character1.setLightSize(this.character1.h*2);
 		this.character2.setLightSize(this.character2.h*2);
+
+		this.setLevelForAllSprites();
 	}
 
 }

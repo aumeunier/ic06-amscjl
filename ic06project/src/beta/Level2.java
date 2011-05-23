@@ -121,5 +121,7 @@ public class Level2 extends Level {
 		Body b2 = state.getBodyForUserData(this.character2);
 		state.modifyBodySize(b2, 0.5f, 0.5f);
 		*/
+		
+		this.setLevelForAllSprites();
 	}
 }

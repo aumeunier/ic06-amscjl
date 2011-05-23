@@ -24,6 +24,7 @@ public class Sprite {
 	protected boolean lightInDarkness=false;
 	protected int lightSize=50;
 	protected Image lightImage=Global.setImage(Global.DEFAULT_LIGHT_IMAGE);
+	protected Level level;
 	
 	public Sprite(){
 		this.x=0;
@@ -40,6 +41,10 @@ public class Sprite {
 		this.y = _y;
 		this.w = _w;
 		this.h = _h;
+	}
+	
+	public void setLevelContainer(Level lvl){
+		this.level = lvl;
 	}
 	
 	public void setCoordinatesFromBody(Body b){

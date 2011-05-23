@@ -45,6 +45,20 @@ public class Level {
 		this.display = new Display(gc);
 	}
 	
+	protected void setLevelForAllSprites(){
+		character1.setLevelContainer(this);
+		character2.setLevelContainer(this);
+		for(Sprite s: sprites){
+			s.setLevelContainer(this);
+		}
+		for(Sprite s: backgroundSprites){
+			s.setLevelContainer(this);
+		}
+		for(Sprite s: listeExit){
+			s.setLevelContainer(this);
+		}
+	}
+	
 	protected void addIndication(int x, int y, String text){
 		InGameIndication indication = new InGameIndication(x,y,text);
 		indications.add(indication);

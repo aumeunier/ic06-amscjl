@@ -125,5 +125,7 @@ public class Level3 extends Level {
 		// Place the first character
 		this.character1 = addCharacterWithPoints(10,330,0.75f);		
 		this.character2 = addCharacterWithPoints(50,330,0.75f);	
+		
+		this.setLevelForAllSprites();
 	}
 }

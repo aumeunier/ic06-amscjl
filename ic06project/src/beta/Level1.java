@@ -130,5 +130,7 @@ public class Level1 extends Level {
 		this.character1 = addCharacterWithPoints(330,Global.GAMEPLAYHEIGHT-65-76,1.0f);		
 		this.character2 = addCharacterWithPoints(Global.GAMEPLAYWIDTH-87-80,
 				Global.GAMEPLAYHEIGHT-65-10,1.0f);		
+		
+		this.setLevelForAllSprites();
 	}
 }
