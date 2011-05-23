@@ -79,6 +79,7 @@ public class Character extends Sprite{
 		}
 	}
 	
+	
 	public void goLeft(){
 		if(!isGoingLeft){			
 			isGoingRight = false;

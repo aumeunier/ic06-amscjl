@@ -16,8 +16,17 @@ public class MyContactListener implements ContactListener {
 		if (point.shape1.getUserData() == GameplayState.GROUND_SENSOR_NAME){
 			Sprite s = (Sprite)point.shape2.getBody().getUserData();
 			if((s instanceof Wall) || (s instanceof Obstacle)||(s instanceof Ground)|| (s instanceof Declencheur)){
-				if(s instanceof Ground && ((Ground)s).getSlippery())
-					((Character) point.shape1.getBody().getUserData()).isSlipping = true;
+				if(s instanceof Ground && ((Ground)s).getSlippery()){
+					if(((Character) point.shape1.getBody().getUserData()).getPower()==Power.FIRE)
+						((Ground)s).setSlippery(false);
+					else{
+						((Character) point.shape1.getBody().getUserData()).isSlipping = true;
+						if(((Ground)s).sens=="left")
+							((Character) point.shape1.getBody().getUserData()).goLeft();
+						else
+							((Character) point.shape1.getBody().getUserData()).goRight();
+					}
+				}
 				else
 					((Character) point.shape1.getBody().getUserData()).isSlipping = false;
 				((Character) point.shape1.getBody().getUserData()).isFalling = false;
@@ -26,8 +35,17 @@ public class MyContactListener implements ContactListener {
 		else if (point.shape2.getUserData() == GameplayState.GROUND_SENSOR_NAME){
 			Sprite s = (Sprite)point.shape1.getBody().getUserData();
 			if((s instanceof Wall) || (s instanceof Obstacle)||(s instanceof Ground)|| (s instanceof Declencheur)){
-				if(s instanceof Ground && ((Ground)s).getSlippery())
-					((Character) point.shape2.getBody().getUserData()).isSlipping = true;
+				if(s instanceof Ground && ((Ground)s).getSlippery()){
+					if(((Character) point.shape2.getBody().getUserData()).getPower()==Power.FIRE)
+						((Ground)s).setSlippery(false);
+					else{
+						((Character) point.shape2.getBody().getUserData()).isSlipping = true;
+						if(((Ground)s).sens=="left")
+							((Character) point.shape2.getBody().getUserData()).goLeft();
+						else
+							((Character) point.shape2.getBody().getUserData()).goRight();
+					}
+				}
 				else
 					((Character) point.shape2.getBody().getUserData()).isSlipping = false;
 				((Character) point.shape2.getBody().getUserData()).isFalling = false;
@@ -69,12 +87,16 @@ public class MyContactListener implements ContactListener {
 		if (o1 == GameplayState.GROUND_SENSOR_NAME){
 			Sprite s = (Sprite)point.shape2.getBody().getUserData();
 			if((s instanceof Wall) || (s instanceof Obstacle)||(s instanceof Ground)|| (s instanceof Declencheur)){
+				if((s instanceof Ground)&& (((Ground)s).sens!=null) && ((Character)point.shape1.getBody().getUserData()).isFire())
+					((Ground)s).setSlippery(true);
 				((Character) point.shape1.getBody().getUserData()).isFalling = true;
 			}
 		}
 		else if (o2 == GameplayState.GROUND_SENSOR_NAME){
 			Sprite s = (Sprite)point.shape1.getBody().getUserData();
 			if((s instanceof Wall) || (s instanceof Obstacle)||(s instanceof Ground)|| (s instanceof Declencheur)){
+				if((s instanceof Ground)&& (((Ground)s).sens!=null)&&((Character)point.shape2.getBody().getUserData()).isFire())
+					((Ground)s).setSlippery(true);
 				((Character) point.shape2.getBody().getUserData()).isFalling = true;
 			}
 		}
