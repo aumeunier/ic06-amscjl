@@ -29,17 +29,20 @@ public class Level4 extends Level {
 		this.backgroundSprites.add(entree);
 		
 		// Sols
-		createGround(0,90,200,20); // En haut a gauche, a cote de l'entree
-		createGround(280,90,200,20); // apres le premier trou, en haut
-		createGround(280,100,20,150); // en dessous
-		createGround(480,70,20,140); // vertical
-		createGround(480,50,160,20); // au dessus
-		createGround(680,50,120,20); // apres le deuxieme trou
-		createGround(550,120,250,20); // en dessous
-		createGround(500,170,20,20); // appui
-		createGround(500,190,180,20); // en dessous
-		createGround(720,190,80,20); // a cote
-		createGround(280,260,520,20); // en dessous
+		createGround(0,90,200,20); 
+		createGround(280,90,200,20);
+		createGround(260,170,80,20);// 
+		createGround(260,200,20,70);//
+		createGround(380,110,20,80); 
+		createGround(480,70,20,40); 
+		createGround(480,50,160,20); 
+		createGround(680,50,120,20); 
+		createGround(550,120,250,20); 
+		createGround(400,170,120,20); 
+		createGround(500,190,180,20);
+		createGround(720,190,80,20); 
+		createGround(280,260,60,20); 
+		createGround(260,280,480,20); 
 		
 		/*
 		
@@ -104,8 +107,8 @@ public class Level4 extends Level {
 		this.character1 = addCharacterWithPoints(10,10,0.7f);		
 		this.character2 = addCharacterWithPoints(Global.GAMEPLAYWIDTH-87-80,
 				Global.GAMEPLAYHEIGHT-65-10,0.7f);	
-		//this.character1.setLightSize(this.character1.h*2);
-		//this.character2.setLightSize(this.character2.h*2);
+		this.character1.setLightSize(this.character1.h*2);
+		this.character2.setLightSize(this.character2.h*2);
 	}
 
 }

@@ -78,6 +78,17 @@ public class MyContactListener implements ContactListener {
 				((Character) point.shape2.getBody().getUserData()).isFalling = false;
 			}
 		}
+		else {
+			Sprite s1 = (Sprite)point.shape1.getBody().getUserData();
+			Sprite s2 = (Sprite)point.shape2.getBody().getUserData();
+
+			if((s1 instanceof Wall || s1 instanceof Obstacle || s1 instanceof Ground) && s2 instanceof Character){
+				((Character)s2).isColliding = true;
+			}
+			else if(s1 instanceof Character && (s2 instanceof Wall || s2 instanceof Obstacle || s2 instanceof Ground)){
+				((Character)s1).isColliding = true;
+			}
+		}
 	}
 
 	@Override
@@ -90,7 +101,7 @@ public class MyContactListener implements ContactListener {
 				if((s instanceof Ground)&& (((Ground)s).sens!=null) && ((Character)point.shape1.getBody().getUserData()).isFire())
 					((Ground)s).setSlippery(true);
 				((Character) point.shape1.getBody().getUserData()).isFalling = true;
-			}
+			}	
 		}
 		else if (o2 == GameplayState.GROUND_SENSOR_NAME){
 			Sprite s = (Sprite)point.shape1.getBody().getUserData();
@@ -117,7 +128,6 @@ public class MyContactListener implements ContactListener {
 								&& (temp1!=s1 ||temp2!=s2))
 							|| ((temp2 instanceof BoutonPressoir && temp1 instanceof Character)
 								&& (temp2!=s1 ||temp1!=s2))){
-							//System.out.println(temp1.toString()+temp2.toString());
 							noOneOnButton = false;
 						}
 					}			
@@ -158,6 +168,54 @@ public class MyContactListener implements ContactListener {
 					((Character)s1).setAtExit(false);
 				}
 			}
+
+			// Character collides with ground or wall or obstacle
+			else {
+				if((s1 instanceof Wall || s1 instanceof Obstacle || s1 instanceof Ground) && s2 instanceof Character){
+					boolean noHardCollision = true;
+					for(ContactPoint c: contactPoints){
+						Body c1 = c.shape1.getBody();
+						Body c2 = c.shape2.getBody();
+						if(c1!= null && c2!=null){
+							Sprite temp1 = (Sprite)c1.getUserData();
+							Sprite temp2 = (Sprite)c2.getUserData();
+							if((((temp1 instanceof Wall || temp1 instanceof Obstacle || temp1 instanceof Ground)
+									&& temp2 instanceof Character)
+									&& (temp1!=s1 && temp2==s2))
+								|| ((temp2 instanceof Wall || temp2 instanceof Obstacle || temp2 instanceof Ground)
+										&& temp1 instanceof Character)
+										&& (temp2!=s1 && temp1==s2)){
+								noHardCollision = false;
+							}
+						}	
+					}
+					if(noHardCollision){
+						((Character)s2).isColliding = false;
+					}		
+				}
+				else if(s1 instanceof Character && (s2 instanceof Wall || s2 instanceof Obstacle || s2 instanceof Ground)){
+					boolean noHardCollision = true;
+					for(ContactPoint c: contactPoints){
+						Body c1 = c.shape1.getBody();
+						Body c2 = c.shape2.getBody();
+						if(c1!= null && c2!=null){
+							Sprite temp1 = (Sprite)c1.getUserData();
+							Sprite temp2 = (Sprite)c2.getUserData();
+							if((((temp1 instanceof Wall || temp1 instanceof Obstacle || temp1 instanceof Ground)
+									&& temp2 instanceof Character)
+									&& (temp1!=s2 && temp2==s1))
+								|| ((temp2 instanceof Wall || temp2 instanceof Obstacle || temp2 instanceof Ground)
+										&& temp1 instanceof Character)
+										&& (temp2!=s2 && temp1==s1)){
+								noHardCollision = false;
+							}
+						}	
+					}
+					if(noHardCollision){
+						((Character)s1).isColliding = false;
+					}					
+				}
+			}			
 		}
 		int indexOfPoint = -1;
 		for(int i = 0 ; i < contactPoints.size() ; ++i){

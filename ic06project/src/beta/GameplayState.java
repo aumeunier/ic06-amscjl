@@ -195,18 +195,20 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		}
 		
 		// Sinon effectuer les traitements d'inputs et l'update du world / des sprites
-		boolean char1CanMove = (char1.isFlying() || !char1.isFalling) && !char1.isSlipping;
-		boolean char2CanMove = (char2.isFlying() || !char2.isFalling) && !char2.isSlipping; 
+		boolean char1CanJump = (char1.isFlying() || !char1.isFalling);
+		boolean char2CanJump = (char2.isFlying() || !char2.isFalling);
+		boolean char1CanMove = (char1CanJump || !char1.isColliding) && !char1.isSlipping;
+		boolean char2CanMove = (char2CanJump || !char2.isColliding) && !char2.isSlipping;
 		
-		if((input.isKeyPressed(Input.KEY_Z)) && char1CanMove){
+		if((input.isKeyPressed(Input.KEY_Z)) && char1CanJump){
 			ch1_body.applyImpulse(new Vec2(0, SPEED_JUMP), ch1_body.getWorldCenter());	
 			char1.isFalling = true;
 		}
-		else if((input.isKeyDown(Input.KEY_Q) && !char1.isSlipping)||(char1.isGoingLeft&&char1.isSlipping)) /*&& char1CanMove*/{
+		else if(((input.isKeyDown(Input.KEY_Q)) && char1CanMove)||(char1.isGoingLeft&&char1.isSlipping)){
 			ch1_body.m_linearVelocity.x = -SPEED_X;			
 			char1.goLeft();
 		}
-		else if((input.isKeyDown(Input.KEY_D)&& !char1.isSlipping)||(char1.isGoingRight&&char1.isSlipping)) /*&& char1CanMove*/{
+		else if(((input.isKeyDown(Input.KEY_D)) && char1CanMove)||(char1.isGoingRight&&char1.isSlipping)){
 			ch1_body.m_linearVelocity.x = SPEED_X;			
 			char1.goRight();
 		}
@@ -216,15 +218,15 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		}
 		
 
-		if((input.isKeyPressed(Input.KEY_UP)) && char2CanMove){
+		if((input.isKeyPressed(Input.KEY_UP)) && char2CanJump){
 			ch2_body.applyImpulse(new Vec2(0, SPEED_JUMP), ch2_body.getWorldCenter());	
 			char2.isFalling = true;
-		}
-		else if((input.isKeyDown(Input.KEY_LEFT)&& !char2.isSlipping)||(char2.isGoingLeft&&char2.isSlipping)) /*&& char2CanMove*/{
+		}		
+		else if(((input.isKeyDown(Input.KEY_LEFT)) && char2CanMove)||(char2.isGoingLeft&&char2.isSlipping)){
 			ch2_body.m_linearVelocity.x = -SPEED_X;			
 			char2.goLeft();
 		}
-		else if((input.isKeyDown(Input.KEY_RIGHT)&& !char2.isSlipping)||(char2.isGoingRight&&char2.isSlipping)) /*&& char2CanMove*/{
+		else if(((input.isKeyDown(Input.KEY_RIGHT)) && char2CanMove)||(char2.isGoingRight&&char2.isSlipping)){
 			ch2_body.m_linearVelocity.x = SPEED_X;			
 			char2.goRight();
 		}
