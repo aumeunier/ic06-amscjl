@@ -39,9 +39,9 @@ public class Level2 extends Level {
 		createGround(630,390,190,35); // Sol 10
 		createGround(540,320,90,70); // Sol 12
 		createGround(540,200,90,70); // Sol 13
-		createGround(730,200,90,50); // Sol 15
+		createGround(730,200,90,70); // Sol 15
 		createGround(730,320,90,10); // Sol 15
-		createGround(630,260,90,10);
+		createGround(630,260,100,10);
 		createGround(0,350,40,10); // Sol 20 petite plateforme
 		Wall w1 = createWall(100,190,410,50); // bois au dessus pour éviter le bug
 		w1.setImage("newherbe2.png");

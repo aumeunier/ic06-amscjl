@@ -72,7 +72,7 @@ public class UIGameplay implements UIInterface {
 		this.display.add(levelLabel);
 
 		Image keysTotalLabelImage = labelImage.getScaledCopy(MENU_W/2, MENU_H);
-		allKeysLabel = new Label(keysTotalLabelImage,"Nombre total de cles: "+
+		allKeysLabel = new Label(keysTotalLabelImage,"Nombre total de fruits Hapsten: "+
 				Save.getInstance().getTotalNumberOfUnlockedKeys()+"/"+Save.getInstance().getTotalNumberOfKeys());
 		allKeysLabel.setBounds(MENU_X+MENU_W+10, Global.WINDOW_HEIGHT-MENU_H, MENU_X-(POWER_X+POWER_W+10), MENU_H);
 		allKeysLabel.setForeground(Color.black);
@@ -107,7 +107,7 @@ public class UIGameplay implements UIInterface {
 		this.display.add(menuLabel);
 	}
 	public void onEnter(){
-		allKeysLabel.setText("Nombre total de cles: "+
+		allKeysLabel.setText("Nombre total de fruits Hapsten: "+
 				Save.getInstance().getTotalNumberOfUnlockedKeys()+"/"+Save.getInstance().getTotalNumberOfKeys());
 		firstPlayerLabel.setText(Save.getInstance().getFirstPlayerName());
 		secondPlayerLabel.setText(Save.getInstance().getSecondPlayerName());
@@ -117,14 +117,14 @@ public class UIGameplay implements UIInterface {
 	public void setLevelInformation(String _levelName, int _nbUnlockedKeys, int _nbUnlockableKeys){
 		levelLabel.setText(_levelName);
 		levelLabel.setImage(null);
-		unlockedKeysLabel.setText("Unlocked keys:"+_nbUnlockedKeys);
+		unlockedKeysLabel.setText("Unlocked fruits:"+_nbUnlockedKeys);
 		unlockedKeysLabel.setImage(null);
-		unlockableKeysLabel.setText("Unlockable keys:"+_nbUnlockableKeys);
+		unlockableKeysLabel.setText("Unlockable fruits:"+_nbUnlockableKeys);
 		unlockableKeysLabel.setImage(null);
 	}
 	public void setTempLevelInformation(Power powerPlayer1, Power powerPlayer2, int _nbUnlockedKeys){
-		unlockedKeysLabel.setText("Unlocked keys:"+_nbUnlockedKeys);
-		allKeysLabel.setText("Nombre total de cles: "+	(Save.getInstance().getTotalNumberOfUnlockedKeys()+_nbUnlockedKeys)
+		unlockedKeysLabel.setText("Unlocked fruits:"+_nbUnlockedKeys);
+		allKeysLabel.setText("Nombre total de fruits Hapsten: "+	(Save.getInstance().getTotalNumberOfUnlockedKeys()+_nbUnlockedKeys)
 				+"/"+Save.getInstance().getTotalNumberOfKeys());
 		if(powerPlayer1.compareTo(p1power)!=0){
 			switch(powerPlayer1){

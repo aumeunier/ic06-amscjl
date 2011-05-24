@@ -682,11 +682,11 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		groundSensor.isSensor=true;
 		groundSensor.userData=GROUND_SENSOR_NAME;
 		if(list!=null){
-			groundSensor.setAsBox((float)((characterData.getCharBodyWidth()*LOW_BODY_CHARACTER_RATIO)*0.9),
+			groundSensor.setAsBox((float)((characterData.getCharBodyWidth()*LOW_BODY_CHARACTER_RATIO)*1.0),
 					2, new Vec2(0,-characterData.getCharBodyHeight()/2), 0);
 		}
 		else {
-			groundSensor.setAsBox((float)((characterData.getCharBodyWidth()/2.0)*0.9), 2, 
+			groundSensor.setAsBox((float)((characterData.getCharBodyWidth()/2.0)*1.0), 2, 
 					new Vec2(0,-characterData.getCharBodyHeight()/2), 0);
 		}
 		if(ch1_body == null){
