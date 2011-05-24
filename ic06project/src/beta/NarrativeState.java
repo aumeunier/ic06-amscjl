@@ -15,10 +15,10 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class NarrativeState extends BasicGameState implements MouseListener {
 	private static NarrativeState instance;
-	static final int MAP_X = 100;
-	static final int MAP_Y = 150;
-	static final int MAP_W = 600;
-	static final int MAP_H = 300;
+	static final int MAP_X = 50;
+	static final int MAP_Y = 25;
+	static final int MAP_W = 700;
+	static final int MAP_H = 500;
 	static final int CONTINUE_X = 340;
 	static final int CONTINUE_Y = MAP_Y+MAP_H+20;
 	static final int CONTINUE_W = 120;
