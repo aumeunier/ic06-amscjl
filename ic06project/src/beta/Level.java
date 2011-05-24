@@ -276,11 +276,10 @@ public class Level {
 	}
 	
 
-	/*
-	protected LevierCombi createLevierCombi(int x, int y, int w, int h, ArrayList<ArrayList<Body> > b, ArrayList<ArrayList<Boolean> > test, ArrayList<LevierCombi> lesLeviers){
+	protected LevierCombi createLevierCombi(int x, int y, int w, int h, ArrayList<ArrayList<Body> > b, ArrayList<ArrayList<Boolean> > test){
 		
 		// Create a levier object
-		LevierCombi levier = new LevierCombi(x,y,w,h,b,test,lesLeviers);
+		LevierCombi levier = new LevierCombi(x,y,w,h,b,test);
 		
 		// Add it to the list of sprites of this level
 		sprites.add(levier);
@@ -290,7 +289,9 @@ public class Level {
 		
 		return levier;
 	}
-	*/
+	
+	
+
 	
 	protected Bonus createBonus(int x, int y, int w, int h){
 		
@@ -442,8 +443,11 @@ public class Level {
 		else {
 			backgroundImage.draw();
 			for(int i = 0 ; i < backgroundSprites.size() ; ++i){
+
 				Sprite s = backgroundSprites.get(i);
-				s.draw(g);
+				if(!s.isHidden()){
+					s.draw(g);
+				}
 				if(s.getIndication()!=null && s.getIndicationActivated()){
 					System.out.println("s'affiche ici !");
 					s.getIndication().render(gc, g);

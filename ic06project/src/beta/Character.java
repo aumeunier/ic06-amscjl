@@ -228,7 +228,6 @@ public class Character extends Sprite{
 		return boutonpressoir;
 	}
 	public void setBouton(int n){
-		System.out.println("bouton"+n);
 		boutonpressoir=n;
 	}
 	 

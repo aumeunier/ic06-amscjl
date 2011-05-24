@@ -20,7 +20,12 @@ public class BoutonElevator extends BoutonPressoir {
 			
 			bx.applyImpulse(new Vec2(0, puissance), bx.getWorldCenter());
 		}
-		this.setImage("blur1test.png");
+		if(poids==1)
+			this.setImage("Boutonactif1.png");
+		else if(poids==2)
+			this.setImage("Boutonactif2.png");
+		else if(poids==3)
+			this.setImage("Boutonactif3.png");
 	}
 
 	public void desactivate(){
@@ -30,6 +35,11 @@ public class BoutonElevator extends BoutonPressoir {
 			bx.applyImpulse(new Vec2(0, -200), bx.getWorldCenter());
 		}
 		
-		this.setImage("blur20test.png");
+		if(poids==1)
+			this.setImage("Bouton1.png");
+		else if(poids==2)
+			this.setImage("Bouton2.png");
+		else if(poids==3)
+			this.setImage("Bouton3.png");
 	}
 }

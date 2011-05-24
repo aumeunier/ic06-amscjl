@@ -19,7 +19,6 @@ public class MyContactFilter implements ContactFilter {
 			Sprite s2 = (Sprite)b2.getUserData();
 			if(s2 instanceof BoutonPressoir){
 				((Character)b1.getUserData()).setBouton(((BoutonPressoir)s2).getNum());
-				System.out.println(((BoutonPressoir)s2).getNum());
 				((BoutonPressoir)s2).check();
 			}
 		}
@@ -28,7 +27,6 @@ public class MyContactFilter implements ContactFilter {
 			Sprite s1 = (Sprite)b1.getUserData();
 			if(s1 instanceof BoutonPressoir){
 				((Character)b2.getUserData()).setBouton(((BoutonPressoir)s1).getNum());
-				System.out.println(((BoutonPressoir)s1).getNum());
 				((BoutonPressoir)s1).check();
 			}		
 		}

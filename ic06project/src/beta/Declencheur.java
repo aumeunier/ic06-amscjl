@@ -11,6 +11,7 @@ public abstract class Declencheur extends Sprite {
 		this.y = _y;
 		this.w = _w;
 		this.h = _h;
+		isActivated=false;
 	}
 	
 	public boolean isActivated(){

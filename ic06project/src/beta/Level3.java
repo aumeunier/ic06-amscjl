@@ -10,7 +10,7 @@ public class Level3 extends Level {
 	public Level3(GameplayState state, LevelSave model){	
 		super(state,model);
 		this.levelID = 3; // Do not forget to update that !!
-		this.setBackgroundImage("8298638_s.jpg");
+		this.setBackgroundImage("5759438_s.jpg");
 		Ground.setim(Ground.IM2);
 
 		// Place a ground wall
@@ -25,13 +25,13 @@ public class Level3 extends Level {
 		//Création des grounds
 			createGround(0,380,100,120); // Sol 1
 			Sprite w1 = new Sprite(0,380,100,50);
-			w1.setImage("newherbe2.png");
+			w1.setImage("snow.png");
 			w1.image = w1.image.getSubImage(0,17,100,50);
 			sprites.add(w1);
 			
 			createGround(150,380,600,50); // Sol 2
 			Sprite w2 = new Sprite(150,380,600,50);
-			w2.setImage("newherbe2.png");
+			w2.setImage("snow.png");
 			w2.image = w2.image.getSubImage(0,17,550,50);
 			sprites.add(w2);
 			
@@ -42,32 +42,29 @@ public class Level3 extends Level {
 		createSource(500,450,40,40,Power.FIRE);	
 		
 		//Création des petites plateformes
-		createGround(200,310,50,4); // plateforme levier 1
-		createGround(300,310,50,4); // plateforme levier 2
-		createGround(400,310,50,4); // plateforme levier 3
-		createGround(500,310,50,4); // plateforme source Gros
+		createGround(220,310,50,5); // plateforme levier 1
+		createGround(360,310,50,5); // plateforme levier 2
+		createGround(500,310,50,5); // plateforme levier 3
+		createGround(0,310,50,5); // plateforme source Gros
 	
 		
 		//Création des leviers et de ce qu'ils déclenchent
 		
-		Source sourceG = createSource(505,265,40,40,Power.FAT); 		//Pouvoir du Gros
+		Source sourceG = createSource(0,265,40,40,Power.FAT); 		//Pouvoir du Gros
 		Body sourceGBody = state.getBodyForUserData(sourceG); 			//Body du pouvoir du Gros
 		Wall wall = createWall(540,250,10,130);							//Mur plateforme sautante
 		Body wallBody = state.getBodyForUserData(wall);					//Body du Mur
 		Wall wall2 = createWall(450,430,10,68);							//Mur pouvoir du feu
 		Body wallBody2 = state.getBodyForUserData(wall2);				//Body du Mur
 		
-		LevierCombi levier1;
-		LevierCombi levier2;
-		LevierCombi levier3;
-		ArrayList<LevierCombi> L = new ArrayList<LevierCombi>();
+
 		
 			//Création des combinaisons
 				//1ere
 				ArrayList<Body> listeB1= new ArrayList<Body>();
 				listeB1.add(sourceGBody);
 				ArrayList<Boolean> listeT1= new ArrayList<Boolean>();
-				listeT1.add(false);
+				listeT1.add(true);
 				listeT1.add(false);
 				listeT1.add(false);
 				//2eme
@@ -92,7 +89,7 @@ public class Level3 extends Level {
 				listeT4.add(true);
 				listeT4.add(false);
 				listeT4.add(true);
-				
+			
 		//Création des listes de combi
 		ArrayList<ArrayList<Body> > listB = new ArrayList<ArrayList<Body> >();
 		listB.add(listeB1);
@@ -105,9 +102,24 @@ public class Level3 extends Level {
 		listT.add(listeT3);
 		listT.add(listeT4);
 		
-		//levier1 = createLevierCombi(210,280,30,30,listB,listT,L);		//levier déclencheur du mur
-		//levier2 = createLevierCombi(310,280,30,30,listB,listT,L);		//levier déclencheur du mur
-		//levier3 = createLevierCombi(410,280,30,30,listB,listT,L);		//levier déclencheur du pouvoir
+
+		
+		LevierCombi levier1=createLevierCombi(230,280,30,30,listB,listT);
+		LevierCombi levier2=createLevierCombi(370,280,30,30,listB,listT);
+		LevierCombi levier3=createLevierCombi(510,280,30,30,listB,listT);
+		ArrayList<LevierCombi> L = new ArrayList<LevierCombi>();
+		L.add(levier1);
+		L.add(levier2);
+		L.add(levier3);
+		
+		levier1.SetListeLeviers(L);		//levier déclencheur du mur
+		levier2.SetListeLeviers(L);		//levier déclencheur du mur
+		levier3.SetListeLeviers(L);		//levier déclencheur du pouvoir
+		
+		levier1.activate();
+		levier1.activate();
+		
+		System.out.println(sourceG.isHidden);
 		
 		Ground solMouvant = createGround(570,373,50,7); 		// plateforme mouvante
 		Body bodyMouvant = state.getBodyForUserData(solMouvant);
@@ -125,39 +137,48 @@ public class Level3 extends Level {
 		
 		
 		createGround(0,240,550,10); // plateforme centrale
+		Sprite w3 = new Sprite(0,240,550,50);
+		w3.setImage("snow.png");
+		w3.image = w3.image.getSubImage(0,17,550,50);
+		sprites.add(w3);
 		
 		createSource(0,200,40,40,Power.TELEPORTATION);	//pouvoir de teleportation
 		
 		//escalier
-		createGround(80,170,40,5);
-		createGround(0,115,40,5);	
-		createGround(50,50,50,5); // plateforme en haut
+		createGround(80,180,60,5);
+		createGround(0,130,60,5);	
+		// plateforme en haut
+		//createGround(45,70,50,5); 
 		
 		//construction de la pente la plus haute
 		ArrayList<Vec2> sol4Points = new ArrayList<Vec2>();
-		sol4Points.add(new Vec2(-215,15));
-		sol4Points.add(new Vec2(-215,10));
-		sol4Points.add(new Vec2(215,-15));
-		sol4Points.add(new Vec2(215,-10));
-		Ground sol4 = createGroundWithPoints(120,60,430,30,sol4Points); // Sol 3
-		sol4.addPointToShape(120,60);
-		sol4.addPointToShape(120,65);
-		sol4.addPointToShape(550,90);
+		sol4Points.add(new Vec2(-235,10));
+		sol4Points.add(new Vec2(-235,5));
+		sol4Points.add(new Vec2(235,-10));
+		sol4Points.add(new Vec2(235,-5));
+		Ground sol4 = createGroundWithPoints(80,70,470,20,sol4Points); // Sol 3
+		sol4.addPointToShape(80,70);
+		sol4.addPointToShape(80,90);
+		sol4.addPointToShape(550,105);
 		sol4.addPointToShape(550,85);
 		sol4.setSlippery(true, "right");
+		sol4.setImage("snow.png");
+		sol4.image = sol4.image.getSubImage(0,10,550,50);
 		
 		//plateforme intermédiaire
 		Ground inter = createGround(570,160,230,5); 
 		inter.addPointToShape(570,157);
-		inter.addPointToShape(570,162);
-		inter.addPointToShape(800,159);
+		inter.addPointToShape(570,172);
+		inter.addPointToShape(800,169);
 		inter.addPointToShape(800,154);
 		inter.setSlippery(true, "left");
+		inter.setImage("snow.png");
+		inter.image = sol4.image.getSubImage(0,0,550,50);
 		
 		
-		//plateforme bonus
-		
+		//creation bonus
 		createBonus(770,127,30,30); 
+		createBonus(760,450,30,30);
 		
 		/*//construction de la deuxieme pente ne marche pas
 		ArrayList<Vec2> sol4Points2 = new ArrayList<Vec2>();
@@ -189,7 +210,7 @@ public class Level3 extends Level {
 		
 		// Place the first character
 		this.character1 = addCharacterWithPoints(10,330,0.75f);		
-		this.character2 = addCharacterWithPoints(50,330,0.75f);	
+		this.character2 = addCharacterWithPoints(200,330,0.75f);	
 		
 		this.setLevelForAllSprites();
 	}

@@ -3,9 +3,9 @@ package beta;
 import java.util.ArrayList;
 
 import org.jbox2d.dynamics.Body;
+import org.newdawn.slick.Color;
 
 public class BoutonPressoir extends Declencheur {
-
 	protected ArrayList<Body> relatedBody;
 	
 	protected int poids;
@@ -19,8 +19,13 @@ public class BoutonPressoir extends Declencheur {
 		cpt++;
 		num=cpt;
 		poids=p;
-		this.setImage("blur20test.png");
-	}
+		if(poids==1)
+			this.setImage("Bouton1.png");
+		else if(poids==2)
+			this.setImage("Bouton2.png");
+		else if(poids==3)
+			this.setImage("Bouton3.png");
+		}
 	
 	public int getPoids(){
 		return poids;
@@ -53,7 +58,12 @@ public class BoutonPressoir extends Declencheur {
 		for (Body bx : relatedBody) {
 			((Sprite)(bx.getUserData())).Hidden(!((Sprite)(bx.getUserData())).isHidden());
 		}
-		this.setImage("blur1test.png");
+		if(poids==1)
+			this.setImage("Boutonactif1.png");
+		else if(poids==2)
+			this.setImage("Boutonactif2.png");
+		else if(poids==3)
+			this.setImage("Boutonactif3.png");
 		
 	}
 	
@@ -63,7 +73,13 @@ public class BoutonPressoir extends Declencheur {
 		for (Body bx : relatedBody) {
 			((Sprite)(bx.getUserData())).Hidden(false);
 		}
-		this.setImage("blur20test.png");
+		if(poids==1){
+			this.setImage("Bouton1.png");
+		}
+		else if(poids==2)
+			this.setImage("Bouton2.png");
+		else if(poids==3)
+			this.setImage("Bouton3.png");
 		
 	}
 }

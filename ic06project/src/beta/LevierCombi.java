@@ -29,29 +29,33 @@ public class LevierCombi extends Declencheur{
 		isActivated=!isActivated;
 		System.out.println("fontion activate de levierCombi");
 		
-		//pour chaque combi possible, réafficher tous les bodies
+		//pour chaque combi possible, réafficher tous les bodies(ou caher les sources)
 		for(int n=0;n<relatedBody.size();n++)
 		{ 			
 			ArrayList<Body> tempBodies = relatedBody.get(n);
 			for (Body bx : tempBodies) 
 			{			
-				((Sprite)(bx.getUserData())).Hidden(false);
+				System.out.println(bx.getUserData());
+				if((Sprite)(bx.getUserData()) instanceof Source) 	//doit etre caché
+						((Sprite)(bx.getUserData())).Hidden(true);
+				else													//doit etre affiché
+					((Sprite)(bx.getUserData())).Hidden(false);
 			}
 		}
 		
 		//pour chaque combi possible, rechercher la bonne
-		for(int n=0;n<leviers.size();n++)
+		for(int n=0;n<combi.size();n++)
 		{ 			
 			ArrayList<Boolean> tempCombi=combi.get(n);
 			Boolean testCombi=true;
 			
 			//je parcours les deux listes pour voir si la combi est bonne
 			for(int i=0;i<leviers.size();i++){
+				System.out.println(leviers.get(i).isActivated );
+				System.out.println(tempCombi.get(i));
 				//si la combi est mauvaise
 				if((leviers.get(i).isActivated && !tempCombi.get(i))||(!leviers.get(i).isActivated && tempCombi.get(i))){
 					testCombi=false;
-					System.out.println(leviers.get(i).isActivated );
-					System.out.println(tempCombi.get(i));
 				}
 			}
 				
@@ -59,7 +63,10 @@ public class LevierCombi extends Declencheur{
 			if(testCombi)
 			{
 				ArrayList<Body> tempBodies = relatedBody.get(n);
-				for (Body bx : tempBodies) {			
+				for (Body bx : tempBodies) {
+					if((Sprite)(bx.getUserData()) instanceof Source) 	//doit etre affiché
+						((Sprite)(bx.getUserData())).Hidden(false);
+					else													//doit etre caché
 					((Sprite)(bx.getUserData())).Hidden(true);
 				}
 				break;

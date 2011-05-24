@@ -308,7 +308,8 @@ public class GameplayState extends BasicGameState implements MouseListener{
 				tempList.add(i);
 			}
 			else {
-				theSprite.setCoordinatesFromBody(tempBody);
+				if(!(theSprite instanceof Levier)&&!(theSprite instanceof LevierCombi))
+					theSprite.setCoordinatesFromBody(tempBody);
 			}
 		}	
 		for(int i = 0 ; i < tempList.size() ; ++i){
@@ -577,14 +578,14 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	public Body addLevier(Levier levier){
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.userData = levier;
-		Vec2 b2dcoord = Global.getBox2DCoordinates(levier.x, levier.y);
-		bodyDef.position = new Vec2(b2dcoord.x+levier.w/2,b2dcoord.y-levier.h/2);
+		Vec2 b2dcoord = Global.getBox2DCoordinates(levier.x+2, levier.y-5);
+		bodyDef.position = new Vec2(b2dcoord.x+(levier.w-4)/2,b2dcoord.y-(levier.h-5)/2);
 		Body newBody = world.createBody(bodyDef);
 		PolygonDef sd = new PolygonDef();		
 		sd.density = 5.0f;
 		sd.friction = 1.0f;
 
-		sd.setAsBox(levier.w/2,levier.h/2);
+		sd.setAsBox((levier.w-4)/2,(levier.h-5)/2);
 		newBody.createShape(sd);
 		spriteBodies.add(newBody);
 		return newBody;
@@ -593,14 +594,14 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	public Body addLevier(LevierCombi levier){
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.userData = levier;
-		Vec2 b2dcoord = Global.getBox2DCoordinates(levier.x, levier.y);
-		bodyDef.position = new Vec2(b2dcoord.x+levier.w/2,b2dcoord.y-levier.h/2);
+		Vec2 b2dcoord = Global.getBox2DCoordinates(levier.x+2, levier.y-5);
+		bodyDef.position = new Vec2(b2dcoord.x+(levier.w-4)/2,b2dcoord.y-(levier.h-5)/2);
 		Body newBody = world.createBody(bodyDef);
 		PolygonDef sd = new PolygonDef();		
 		sd.density = 5.0f;
 		sd.friction = 1.0f;
 
-		sd.setAsBox(levier.w/2,levier.h/2);
+		sd.setAsBox((levier.w-4)/2,(levier.h-5)/2);
 		newBody.createShape(sd);
 		spriteBodies.add(newBody);
 		return newBody;
