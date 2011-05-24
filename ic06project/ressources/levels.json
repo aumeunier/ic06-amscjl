@@ -19,9 +19,9 @@
 		},
 		{
 			"id":3,
-			"levelName":"caverne",
+			"levelName":"The Mountain",
 			"music":"gmz_-_Between_Me_and_Myself.ogg",
-			"numberOfKeys":3,
+			"numberOfKeys":2,
 			"areaOnMap":[250, 100, 50, 50]		
 			
 		},
