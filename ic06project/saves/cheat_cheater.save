@@ -4,7 +4,7 @@
 	 "levels":[
 		{
 			"id":1,
-			"keys":0,
+			"keys":3,
 			"unlocked":true,
 			"finished":true
 		},
@@ -22,7 +22,7 @@
 		},
 		{
 			"id":4,
-			"keys":0,
+			"keys":2,
 			"unlocked":true,
 			"finished":true
 		},
