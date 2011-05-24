@@ -305,6 +305,21 @@ public class Level {
 		
 		return bonus;
 	}
+	
+	protected Monster createMonster(int x, int y, int w, int h){
+		
+		// Create a bonus object
+		Monster monster = new Monster(x,y,w,h);
+		
+		// Add it to the list of sprites of this level
+		sprites.add(monster);
+		
+		// Create the source body
+		myState.addMonster(monster);
+		
+		return monster;
+	}
+
 
 	protected Character addCharacter(int x, int y, float ratio){
 		// Create a new character and add it to the panel

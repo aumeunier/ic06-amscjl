@@ -32,6 +32,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	private Body ch1_body;
 	private Body ch2_body;
 	private ArrayList<Body> spriteBodies;
+	private ArrayList<Body> monsterBodies;
 	private UIGameplay uiGameplay;
 	private UIDeath uiDeath;
 	private UIPause uiPause;
@@ -94,6 +95,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	public void init(GameContainer gc, StateBasedGame sbg)
 	throws SlickException {
 		spriteBodies = new ArrayList<Body>();
+		monsterBodies = new ArrayList<Body>();
 		this.uiGameplay = new UIGameplay(gc);
 		this.uiPause = new UIPause(gc);
 		this.uiDeath = new UIDeath(gc);
@@ -196,7 +198,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		
 		// Sinon effectuer les traitements d'inputs et l'update du world / des sprites
 		boolean char1CanJump = (char1.isFlying() || !char1.isFalling) && !char1.isSlipping;
-		boolean char2CanJump = (char2.isFlying() || !char2.isFalling)&& !char2.isSlipping;
+		boolean char2CanJump = (char2.isFlying() || !char2.isFalling) && !char2.isSlipping;
 		boolean char1CanMove = (char1CanJump || !char1.isColliding) && !char1.isSlipping;
 		boolean char2CanMove = (char2CanJump || !char2.isColliding) && !char2.isSlipping;
 		
@@ -281,6 +283,14 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		char1.setCoordinatesFromBody(ch1_body);
 		char2.setCoordinatesFromBody(ch2_body);	
 		
+		// Update the monster's speed
+		for(Body b: monsterBodies){
+			Monster m = (Monster)b.getUserData();
+			b.setLinearVelocity(m.getSpeed());	
+			((Monster)b.getUserData()).step();
+			m.setCoordinatesFromBody(b);
+		}
+		
 		// Simulation sur 0.1s dans notre box2D world
 		world.step((float)delta/100, 100);
 
@@ -351,6 +361,10 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			world.destroyBody(b);
 		}
 		spriteBodies.clear();
+		for(Body b:monsterBodies){
+			world.destroyBody(b);
+		}
+		monsterBodies.clear();
 		if(null!=ch1_body){
 			world.destroyBody(ch1_body);
 			ch1_body=null;
@@ -589,6 +603,25 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		sd.setAsBox(levier.w/2,levier.h/2);
 		newBody.createShape(sd);
 		spriteBodies.add(newBody);
+		return newBody;
+	}
+	
+	public Body addMonster(Monster monsterData){
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.userData = monsterData;
+		Vec2 b2dcoord = Global.getBox2DCoordinates(monsterData.x, monsterData.y);
+		bodyDef.position = new Vec2(b2dcoord.x+monsterData.w/2,b2dcoord.y-monsterData.h/2);
+		MassData md = new MassData();
+		md.mass = 100.0f;
+		bodyDef.massData = md;
+		Body newBody = world.createBody(bodyDef);
+		
+		PolygonDef sd = new PolygonDef();		
+		sd.density = 5000.0f;
+		sd.friction = 1.0f;
+		sd.setAsBox(monsterData.w/2,monsterData.h/2);
+		newBody.createShape(sd);
+		monsterBodies.add(newBody);
 		return newBody;
 	}
 

@@ -33,6 +33,9 @@ public class Character extends Sprite{
 		super(_x,_y,CHAR_W,CHAR_H);
 		setAnimation("fee-de-face.png",CHAR_W,CHAR_H);
 	}
+	public Character(int _x, int _y,int _w, int _h){
+		super(_x,_y,_w,_h);
+	}
 	public Character(int _x, int _y, float ratio){
 		super(_x,_y,(int)(CHAR_W*ratio),(int)(CHAR_H*ratio));
 		setAnimation("fee-de-face.png",CHAR_W,CHAR_H);

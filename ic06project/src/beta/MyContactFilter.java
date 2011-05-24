@@ -1,3 +1,4 @@
+
 package beta;
 
 import org.jbox2d.collision.Shape;
@@ -21,7 +22,6 @@ public class MyContactFilter implements ContactFilter {
 				System.out.println(((BoutonPressoir)s2).getNum());
 				((BoutonPressoir)s2).check();
 			}
-
 		}
 		// Deuxieme cas b2 est le groundsensor
 		else if(shape2.getUserData()==GameplayState.GROUND_SENSOR_NAME){
@@ -30,7 +30,7 @@ public class MyContactFilter implements ContactFilter {
 				((Character)b2.getUserData()).setBouton(((BoutonPressoir)s1).getNum());
 				System.out.println(((BoutonPressoir)s1).getNum());
 				((BoutonPressoir)s1).check();
-			}			
+			}		
 		}
 
 		/* Collisions concernant le personnage */
@@ -45,6 +45,13 @@ public class MyContactFilter implements ContactFilter {
 						return false;
 					}
 					else if(s2.isHidden()){
+						return false;
+					}
+					else if((s2.getClass().equals(Monster.class))&&(((Character)(s1)).getPower() != Power.INVISIBLE)){
+						((Character)(s1)).setDead(true);
+						return false;
+					}
+					else if((s2.getClass().equals(Monster.class))&&(((Character)(s1)).getPower() == Power.INVISIBLE)){
 						return false;
 					}
 					else if((s2.getClass().equals(SourceMortelle.class))&&(((Character)(s1)).getPower()!= Power.NAGE)){
@@ -91,6 +98,13 @@ public class MyContactFilter implements ContactFilter {
 						return false;
 					}
 					else if(s1.isHidden()){
+						return false;
+					}
+					else if((s1.getClass().equals(Monster.class))&&(((Character)(s2)).getPower() != Power.INVISIBLE)){
+						((Character)(s2)).setDead(true);
+						return false;
+					}
+					else if((s1.getClass().equals(Monster.class))&&(((Character)(s2)).getPower() == Power.INVISIBLE)){
 						return false;
 					}
 					else if((s1.getClass().equals(SourceMortelle.class)) && (((Character)(s2)).getPower()!= Power.NAGE)){

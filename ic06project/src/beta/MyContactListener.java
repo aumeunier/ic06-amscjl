@@ -139,7 +139,8 @@ public class MyContactListener implements ContactListener {
 
 			// Character collides with ground or wall or obstacle
 			else {
-				if((s1 instanceof Wall || s1 instanceof Obstacle || s1 instanceof Ground) && s2 instanceof Character){
+				if((s1 instanceof Wall || s1 instanceof Obstacle || s1 instanceof Ground)
+						&& (s2.getClass().equals(Character.class)) ){
 					boolean noHardCollision = true;
 					for(ContactPoint c: contactPoints){
 						Body c1 = c.shape1.getBody();
@@ -148,10 +149,10 @@ public class MyContactListener implements ContactListener {
 							Sprite temp1 = (Sprite)c1.getUserData();
 							Sprite temp2 = (Sprite)c2.getUserData();
 							if((((temp1 instanceof Wall || temp1 instanceof Obstacle || temp1 instanceof Ground)
-									&& temp2 instanceof Character)
+									&& temp2.getClass().equals(Character.class))
 									&& (temp1!=s1 && temp2==s2))
 								|| ((temp2 instanceof Wall || temp2 instanceof Obstacle || temp2 instanceof Ground)
-										&& temp1 instanceof Character)
+										&& temp1.getClass().equals(Character.class))
 										&& (temp2!=s1 && temp1==s2)){
 								noHardCollision = false;
 							}
@@ -161,7 +162,8 @@ public class MyContactListener implements ContactListener {
 						((Character)s2).isColliding = false;
 					}		
 				}
-				else if(s1 instanceof Character && (s2 instanceof Wall || s2 instanceof Obstacle || s2 instanceof Ground)){
+				else if((s1.getClass().equals(Character.class)) 
+						&& (s2 instanceof Wall || s2 instanceof Obstacle || s2 instanceof Ground)){
 					boolean noHardCollision = true;
 					for(ContactPoint c: contactPoints){
 						Body c1 = c.shape1.getBody();
@@ -170,10 +172,10 @@ public class MyContactListener implements ContactListener {
 							Sprite temp1 = (Sprite)c1.getUserData();
 							Sprite temp2 = (Sprite)c2.getUserData();
 							if((((temp1 instanceof Wall || temp1 instanceof Obstacle || temp1 instanceof Ground)
-									&& temp2 instanceof Character)
+									&& temp2.getClass().equals(Character.class))
 									&& (temp1!=s2 && temp2==s1))
 								|| ((temp2 instanceof Wall || temp2 instanceof Obstacle || temp2 instanceof Ground)
-										&& temp1 instanceof Character)
+										&& temp1.getClass().equals(Character.class))
 										&& (temp2!=s2 && temp1==s1)){
 								noHardCollision = false;
 								System.out.println("Collide:"+temp1.toString()+" - "+temp2.toString());
