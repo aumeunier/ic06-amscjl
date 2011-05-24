@@ -19,6 +19,8 @@ public class Sprite {
 	protected Polygon shape = null;
 	protected boolean shouldBeDestroy=false;
 	protected boolean shouldChangeSize=false;
+	protected boolean shouldRebond=false;
+	protected boolean shouldNage=false;
 	protected Color colorFilter = Color.white;
 	protected boolean isHidden=false;
 	protected boolean lightInDarkness=false;

@@ -49,14 +49,11 @@ public class Level2 extends Level {
 		w2.image = w2.image.getSubImage(0,15,300,50);
 
 		//source
-		createSource(750,150,49,42,Power.PETIT);
+		createSource(750,150,60,60,Power.PETIT);
 		createSource(750,20,49,42,Power.REBOND);
-		createSource(300,150,49,42,Power.NAGE);
+		createSource(10,10,60,60,Power.NAGE);
+		createSource(300,450,49,42,Power.ABSORBE);
 		
-		
-		
-
-
 		Exit exit = createExit(600,400,25,25);
 
 
@@ -95,15 +92,13 @@ public class Level2 extends Level {
 		
 		
 		//place l'eau
-		createSourceMortelle(0,Global.GAMEPLAYHEIGHT-20,100,10);
+		createSourceMortelle(25,Global.GAMEPLAYHEIGHT-20,175,10);
 		Sprite s6 = new Sprite(0,Global.GAMEPLAYHEIGHT-60,50,50);
 		sprites.add(s6);
 		s6.setAnimation("waves.png", 300, 300);
 		Sprite s7 = new Sprite(50,Global.GAMEPLAYHEIGHT-60,50,50);
 		sprites.add(s7);
 		s7.setAnimation("waves2.png", 300, 300);
-		
-		createSourceMortelle(100,Global.GAMEPLAYHEIGHT-20,100,10);
 		Sprite s8 = new Sprite(100,Global.GAMEPLAYHEIGHT-60,50,50);
 		sprites.add(s8);
 		s8.setAnimation("waves.png", 300, 300);
@@ -111,7 +106,7 @@ public class Level2 extends Level {
 		sprites.add(s9);
 		s9.setAnimation("waves2.png", 300, 300);
 		
-		createBoutonPressoir(5,460,20,20,b3); //levier z
+		createBoutonPressoir(5,480,20,20,b3); //levier z
 		
 		//transporteur
 		createTransporter(790,450,10,42,300,280);

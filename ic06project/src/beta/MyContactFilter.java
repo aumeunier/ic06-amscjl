@@ -49,6 +49,11 @@ public class MyContactFilter implements ContactFilter {
 					}
 					else if((s2.getClass().equals(SourceMortelle.class))&&(((Character)(s1)).getPower()!= Power.NAGE)){
 						((Character)(s1)).setDead(true);
+						return false;
+					}
+					else if((s2.getClass().equals(SourceMortelle.class)) && (((Character)(s2)).getPower()== Power.NAGE)){
+						((Character)(s2)).isFalling=false;
+						return false;
 					}
 					else if(s2.getClass().equals(Source.class)){
 						Source source = (Source)s2;
@@ -85,10 +90,12 @@ public class MyContactFilter implements ContactFilter {
 						return false;
 					}
 					else if((s1.getClass().equals(SourceMortelle.class)) && (((Character)(s2)).getPower()!= Power.NAGE)){
-						((Character)(s2)).setDead(true);					
+						((Character)(s2)).setDead(true);	
+						return false;
 					}
 					else if((s1.getClass().equals(SourceMortelle.class)) && (((Character)(s2)).getPower()== Power.NAGE)){
-						((Character)(s2)).isFalling=false;					
+						((Character)(s2)).isFalling=false;		
+						return false;
 					}
 					else if(s1.getClass().equals(Source.class)){
 						Source source = (Source)s1;

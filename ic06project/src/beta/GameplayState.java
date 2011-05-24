@@ -260,13 +260,21 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			modifyBodySize(getBodyForUserData(char2),(float)2.0,(float)2.0);
 			char2.shouldChangeSize=false;
 		}
-		if((char1.isRebond())&&(char1.shouldChangeSize)){
+		if((char1.isRebond())&&(char1.shouldRebond)){
 			modifyBodyRebond(getBodyForUserData(char1),(float)0.9);
-			char1.shouldChangeSize=false;
+			char1.shouldRebond=false;
 		}
-		if((char2.isRebond())&&(char2.shouldChangeSize)){
-			modifyBodyRebond(getBodyForUserData(char2),(float)0.5);
-			char2.shouldChangeSize=false;
+		if((char2.isRebond())&&(char2.shouldRebond)){
+			modifyBodyRebond(getBodyForUserData(char2),(float)0.9);
+			char2.shouldRebond=false;
+		}
+		if((char1.isNage())&& char1.shouldNage){
+			modifyBodyRebond(getBodyForUserData(char1),(float)0.0);
+			char1.shouldNage=false;
+		}
+		if((char2.isNage())&& char2.shouldNage){
+			modifyBodyRebond(getBodyForUserData(char2),(float)0.0);
+			char2.shouldNage=false;
 		}
 		
 		

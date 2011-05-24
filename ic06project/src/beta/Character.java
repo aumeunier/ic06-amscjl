@@ -195,9 +195,15 @@ public class Character extends Sprite{
 	}
 	
 	public void setPower(Power _power){
-		if((_power==Power.PETIT && power!=Power.PETIT) ||(_power==Power.REBOND && power!=Power.REBOND) ||(power==Power.PETIT && _power!=Power.PETIT)){
-			shouldChangeSize=true;
-		}
+
+		if((_power==Power.PETIT && power!=Power.PETIT) ||(power==Power.PETIT && _power!=Power.PETIT)){
+
+			shouldChangeSize=true;}
+		else if(((_power==Power.REBOND) && (power!=Power.REBOND)))
+			shouldRebond=true;
+		else if(((_power==Power.NAGE) && (power!=Power.NAGE)))
+			shouldNage=true;
+		
 		power = _power;
 		changePower();
 	}
