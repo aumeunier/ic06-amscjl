@@ -39,7 +39,13 @@ public class MyContactFilter implements ContactFilter {
 				Sprite s1 = (Sprite)b1.getUserData();
 				Sprite s2 = (Sprite)b2.getUserData();
 				// Premier cas s1 est ...
+				
 				if(s1.getClass().equals(Character.class)){
+					if(s2 instanceof Sprite && s2.getIndication()!=null ){
+						s2.activateIndication();
+						if (s2.getIndicationActivated()) 
+							System.out.println(s2.getIndication().getTexte());
+					}
 					if(((Character)s1).isIntangible()
 							&& (s2.getClass().equals(Obstacle.class))){
 						return false;
@@ -89,10 +95,17 @@ public class MyContactFilter implements ContactFilter {
 					}
 					else if(s2.getClass().equals(Bonus.class)){
 						((Bonus)s2).obtained();
+
+						
 					}
 				}
 				// Deuxieme cas s2 est ...
 				else if(s2.getClass().equals(Character.class)){
+					if(s1 instanceof Sprite && s1.getIndication()!=null){
+						s1.activateIndication();
+						if (s1.getIndicationActivated()) 
+							System.out.println(s1.getIndication().getTexte());
+					}
 					if(((Character)s2).isIntangible()
 							&& (s1.getClass().equals(Obstacle.class))){
 						return false;
@@ -136,11 +149,14 @@ public class MyContactFilter implements ContactFilter {
 					}
 					else if(s1.getClass().equals(Bonus.class)){
 						((Bonus)s1).obtained();
+
+						
 					}
-				}
-			}	
+				}	
+			}
 		}
 		return true;
 	}
 
 }
+

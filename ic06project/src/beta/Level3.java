@@ -105,9 +105,9 @@ public class Level3 extends Level {
 		listT.add(listeT3);
 		listT.add(listeT4);
 		
-		levier1 = createLevierCombi(210,280,30,30,listB,listT,L);		//levier déclencheur du mur
-		levier2 = createLevierCombi(310,280,30,30,listB,listT,L);		//levier déclencheur du mur
-		levier3 = createLevierCombi(410,280,30,30,listB,listT,L);		//levier déclencheur du pouvoir
+		//levier1 = createLevierCombi(210,280,30,30,listB,listT,L);		//levier déclencheur du mur
+		//levier2 = createLevierCombi(310,280,30,30,listB,listT,L);		//levier déclencheur du mur
+		//levier3 = createLevierCombi(410,280,30,30,listB,listT,L);		//levier déclencheur du pouvoir
 		
 		Ground solMouvant = createGround(570,373,50,7); 		// plateforme mouvante
 		Body bodyMouvant = state.getBodyForUserData(solMouvant);

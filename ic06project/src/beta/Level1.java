@@ -102,7 +102,7 @@ public class Level1 extends Level {
 		b2.add(oMurSortieBody);
 		
 		// CrŽŽ un levier qui ouvre ce mur
-		createLevier(Global.GAMEPLAYWIDTH-70,195,30,30,b2);
+		Levier l1 = createLevier(Global.GAMEPLAYWIDTH-70,195,30,30,b2);
 		
 		// Place l'eau
 		SourceMortelle s = createSourceMortelle(80,Global.GAMEPLAYHEIGHT-60,50,50);
@@ -124,9 +124,13 @@ public class Level1 extends Level {
 		Exit exit = createExit(Global.GAMEPLAYWIDTH-65,10,45,65);
 		
 		//place bonus
-		createBonus(50,Global.GAMEPLAYHEIGHT-110,25,25);
+		Bonus b3 = createBonus(50,Global.GAMEPLAYHEIGHT-110,25,25);
 		createBonus(20,20,25,25);
 		createBonus(450,20,25,25);
+		
+		// indication
+		l1.setIndication(200,100,"Tu peux maintenant voler!");
+		//b3.activateIndication();
 		
 		// Place the first character
 		//*

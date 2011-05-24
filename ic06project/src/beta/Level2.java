@@ -60,8 +60,8 @@ public class Level2 extends Level {
 		//bonus
 		createBonus(10,300,25,25);
 
-
-		//addIndication(200,100,"Tu peux maintenant voler!");
+		
+		
 		
 		//mur levier x
 		Obstacle oMurLevier = new Obstacle(700,0,10,60);

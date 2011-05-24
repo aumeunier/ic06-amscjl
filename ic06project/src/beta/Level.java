@@ -442,7 +442,12 @@ public class Level {
 		else {
 			backgroundImage.draw();
 			for(int i = 0 ; i < backgroundSprites.size() ; ++i){
-				backgroundSprites.get(i).draw(g);
+				Sprite s = backgroundSprites.get(i);
+				s.draw(g);
+				if(s.getIndication()!=null && s.getIndicationActivated()){
+					System.out.println("s'affiche ici !");
+					s.getIndication().render(gc, g);
+				}
 			}
 			for(int i = 0 ; i < listeExit.size() ; ++i){
 				listeExit.get(i).draw(g);
@@ -453,6 +458,12 @@ public class Level {
 				Sprite s = sprites.get(i);
 				if(!s.isHidden()){
 					s.draw(g);
+				}
+				if (s.getIndication()!=null)
+					System.out.println("debug");
+				if(s.getIndication()!=null && s.getIndicationActivated()){
+					System.out.println("s'affiche ici !");
+					s.getIndication().render(gc, g);
 				}
 			}
 			for(InGameIndication indication: indications){

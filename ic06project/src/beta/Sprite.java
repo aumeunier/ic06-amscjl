@@ -27,6 +27,8 @@ public class Sprite {
 	protected int lightSize=50;
 	protected Image lightImage=Global.setImage(Global.DEFAULT_LIGHT_IMAGE);
 	protected Level level;
+	protected InGameIndication indication= null;
+	protected boolean IndicationActivated=false;
 	
 	public Sprite(){
 		this.x=0;
@@ -108,9 +110,26 @@ public class Sprite {
 	public boolean getShouldBeDestroy(){
 		return shouldBeDestroy;
 	}
+	public boolean getIndicationActivated(){
+		return IndicationActivated;
+	}
+	
+	public InGameIndication getIndication(){
+		if(indication!=null)
+			System.out.println(IndicationActivated);
+		return indication;
+	}
+	public void activateIndication(){
+		IndicationActivated=true;
+	}
 	
 	public void setShouldBeDestroy(){
 		 shouldBeDestroy=true;
+	}
+	public void setIndication(int x, int y,String msg){
+		InGameIndication indic = new InGameIndication(x,y,msg);
+		 indication=indic;
+		 //System.out.println(indic.getTexte());
 	}
 	
 	public boolean isHidden(){
