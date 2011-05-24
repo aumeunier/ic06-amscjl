@@ -3,15 +3,15 @@
 	"levels":[
 		{
 			"id":1,
-			"levelName":"prairie",
+			"levelName":"La Prairie d'Eel Ti Jut",
 			"music":"gmz_-_Between_Me_and_Myself.ogg",
-			"numberOfKeys":1,
+			"numberOfKeys":3,
 			"areaOnMap":[50, 50, 50, 50]
 					
 		},
 		{
 			"id":2,
-			"levelName":"bois",
+			"levelName":"Sous la Terre d'Eel ti Jut",
 			"music":"gmz_-_Between_Me_and_Myself.ogg",
 			"numberOfKeys":2,
 			"areaOnMap":[150, 50, 50, 50]		
@@ -19,7 +19,7 @@
 		},
 		{
 			"id":3,
-			"levelName":"The Mountain",
+			"levelName":"Le mont Izapov",
 			"music":"gmz_-_Between_Me_and_Myself.ogg",
 			"numberOfKeys":2,
 			"areaOnMap":[250, 100, 50, 50]		
@@ -27,9 +27,9 @@
 		},
 		{
 			"id":4,
-			"levelName":"douve",
+			"levelName":"Les grottes d'ArgennK",
 			"music":"gmz_-_Between_Me_and_Myself.ogg",
-			"numberOfKeys":4,
+			"numberOfKeys":3,
 			"areaOnMap":[350, 150, 50, 50]		
 			
 		},
@@ -37,7 +37,7 @@
 			"id":5,
 			"levelName":"chateau",
 			"music":"gmz_-_Between_Me_and_Myself.ogg",
-			"numberOfKeys":3,
+			"numberOfKeys":0,
 			"areaOnMap":[2000, 50, 50, 50]		
 			
 		}	
