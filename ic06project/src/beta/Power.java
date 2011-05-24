@@ -47,7 +47,7 @@ public enum Power {
 			result = "nage.png";
 			break;
 		case LIGHT:
-			result = "fat.png";
+			result = "lumière.png";
 			break;
 		case TELEPORTATION:
 			result = "teleportation.png";
@@ -59,7 +59,7 @@ public enum Power {
 			result = "musclor.png";
 			break;
 		case INVISIBLE:
-			result = "fat.png";
+			result = "invisible2.png";
 			break;
 		default:
 			result = "fat.png";

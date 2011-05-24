@@ -142,7 +142,7 @@ public class Level3 extends Level {
 		w3.image = w3.image.getSubImage(0,17,550,50);
 		sprites.add(w3);
 		
-		createSource(0,200,40,40,Power.TELEPORTATION);	//pouvoir de teleportation
+		createSource(0,200,60,60,Power.TELEPORTATION);	//pouvoir de teleportation
 		
 		//escalier
 		createGround(80,180,60,5);
