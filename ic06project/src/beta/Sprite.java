@@ -58,7 +58,10 @@ public class Sprite {
 	
 	protected void setImage(String filename){
 		try {
-			this.image = new Image(Global.PATH_IMAGES_RESSOURCES+filename);
+			if (filename==null) 
+				this.image=null;
+			else 
+				this.image = new Image(Global.PATH_IMAGES_RESSOURCES+filename);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

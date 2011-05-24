@@ -41,6 +41,7 @@ public class Level2 extends Level {
 		createGround(540,200,90,70); // Sol 13
 		createGround(730,200,90,50); // Sol 15
 		createGround(730,320,90,10); // Sol 15
+		createGround(630,260,90,10);
 		createGround(0,350,40,10); // Sol 20 petite plateforme
 		Wall w1 = createWall(100,190,410,50); // bois au dessus pour éviter le bug
 		w1.setImage("newherbe2.png");
@@ -53,15 +54,13 @@ public class Level2 extends Level {
 		createSource(750,150,60,60,Power.PETIT);
 		createSource(750,20,49,42,Power.REBOND);
 		createSource(10,10,60,60,Power.NAGE);
-		createSource(300,450,49,42,Power.ABSORBE);
+		createSource(350,450,49,42,Power.ABSORBE);
 		
 		Exit exit = createExit(600,400,25,25);
 		
 		//bonus
 		createBonus(10,300,25,25);
-
-		
-		
+		createBonus(650,215,25,25);
 		
 		//mur levier x
 		Obstacle oMurLevier = new Obstacle(700,0,10,60);
@@ -120,6 +119,10 @@ public class Level2 extends Level {
 		createTransporter(790,350,10,42,600,440);
 		createTransporter(545,280,10,42,10,330);
 		createTransporter(170,450,10,42,600,0);
+		Transporter t1 = createTransporter(300,450,10,42,630,210);
+		Transporter t2 = createTransporter(720,215,10,42,350,450);
+		t1.setImage(null);
+		t2.setImage(null);
 		
 		
 		//plateforme
