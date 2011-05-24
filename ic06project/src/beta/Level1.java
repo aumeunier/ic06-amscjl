@@ -117,7 +117,7 @@ public class Level1 extends Level {
 		s5.setAnimation("waves.png", 300, 300);
 		
 		// Place sources
-		createSource(500,Global.GAMEPLAYHEIGHT-42,49,42,Power.FLYING);
+		Source s1 = createSource(500,Global.GAMEPLAYHEIGHT-42,49,42,Power.FLYING);
 		createSource(Global.GAMEPLAYWIDTH-50,Global.GAMEPLAYHEIGHT-87,49,42,Power.INTANGIBLE);
 		
 		//place SOrtie
@@ -129,7 +129,9 @@ public class Level1 extends Level {
 		createBonus(450,20,25,25);
 		
 		// indication
-		l1.setIndication(200,100,"Tu peux maintenant voler!");
+		l1.setIndication(150,300,"Ceci est un levier, il peut ouvrir une ou plusieurs portes, il a 2 positions");
+		s1.setIndication(50, 300, "ceci est une source, elle apporte un pouvoir particulier, regardez les dessins");
+		
 		//b3.activateIndication();
 		
 		// Place the first character
