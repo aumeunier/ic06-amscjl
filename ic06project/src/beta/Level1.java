@@ -10,6 +10,7 @@ public class Level1 extends Level {
 		super(state,model);
 		this.levelID = 1; // Do not forget to update that !!
 		this.setBackgroundImage("6362779_s.jpg");
+		Ground.setim(Ground.IM2);
 
 		// Place a ground wall
 		createWall(0,Global.GAMEPLAYHEIGHT-10,Global.GAMEPLAYWIDTH,10);		
@@ -32,6 +33,7 @@ public class Level1 extends Level {
 		createGround(0,Global.GAMEPLAYHEIGHT-85,80,75); // Sol 1
 		createGround(310,Global.GAMEPLAYHEIGHT-85,100,75); // Sol 2 (apres l'eau)
 		createGround(Global.GAMEPLAYWIDTH-80,Global.GAMEPLAYHEIGHT-45,80,35); // Sol 4 (en dessous perso 2)
+
 		//*
 		ArrayList<Vec2> sol3Points = new ArrayList<Vec2>();
 		sol3Points.add(new Vec2(-40,-27));
@@ -60,7 +62,7 @@ public class Level1 extends Level {
 		//Plateform
 		Wall o1 = createWall(10,75,(int)(148/1.3),(int)(42/1.3));
 		o1.setImage("fleur2.png");
-		Wall o2 = createWall(75,200,(int)(148/1.3),(int)(42/1.3));
+		Wall o2 = createWall(75,250,(int)(148/1.3),(int)(42/1.3));
 		o2.setImage("fleur2.png");
 		
 		//la cage
@@ -68,6 +70,7 @@ public class Level1 extends Level {
 		createWall(300,85,70,10);
 		createWall(430,85,75,10);
 		createWall(495,0,10,85);
+		
 		
 		//l'arrivée
 		createWall(Global.GAMEPLAYWIDTH-160,75,150,10);
@@ -87,7 +90,7 @@ public class Level1 extends Level {
 		b1.add(oMurLevierBody);
 		
 		// Créé un bouton pressoir qui ouvre ce mur
-		createBoutonPressoir(85,185,30,18,b1);
+		createBoutonPressoir(85,235,30,18,b1);
 		
 		// Place un mur devant la sortie
 		Obstacle oMurSortie = new Obstacle(Global.GAMEPLAYWIDTH-160,0,20,75);
@@ -121,7 +124,9 @@ public class Level1 extends Level {
 		Exit exit = createExit(Global.GAMEPLAYWIDTH-65,10,45,65);
 		
 		//place bonus
-		Bonus bonus1 = createBonus(50,Global.GAMEPLAYHEIGHT-110,25,25);
+		createBonus(50,Global.GAMEPLAYHEIGHT-110,25,25);
+		createBonus(20,20,25,25);
+		createBonus(450,20,25,25);
 		
 		// Place the first character
 		//*

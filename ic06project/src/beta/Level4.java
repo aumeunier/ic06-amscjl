@@ -12,6 +12,7 @@ public class Level4 extends Level {
 		this.levelID = 4;
 		this.inTheDarkness = true;
 		this.setBackgroundImage("1770925_s.jpg");
+		Ground.setim(Ground.IM1);
 		
 		// Place a ground wall
 		createWall(0,Global.GAMEPLAYHEIGHT-10,Global.GAMEPLAYWIDTH,10);		

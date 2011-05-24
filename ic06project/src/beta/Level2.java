@@ -11,6 +11,7 @@ public class Level2 extends Level {
 		super(state,model);
 		this.levelID = 2; // Do not forget to update that !!
 		this.setBackgroundImage("6362779_s.jpg");
+		Ground.setim(Ground.IM1);
 
 		// Place a ground wall
 		createWall(0,Global.GAMEPLAYHEIGHT-10,Global.GAMEPLAYWIDTH,10);		
@@ -55,6 +56,9 @@ public class Level2 extends Level {
 		createSource(300,450,49,42,Power.ABSORBE);
 		
 		Exit exit = createExit(600,400,25,25);
+		
+		//bonus
+		createBonus(10,300,25,25);
 
 
 		//addIndication(200,100,"Tu peux maintenant voler!");
