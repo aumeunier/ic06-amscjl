@@ -30,6 +30,7 @@ public class NarrativeState extends BasicGameState implements MouseListener {
 	mdes.slick.sui.TextField textFieldSui;
 	TextField textField;
 	Display display;
+	String textToDisplay = "";
 
 	@Override
 	public int getID() {
@@ -65,20 +66,23 @@ public class NarrativeState extends BasicGameState implements MouseListener {
 	public void ChooseLevel(int i){
 		switch(i){
 		case 1:
-			this.textFieldSui.setText("Pas de description pour ce niveau! :(");
+			textToDisplay = "Pas de description pour ce niveau 1! :(";
 			break;
 		case 2:
-			this.textFieldSui.setText("Pas de description pour ce niveau! :(");
+			textToDisplay = "Pas de description pour ce niveau 2! :(";
 			break;
 		case 3:
-			this.textFieldSui.setText("Pas de description pour ce niveau! :(");
+			textToDisplay = "Pas de description pour ce niveau 3! :(";
 			break;
 		case 4 :
-			this.textFieldSui.setText("Pas de description pour ce niveau! :(");
+			textToDisplay = "Pas de description pour ce niveau 4! :(";
 			break;
 		default:
-			this.textFieldSui.setText("Pas de description pour ce niveau! :(");
+			textToDisplay = "Pas de description pour ce niveau! :(";
 			break;
+		}
+		if(textField!=null){
+			this.textField.setText(textToDisplay);
 		}
 	}
 	
@@ -95,14 +99,7 @@ public class NarrativeState extends BasicGameState implements MouseListener {
 		textField.setBorderColor(new Color(0.0f,0.0f,0.0f,0.0f));
 		textField.setTextColor(Color.black);
 		textField.setAcceptingInput(false);
-		textField.setText("azepijazoeuhaozeuhazoehaozehaozehoazhe apehaocnoaizej aizej apzijacz epiaj pjad pnza ej azpie" +
-				"aae^oake apze az^epa eaz$l far pzaijdoiazho dzae azpje az e" +
-				"az dazpiejza peij azp" +
-				" azepijzaep iaj" +
-				" aepijzpiej a" +
-				"ezapij eazpiej " +
-				"az epijzapeaz" +
-				" pejaz ");
+		textField.setText(textToDisplay);
 		
 		Image labelImage = Global.setImage("blur11.jpg");
 		Image continueImage = labelImage.getScaledCopy(CONTINUE_W, CONTINUE_H);

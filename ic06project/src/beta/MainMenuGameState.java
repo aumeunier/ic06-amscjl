@@ -143,7 +143,7 @@ public class MainMenuGameState extends BasicGameState implements MouseListener {
 			if(selection == Game.GAMEPLAY_STATE){
 				((GameplayState)(sbg.getState(Game.GAMEPLAY_STATE))).ChooseLevel(levelSelection);
 				selection = Game.NARRATIVE_STATE;
-				((GameplayState)(sbg.getState(Game.NARRATIVE_STATE))).ChooseLevel(levelSelection);
+				((NarrativeState)(sbg.getState(Game.NARRATIVE_STATE))).ChooseLevel(levelSelection);
 			}
 			sbg.enterState(selection);				
 		}

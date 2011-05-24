@@ -178,7 +178,6 @@ public class MyContactListener implements ContactListener {
 										&& temp1.getClass().equals(Character.class))
 										&& (temp2!=s2 && temp1==s1)){
 								noHardCollision = false;
-								System.out.println("Collide:"+temp1.toString()+" - "+temp2.toString());
 							}
 						}	
 					}

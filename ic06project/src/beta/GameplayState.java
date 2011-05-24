@@ -177,21 +177,17 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		}
 		
 		if(((Character)this.ch1_body.getUserData()).isTransported() ){
-			System.out.println("doit etre transporté à x="+((Character)ch1_body.getUserData()).X_transported+" et à y="+((Character)ch1_body.getUserData()).Y_transported);
 			Vec2 b2dcoord = Global.getBox2DCoordinates(((Character)ch1_body.getUserData()).X_transported, ((Character)ch1_body.getUserData()).Y_transported);
 			Vec2 position = new Vec2(b2dcoord.x+((Character)ch1_body.getUserData()).w/2, b2dcoord.y-((Character)ch1_body.getUserData()).h/2);
 			ch1_body.setXForm(position,0);
-			System.out.println("test 2");
 			((Character)ch1_body.getUserData()).setTransported(false,0,0);
 			return;
 		}
 		
 		if(((Character)this.ch2_body.getUserData()).isTransported() ){
-			System.out.println("doit etre transporté à x="+((Character)ch2_body.getUserData()).X_transported+" et à y="+((Character)ch2_body.getUserData()).Y_transported);
 			Vec2 b2dcoord = Global.getBox2DCoordinates(((Character)ch2_body.getUserData()).X_transported, ((Character)ch2_body.getUserData()).Y_transported);
 			Vec2 position = new Vec2(b2dcoord.x+((Character)ch2_body.getUserData()).w/2, b2dcoord.y-((Character)ch2_body.getUserData()).h/2);
 			ch2_body.setXForm(position,0);
-			System.out.println("test 2 bis");
 			((Character)ch2_body.getUserData()).setTransported(false,0,0);
 			return;
 		}
@@ -765,7 +761,6 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	}
 	public Body modifyBodySize(Body body, float h, float w)//nb : rajout d'un parametre pour pouvoir grossir uniquement
 	{
-		System.out.println(body.toString());
 		if(!(body.getUserData() instanceof Sprite)){
 			return null;
 		}
@@ -786,12 +781,6 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		MassData md = new MassData();
 		md.mass = body.getMass();
 		bodyDef.massData = md;
-		
-		if(body == ch1_body){
-		System.out.println(userData.toString());
-		System.out.println(b2position.toString());
-		System.out.println(body.getMass());
-		}
 		
 		Body newBody = world.createBody(bodyDef);		
 		Shape shape = body.getShapeList();

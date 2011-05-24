@@ -41,6 +41,8 @@ public class Game extends StateBasedGame implements MusicListener {
 		addState(new LoadGameState(LOADGAME_STATE));
 		addState(new OptionsGameState(OPTIONSGAME_STATE));
 		addState(NarrativeState.getInstance());
+		
+		// Initialize the music
 		changeMusic("108316_Corsica_S_welcome_to_our_fairy_world.ogg");
 		playMusic();
 		this.music.addListener(this);
