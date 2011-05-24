@@ -284,18 +284,29 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		char2.setCoordinatesFromBody(ch2_body);	
 		
 		// Update the monster's speed
-		for(Body b: monsterBodies){
+		ArrayList<Integer> tempList = new ArrayList<Integer>();
+		for(int i = 0 ; i < monsterBodies.size() ; ++i){
+			Body b = monsterBodies.get(i);
 			Monster m = (Monster)b.getUserData();
 			b.setLinearVelocity(m.getSpeed());	
 			((Monster)b.getUserData()).step();
 			m.setCoordinatesFromBody(b);
+			if (m.getShouldBeDestroy()){
+				currentLevel.sprites.remove(m);
+				tempList.add(i);
+			}
 		}
+		for(int i = 0 ; i < tempList.size() ; ++i){
+			Body tempBody = monsterBodies.get((tempList.get(i))-i);
+			this.monsterBodies.remove(tempBody);
+			this.world.destroyBody(tempBody);
+		}
+		tempList.clear();
 		
 		// Simulation sur 0.1s dans notre box2D world
 		world.step((float)delta/100, 100);
 
 		// Update the screen and the model values
-		ArrayList<Integer> tempList = new ArrayList<Integer>();
 		for(int i = 0 ; i < spriteBodies.size() ; ++i){
 			Body tempBody = spriteBodies.get(i);
 			Sprite theSprite = (Sprite)tempBody.getUserData();
@@ -461,6 +472,24 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		sd.setAsBox(obstacleData.w/2,obstacleData.h/2);
 		newBody.createShape(sd);
 		newBody.putToSleep();
+		spriteBodies.add(newBody);
+		return newBody;
+	}
+	public Body addDestructible(Destructible destructibleData){
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.userData = destructibleData;
+		Vec2 b2dcoord = Global.getBox2DCoordinates(destructibleData.x, destructibleData.y);
+		bodyDef.position = new Vec2(b2dcoord.x+destructibleData.w/2,b2dcoord.y-destructibleData.h/2);
+		MassData md = new MassData();
+		md.mass = 100.0f;
+		bodyDef.massData = md;
+		Body newBody = world.createBody(bodyDef);
+		PolygonDef sd = new PolygonDef();		
+		sd.density = 5000.0f;
+		sd.friction = 0.5f;
+
+		sd.setAsBox(destructibleData.w/2,destructibleData.h/2);
+		newBody.createShape(sd);
 		spriteBodies.add(newBody);
 		return newBody;
 	}

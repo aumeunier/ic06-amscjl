@@ -11,7 +11,7 @@ public class Level4 extends Level {
 	public Level4(GameplayState state, LevelSave model) {
 		super(state,model);
 		this.levelID = 4;
-		//this.inTheDarkness = true;
+		this.inTheDarkness = true;
 		this.setBackgroundImage("1770925_s.jpg");
 		Ground.setim(Ground.IM1);
 		
@@ -53,7 +53,7 @@ public class Level4 extends Level {
 		createGround(340,390,320,20); // 20
 		createGround(740,390,60,20); // 21
 		createGround(80,165,100,35); // 22
-		createGround(0,220,40,80); // 23
+		createGround(0,220,40,65); // 23
 		createGround(40,250,160,20); // 24
 		createGround(0,340,150,20); // 25
 		createGround(195,330,85,30); // 26
@@ -70,8 +70,7 @@ public class Level4 extends Level {
 		createLevier(420,130,30,30,b1);
 
 		Obstacle o2 = createObstacle(40,270,60,70);
-		//createGround(40,250,160,20); // 24
-		o2.setImage("new-sol.png");
+		o2.setImage("sol-pourri-v56.png");
 		o2.image = o2.image.getSubImage(o2.x,250,o2.w,o2.h);
 		ArrayList<Body> b2 = new ArrayList<Body>();
 		b2.add(myState.getBodyForUserData(o2));
@@ -83,6 +82,14 @@ public class Level4 extends Level {
 		b3.add(myState.getBodyForUserData(o3));
 		createLevier(120,460,30,30,b3);
 		
+		// Place destructibles
+		Destructible d1 = createDestructible(42,360,76,70);
+		Destructible d2 = createDestructible(60,430,60,60);
+		d2.addDestructible(d1);
+		Destructible d3 = createDestructible(670,340,60,30);
+		Destructible d4 = createDestructible(640,370,120,20);
+		d4.addDestructible(d3);
+		
 		// Place l'eau
 		SourceMortelle s = createSourceMortelle(320,185,60,5);
 		s.setAnimation("waves.png", 300, 300);
@@ -92,8 +99,9 @@ public class Level4 extends Level {
 		Source sLight = createSource(340,90-42,49,42,Power.LIGHT);
 		sLight.setLightSize(100);
 		createSource(290,290,49,42,Power.INVISIBLE);
+		createSource(0,298,49,42,Power.DESTRUCTOR);
 		
-		//place Sortie
+		// Place Sortie
 		createExit(Global.GAMEPLAYWIDTH-50,Global.GAMEPLAYHEIGHT-56,32,46);
 		
 		// Place bonus
@@ -102,25 +110,24 @@ public class Level4 extends Level {
 		createBonus(290,225,25,25);
 		
 		// Place les monstres
-		Monster m1 = createMonster(565,70,40,40);
+		Monster m1 = createMonster(565,74,30,30);
 		m1.setImage("6241879_s.jpg");
-		m1.setSpeed(new Vec2(-10,0));
-		m1.setBorns(new Vec2(565,0), new Vec2(800-m1.w-1,0));
+		m1.setSpeed(new Vec2(-10,+1.0f));
+		m1.setBorns(new Vec2(565,74-1), new Vec2(800-m1.w-1,74+4));
 		
-		Monster m2 = createMonster(520,130,40,40);
+		Monster m2 = createMonster(520,134,30,30);
 		m2.setImage("6241879_s.jpg");
-		m2.setSpeed(new Vec2(10,0));
-		m2.setBorns(new Vec2(m2.x,0), new Vec2(800-m2.w-1,0));
+		m2.setSpeed(new Vec2(10,+1.0f));
+		m2.setBorns(new Vec2(m2.x,133), new Vec2(800-m2.w-1,138));
 
-		Monster m3 = createMonster(340,220,40,40);
+		Monster m3 = createMonster(340,220,30,30);
 		m3.setImage("6241879_s.jpg");
 		m3.setSpeed(new Vec2(10,0));
 		m3.setBorns(new Vec2(m3.x,0), new Vec2(740-m3.w-1,0));
 		
-		Monster m = createMonster(Global.GAMEPLAYWIDTH-100,Global.GAMEPLAYHEIGHT-70,50,60);
-		//m.setBorns(new Vec2(50,0), new Vec2(120,0));
-		m.setSpeed(new Vec2(-20,0));
-		m.setBorns(new Vec2(m.x-300,m.y), new Vec2(m.x,m.y));
+		Monster m = createMonster(Global.GAMEPLAYWIDTH-120,Global.GAMEPLAYHEIGHT-70,50,60);
+		//m.setSpeed(new Vec2(-8,0));
+		//m.setBorns(new Vec2(m.x-300,m.y), new Vec2(m.x,m.y));
 		
 		// Place des torches
 		Torch torch1 = new Torch(280,210);
@@ -134,8 +141,6 @@ public class Level4 extends Level {
 		this.character2 = addCharacterWithPoints(10,50,0.7f);	
 		this.character1.setLightSize(this.character1.h);
 		this.character2.setLightSize(this.character2.h);
-		this.character1.setPower(Power.INVISIBLE);
-		this.character2.setPower(Power.INVISIBLE);
 
 		this.setLevelForAllSprites();
 	}

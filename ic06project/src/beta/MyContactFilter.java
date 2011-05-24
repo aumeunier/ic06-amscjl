@@ -30,12 +30,36 @@ public class MyContactFilter implements ContactFilter {
 				((BoutonPressoir)s1).check();
 			}		
 		}
+		Object b1d = b1.getUserData();
+		Object b2d = b2.getUserData();
+		if((b1d!=null && b2d!=null)
+				&& ((b1d.getClass().equals(Destructible.class) && !b2d.getClass().equals(Character.class))
+						|| (b2d.getClass().equals(Destructible.class) && !b1d.getClass().equals(Character.class)))){
+			if((b1d.getClass().equals(Monster.class) && b2d.getClass().equals(Destructible.class))){
+				if(((Destructible)b2d).isDeadly()){
+					((Monster)b1d).setDead(true);
+					((Monster)b1d).shouldBeDestroy=true;	
+				}
+			}
+			else if((b2d.getClass().equals(Monster.class) && b1d.getClass().equals(Destructible.class))){
+				if(((Destructible)b1d).isDeadly()){
+					((Monster)b2d).setDead(true);
+					((Monster)b2d).shouldBeDestroy=true;
+				}				
+			}
+			else if((b1d.getClass().equals(Wall.class) && b2d.getClass().equals(Destructible.class))){
+				((Destructible)b2d).setDeadly(false);
+			}
+			else if((b2d.getClass().equals(Wall.class) && b1d.getClass().equals(Destructible.class))){
+				((Destructible)b1d).setDeadly(false);				
+			}
+		}
 
 		/* Collisions concernant le personnage */
 		else {
-			if(b1.getUserData()!=null && b2.getUserData()!=null){
-				Sprite s1 = (Sprite)b1.getUserData();
-				Sprite s2 = (Sprite)b2.getUserData();
+			if(b1d!=null && b2d!=null){
+				Sprite s1 = (Sprite)b1d;
+				Sprite s2 = (Sprite)b2d;
 				// Premier cas s1 est ...
 				
 				if(s1.getClass().equals(Character.class)){
@@ -62,8 +86,18 @@ public class MyContactFilter implements ContactFilter {
 						((Character)(s1)).setDead(true);
 						return false;
 					}
-					else if((s2.getClass().equals(SourceMortelle.class)) && (((Character)(s2)).getPower()== Power.NAGE)){
+					else if((s2.getClass().equals(SourceMortelle.class)) && (((Character)(s1)).getPower()== Power.NAGE)){
 						((Character)(s2)).isFalling=false;
+						return false;
+					}
+					else if((s2.getClass().equals(Destructible.class)) && (((Destructible)s2).isDeadly())){
+						((Character)s1).setDead(true);
+						return false;
+					}
+					else if((s2.getClass().equals(Destructible.class)) && (((Character)(s1)).getPower()== Power.DESTRUCTOR)){
+						s2.shouldBeDestroy=true;
+						((Destructible)s2).setDestructiblesDeadly();
+						((Character)(s1)).isFalling=false;
 						return false;
 					}
 					else if(s2.getClass().equals(Source.class)){
@@ -124,6 +158,16 @@ public class MyContactFilter implements ContactFilter {
 					}
 					else if((s1.getClass().equals(SourceMortelle.class)) && (((Character)(s2)).getPower()== Power.NAGE)){
 						((Character)(s2)).isFalling=false;		
+						return false;
+					}
+					else if((s1.getClass().equals(Destructible.class)) && (((Destructible)s1).isDeadly())){
+						((Character)s2).setDead(true);
+						return false;
+					}
+					else if((s1.getClass().equals(Destructible.class)) && (((Character)(s2)).getPower()== Power.DESTRUCTOR)){
+						s1.shouldBeDestroy=true;
+						((Destructible)s1).setDestructiblesDeadly();
+						((Character)(s2)).isFalling=false;
 						return false;
 					}
 					else if(s1.getClass().equals(Source.class)){

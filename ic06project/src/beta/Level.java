@@ -153,6 +153,19 @@ public class Level {
 		
 		return obstacle;
 	}
+	protected Destructible createDestructible(int x, int y, int w, int h){
+		
+		// Create a wall object
+		Destructible destructible = new Destructible(x,y,w,h);
+
+		// Add it to the list of sprites of the level
+		sprites.add(destructible);
+		
+		// Create the obstacle body
+		myState.addDestructible(destructible);
+		
+		return destructible;
+	}
 	protected Obstacle createObstacleWithPoints(int x, int y, int w, int h, ArrayList<Vec2> point){
 		
 		// Create a wall object
@@ -376,7 +389,7 @@ public class Level {
 			g.setDrawMode(Graphics.MODE_ALPHA_MAP);
 			for(int i = 0 ; i < backgroundSprites.size() ; ++i){
 				Sprite s = backgroundSprites.get(i);
-				if(s.lightInDarkness){
+				if(s.lightInDarkness && !s.isHidden()){
 					s.drawLight(g, true);				
 				}
 			}
@@ -388,7 +401,7 @@ public class Level {
 			}
 			for(int i = 0 ; i < sprites.size() ; ++i){
 				Sprite s = sprites.get(i);
-				if(s.lightInDarkness){
+				if(s.lightInDarkness && !s.isHidden()){
 					s.drawLight(g, true);				
 				}
 			}	  
@@ -397,7 +410,7 @@ public class Level {
 			backgroundImage.draw();
 			for(int i = 0 ; i < backgroundSprites.size() ; ++i){
 				Sprite s = backgroundSprites.get(i);
-				if(!s.lightInDarkness){
+				if(!s.lightInDarkness && !s.isHidden()){
 					s.draw(g);				
 				}
 				else {
@@ -414,7 +427,7 @@ public class Level {
 			}
 			for(int i = 0 ; i < sprites.size() ; ++i){
 				Sprite s = sprites.get(i);
-				if(!s.lightInDarkness){
+				if(!s.lightInDarkness && !s.isHidden()){
 					s.draw(g);				
 				}
 			}
@@ -431,7 +444,7 @@ public class Level {
 			}
 			for(int i = 0 ; i < sprites.size() ; ++i){
 				Sprite s = sprites.get(i);
-				if(s.lightInDarkness){
+				if(s.lightInDarkness && !s.isHidden()){
 					s.draw(g);				
 				}
 			}
@@ -463,10 +476,7 @@ public class Level {
 				if(!s.isHidden()){
 					s.draw(g);
 				}
-				if (s.getIndication()!=null)
-					System.out.println("debug");
 				if(s.getIndication()!=null && s.getIndicationActivated()){
-					System.out.println("s'affiche ici !");
 					s.getIndication().render(gc, g);
 				}
 			}

@@ -24,10 +24,10 @@ public class Monster extends Character {
 		else if(x > end.x && speed.x > 0){
 			speed.x = -speed.x;
 		}
-		if(y < start.y && speed.y < 0){
+		if(y < start.y && speed.y > 0){
 			speed.y = -speed.y;
 		}
-		else if(y > end.y && speed.y > 0){
+		else if(y > end.y && speed.y < 0){
 			speed.y = -speed.y;
 		}
 	}

@@ -56,7 +56,7 @@ public enum Power {
 			result = "fat.png";
 			break;
 		case DESTRUCTOR:
-			result = "fat.png";
+			result = "musclor.png";
 			break;
 		case INVISIBLE:
 			result = "fat.png";

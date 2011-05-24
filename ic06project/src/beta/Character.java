@@ -14,6 +14,7 @@ public class Character extends Sprite{
 	private boolean isDead = false;
 	private boolean isAtExit = false;
 	private boolean isTransported = false;
+	private boolean destructionPowerActivated = false;
 	private int boutonpressoir = 0;
 	public int X_transported = 0;
 	public int Y_transported = 0;
@@ -41,11 +42,11 @@ public class Character extends Sprite{
 		setAnimation("fee-de-face.png",CHAR_W,CHAR_H);
 	}
 	public void changePower(){
+		this.setFilter(Color.white);
 		if(isIntangible()){
 			this.setFilter(new Color(129,244,254,100));
 		}
 		else if(isFlying()){
-			this.setFilter(Color.white);
 			setAnimation("fee-de-face-pouvoir-1.png",CHAR_W,CHAR_H);
 		}
 		else if(isFire()){
@@ -163,6 +164,12 @@ public class Character extends Sprite{
 	}
 	public boolean isLight(){
 		return power==Power.LIGHT;
+	}
+	public boolean isDestructor(){
+		return power==Power.DESTRUCTOR;
+	}
+	public boolean canDestruct(){
+		return power==Power.DESTRUCTOR && destructionPowerActivated;
 	}
 	public boolean canTeleport(){
 		return power==Power.TELEPORTATION;
