@@ -103,7 +103,7 @@ public class Save {
 				int tempKeys = lvl.path("keys").getIntValue();
 				LevelSave level = getLevelWithID(tempId);
 				if(level != null){
-					level.setSavedLevelData(tempKeys, tempUnlocked, tempFinished);
+					level.setSavedLevelDataFromSave(tempKeys, tempUnlocked, tempFinished);
 					totalNumberOfUnlockedKeys+=level.getUnlockedKeys();
 				}
 			}			

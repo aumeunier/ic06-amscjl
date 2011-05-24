@@ -24,7 +24,7 @@ public class LevelSave {
 		isFinished = false;
 	}
 	/**
-	 * Method used to load the players data on a particular level
+	 * Method used to save the players data on a particular level
 	 * @param unlocked
 	 * @param levelUnlocked
 	 * @param levelFinished
@@ -33,6 +33,17 @@ public class LevelSave {
 		unlockedKeys = (unlockedKeys >= unlocked)?unlockedKeys:unlocked;
 		isUnlocked = isUnlocked || levelUnlocked;
 		isFinished = isFinished || levelFinished;
+	}
+	/**
+	 * Method used to load the players data on a particular level
+	 * @param unlocked
+	 * @param levelUnlocked
+	 * @param levelFinished
+	 */
+	public void setSavedLevelDataFromSave(int unlocked, boolean levelUnlocked, boolean levelFinished){
+		unlockedKeys = (unlockedKeys >= unlocked)?unlockedKeys:unlocked;
+		isUnlocked = levelUnlocked;
+		isFinished = levelFinished;
 	}
 	public String getName(){
 		return levelName;
