@@ -96,10 +96,10 @@ public class Level4 extends Level {
 		s.setFilter(Color.green);
 		
 		// Place sources
-		Source sLight = createSource(340,90-42,49,42,Power.LIGHT);
+		Source sLight = createSource(340,90-42,60,60,Power.LIGHT);
 		sLight.setLightSize(100);
-		createSource(290,290,49,42,Power.INVISIBLE);
-		createSource(0,298,49,42,Power.DESTRUCTOR);
+		createSource(290,290,60,60,Power.INVISIBLE);
+		createSource(0,298,60,60,Power.DESTRUCTOR);
 		
 		// Place Sortie
 		createExit(Global.GAMEPLAYWIDTH-50,Global.GAMEPLAYHEIGHT-56,32,46);
