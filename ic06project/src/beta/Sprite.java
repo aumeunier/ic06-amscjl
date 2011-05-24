@@ -1,5 +1,7 @@
 package beta;
 
+import java.util.Timer;
+
 import org.jbox2d.dynamics.Body;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
@@ -29,6 +31,7 @@ public class Sprite {
 	protected Level level;
 	protected InGameIndication indication= null;
 	protected boolean IndicationActivated=false;
+	protected Timer timer = null;
 	
 	public Sprite(){
 		this.x=0;

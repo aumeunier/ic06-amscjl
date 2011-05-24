@@ -42,6 +42,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	private boolean startAgain;
 	private boolean alwaysStartAgain;
 	private boolean levelJustCreated;
+	private boolean stop_play_music;
 
 	public GameplayState(int id){
 		super();
@@ -51,6 +52,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		this.alwaysStartAgain = false;
 		this.isFinished = false;
 		this.levelJustCreated = true;
+		this.stop_play_music = false;
 		this.currentLevelState = new LevelState();
 	}
 
@@ -134,6 +136,16 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		// Si un changement d'etat a ete demande, l'effectuer
 		if(this.selection != -1){
 			sbg.enterState(selection);			
+		}
+		if(this.stop_play_music){
+			Game game = (Game)sbg;
+			if(game.isMusicPlaying()){
+				game.stopMusic();
+			}
+			else{
+				game.playMusic();
+			}
+			this.stop_play_music = false;
 		}
 		
 		// Si aucun niveau n'est charge ou que le niveau est fini, aucun interet a faire des calculs
@@ -860,6 +872,10 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			if(selection == Game.SHOULD_RESTART){
 				this.ChooseLevel(this.currentLevel.getLevelID());
 				selection = -1;				
+			}		
+			else if(selection == Game.STOP_PLAY_MUSIC){
+				this.stop_play_music = true;
+				selection = -1;
 			}		
 		}
 		else if(this.currentLevel!=null && this.arePlayersDead()){

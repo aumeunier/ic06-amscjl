@@ -19,6 +19,7 @@ public class Game extends StateBasedGame implements MusicListener {
 	public static final int NARRATIVE_STATE = 5;
 	public static final int GO_TO_NEXT_LEVEL = -100;
 	public static final int SHOULD_RESTART = -200;
+	public static final int STOP_PLAY_MUSIC = -300;
 	
 	private final static String MENUS_MUSIC = "duckett_-_Pequennas_Alas_(PC_TA_mix).ogg";
 
@@ -70,6 +71,9 @@ public class Game extends StateBasedGame implements MusicListener {
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}				
+	}
+	public boolean isMusicPlaying(){
+		return this.music.playing();
 	}
 	public void playMusic(){
 		this.music.play();

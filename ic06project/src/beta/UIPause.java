@@ -38,23 +38,31 @@ public class UIPause implements UIInterface {
 		
 		// Background image
 		this.menuBackgroundImage = Global.setImage("menupause.png");
+		
+		int i = 0;
 
 		// Back to game button
 		Image buttonImage = Global.setImage("blur11.jpg").getScaledCopy(BUTTON_W, BUTTON_H);
 		Label backToGameLabel = new Label(buttonImage,"Retour au jeu");
-		backToGameLabel.setBounds(BUTTON_X,BUTTON_Y_INIT,BUTTON_W,BUTTON_H);
+		backToGameLabel.setBounds(BUTTON_X,BUTTON_Y_INIT+(i++)*(BUTTON_H+BUTTON_SPACE),BUTTON_W,BUTTON_H);
 		backToGameLabel.pack();
 		this.display.add(backToGameLabel);
 		
 		// Restart level button  
+		Label musicLabel = new Label(buttonImage,"Stop/Play music");
+		musicLabel.setBounds(BUTTON_X,BUTTON_Y_INIT+(i++)*(BUTTON_H+BUTTON_SPACE),BUTTON_W,BUTTON_H);
+		musicLabel.pack();
+		this.display.add(musicLabel);
+		
+		// Restart level button  
 		Label restartLabel = new Label(buttonImage,"Recommencer le niveau");
-		restartLabel.setBounds(BUTTON_X,BUTTON_Y_INIT+BUTTON_H+BUTTON_SPACE,BUTTON_W,BUTTON_H);
+		restartLabel.setBounds(BUTTON_X,BUTTON_Y_INIT+(i++)*(BUTTON_H+BUTTON_SPACE),BUTTON_W,BUTTON_H);
 		restartLabel.pack();
 		this.display.add(restartLabel);
 		
 		// Back to menu button  
 		Label backToMenuLabel = new Label(buttonImage,"Retour au menu principal");
-		backToMenuLabel.setBounds(BUTTON_X,BUTTON_Y_INIT+2*BUTTON_H+2*BUTTON_SPACE,BUTTON_W,BUTTON_H);
+		backToMenuLabel.setBounds(BUTTON_X,BUTTON_Y_INIT+(i++)*(BUTTON_H+BUTTON_SPACE),BUTTON_W,BUTTON_H);
 		backToMenuLabel.pack();
 		this.display.add(backToMenuLabel);
 	}
@@ -83,11 +91,17 @@ public class UIPause implements UIInterface {
 				&&	(y >= BUTTON_Y_INIT+BUTTON_H+BUTTON_SPACE  
 						&& y <= (BUTTON_Y_INIT+BUTTON_H+BUTTON_SPACE + BUTTON_H))){
 			state.setPaused(false);	
-			result = Game.SHOULD_RESTART;
+			result = Game.STOP_PLAY_MUSIC;
 		}
 		else if((x >= BUTTON_X && x <= (BUTTON_X + BUTTON_W)) 
 				&&	(y >= BUTTON_Y_INIT+2*BUTTON_H+2*BUTTON_SPACE  
 						&& y <= (BUTTON_Y_INIT+2*BUTTON_H+2*BUTTON_SPACE + BUTTON_H))){
+			state.setPaused(false);	
+			result = Game.SHOULD_RESTART;
+		}
+		else if((x >= BUTTON_X && x <= (BUTTON_X + BUTTON_W)) 
+				&&	(y >= BUTTON_Y_INIT+3*BUTTON_H+3*BUTTON_SPACE  
+						&& y <= (BUTTON_Y_INIT+3*BUTTON_H+3*BUTTON_SPACE + BUTTON_H))){
 			state.setPaused(false);	
 			result = Game.MAINMENU_STATE;
 		}
