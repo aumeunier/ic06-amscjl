@@ -66,16 +66,16 @@ public class NarrativeState extends BasicGameState implements MouseListener {
 	public void ChooseLevel(int i){
 		switch(i){
 		case 1:
-			textToDisplay = "Pas de description pour ce niveau 1! :(";
+			textToDisplay = "Il était une fois, un peuple de fées...\n Elles vivaient paisiblement depuis plusieurs milliers \n d'années, dans une contrée lointaine à l'Ouest du royaume \n Bros. Leur village se situait dans la \n vallée de ‘Eel Ti Jut’... \n Les fées se sont toujours tenus à l'écart du\n royaume de la sorcière (la \n sorcière ‘Ulna Rei’) située dans les contrées Est.\n La sorcière, elle, rêve depuis toujours de \n capturer le peuple des fées pour leur arracher \n leurs ailes qui possèdent des particularités \n  surprenantes.\n Les fées peuvent effectivement grâce \n à leurs ailes absorber des pouvoirs \n dissimulés dans des zones magiques (que les\n fées arrivent à détecter par une aura étoilé). \n Comme chaque 1er jour de l'été les deux plus\n jeunes fées de la tribu ont la difficile tâche de \n récupérer un fruit très rare dont seules les fées\n connaissent l'existence : ce fruit qu'elles \n nomment ‘Hapsten’. \n Ce fruit est utilisé pour la cérémonie \n annuelle féérique et permet, si le \n nombre de fruit récolté est suffisant, de \n pouvoir être une source de pouvoir gigantesque ! Ce \n que ne savent pas nos deux fées c'est\n que cette année la récolte sera d'une importance \n capitale pour la survie de la tribu ! \n Et c'est donc ici que commence l'Histoire de nos 2 Super \n Fairy Bros !";
 			break;
 		case 2:
-			textToDisplay = "Pas de description pour ce niveau 2! :(";
+			textToDisplay = "Après avoir parcouru les plaines des contrées\n ouest de Bros nos deux fées ont aperçu leur village\n en feu ! \n Après une visite des lieux,  elles ont retrouvé\n le village désert et à moitié en ruine. \n Elles trouvèrent un message menaçant\n accroché à l’entrée du village : « J’ai fait prisonnière toutes \n vos soeurs, j’ai récupéré leurs ailes et elles \n n’auront plus jamais aucun pouvoir ! Bientôt votre \n tour viendra… \n La Sorcière ‘Ulna Rei’ » \n Nos deux fées ont donc décidé d’aller \n sauver les fées prisonnières de la sorcière : pour se faire \n elles vont réunir le plus possible de leur fruit\n magique ‘Hapsten’ afin de fabriquer une source de \n pouvoir très puissante et de pouvoir, \n peut-être, sauver leurs sœurs et leurs mères. \n";
 			break;
 		case 3:
-			textToDisplay = "Pas de description pour ce niveau 3! :(";
+			textToDisplay = "Nos deux fées doivent maintenant \n traverser le mont ‘ Izapov’ afin de rejoindre les \n  grottes  ‘d’ ArgennK ‘, n’oubliez pas \n de ramasser autant d’’Hapsten’ que possible. \n";
 			break;
 		case 4 :
-			textToDisplay = "Pas de description pour ce niveau 4! :(";
+			textToDisplay = "Toujours en allant vers l’Est nos deux fées traversent\n les grottes qui n’abritent pas toujours de doux \n compagnons… Juste derrière ces grottes nous trouveront la Sorcière…";
 			break;
 		default:
 			textToDisplay = "Pas de description pour ce niveau! :(";
