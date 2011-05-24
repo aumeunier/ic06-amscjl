@@ -27,7 +27,6 @@ public class LevierCombi extends Declencheur{
 	public void activate() 
 	{
 		isActivated=!isActivated;
-		System.out.println("fontion activate de levierCombi");
 		
 		//pour chaque combi possible, réafficher tous les bodies(ou caher les sources)
 		for(int n=0;n<relatedBody.size();n++)
@@ -35,7 +34,6 @@ public class LevierCombi extends Declencheur{
 			ArrayList<Body> tempBodies = relatedBody.get(n);
 			for (Body bx : tempBodies) 
 			{			
-				System.out.println(bx.getUserData());
 				if((Sprite)(bx.getUserData()) instanceof Source) 	//doit etre caché
 						((Sprite)(bx.getUserData())).Hidden(true);
 				else													//doit etre affiché
@@ -51,8 +49,6 @@ public class LevierCombi extends Declencheur{
 			
 			//je parcours les deux listes pour voir si la combi est bonne
 			for(int i=0;i<leviers.size();i++){
-				System.out.println(leviers.get(i).isActivated );
-				System.out.println(tempCombi.get(i));
 				//si la combi est mauvaise
 				if((leviers.get(i).isActivated && !tempCombi.get(i))||(!leviers.get(i).isActivated && tempCombi.get(i))){
 					testCombi=false;

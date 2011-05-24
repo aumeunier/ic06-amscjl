@@ -128,30 +128,62 @@ public class UIGameplay implements UIInterface {
 				+"/"+Save.getInstance().getTotalNumberOfKeys());
 		if(powerPlayer1.compareTo(p1power)!=0){
 			switch(powerPlayer1){
-			case NONE:
-				leftPlayerImage = Global.setImage("star.png");;
-				break;
-			case DEATHLY:
-				leftPlayerImage = Global.setImage("star.png");;
-				break;
-			case INTANGIBLE:
-				leftPlayerImage = Global.setImage("powerMur.png");
-				break;
-			case FLYING:
-				leftPlayerImage = Global.setImage("powerFlying.png");
-				break;
-			default:
-				break;
-			}
+			
+				case NONE:
+					leftPlayerImage = Global.setImage("wall.png");
+					break;
+				case DEATHLY:
+					leftPlayerImage = Global.setImage("blur11.jpg");
+					break;
+				case INTANGIBLE:
+					leftPlayerImage = Global.setImage("powerMur.png");
+					break;
+				case FLYING:
+					leftPlayerImage = Global.setImage("powerFlying.png");
+					break;
+				case FAT:
+					leftPlayerImage = Global.setImage("gros.png");
+					break;
+				case PETIT:
+					leftPlayerImage = Global.setImage("petit.png");
+					break;
+				case REBOND:
+					leftPlayerImage = Global.setImage("fat.png");
+					break;
+				case FIRE:
+					leftPlayerImage = Global.setImage("powerFire.png");
+					break;
+				case NAGE:
+					leftPlayerImage = Global.setImage("nage.png");
+					break;
+				case LIGHT:
+					leftPlayerImage = Global.setImage("fat.png");
+					break;
+				case TELEPORTATION:
+					leftPlayerImage = Global.setImage("teleportation.png");
+					break;
+				case ABSORBE:
+					leftPlayerImage = Global.setImage("fat.png");
+					break;
+				case DESTRUCTOR:
+					leftPlayerImage = Global.setImage("musclor.png");
+					break;
+				case INVISIBLE:
+					leftPlayerImage = Global.setImage("fat.png");
+					break;
+				default:
+					leftPlayerImage = Global.setImage("fat.png");
+					break;
+				}
 			this.p1power = powerPlayer1;
 		}
 		if(powerPlayer2.compareTo(p2power)!=0){
 			switch(powerPlayer2){
 			case NONE:
-				rightPlayerImage = Global.setImage("star.png");;
+				rightPlayerImage = Global.setImage("wall.png");
 				break;
 			case DEATHLY:
-				rightPlayerImage = Global.setImage("star.png");;
+				rightPlayerImage = Global.setImage("blur11.jpg");
 				break;
 			case INTANGIBLE:
 				rightPlayerImage = Global.setImage("powerMur.png");
@@ -159,7 +191,38 @@ public class UIGameplay implements UIInterface {
 			case FLYING:
 				rightPlayerImage = Global.setImage("powerFlying.png");
 				break;
+			case FAT:
+				rightPlayerImage = Global.setImage("gros.png");
+				break;
+			case PETIT:
+				rightPlayerImage = Global.setImage("petit.png");
+				break;
+			case REBOND:
+				rightPlayerImage = Global.setImage("fat.png");
+				break;
+			case FIRE:
+				rightPlayerImage = Global.setImage("powerFire.png");
+				break;
+			case NAGE:
+				rightPlayerImage = Global.setImage("nage.png");
+				break;
+			case LIGHT:
+				rightPlayerImage = Global.setImage("fat.png");
+				break;
+			case TELEPORTATION:
+				rightPlayerImage = Global.setImage("teleportation.png");
+				break;
+			case ABSORBE:
+				rightPlayerImage = Global.setImage("fat.png");
+				break;
+			case DESTRUCTOR:
+				rightPlayerImage = Global.setImage("musclor.png");
+				break;
+			case INVISIBLE:
+				rightPlayerImage = Global.setImage("fat.png");
+				break;
 			default:
+				rightPlayerImage = Global.setImage("fat.png");
 				break;
 			}
 			this.p2power = powerPlayer2;

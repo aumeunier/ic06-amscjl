@@ -118,9 +118,7 @@ public class Level3 extends Level {
 		
 		levier1.activate();
 		levier1.activate();
-		
-		System.out.println(sourceG.isHidden);
-		
+			
 		Ground solMouvant = createGround(570,373,50,7); 		// plateforme mouvante
 		Body bodyMouvant = state.getBodyForUserData(solMouvant);
 		ArrayList<Body> b2 = new ArrayList<Body>();
@@ -128,8 +126,7 @@ public class Level3 extends Level {
 		MassData md = new MassData();
 		md.mass = 100.0f;
 		bodyMouvant.setMass(md);
-		BoutonElevator B = createBoutonElevator(680, 362, 30, 18, b2, 2, 5000);	//bouton Elevator pour la plateforme
-		System.out.println(B.getNum());
+		BoutonElevator B = createBoutonElevator(660, 362, 30, 18, b2, 2, 5000);	//bouton Elevator pour la plateforme
 		createGround(565,375,5,5);//cale1
 		createGround(620,375,5,5);//cale2
 		
