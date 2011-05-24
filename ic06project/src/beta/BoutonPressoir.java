@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.jbox2d.dynamics.Body;
 
 public class BoutonPressoir extends Declencheur {
+
+	protected ArrayList<Body> relatedBody;
 	
 	protected int poids;
 	static private int cpt=0;
@@ -12,7 +14,8 @@ public class BoutonPressoir extends Declencheur {
 	protected boolean resteactive=false;
 	
 	public BoutonPressoir(int _x, int _y, int _w, int _h, ArrayList<Body> b, int p){
-		super(_x, _y, _w, _h, b);
+		super(_x, _y, _w, _h);
+		relatedBody=b;
 		cpt++;
 		num=cpt;
 		poids=p;

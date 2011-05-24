@@ -40,7 +40,6 @@ public class Level3 extends Level {
 		//Création de la source FEU
 		createSource(500,450,40,40,Power.FIRE);	
 		
-		
 		//Création des petites plateformes
 		createGround(200,310,50,4); // plateforme levier 1
 		createGround(300,310,50,4); // plateforme levier 2
@@ -54,19 +53,60 @@ public class Level3 extends Level {
 		Body sourceGBody = state.getBodyForUserData(sourceG); 			//Body du pouvoir du Gros
 		Wall wall = createWall(540,250,10,130);							//Mur plateforme sautante
 		Body wallBody = state.getBodyForUserData(wall);					//Body du Mur
-		Wall wall2 = createWall(450,430,10,68);	//Mur pouvoir du feu
+		Wall wall2 = createWall(450,430,10,68);							//Mur pouvoir du feu
 		Body wallBody2 = state.getBodyForUserData(wall2);				//Body du Mur
 		
-		ArrayList<Body> b3 = new ArrayList<Body>();
-		b3.add(wallBody);
-		createLevier(310,280,30,30,b3);							//levier déclencheur du mur
-		ArrayList<Body> b5 = new ArrayList<Body>();
-		b5.add(wallBody2);
-		createLevier(410,280,30,30,b5);							//levier déclencheur du mur
-		ArrayList<Body> b1 = new ArrayList<Body>();
-		b1.add(sourceGBody);
-		Levier levier1 = createLevier(210,280,30,30,b1);		//levier déclencheur du pouvoir
-		levier1.activate();
+		LevierCombi levier1;
+		LevierCombi levier2;
+		LevierCombi levier3;
+		ArrayList<LevierCombi> L = new ArrayList<LevierCombi>();
+		
+			//Création des combinaisons
+				//1ere
+				ArrayList<Body> listeB1= new ArrayList<Body>();
+				listeB1.add(sourceGBody);
+				ArrayList<Boolean> listeT1= new ArrayList<Boolean>();
+				listeT1.add(false);
+				listeT1.add(false);
+				listeT1.add(false);
+				//2eme
+				ArrayList<Body> listeB2= new ArrayList<Body>();
+				listeB2.add(wallBody);
+				ArrayList<Boolean> listeT2= new ArrayList<Boolean>();
+				listeT2.add(true);
+				listeT2.add(true);
+				listeT2.add(false);
+				//3eme
+				ArrayList<Body> listeB3= new ArrayList<Body>();
+				listeB3.add(wallBody2);
+				ArrayList<Boolean> listeT3= new ArrayList<Boolean>();
+				listeT3.add(true);
+				listeT3.add(true);
+				listeT3.add(true);
+				//4eme
+				ArrayList<Body> listeB4= new ArrayList<Body>();
+				listeB4.add(wallBody);
+				listeB4.add(wallBody2);
+				ArrayList<Boolean> listeT4= new ArrayList<Boolean>();
+				listeT4.add(true);
+				listeT4.add(false);
+				listeT4.add(true);
+				
+		//Création des listes de combi
+		ArrayList<ArrayList<Body> > listB = new ArrayList<ArrayList<Body> >();
+		listB.add(listeB1);
+		listB.add(listeB2);
+		listB.add(listeB3);
+		listB.add(listeB4);
+		ArrayList<ArrayList<Boolean> > listT = new ArrayList<ArrayList<Boolean> >();
+		listT.add(listeT1);
+		listT.add(listeT2);
+		listT.add(listeT3);
+		listT.add(listeT4);
+		
+		levier1 = createLevierCombi(210,280,30,30,listB,listT,L);		//levier déclencheur du mur
+		levier2 = createLevierCombi(310,280,30,30,listB,listT,L);		//levier déclencheur du mur
+		levier3 = createLevierCombi(410,280,30,30,listB,listT,L);		//levier déclencheur du pouvoir
 		
 		Ground solMouvant = createGround(570,373,50,7); 		// plateforme mouvante
 		Body bodyMouvant = state.getBodyForUserData(solMouvant);

@@ -276,6 +276,22 @@ public class Level {
 		return levier;
 	}
 	
+
+	
+	protected LevierCombi createLevierCombi(int x, int y, int w, int h, ArrayList<ArrayList<Body> > b, ArrayList<ArrayList<Boolean> > test, ArrayList<LevierCombi> lesLeviers){
+		
+		// Create a levier object
+		LevierCombi levier = new LevierCombi(x,y,w,h,b,test,lesLeviers);
+		
+		// Add it to the list of sprites of this level
+		sprites.add(levier);
+		
+		// Create the source body
+		myState.addLevier(levier);
+		
+		return levier;
+	}
+	
 	protected Bonus createBonus(int x, int y, int w, int h){
 		
 		// Create a bonus object

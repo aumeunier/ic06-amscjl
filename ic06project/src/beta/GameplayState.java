@@ -575,6 +575,22 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		spriteBodies.add(newBody);
 		return newBody;
 	}
+	
+	public Body addLevier(LevierCombi levier){
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.userData = levier;
+		Vec2 b2dcoord = Global.getBox2DCoordinates(levier.x, levier.y);
+		bodyDef.position = new Vec2(b2dcoord.x+levier.w/2,b2dcoord.y-levier.h/2);
+		Body newBody = world.createBody(bodyDef);
+		PolygonDef sd = new PolygonDef();		
+		sd.density = 5.0f;
+		sd.friction = 1.0f;
+
+		sd.setAsBox(levier.w/2,levier.h/2);
+		newBody.createShape(sd);
+		spriteBodies.add(newBody);
+		return newBody;
+	}
 
 	public Body addCharacter(Character characterData, ArrayList<Vec2> list){
 		BodyDef bodyDef = new BodyDef();

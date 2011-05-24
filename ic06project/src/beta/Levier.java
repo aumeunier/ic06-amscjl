@@ -6,8 +6,11 @@ import org.jbox2d.dynamics.Body;
 
 public class Levier extends Declencheur {
 
+	protected ArrayList<Body> relatedBody;
+
 	public Levier(int _x, int _y, int _w, int _h, ArrayList<Body> b){
-		super(_x, _y, _w, _h, b);
+		super(_x, _y, _w, _h);
+		relatedBody=b;
 		this.setImage("levier-1.png");
 	}
 

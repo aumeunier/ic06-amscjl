@@ -76,6 +76,10 @@ public class MyContactFilter implements ContactFilter {
 						((Levier)s2).activate();
 						return false;
 					}
+					else if(s2.getClass().equals(LevierCombi.class)){
+						((LevierCombi)s2).activate();
+						return false;
+					}
 					else if(s2.getClass().equals(Bonus.class)){
 						((Bonus)s2).obtained();
 					}
@@ -110,6 +114,10 @@ public class MyContactFilter implements ContactFilter {
 
 					else if(s1.getClass().equals(Levier.class)){
 						((Levier)s1).activate();
+						return false;
+					}
+					else if(s1.getClass().equals(LevierCombi.class)){
+						((LevierCombi)s1).activate();
 						return false;
 					}
 					else if(s1.getClass().equals(Bonus.class)){
