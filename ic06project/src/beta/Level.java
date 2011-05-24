@@ -173,7 +173,6 @@ public class Level {
 		Exit exit = new Exit(x,y,w,h);
 
 		// Add it to the list of sprites of the level
-		//sprites.add(exit);
 		listeExit.add(exit);
 		
 		// Create the obstacle body
@@ -277,7 +276,7 @@ public class Level {
 	}
 	
 
-	
+	/*
 	protected LevierCombi createLevierCombi(int x, int y, int w, int h, ArrayList<ArrayList<Body> > b, ArrayList<ArrayList<Boolean> > test, ArrayList<LevierCombi> lesLeviers){
 		
 		// Create a levier object
@@ -291,6 +290,7 @@ public class Level {
 		
 		return levier;
 	}
+	*/
 	
 	protected Bonus createBonus(int x, int y, int w, int h){
 		
@@ -404,6 +404,9 @@ public class Level {
 			}
 	        // Normal drawing
 	        g.setDrawMode(Graphics.MODE_NORMAL);
+			for(int i = 0 ; i < listeExit.size() ; ++i){
+				listeExit.get(i).draw(g);
+			}
 			if(character1.lightInDarkness){
 				character1.draw(g);	
 			}

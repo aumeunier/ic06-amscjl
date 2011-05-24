@@ -80,7 +80,6 @@ public class Level1 extends Level {
 		
 		// Place un mur pour empecher l'acces au levier
 		Obstacle oMurLevier = new Obstacle(Global.GAMEPLAYWIDTH-130,85,30,135);
-		oMurLevier.setImage("arbre-droit.png");
 		oMurLevier.image = oMurLevier.image.getSubImage(25,10,50,325);
 		sprites.add(oMurLevier);
 		Body oMurLevierBody = myState.addObstacle(oMurLevier);

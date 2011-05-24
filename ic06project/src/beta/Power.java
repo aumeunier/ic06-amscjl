@@ -12,7 +12,9 @@ public enum Power {
 	PETIT,
 	LIGHT,
 	ABSORBE,
-	TELEPORTATION;
+	TELEPORTATION,
+	DESTRUCTOR,
+	INVISIBLE;
 	
 	public String imageForPower() {
 		String result = "";
@@ -51,6 +53,15 @@ public enum Power {
 			result = "teleportation.png";
 			break;
 		case ABSORBE:
+			result = "fat.png";
+			break;
+		case DESTRUCTOR:
+			result = "fat.png";
+			break;
+		case INVISIBLE:
+			result = "fat.png";
+			break;
+		default:
 			result = "fat.png";
 			break;
 		}

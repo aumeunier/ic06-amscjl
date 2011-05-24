@@ -10,7 +10,7 @@ public class Level4 extends Level {
 	public Level4(GameplayState state, LevelSave model) {
 		super(state,model);
 		this.levelID = 4;
-		//this.inTheDarkness = true;
+		this.inTheDarkness = true;
 		this.setBackgroundImage("1770925_s.jpg");
 		
 		// Place a ground wall
@@ -41,28 +41,45 @@ public class Level4 extends Level {
 		createGround(520,170,160,30); // 10
 		createGround(320,190,60,10); // 11
 		createGround(260,180,60,20); // 12
-		createGround(260,200,20,140); // 13
+		createGround(260,200,20,130); // 13
 		createGround(280,250,60,30); // 14
 		createGround(340,260,400,10); // 15
 		createGround(420,200,260,10); // 16
 		createGround(280,330,100,10); // 17
 		createGround(540,320,260,20); // 18
-		createGround(420,370,40,20); // 19
-		createGround(280,390,380,20); // 20
-		createGround(700,390,100,20); // 21
+		createGround(430,370,80,20); // 19
+		createGround(340,390,320,20); // 20
+		createGround(740,390,60,20); // 21
 		createGround(80,165,100,35); // 22
 		createGround(0,220,40,80); // 23
-		createGround(40,250,160,10); // 24
+		createGround(40,250,160,20); // 24
 		createGround(0,340,150,20); // 25
-		createGround(200,340,60,20); // 26
-		//createGround(0,340,150,10); // 27
+		createGround(200,330,80,30); // 26
+		createGround(120,410,110,20); // 27
 		createGround(0,360,40,70); // 28
+		createGround(280,460,80,30); // 29
 		createGround(160,115,40,50); // 30
 		
 		// Place obstacles
 		Obstacle o1 = createObstacle(200,250,60,20);
 		o1.setImage("arbre-horizontal.png");
-		Ground o2 = createGround(40,260,60,80); // 02
+		ArrayList<Body> b1 = new ArrayList<Body>();
+		b1.add(myState.getBodyForUserData(o1));
+		createLevier(420,130,30,30,b1);
+
+		Obstacle o2 = createObstacle(40,270,60,70);
+		//createGround(40,250,160,20); // 24
+		o2.setImage("new-sol.png");
+		o2.image = o2.image.getSubImage(o2.x,250,o2.w,o2.h);
+		ArrayList<Body> b2 = new ArrayList<Body>();
+		b2.add(myState.getBodyForUserData(o2));
+		createLevier(120,135,30,30,b2);
+
+		Obstacle o3 = createObstacle(540,270,40,50);
+		o3.setImage("arbre-droit.png");
+		ArrayList<Body> b3 = new ArrayList<Body>();
+		b3.add(myState.getBodyForUserData(o3));
+		createLevier(120,460,30,30,b3);
 		
 		// Place l'eau
 		SourceMortelle s = createSourceMortelle(320,170,60,20);
@@ -71,12 +88,22 @@ public class Level4 extends Level {
 		// Place sources
 		Source sLight = createSource(340,90-42,49,42,Power.LIGHT);
 		sLight.setLightSize(100);
+		createSource(290,290,49,42,Power.INVISIBLE);
 		
 		//place Sortie
-		//createExit(Global.GAMEPLAYWIDTH-65,Global.GAMEPLAYHEIGHT-65-10,32,46);
+		createExit(Global.GAMEPLAYWIDTH-50,Global.GAMEPLAYHEIGHT-56,32,46);
 		
 		// Place bonus
-		//createBonus(50,Global.GAMEPLAYHEIGHT-110,25,25);
+		createBonus(10,195,25,25);
+		createBonus(10,465,25,25);
+		createBonus(290,225,25,25);
+		
+		// Place des torches
+		Torch torch1 = new Torch(280,210);
+		this.backgroundSprites.add(torch1);		
+		Torch torch2 = new Torch(Global.GAMEPLAYWIDTH-70,Global.GAMEPLAYHEIGHT-70);
+		torch2.setLightSize(110);
+		this.backgroundSprites.add(torch2);
 		
 		// Place the first character
 		this.character1 = addCharacterWithPoints(10,40,0.7f);		
