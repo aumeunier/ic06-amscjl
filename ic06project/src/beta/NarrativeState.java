@@ -62,6 +62,25 @@ public class NarrativeState extends BasicGameState implements MouseListener {
 			this.textFieldSui.setText(text);
 		}
 	}
+	public void ChooseLevel(int i){
+		switch(i){
+		case 1:
+			this.textFieldSui.setText("Pas de description pour ce niveau! :(");
+			break;
+		case 2:
+			this.textFieldSui.setText("Pas de description pour ce niveau! :(");
+			break;
+		case 3:
+			this.textFieldSui.setText("Pas de description pour ce niveau! :(");
+			break;
+		case 4 :
+			this.textFieldSui.setText("Pas de description pour ce niveau! :(");
+			break;
+		default:
+			this.textFieldSui.setText("Pas de description pour ce niveau! :(");
+			break;
+		}
+	}
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
@@ -71,23 +90,6 @@ public class NarrativeState extends BasicGameState implements MouseListener {
 		
 		display = new Display(container);
 		
-		/*
-		textFieldSui = new mdes.slick.sui.TextField("test");
-		textFieldSui.setBounds(MAP_X+50, MAP_Y+50, MAP_W-100, MAP_H-100);
-		textFieldSui.setForeground(Color.black);
-		textFieldSui.setBackground(new Color(1.0f,1.0f,1.0f,1.0f));
-		textFieldSui.setEditable(false);
-		textFieldSui.setText("azepijazoeuhaozeuhazoehaozehaozehoazhe apehaocnoaizej aizej apzijacz epiaj pjad pnza ej azpie" +
-				"aae^oake apze az^epa eaz$l far pzaijdoiazho dzae azpje az e" +
-				"az dazpiejza peij azp" +
-				" azepijzaep iaj" +
-				" aepijzpiej a" +
-				"ezapij eazpiej " +
-				"az epijzapeaz" +
-				" pejaz ");
-		textFieldSui.updateAppearance();
-		display.add(textFieldSui);
-		/*/
 		textField = new TextField(container, container.getDefaultFont(), MAP_X+50, MAP_Y+50, MAP_W-100, MAP_H-100);
 		textField.setBackgroundColor(new Color(0.0f,0.0f,0.0f,0.0f));
 		textField.setBorderColor(new Color(0.0f,0.0f,0.0f,0.0f));
@@ -101,7 +103,6 @@ public class NarrativeState extends BasicGameState implements MouseListener {
 				"ezapij eazpiej " +
 				"az epijzapeaz" +
 				" pejaz ");
-		//*/
 		
 		Image labelImage = Global.setImage("blur11.jpg");
 		Image continueImage = labelImage.getScaledCopy(CONTINUE_W, CONTINUE_H);
