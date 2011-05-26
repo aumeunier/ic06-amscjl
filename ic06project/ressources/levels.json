@@ -12,7 +12,7 @@
 		{
 			"id":2,
 			"levelName":"Sous la Terre d'Eel ti Jut",
-			"music":"gmz_-_Between_Me_and_Myself.ogg",
+			"music":"onlymeith_-_Dance_of_Light_Pixies-4.ogg",
 			"numberOfKeys":2,
 			"areaOnMap":[150, 50, 50, 50]		
 			
@@ -20,7 +20,7 @@
 		{
 			"id":3,
 			"levelName":"Le mont Izapov",
-			"music":"gmz_-_Between_Me_and_Myself.ogg",
+			"music":"jaspertine_-_Waiting_to_Come_Back_Down-1.ogg",
 			"numberOfKeys":2,
 			"areaOnMap":[250, 100, 50, 50]		
 			
@@ -28,8 +28,8 @@
 		{
 			"id":4,
 			"levelName":"Les grottes d'ArgennK",
-			"music":"gmz_-_Between_Me_and_Myself.ogg",
-			"numberOfKeys":3,
+			"music":"scottaltham_-_Never_Heard_a_Rhyme_Like_This_Before.ogg",
+			"numberOfKeys":4,
 			"areaOnMap":[350, 150, 50, 50]		
 			
 		},
