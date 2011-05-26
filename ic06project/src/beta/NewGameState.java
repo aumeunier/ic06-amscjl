@@ -97,6 +97,7 @@ public class NewGameState extends BasicGameState implements MouseListener {
 		}
 		if(selection == Game.GAMEPLAY_STATE){
 			((GameplayState)(arg1.getState(Game.GAMEPLAY_STATE))).ChooseLevel(1);
+			((NarrativeState)(arg1.getState(Game.NARRATIVE_STATE))).ChooseLevel(1);
 			arg1.enterState(Game.NARRATIVE_STATE);
 			Global.CURRENT_GAME_FILENAME = name1textField.getText()+"_"+name2textField.getText();
 		}

@@ -308,6 +308,8 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			Body tempBody = monsterBodies.get((tempList.get(i))-i);
 			this.monsterBodies.remove(tempBody);
 			this.world.destroyBody(tempBody);
+			currentLevel.nbBonus++; // Every monster killed gives a fruit
+			this.currentLevelState.setNbKeysUnlocked(currentLevel.nbBonus);
 		}
 		tempList.clear();
 		
@@ -349,7 +351,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		uiGameplay.render(gc, g);
 		if(currentLevel !=null){
 
-			currentLevel.render(gc, g);
+			currentLevel.render(gc, sbg, g);
 			
 			// Si un des personnages est mort, afficher le menu de mort
 			if(this.currentLevel.getFirstCharacter().isDead() || this.currentLevel.getSecondCharacter().isDead()){	

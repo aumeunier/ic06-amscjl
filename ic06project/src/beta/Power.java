@@ -20,7 +20,7 @@ public enum Power {
 		String result = "";
 		switch(this){
 		case NONE:
-			result = "wall.png";
+			result = "wall.jpg";
 			break;
 		case DEATHLY:
 			result = "blur11.jpg";
@@ -47,7 +47,7 @@ public enum Power {
 			result = "nage.png";
 			break;
 		case LIGHT:
-			result = "lumière.png";
+			result = "lumiere.png";
 			break;
 		case TELEPORTATION:
 			result = "teleportation.png";

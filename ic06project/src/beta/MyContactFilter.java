@@ -85,7 +85,7 @@ public class MyContactFilter implements ContactFilter {
 						return false;
 					}
 					else if((s2.getClass().equals(SourceMortelle.class)) && (((Character)(s1)).getPower()== Power.NAGE)){
-						((Character)(s2)).isFalling=false;
+						((Character)(s1)).isFalling=false;
 						return false;
 					}
 					else if((s2.getClass().equals(Destructible.class)) && (((Destructible)s2).isDeadly())){

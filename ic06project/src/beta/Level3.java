@@ -139,7 +139,9 @@ public class Level3 extends Level {
 		w3.image = w3.image.getSubImage(0,17,550,50);
 		sprites.add(w3);
 		
-		createSource(0,200,60,60,Power.TELEPORTATION);	//pouvoir de teleportation
+		Source sTp = createSource(0,200,60,60,Power.TELEPORTATION);	//pouvoir de teleportation
+		sTp.setIndication(250,200,
+				200, 200, "Appuyez sur A\n ou sur Enter pour \nteleporter votre \nami a vos cotes");
 		
 		//escalier
 		createGround(80,180,60,5);
@@ -202,8 +204,6 @@ public class Level3 extends Level {
 		BoutonPressoir B2 = createBoutonPressoir(680, 87, 30, 18, b4, 3);
 		B2.setResteActive(true);
 		createExit(Global.GAMEPLAYWIDTH-45,40,45,65);
-		
-		
 		
 		// Place the first character
 		this.character1 = addCharacterWithPoints(10,330,0.75f);		

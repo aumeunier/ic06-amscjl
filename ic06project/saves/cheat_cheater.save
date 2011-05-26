@@ -10,19 +10,19 @@
 		},
 		{
 			"id":2,
-			"keys":0,
+			"keys":1,
 			"unlocked":true,
 			"finished":true
 		},
 		{
 			"id":3,
-			"keys":0,
+			"keys":2,
 			"unlocked":true,
 			"finished":true
 		},
 		{
 			"id":4,
-			"keys":2,
+			"keys":3,
 			"unlocked":true,
 			"finished":true
 		},

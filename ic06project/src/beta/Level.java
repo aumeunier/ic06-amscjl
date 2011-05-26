@@ -6,11 +6,11 @@ import mdes.slick.sui.Display;
 
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
 
 public class Level {	
 	protected final static int CH1_INIT_X = 50;
@@ -59,8 +59,8 @@ public class Level {
 		}
 	}
 	
-	protected void addIndication(int x, int y, String text){
-		InGameIndication indication = new InGameIndication(x,y,text);
+	protected void addIndication(int x, int y, int w, int h, String text){
+		InGameIndication indication = new InGameIndication(x,y,w,h,text);
 		indications.add(indication);
 	}
 
@@ -381,7 +381,7 @@ public class Level {
 		this.sprites.remove(s);
 	}
 	
-	public void render(GameContainer gc, Graphics g){
+	public void render(GameContainer gc, StateBasedGame sbg, Graphics g){
 		g.setAntiAlias(true);		
 		// If the map is plunged in the darkness
 		if(this.inTheDarkness){
@@ -411,45 +411,45 @@ public class Level {
 			for(int i = 0 ; i < backgroundSprites.size() ; ++i){
 				Sprite s = backgroundSprites.get(i);
 				if(!s.lightInDarkness && !s.isHidden()){
-					s.draw(g);				
+					s.draw(gc, sbg, g);				
 				}
 				else {
 			        g.setDrawMode(Graphics.MODE_NORMAL); 
-					s.draw(g);		
+					s.draw(gc, sbg, g);			
 			        g.setDrawMode(Graphics.MODE_ALPHA_BLEND); 
 				}
 			}
 			if(!character1.lightInDarkness){
-				character1.draw(g);	
+				character1.draw(gc, sbg, g);	
 			}
 			if(!character2.lightInDarkness){
-				character2.draw(g);				
+				character2.draw(gc, sbg, g);				
 			}
 			for(int i = 0 ; i < sprites.size() ; ++i){
 				Sprite s = sprites.get(i);
 				if(!s.lightInDarkness && !s.isHidden()){
-					s.draw(g);				
+					s.draw(gc, sbg, g);				
 				}
 			}
 	        // Normal drawing
 	        g.setDrawMode(Graphics.MODE_NORMAL);
 			for(int i = 0 ; i < listeExit.size() ; ++i){
-				listeExit.get(i).draw(g);
+				listeExit.get(i).draw(gc, sbg, g);
 			}
 			if(character1.lightInDarkness){
-				character1.draw(g);	
+				character1.draw(gc, sbg, g);	
 			}
 			if(character2.lightInDarkness){
-				character2.draw(g);		
+				character2.draw(gc, sbg, g);		
 			}
 			for(int i = 0 ; i < sprites.size() ; ++i){
 				Sprite s = sprites.get(i);
 				if(s.lightInDarkness && !s.isHidden()){
-					s.draw(g);				
+					s.draw(gc, sbg, g);				
 				}
 			}
 			for(InGameIndication indication: indications){
-				indication.render(gc, g);
+				indication.render(gc, sbg, g);
 			}	  
 		}
 		// If no darkness we draw as usual
@@ -459,28 +459,28 @@ public class Level {
 
 				Sprite s = backgroundSprites.get(i);
 				if(!s.isHidden()){
-					s.draw(g);
+					s.draw(gc, sbg, g);
 				}
 				if(s.getIndication()!=null && s.getIndicationActivated()){
-					s.getIndication().render(gc, g);
+					s.getIndication().render(gc, sbg, g);
 				}
 			}
 			for(int i = 0 ; i < listeExit.size() ; ++i){
-				listeExit.get(i).draw(g);
+				listeExit.get(i).draw(gc, sbg, g);
 			}
-			character1.draw(g);
-			character2.draw(g);
+			character1.draw(gc, sbg, g);
+			character2.draw(gc, sbg, g);
 			for(int i = 0 ; i < sprites.size() ; ++i){
 				Sprite s = sprites.get(i);
 				if(!s.isHidden()){
-					s.draw(g);
+					s.draw(gc, sbg, g);
 				}
 				if(s.getIndication()!=null && s.getIndicationActivated()){
-					s.getIndication().render(gc, g);
+					s.getIndication().render(gc, sbg, g);
 				}
 			}
 			for(InGameIndication indication: indications){
-				indication.render(gc, g);
+				indication.render(gc, sbg, g);
 			}				
 		}
 		g.setAntiAlias(false);

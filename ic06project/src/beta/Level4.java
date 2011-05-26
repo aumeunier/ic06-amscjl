@@ -39,14 +39,14 @@ public class Level4 extends Level {
 		createGround(380,110,20,60); // 6
 		createGround(380,160,140,40); // 7
 		createGround(565,110,235,10); // 8
-		createGround(720,170,80,20); // 9
-		createGround(520,170,160,30); // 10
+		createGround(700,170,100,20); // 9
+		createGround(500,170,150,30); // 10
 		createGround(320,190,60,10); // 11
 		createGround(255,180,65,20); // 12
 		createGround(255,200,25,130); // 13
 		createGround(280,250,60,30); // 14
 		createGround(340,260,400,10); // 15
-		createGround(420,200,260,10); // 16
+		createGround(420,200,230,10); // 16
 		createGround(280,330,100,10); // 17
 		createGround(540,320,260,20); // 18
 		createGround(430,370,80,20); // 19

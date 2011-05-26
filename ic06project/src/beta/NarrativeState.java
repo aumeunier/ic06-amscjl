@@ -72,11 +72,9 @@ public class NarrativeState extends BasicGameState implements MouseListener {
 			textToDisplay = "Après avoir parcouru les plaines des contrées ouest de Bros nos \n deux fées ont aperçu leur village\n en feu ! Après une visite des \n lieux,  elles ont retrouvé le village désert et à moitié en ruine. \n Elles trouvèrent un message menaçant accroché à l’entrée du \n village : « J’ai fait prisonnière toutes  vos soeurs,\n j’ai récupéré leurs ailes et elles \n n’auront plus jamais aucun pouvoir !\n Bientôt votre \n tour viendra… \n La Sorcière ‘Ulna Rei’ » \n Nos deux fées ont donc décidé d’aller \n sauver les fées prisonnières de la sorcière \n: pour se faire \n elles vont réunir le plus possible de leur fruit\n magique ‘Hapsten’ afin de fabriquer une source de \n pouvoir très puissante et de pouvoir, \n peut-être, sauver leurs sœurs et leurs mères. \n";
 			break;
 		case 3:
-			textToDisplay = "Nos deux fées doivent maintenant \n traverser le mont ‘ Izapov’ afin de rejoindre les \n  grottes  ‘d’ ArgennK ‘, n’oubliez pas \n de ramasser autant d’’Hapsten’ que possible. \n";
-			break;
+			textToDisplay = "Nos deux fées doivent maintenant \n traverser le mont ‘ Izapov’ afin de rejoindre les \n  grottes  ‘d’ ArgennK ‘, n’oubliez pas \n de ramasser autant d’’Hapsten’ que possible. \n";			break;
 		case 4 :
-			textToDisplay = "Toujours en allant vers l’Est nos deux fées traversent\n les grottes qui n’abritent pas toujours de doux \n compagnons… Juste derrière ces grottes nous trouveront la Sorcière…";
-			break;
+			textToDisplay = "Toujours en allant vers l’Est nos deux fées traversent\n les grottes qui n’abritent pas toujours de doux \n compagnons… Juste derrière ces grottes nous trouveront la Sorcière…";	break;
 		default:
 			textToDisplay = "Pas de description pour ce niveau! :(";
 			break;

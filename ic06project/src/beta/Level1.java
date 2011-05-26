@@ -67,8 +67,8 @@ public class Level1 extends Level {
 		
 		//la cage
 		createWall(300,0,10,85);
-		createWall(300,85,70,10);
-		createWall(430,85,75,10);
+		createWall(300,85,70,25);
+		createWall(430,85,75,25);
 		createWall(495,0,10,85);
 		
 		
@@ -120,7 +120,7 @@ public class Level1 extends Level {
 		Source s1 = createSource(500,Global.GAMEPLAYHEIGHT-42,49,42,Power.FLYING);
 		createSource(Global.GAMEPLAYWIDTH-50,Global.GAMEPLAYHEIGHT-87,49,42,Power.INTANGIBLE);
 		
-		//place SOrtie
+		//place Sortie
 		Exit exit = createExit(Global.GAMEPLAYWIDTH-65,10,45,65);
 		
 		//place bonus
@@ -129,13 +129,16 @@ public class Level1 extends Level {
 		createBonus(450,20,25,25);
 		
 		// indication
-		l1.setIndication(150,300,"Ceci est un levier, il peut ouvrir une ou plusieurs portes, il a 2 positions");
-		s1.setIndication(50, 300, "ceci est une source, elle apporte un pouvoir particulier, regardez les dessins");
+		l1.setIndication(300, 150, 200, 150,"Ceci est un levier, \nil peut ouvrir une \nou plusieurs portes, \nil a 2 positions");
+		s1.setIndication(300, 300, 200, 150,"ceci est une source, \nelle apporte un \npouvoir particulier,\n regardez les dessins!");
 		
-		//b3.activateIndication();
+		Source testSprite = this.createSource(330+34,Global.GAMEPLAYHEIGHT-35-76,
+				5, 5, Power.NONE);
+		testSprite.isHidden = true;
+		testSprite.setIndication(250,200,
+				200, 100, "Appuyez sur Q Z D ou \nsur les fleches\n pour vous deplacer");
 		
-		// Place the first character
-		//*
+		// Place the characters
 		this.character1 = addCharacterWithPoints(330,Global.GAMEPLAYHEIGHT-65-76,1.0f);		
 		this.character2 = addCharacterWithPoints(Global.GAMEPLAYWIDTH-87-80,
 				Global.GAMEPLAYHEIGHT-65-10,1.0f);		

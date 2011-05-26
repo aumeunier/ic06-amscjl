@@ -1,15 +1,18 @@
 package beta;
 
 import java.util.Timer;
+import java.util.TimerTask;
 
 import org.jbox2d.dynamics.Body;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.geom.Polygon;
+import org.newdawn.slick.state.StateBasedGame;
 
 public class Sprite {
 	protected int x;
@@ -31,8 +34,9 @@ public class Sprite {
 	protected Level level;
 	protected InGameIndication indication= null;
 	protected boolean IndicationActivated=false;
+	protected boolean IndicationActivatedBefore=false;
 	protected Timer timer = null;
-	
+
 	public Sprite(){
 		this.x=0;
 		this.y=0;
@@ -49,16 +53,16 @@ public class Sprite {
 		this.w = _w;
 		this.h = _h;
 	}
-	
+
 	public void setLevelContainer(Level lvl){
 		this.level = lvl;
 	}
-	
+
 	public void setCoordinatesFromBody(Body b){
 		this.x = (int)b.getPosition().x-this.w/2;
 		this.y = Global.GAMEPLAYHEIGHT-(int)b.getPosition().y-this.h/2;
 	}
-	
+
 	protected void setImage(String filename){
 		try {
 			if (filename==null) 
@@ -93,7 +97,7 @@ public class Sprite {
 		shape.addPoint(x, y);
 	}
 
-	public void draw(Graphics g){
+	public void draw(GameContainer container, StateBasedGame game, Graphics g){
 		if(animation!=null){
 			animation.draw(x, y, w, h, colorFilter);
 		}
@@ -102,6 +106,9 @@ public class Sprite {
 		}
 		else if(image!=null){
 			image.draw(x, y, w, h);
+		}
+		if(this.getIndication()!=null && this.getIndicationActivated()){
+			this.getIndication().render(container, game, g);
 		}
 	}
 	public void drawLight(Graphics g, boolean alphaMode){
@@ -112,45 +119,70 @@ public class Sprite {
 		this.lightSize = _lightSize;
 		this.lightImage = Global.setImage(Global.DEFAULT_LIGHT_IMAGE).getScaledCopy(lightSize, lightSize);
 	}
-	
+
 	public boolean getShouldBeDestroy(){
 		return shouldBeDestroy;
 	}
 	public boolean getIndicationActivated(){
 		return IndicationActivated;
 	}
-	
+
 	public InGameIndication getIndication(){
 		if(indication!=null)
 			System.out.println(IndicationActivated);
 		return indication;
 	}
 	public void activateIndication(){
+		if(IndicationActivatedBefore){
+			return;
+		}
 		IndicationActivated=true;
+		IndicationActivatedBefore=true;
+		if(this.timer == null){
+			this.timer = new Timer("indication");
+			timer.schedule(new TimerTask(){
+				@Override
+				public void run() {
+					desactivateIndication();
+				}			
+			}, 5000);
+		}
+		else {
+			this.timer.cancel();
+			this.timer = new Timer("indication");
+			timer.schedule(new TimerTask(){
+				@Override
+				public void run() {
+					desactivateIndication();
+				}			
+			}, 5000);
+		}
 	}
-	
+	public void desactivateIndication(){
+		IndicationActivated = false;
+	}
+
 	public void setShouldBeDestroy(){
-		 shouldBeDestroy=true;
+		shouldBeDestroy=true;
 	}
-	public void setIndication(int x, int y,String msg){
-		InGameIndication indic = new InGameIndication(x,y,msg);
-		 indication=indic;
-		 //System.out.println(indic.getTexte());
+	public void setIndication(int x, int y, int w, int h, String msg){
+		InGameIndication indic = new InGameIndication(x,y,w,h,msg);
+		indication=indic;
 	}
-	
+
 	public boolean isHidden(){
-		 return isHidden;
+		return isHidden;
 	}
-	
+
 	public void Hidden(boolean hideOrNot){
-		 isHidden=hideOrNot;
+		isHidden=hideOrNot;
 	}
-	
+
 	public boolean rectCollideWithOther(Sprite other){
 		if((((this.x >= other.x) && (this.x <= (other.x+other.w))) 
 				|| (((this.x + this.w) >= other.x) && ((this.x + this.w) <= (other.x+other.w))))
-			&& (((this.y >= other.y) && (this.y <= (other.y+other.h))) 
-					|| (((this.y + this.h) >= other.y) && ((this.y + this.h) <= (other.y+other.h))))){
+				&& (((this.y >= other.y) && (this.y <= (other.y+other.h))) 
+						|| (((this.y + this.h) >= other.y) && ((this.y + this.h) <= (other.y+other.h))))){
 			return true;
 		}
 		else{
