@@ -33,6 +33,7 @@ public class LevelSave {
 		unlockedKeys = (unlockedKeys >= unlocked)?unlockedKeys:unlocked;
 		isUnlocked = isUnlocked || levelUnlocked;
 		isFinished = isFinished || levelFinished;
+		System.out.println("setSavedLevelData");
 	}
 	/**
 	 * Method used to load the players data on a particular level

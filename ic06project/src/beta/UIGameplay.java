@@ -130,7 +130,7 @@ public class UIGameplay implements UIInterface {
 			switch(powerPlayer1){
 			
 				case NONE:
-					leftPlayerImage = Global.setImage("wall.png");
+					leftPlayerImage = Global.setImage("star.png");
 					break;
 				case DEATHLY:
 					leftPlayerImage = Global.setImage("blur11.jpg");
@@ -180,7 +180,7 @@ public class UIGameplay implements UIInterface {
 		if(powerPlayer2.compareTo(p2power)!=0){
 			switch(powerPlayer2){
 			case NONE:
-				rightPlayerImage = Global.setImage("wall.png");
+				rightPlayerImage = Global.setImage("star.png");
 				break;
 			case DEATHLY:
 				rightPlayerImage = Global.setImage("blur11.jpg");

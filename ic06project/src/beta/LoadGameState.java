@@ -109,7 +109,6 @@ public class LoadGameState extends BasicGameState implements MouseListener {
 		else if((x >= SAVE_OFFSET_X && x <= (SAVE_OFFSET_X + 100))) {
 			float temp = (float)(y-SAVE_OFFSET_Y)%(float)(SAVE_SPACE_Y+SAVE_TEXT_Y);
 			if(temp >= 0 && temp <= SAVE_TEXT_Y){
-				System.out.println(saves.get((y-SAVE_OFFSET_Y)/(SAVE_SPACE_Y+SAVE_TEXT_Y)));
 				Save.getInstance().loadSave(saves.get((y-SAVE_OFFSET_Y)/(SAVE_SPACE_Y+SAVE_TEXT_Y)));
 				selection = Game.MAINMENU_STATE;
 			}
