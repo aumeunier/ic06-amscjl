@@ -42,7 +42,7 @@ public class UIPause implements UIInterface {
 		int i = 0;
 
 		// Back to game button
-		Image buttonImage = Global.setImage("blur11.jpg").getScaledCopy(BUTTON_W, BUTTON_H);
+		Image buttonImage = Global.setImage(Global.BUTTON_STANDARD_IMAGE).getScaledCopy(BUTTON_W, BUTTON_H);
 		Label backToGameLabel = new Label(buttonImage,"Retour au jeu");
 		backToGameLabel.setBounds(BUTTON_X,BUTTON_Y_INIT+(i++)*(BUTTON_H+BUTTON_SPACE),BUTTON_W,BUTTON_H);
 		backToGameLabel.pack();

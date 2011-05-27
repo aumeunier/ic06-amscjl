@@ -99,7 +99,7 @@ public class NarrativeState extends BasicGameState implements MouseListener {
 		textField.setAcceptingInput(false);
 		textField.setText(textToDisplay);
 		
-		Image labelImage = Global.setImage("blur11.jpg");
+		Image labelImage = Global.setImage(Global.BUTTON_STANDARD_IMAGE);
 		Image continueImage = labelImage.getScaledCopy(CONTINUE_W, CONTINUE_H);
 		Label continueLabel = new Label(continueImage,"Continue"); //TODO: button
 		continueLabel.setBounds(CONTINUE_X,CONTINUE_Y,CONTINUE_W,CONTINUE_H);

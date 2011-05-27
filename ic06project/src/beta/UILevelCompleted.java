@@ -37,7 +37,7 @@ public class UILevelCompleted implements UIInterface {
 		this.menuBackgroundImage = Global.setImage("9191582_s.jpg");	
 		
 		// Texte
-		Image textImage = Global.setImage("blur11.jpg").getScaledCopy(2*BUTTON_W+BUTTON_SPACE, BUTTON_H);
+		Image textImage = Global.setImage(Global.BUTTON_STANDARD_IMAGE).getScaledCopy(2*BUTTON_W+BUTTON_SPACE, BUTTON_H);
 		Label winLabel = new Label(textImage,"Niveau termine! Felicitations!");
 		winLabel.setBounds(BUTTON_X,WIN_Y+WIN_H/3,2*BUTTON_W+BUTTON_SPACE,BUTTON_H);
 		winLabel.pack();
@@ -45,7 +45,7 @@ public class UILevelCompleted implements UIInterface {
 		winLabel.setImage(null);
 		
 		// Restart button //TODO: Button
-		Image buttonImage = Global.setImage("blur11.jpg").getScaledCopy(BUTTON_W, BUTTON_H);
+		Image buttonImage = Global.setImage(Global.BUTTON_STANDARD_IMAGE).getScaledCopy(BUTTON_W, BUTTON_H);
 		Label restartLabel = new Label(buttonImage,"Rejouer");
 		restartLabel.setBounds(BUTTON_X,BUTTON_Y,BUTTON_W,BUTTON_H);
 		restartLabel.pack();
@@ -58,7 +58,7 @@ public class UILevelCompleted implements UIInterface {
 		this.display.add(nextLabel);
 
 		// Main menu button //TODO: Button
-		buttonImage = Global.setImage("blur11.jpg").getScaledCopy(BUTTON_W*2+BUTTON_SPACE, BUTTON_H);
+		buttonImage = Global.setImage(Global.BUTTON_STANDARD_IMAGE).getScaledCopy(BUTTON_W*2+BUTTON_SPACE, BUTTON_H);
 		Label backToMenuLabel = new Label(buttonImage,"Menu principal");
 		backToMenuLabel.setBounds(BUTTON_X,BUTTON_Y+BUTTON_H+BUTTON_SPACE,2*BUTTON_W+BUTTON_SPACE,BUTTON_H);
 		backToMenuLabel.pack();

@@ -20,10 +20,10 @@ public enum Power {
 		String result = "";
 		switch(this){
 		case NONE:
-			result = "star.jpg";
+			result = "powerEmpty.png";
 			break;
 		case DEATHLY:
-			result = "star.jpg";
+			result = "powerEmpty.png";
 			break;
 		case INTANGIBLE:
 			result = "powerMur.png";
@@ -32,37 +32,37 @@ public enum Power {
 			result = "powerFlying.png";
 			break;
 		case FAT:
-			result = "gros.png";
+			result = "powerGros.png";
 			break;
 		case PETIT:
-			result = "petit.png";
+			result = "powerPetit.png";
 			break;
 		case REBOND:
-			result = "fat.png";
+			result = "powerRebond.png";
 			break;
 		case FIRE:
 			result = "powerFire.png";
 			break;
 		case NAGE:
-			result = "nage.png";
+			result = "powerNage.png";
 			break;
 		case LIGHT:
-			result = "lumiere.png";
+			result = "powerLight.png";
 			break;
 		case TELEPORTATION:
-			result = "teleportation.png";
+			result = "powerTeleportation.png";
 			break;
 		case ABSORBE:
-			result = "fat.png";
+			result = "powerEmpty.png";
 			break;
 		case DESTRUCTOR:
-			result = "musclor.png";
+			result = "powerDestructor.png";
 			break;
 		case INVISIBLE:
-			result = "invisible2.png";
+			result = "powerInvisible.png";
 			break;
 		default:
-			result = "star.jpg";
+			result = "powerEmpty.png";
 			break;
 		}
 		return result;

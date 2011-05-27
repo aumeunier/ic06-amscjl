@@ -81,7 +81,7 @@ public class MainMenuGameState extends BasicGameState implements MouseListener {
 		titleImage = titleImage.getScaledCopy((int) (titleImage.getWidth()*SCALE_DOWN_W*1.5),titleImage.getHeight());
 
 		display = new Display(gc);
-		Image labelImage = Global.setImage("blur11.jpg");
+		Image labelImage = Global.setImage(Global.BUTTON_STANDARD_IMAGE);
 		Image playerImage = labelImage.getScaledCopy(150,25);
 		mapErrorLabel = new Label(playerImage,"");
 		mapErrorLabel.setForeground(Color.red);

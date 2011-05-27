@@ -35,17 +35,17 @@ public class UIGameplay implements UIInterface {
 	protected Power p1power = Power.NONE, p2power = Power.NONE;
 	
 	public UIGameplay(GameContainer gc) {
-		backgroundImage = Global.setImage("06_wood_artshare_ru.jpg");
-		leftPlayerImage = Global.setImage("star.png");
-		rightPlayerImage = Global.setImage("star.png");
-		menuBackgroundImage = Global.setImage("blur11.jpg");
+		backgroundImage = Global.setImage(Global.DEFAULT_UIGAMEPLAY_BACKGROUND_IMAGE);
+		leftPlayerImage = Global.setImage(p1power.imageForPower());
+		rightPlayerImage = Global.setImage(p2power.imageForPower());
+		menuBackgroundImage = Global.setImage(Global.BUTTON_STANDARD_IMAGE);
 		this.x = 0; this.y = Global.GAMEPLAYHEIGHT;
 		this.w = Global.WINDOW_WIDTH; this.h = Global.WINDOW_HEIGHT-Global.GAMEPLAYHEIGHT;
 		
 		this.display = new Display(gc);
 		
 		// Labels (utilisation d'une image pour dimensionner)
-		Image labelImage = Global.setImage("blur11.jpg");
+		Image labelImage = Global.setImage(Global.BUTTON_STANDARD_IMAGE);
 		Image playerImage = labelImage.getScaledCopy(POWER_W,25);
 		
 		firstPlayerLabel = new Label(playerImage,Save.getInstance().getFirstPlayerName());
@@ -111,8 +111,8 @@ public class UIGameplay implements UIInterface {
 				Save.getInstance().getTotalNumberOfUnlockedKeys()+"/"+Save.getInstance().getTotalNumberOfKeys());
 		firstPlayerLabel.setText(Save.getInstance().getFirstPlayerName());
 		secondPlayerLabel.setText(Save.getInstance().getSecondPlayerName());
-		leftPlayerImage = Global.setImage("star.png");;
-		rightPlayerImage = Global.setImage("star.png");;
+		leftPlayerImage = Global.setImage(p1power.imageForPower());
+		rightPlayerImage = Global.setImage(p2power.imageForPower());;
 	}
 	public void setLevelInformation(String _levelName, int _nbUnlockedKeys, int _nbUnlockableKeys){
 		levelLabel.setText(_levelName);
@@ -127,104 +127,11 @@ public class UIGameplay implements UIInterface {
 		allKeysLabel.setText("Nombre total de fruits Hapsten: "+	(Save.getInstance().getTotalNumberOfUnlockedKeys()+_nbUnlockedKeys)
 				+"/"+Save.getInstance().getTotalNumberOfKeys());
 		if(powerPlayer1.compareTo(p1power)!=0){
-			switch(powerPlayer1){
-			
-				case NONE:
-					leftPlayerImage = Global.setImage("star.png");
-					break;
-				case DEATHLY:
-					leftPlayerImage = Global.setImage("blur11.jpg");
-					break;
-				case INTANGIBLE:
-					leftPlayerImage = Global.setImage("powerMur.png");
-					break;
-				case FLYING:
-					leftPlayerImage = Global.setImage("powerFlying.png");
-					break;
-				case FAT:
-					leftPlayerImage = Global.setImage("gros.png");
-					break;
-				case PETIT:
-					leftPlayerImage = Global.setImage("petit.png");
-					break;
-				case REBOND:
-					leftPlayerImage = Global.setImage("fat.png");
-					break;
-				case FIRE:
-					leftPlayerImage = Global.setImage("powerFire.png");
-					break;
-				case NAGE:
-					leftPlayerImage = Global.setImage("nage.png");
-					break;
-				case LIGHT:
-					leftPlayerImage = Global.setImage("fat.png");
-					break;
-				case TELEPORTATION:
-					leftPlayerImage = Global.setImage("teleportation.png");
-					break;
-				case ABSORBE:
-					leftPlayerImage = Global.setImage("fat.png");
-					break;
-				case DESTRUCTOR:
-					leftPlayerImage = Global.setImage("musclor.png");
-					break;
-				case INVISIBLE:
-					leftPlayerImage = Global.setImage("fat.png");
-					break;
-				default:
-					leftPlayerImage = Global.setImage("fat.png");
-					break;
-				}
+			leftPlayerImage = Global.setImage(p1power.imageForPower());
 			this.p1power = powerPlayer1;
 		}
 		if(powerPlayer2.compareTo(p2power)!=0){
-			switch(powerPlayer2){
-			case NONE:
-				rightPlayerImage = Global.setImage("star.png");
-				break;
-			case DEATHLY:
-				rightPlayerImage = Global.setImage("blur11.jpg");
-				break;
-			case INTANGIBLE:
-				rightPlayerImage = Global.setImage("powerMur.png");
-				break;
-			case FLYING:
-				rightPlayerImage = Global.setImage("powerFlying.png");
-				break;
-			case FAT:
-				rightPlayerImage = Global.setImage("gros.png");
-				break;
-			case PETIT:
-				rightPlayerImage = Global.setImage("petit.png");
-				break;
-			case REBOND:
-				rightPlayerImage = Global.setImage("fat.png");
-				break;
-			case FIRE:
-				rightPlayerImage = Global.setImage("powerFire.png");
-				break;
-			case NAGE:
-				rightPlayerImage = Global.setImage("nage.png");
-				break;
-			case LIGHT:
-				rightPlayerImage = Global.setImage("fat.png");
-				break;
-			case TELEPORTATION:
-				rightPlayerImage = Global.setImage("teleportation.png");
-				break;
-			case ABSORBE:
-				rightPlayerImage = Global.setImage("fat.png");
-				break;
-			case DESTRUCTOR:
-				rightPlayerImage = Global.setImage("musclor.png");
-				break;
-			case INVISIBLE:
-				rightPlayerImage = Global.setImage("fat.png");
-				break;
-			default:
-				rightPlayerImage = Global.setImage("fat.png");
-				break;
-			}
+			rightPlayerImage = Global.setImage(p2power.imageForPower());
 			this.p2power = powerPlayer2;
 		}
 	}

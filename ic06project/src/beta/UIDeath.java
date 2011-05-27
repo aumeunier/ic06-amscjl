@@ -36,7 +36,7 @@ public class UIDeath implements UIInterface {
 		this.menuBackgroundImage = Global.setImage("1770925_s.jpg");		
 		
 		// You lost label
-		Image gameOverImage = Global.setImage("blur11.jpg").getScaledCopy(DEATH_W-2*BUTTON_SPACE, BUTTON_H);
+		Image gameOverImage = Global.setImage(Global.BUTTON_STANDARD_IMAGE).getScaledCopy(DEATH_W-2*BUTTON_SPACE, BUTTON_H);
 		Label gameOver = new Label(gameOverImage,"Vous etes morts!\n");
 		gameOver.setBounds(BUTTON_X,DEATH_Y+DEATH_H/3-BUTTON_H,DEATH_W-2*BUTTON_SPACE,BUTTON_H);
 		gameOver.setForeground(Color.black);
@@ -45,7 +45,7 @@ public class UIDeath implements UIInterface {
 		gameOver.setImage(null);
 
 		// Restart button //TODO: Button
-		Image buttonImage = Global.setImage("blur11.jpg").getScaledCopy(BUTTON_W, BUTTON_H);
+		Image buttonImage = Global.setImage(Global.BUTTON_STANDARD_IMAGE).getScaledCopy(BUTTON_W, BUTTON_H);
 		Label restartLabel = new Label(buttonImage,"Recommencer");
 		restartLabel.setBounds(BUTTON_X,BUTTON_Y,BUTTON_W,BUTTON_H);
 		restartLabel.pack();
