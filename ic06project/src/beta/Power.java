@@ -47,7 +47,7 @@ public enum Power {
 			result = "powerNage.png";
 			break;
 		case LIGHT:
-			result = "powerLight.png";
+			result = "powerLumiere.png";
 			break;
 		case TELEPORTATION:
 			result = "powerTeleportation.png";
