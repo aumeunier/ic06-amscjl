@@ -319,6 +319,39 @@ public class Level {
 		
 		return bonus;
 	}
+
+	protected IndicationSprite createIndicationSprite(int x, int y, int w, int h, InGameIndication indication){
+		
+		// Create a bonus object
+		IndicationSprite indic = new IndicationSprite(x,y,w,h);
+		
+		// Create the source body
+		myState.addIndicationSprite(indic);
+		
+		// Link it to an indication
+		indic.setIndication(indication);
+		
+		// Add the indication to the list of indications of this level
+		this.indications.add(indication);
+		
+		return indic;		
+	}
+	protected IndicationSprite createIndicationFromSprite(Sprite s, InGameIndication indication){
+		
+		// Create a bonus object
+		IndicationSprite indic = new IndicationSprite(s);
+		
+		// Create the source body
+		myState.addIndicationSprite(indic);
+		
+		// Link it to an indication
+		indic.setIndication(indication);
+		
+		// Add the indication to the list of indications of this level
+		this.indications.add(indication);
+		
+		return indic;		
+	}
 	
 	protected Monster createMonster(int x, int y, int w, int h){
 		

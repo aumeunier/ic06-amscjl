@@ -98,6 +98,10 @@ public class MyContactFilter implements ContactFilter {
 						((Character)(s1)).isFalling=false;
 						return false;
 					}
+					else if(s2.getClass().equals(IndicationSprite.class)){
+						((IndicationSprite)s2).activateIndication();
+						return false;
+					}
 					else if(s2.getClass().equals(Source.class)){
 						Source source = (Source)s2;
 						Character character = (Character)s1;
@@ -166,6 +170,10 @@ public class MyContactFilter implements ContactFilter {
 						((Character)(s2)).isFalling=false;
 						return false;
 					}
+					else if(s1.getClass().equals(IndicationSprite.class)){
+						((IndicationSprite)s1).activateIndication();
+						return false;
+					}
 					else if(s1.getClass().equals(Source.class)){
 						Source source = (Source)s1;
 						Character character = (Character)s2;
@@ -191,6 +199,16 @@ public class MyContactFilter implements ContactFilter {
 						
 					}
 				}	
+				
+				// Les IndicationSprite ne collide pas
+				else {
+					if(s1.getClass().equals(IndicationSprite.class)){
+						return false;
+					}
+					else if(s2.getClass().equals(IndicationSprite.class)){
+						return false;
+					}
+				}
 			}
 		}
 		return true;

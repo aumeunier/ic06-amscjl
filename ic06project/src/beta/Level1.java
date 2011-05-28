@@ -131,6 +131,10 @@ public class Level1 extends Level {
 		// indication
 		l1.setIndication(300, 150, 200, 150,"Ceci est un levier, \nil peut ouvrir une \nou plusieurs portes, \nil a 2 positions");
 		s1.setIndication(300, 300, 200, 150,"ceci est une source, \nelle apporte un \npouvoir particulier,\n regardez les dessins!");
+		InGameIndication indication3 = new InGameIndication(150, 150, 200, 150, 
+				"Ceci est un fruit, \nramasse les tous pour sauver tes amis!");		
+		createIndicationFromSprite(b3,indication3);
+
 		
 		Source testSprite = this.createSource(330+34,Global.GAMEPLAYHEIGHT-35-76,
 				5, 5, Power.NONE);

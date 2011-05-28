@@ -654,6 +654,26 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		return newBody;
 	}
 	
+	public Body addIndicationSprite(IndicationSprite indic){
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.userData = indic;
+		Vec2 b2dcoord = Global.getBox2DCoordinates(indic.x, indic.y);
+		bodyDef.position = new Vec2(b2dcoord.x+indic.w/2,b2dcoord.y-indic.h/2);
+		MassData md = new MassData();
+		md.mass = 100.0f;
+		bodyDef.massData = md;
+		Body newBody = world.createBody(bodyDef);
+		PolygonDef sd = new PolygonDef();		
+		sd.density = 5.0f;
+		sd.friction = 1.0f;
+
+		sd.setAsBox(indic.w/2,indic.h/2);
+		newBody.createShape(sd);
+		spriteBodies.add(newBody);
+		newBody.putToSleep();
+		return newBody;
+	}
+	
 	public Body addMonster(Monster monsterData){
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.userData = monsterData;

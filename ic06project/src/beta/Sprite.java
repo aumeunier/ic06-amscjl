@@ -133,6 +133,9 @@ public class Sprite {
 		InGameIndication indic = new InGameIndication(x,y,w,h,msg);
 		indication=indic;
 	}
+	public void setIndication(InGameIndication indic){
+		indication=indic;
+	}
 
 	public boolean isHidden(){
 		return isHidden;
