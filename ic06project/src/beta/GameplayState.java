@@ -43,6 +43,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	private boolean alwaysStartAgain;
 	private boolean levelJustCreated;
 	private boolean stop_play_music;
+	private boolean music_changed;
 
 	public GameplayState(int id){
 		super();
@@ -58,6 +59,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 
 	public void ChooseLevel(int levelIndex){
 		LevelSave save = Save.getInstance().levelSaveForLevelID(levelIndex);
+		this.music_changed = true;
 		this.currentLevelState = new LevelState();
 		this.uiGameplay.setLevelInformation(save.getName(), 0, save.getUnlockableKeys());
 		this.cleanAllBodies();
@@ -136,6 +138,12 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		// Si un changement d'etat a ete demande, l'effectuer
 		if(this.selection != -1){
 			sbg.enterState(selection);			
+		}
+		
+		// Change la musique quand le niveau change 
+		if(this.music_changed){
+			((Game)sbg).enterState(Game.GAMEPLAY_STATE);
+			this.music_changed = false;
 		}
 		if(this.stop_play_music){
 			Game game = (Game)sbg;
