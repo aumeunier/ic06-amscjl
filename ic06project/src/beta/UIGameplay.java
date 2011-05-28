@@ -10,7 +10,8 @@ import org.newdawn.slick.Image;
 
 public class UIGameplay implements UIInterface {
 	final static int MENU_X = Global.WINDOW_WIDTH/2-50;
-	final static int MENU_Y = Global.WINDOW_HEIGHT-20;
+	final static int MENU_Y = Global.GAMEPLAYHEIGHT+80;
+	final static int RESTART_Y = Global.GAMEPLAYHEIGHT+45;
 	final static int MENU_W = 100;
 	final static int MENU_H = 15;
 	final static int POWER_X = 10;
@@ -62,7 +63,7 @@ public class UIGameplay implements UIInterface {
 
 		Image levelLabelImage = labelImage.getScaledCopy(MENU_X-(POWER_X+POWER_W+10), MENU_H);
 		levelLabel = new Label(levelLabelImage,null);
-		levelLabel.setBounds(POWER_X+POWER_W, Global.WINDOW_HEIGHT-MENU_H, MENU_X-(POWER_X+POWER_W+10), MENU_H);
+		levelLabel.setBounds(POWER_X+POWER_W, MENU_Y, MENU_X-(POWER_X+POWER_W+10), MENU_H);
 		levelLabel.setForeground(Color.black);
 		levelLabel.setHorizontalAlignment(Label.RIGHT_ALIGNMENT);
 		levelLabel.updateAppearance();
@@ -72,7 +73,7 @@ public class UIGameplay implements UIInterface {
 		Image keysTotalLabelImage = labelImage.getScaledCopy(MENU_W/2, MENU_H);
 		allKeysLabel = new Label(keysTotalLabelImage,"Nombre total de fruits Hapsten: "+
 				Save.getInstance().getTotalNumberOfUnlockedKeys()+"/"+Save.getInstance().getTotalNumberOfKeys());
-		allKeysLabel.setBounds(MENU_X+MENU_W+10, Global.WINDOW_HEIGHT-MENU_H, MENU_X-(POWER_X+POWER_W+10), MENU_H);
+		allKeysLabel.setBounds(MENU_X+MENU_W+10, MENU_Y, MENU_X-(POWER_X+POWER_W+10), MENU_H);
 		allKeysLabel.setForeground(Color.black);
 		allKeysLabel.setHorizontalAlignment(Label.LEFT_ALIGNMENT);
 		allKeysLabel.updateAppearance();
@@ -82,7 +83,7 @@ public class UIGameplay implements UIInterface {
 
 		Image keyLabelImage = labelImage.getScaledCopy(MENU_W/2, 25);
 		unlockedKeysLabel = new Label(keyLabelImage,null);
-		unlockedKeysLabel.setBounds(MENU_X-(MENU_W/2+10), Global.GAMEPLAYHEIGHT+40, MENU_W/2, MENU_H);
+		unlockedKeysLabel.setBounds(MENU_X-(MENU_W/2+10), RESTART_Y-5, MENU_W/2, MENU_H);
 		unlockedKeysLabel.setForeground(Color.black);
 		unlockedKeysLabel.setHorizontalAlignment(Label.RIGHT_ALIGNMENT);
 		unlockedKeysLabel.updateAppearance();
@@ -90,7 +91,7 @@ public class UIGameplay implements UIInterface {
 		this.display.add(unlockedKeysLabel);
 
 		unlockableKeysLabel = new Label(keyLabelImage,null);
-		unlockableKeysLabel.setBounds(MENU_X+(MENU_W+10), Global.GAMEPLAYHEIGHT+40, MENU_W/2, MENU_H);
+		unlockableKeysLabel.setBounds(MENU_X+(MENU_W+10), RESTART_Y-5, MENU_W/2, MENU_H);
 		unlockableKeysLabel.setForeground(Color.black);
 		unlockableKeysLabel.setHorizontalAlignment(Label.LEFT_ALIGNMENT);
 		unlockableKeysLabel.updateAppearance();
@@ -103,6 +104,10 @@ public class UIGameplay implements UIInterface {
 		menuLabel.setBounds(MENU_X,MENU_Y,MENU_W,MENU_H);
 		menuLabel.pack();
 		this.display.add(menuLabel);
+		Label restartLabel = new Label(menuImage,"Recommencer"); //TODO: button
+		restartLabel.setBounds(MENU_X,RESTART_Y,MENU_W,MENU_H);
+		restartLabel.pack();
+		this.display.add(restartLabel);
 	}
 	public void onEnter(){
 		allKeysLabel.setText("Nombre total de fruits Hapsten: "+
@@ -155,11 +160,16 @@ public class UIGameplay implements UIInterface {
 	
 	@Override
 	public int mouseClicked(int button, int x, int y, int clickCount, GameplayState state) {
+		int selection = -1;
 		if((x >= MENU_X && x <= (MENU_X + MENU_W)) 
 				&&	(y >= MENU_Y && y <= (MENU_Y + MENU_H))){
 			state.setPaused(true);			
 		}	
+		else if((x >= MENU_X && x <= (MENU_X + MENU_W)) 
+				&&	(y >= RESTART_Y && y <= (RESTART_Y + MENU_H))){
+			selection = Game.SHOULD_RESTART;
+		}	
 		
-		return -1;
+		return selection;
 	}
 }

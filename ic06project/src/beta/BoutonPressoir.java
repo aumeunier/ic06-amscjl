@@ -40,6 +40,7 @@ public class BoutonPressoir extends Declencheur {
 	}
 
 	public void check(){
+		System.out.println("Char1:"+level.character1.getBouton()+ "Char2:"+level.character2.getBouton());
 		if((level.character1.getBouton()==num || level.character2.getBouton()==num)&& poids==1)
 			activate();
 		else if(((level.character1.getBouton()==num && level.character2.getBouton()==num)||(level.character1.getBouton()==num && level.character1.isFat())||(level.character2.getBouton()==num && level.character2.isFat()))&&poids==2)
@@ -56,7 +57,7 @@ public class BoutonPressoir extends Declencheur {
 	public void activate(){
 		this.setActivated(true);
 		for (Body bx : relatedBody) {
-			((Sprite)(bx.getUserData())).Hidden(!((Sprite)(bx.getUserData())).isHidden());
+			((Sprite)(bx.getUserData())).Hidden(true);
 		}
 		if(poids==1)
 			this.setImage("Boutonactif1.png");

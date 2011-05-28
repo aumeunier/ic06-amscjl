@@ -892,31 +892,23 @@ public class GameplayState extends BasicGameState implements MouseListener{
 				this.ChooseLevel(this.currentLevel.getLevelID()+1);
 				selection = -1;
 			}		
-			else if(selection == Game.SHOULD_RESTART){
-				this.ChooseLevel(this.currentLevel.getLevelID());
-				selection = -1;				
-			}
 		}
 		else if(this.isPaused){
 			selection = this.uiPause.mouseClicked(button, x, y, clickCount, this);
-			if(selection == Game.SHOULD_RESTART){
-				this.ChooseLevel(this.currentLevel.getLevelID());
-				selection = -1;				
-			}		
-			else if(selection == Game.STOP_PLAY_MUSIC){
+			if(selection == Game.STOP_PLAY_MUSIC){
 				this.stop_play_music = true;
 				selection = -1;
 			}		
 		}
 		else if(this.currentLevel!=null && this.arePlayersDead()){
 			selection = this.uiDeath.mouseClicked(button, x, y, clickCount, this);
-			if(selection == Game.SHOULD_RESTART){
-				this.ChooseLevel(this.currentLevel.getLevelID());
-				selection = -1;
-			}
 		}
 		else if(y >= Global.GAMEPLAYHEIGHT){
 			selection = this.uiGameplay.mouseClicked(button, x, y, clickCount, this);
+		}
+		if(selection == Game.SHOULD_RESTART){
+			this.ChooseLevel(this.currentLevel.getLevelID());
+			selection = -1;
 		}
 	}
 	public void setPaused(boolean _paused){
