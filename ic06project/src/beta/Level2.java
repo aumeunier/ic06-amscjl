@@ -117,7 +117,7 @@ public class Level2 extends Level {
 		createTransporter(790,280,10,42,120,370);
 		createTransporter(130,370,5,42,750,440);
 		createTransporter(790,350,10,42,600,440);
-		createTransporter(545,280,10,42,10,330);
+		createTransporter(545,280,10,42,10,250);
 		createTransporter(170,450,10,42,600,0);
 		Transporter t1 = createTransporter(300,450,10,42,630,210);
 		Transporter t2 = createTransporter(720,215,10,42,350,450);
