@@ -100,6 +100,7 @@ public class MyContactFilter implements ContactFilter {
 					}
 					else if(s2.getClass().equals(IndicationSprite.class)){
 						((IndicationSprite)s2).activateIndication();
+						s2.setShouldBeDestroy();
 						return false;
 					}
 					else if(s2.getClass().equals(Source.class)){
@@ -172,6 +173,7 @@ public class MyContactFilter implements ContactFilter {
 					}
 					else if(s1.getClass().equals(IndicationSprite.class)){
 						((IndicationSprite)s1).activateIndication();
+						s1.setShouldBeDestroy();
 						return false;
 					}
 					else if(s1.getClass().equals(Source.class)){
