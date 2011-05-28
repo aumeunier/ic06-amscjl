@@ -36,7 +36,8 @@ public class Game extends StateBasedGame implements MusicListener {
 	@Override
 	public void initStatesList(GameContainer gc) throws SlickException {		
 		// Initialize the states
-		addState(new MainMenuGameState(MAINMENU_STATE));
+		//addState(new MainMenuGameState(MAINMENU_STATE));
+		addState(new MainMenuGameStateNew(MAINMENU_STATE));
 		addState(new GameplayState(GAMEPLAY_STATE));
 		addState(new NewGameState(NEWGAME_STATE));
 		addState(new LoadGameState(LOADGAME_STATE));
@@ -84,6 +85,13 @@ public class Game extends StateBasedGame implements MusicListener {
 	public void stopMusic(){
 		this.music.stop();
 	}
+	public void changeGameplayMusic(){
+		LevelSave s = ((GameplayState)this.getState(GAMEPLAY_STATE)).getCurrentLevelModel();
+		if(s!=null){
+			changeMusic(s.getMusicName());	
+			loopMusic();	
+		}			
+	}
 	
 	@Override
 	public void enterState(int id){
@@ -93,12 +101,8 @@ public class Game extends StateBasedGame implements MusicListener {
 			changeMusic(MENUS_MUSIC);
 			loopMusic();
 		}
-		else if(id==GAMEPLAY_STATE){
-			LevelSave s = ((GameplayState)this.getState(id)).getCurrentLevelModel();
-			if(s!=null){
-				changeMusic(s.getMusicName());	
-				loopMusic();	
-			}	
+		else if(id==NARRATIVE_STATE){
+			changeGameplayMusic();
 		}
 	}
 

@@ -101,9 +101,6 @@ public class Sprite {
 		else if(image!=null){
 			image.draw(x, y, w, h);
 		}
-		if(this.indication!=null){
-			this.indication.render(container, game, g);
-		}
 	}
 	public void drawLight(Graphics g, boolean alphaMode){
 		lightImage.draw(x+w/2-lightSize/2, y+w/2-lightSize/2, new Color(0.0f,0.0f,0.0f,0.5f));
@@ -130,8 +127,10 @@ public class Sprite {
 		shouldBeDestroy=true;
 	}
 	public void setIndication(int x, int y, int w, int h, String msg){
-		InGameIndication indic = new InGameIndication(x,y,w,h,msg);
-		indication=indic;
+		indication = new InGameIndication(x,y,w,h,msg);
+		if(this.level != null){
+			this.level.addIndication(indication);
+		}
 	}
 	public void setIndication(InGameIndication indic){
 		indication=indic;

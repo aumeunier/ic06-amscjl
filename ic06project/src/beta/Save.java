@@ -255,4 +255,7 @@ public class Save {
 	public boolean hasSaveLoaded(){
 		return (this.saveFilename!=null);
 	}
+	public int getNumberOfLoadedLevels(){
+		return levels.size();
+	}
 }

@@ -142,7 +142,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		
 		// Change la musique quand le niveau change 
 		if(this.music_changed){
-			((Game)sbg).enterState(Game.GAMEPLAY_STATE);
+			((Game)sbg).changeGameplayMusic();
 			this.music_changed = false;
 		}
 		if(this.stop_play_music){

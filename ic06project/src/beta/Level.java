@@ -58,9 +58,12 @@ public class Level {
 			s.setLevelContainer(this);
 		}
 	}
-	
+
 	protected void addIndication(int x, int y, int w, int h, String text){
 		InGameIndication indication = new InGameIndication(x,y,w,h,text);
+		indications.add(indication);
+	}
+	protected void addIndication(InGameIndication indication){
 		indications.add(indication);
 	}
 

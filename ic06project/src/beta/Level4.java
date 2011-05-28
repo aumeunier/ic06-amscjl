@@ -98,7 +98,7 @@ public class Level4 extends Level {
 		// Place sources
 		Source sLight = createSource(340,90-42,60,60,Power.LIGHT);
 		sLight.setLightSize(100);
-		createSource(290,290,60,60,Power.INVISIBLE);
+		createSource(290,290,40,40,Power.INVISIBLE);
 		createSource(0,298,60,60,Power.DESTRUCTOR);
 		
 		// Place Sortie
@@ -143,6 +143,8 @@ public class Level4 extends Level {
 		this.character2.setLightSize(this.character2.h);
 
 		this.setLevelForAllSprites();
+		
+		// TODO: indications
 	}
 
 }

@@ -61,6 +61,12 @@ public class MyContactListener implements ContactListener {
 			else if(s1 instanceof Character && s2 instanceof Exit){
 				((Character)s1).setAtExit(true);
 			}
+			else if((s1 instanceof Wall || s1 instanceof Obstacle || s1 instanceof Ground) && s2 instanceof Character){
+				((Character)s2).isColliding = true;
+			}
+			else if(s1 instanceof Character && (s2 instanceof Wall || s2 instanceof Obstacle || s2 instanceof Ground)){
+				((Character)s1).isColliding = true;
+			}
 		}
 	}
 
@@ -78,6 +84,7 @@ public class MyContactListener implements ContactListener {
 				((Character) point.shape2.getBody().getUserData()).isFalling = false;
 			}
 		}
+		/*
 		else {
 			Sprite s1 = (Sprite)point.shape1.getBody().getUserData();
 			Sprite s2 = (Sprite)point.shape2.getBody().getUserData();
@@ -89,6 +96,7 @@ public class MyContactListener implements ContactListener {
 				((Character)s1).isColliding = true;
 			}
 		}
+		*/
 	}
 
 	@Override
@@ -139,6 +147,8 @@ public class MyContactListener implements ContactListener {
 
 			// Character collides with ground or wall or obstacle
 			else {
+				// FIXME: parfois, si personnage en contact avec deux obstacles,
+				// les deux obstacles se bloquent mutuellement
 				if((s1 instanceof Wall || s1 instanceof Obstacle || s1 instanceof Ground)
 						&& (s2.getClass().equals(Character.class)) ){
 					boolean noHardCollision = true;
@@ -180,23 +190,19 @@ public class MyContactListener implements ContactListener {
 								noHardCollision = false;
 							}
 						}	
-					}
+					}	
 					if(noHardCollision){
 						((Character)s1).isColliding = false;
 					}					
 				}
 			}			
 		}
-		int indexOfPoint = -1;
-		for(int i = 0 ; i < contactPoints.size() ; ++i){
+		for(int i = contactPoints.size() - 1; i >= 0; --i){
 			ContactPoint p = contactPoints.get(i);
 			if((point.shape1.equals(p.shape1) && point.shape2.equals(p.shape2))
 					|| (point.shape2.equals(p.shape1) && point.shape1.equals(p.shape2))){
-				indexOfPoint = i;		
-			}
-		}
-		if(indexOfPoint > -1){
-			contactPoints.remove(indexOfPoint);
+				contactPoints.remove(i);
+			}	
 		}
 	}
 

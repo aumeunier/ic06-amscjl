@@ -140,8 +140,6 @@ public class Level3 extends Level {
 		sprites.add(w3);
 		
 		Source sTp = createSource(0,200,60,60,Power.TELEPORTATION);	//pouvoir de teleportation
-		sTp.setIndication(250,200,
-				200, 200, "Appuyez sur A\n ou sur Enter pour \nteleporter votre \nami a vos cotes");
 		
 		//escalier
 		createGround(60,175,60,5);
@@ -210,5 +208,9 @@ public class Level3 extends Level {
 		this.character2 = addCharacterWithPoints(200,190,0.75f);	
 		
 		this.setLevelForAllSprites();
+		sTp.setIndication(250,200,
+				200, 200, "Appuyez sur A\n ou sur Enter pour \nteleporter votre \nami a vos cotes");
+		
+		//TODO: indications
 	}
 }

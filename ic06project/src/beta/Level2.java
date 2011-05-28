@@ -150,5 +150,7 @@ public class Level2 extends Level {
 		*/
 		
 		this.setLevelForAllSprites();
+		
+		// TODO: indications
 	}
 }
