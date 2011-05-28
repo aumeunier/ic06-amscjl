@@ -59,7 +59,6 @@ public class GameplayState extends BasicGameState implements MouseListener{
 
 	public void ChooseLevel(int levelIndex){
 		LevelSave save = Save.getInstance().levelSaveForLevelID(levelIndex);
-		this.music_changed = true;
 		this.currentLevelState = new LevelState();
 		this.uiGameplay.setLevelInformation(save.getName(), 0, save.getUnlockableKeys());
 		this.cleanAllBodies();
@@ -358,7 +357,6 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	throws SlickException {		
 		uiGameplay.render(gc, g);
 		if(currentLevel !=null){
-
 			currentLevel.render(gc, sbg, g);
 			
 			// Si un des personnages est mort, afficher le menu de mort
@@ -369,7 +367,6 @@ public class GameplayState extends BasicGameState implements MouseListener{
 
 		// Si le niveau est complete, afficher un ecran de victoire
 		if(this.isFinished){
-
 			this.uiWin.render(gc, g);
 		}
 		// Si le menu de pause a ete demande, l'afficher
@@ -890,6 +887,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			selection = this.uiWin.mouseClicked(button, x, y, clickCount, this);
 			if(selection == Game.GO_TO_NEXT_LEVEL){
 				this.ChooseLevel(this.currentLevel.getLevelID()+1);
+				this.music_changed = true;
 				selection = -1;
 			}		
 		}

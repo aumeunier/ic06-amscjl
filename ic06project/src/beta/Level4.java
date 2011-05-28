@@ -24,12 +24,6 @@ public class Level4 extends Level {
 		// Celling
 		createWall(0,-10,Global.GAMEPLAYWIDTH,10);
 		
-		// place entree
-		Sprite entree = new Sprite(10,44,32,46);
-		entree.setImage("porte.png");
-		entree.setLightSize(100);
-		this.backgroundSprites.add(entree);
-		
 		// Sols
 		createGround(0,90,220,25); // 1
 		createGround(280,90,200,20); // 2
@@ -98,8 +92,8 @@ public class Level4 extends Level {
 		// Place sources
 		Source sLight = createSource(340,90-42,60,60,Power.LIGHT);
 		sLight.setLightSize(100);
-		createSource(290,290,40,40,Power.INVISIBLE);
-		createSource(0,298,60,60,Power.DESTRUCTOR);
+		Source sInvisible = createSource(290,290,40,40,Power.INVISIBLE);
+		Source sDestructor = createSource(0,298,60,60,Power.DESTRUCTOR);
 		
 		// Place Sortie
 		createExit(Global.GAMEPLAYWIDTH-50,Global.GAMEPLAYHEIGHT-56,32,46);
@@ -130,6 +124,10 @@ public class Level4 extends Level {
 		//m.setBorns(new Vec2(m.x-300,m.y), new Vec2(m.x,m.y));
 		
 		// Place des torches
+		
+		// place entree
+		Torch torch0 = new Torch(10,44);
+		this.backgroundSprites.add(torch0);
 		Torch torch1 = new Torch(280,210);
 		this.backgroundSprites.add(torch1);		
 		Torch torch2 = new Torch(Global.GAMEPLAYWIDTH-70,Global.GAMEPLAYHEIGHT-70);
@@ -143,8 +141,10 @@ public class Level4 extends Level {
 		this.character2.setLightSize(this.character2.h);
 
 		this.setLevelForAllSprites();
-		
-		// TODO: indications
+		InGameIndication indication0 = new InGameIndication(150, 100, 200, 150, 
+				"Il fait sombre!\n Trouve de la lumiere \npour mieux voir \nautour de toi!");
+		createIndicationSprite(this.character1.x+this.character1.w+20,this.character1.y, 40,40, indication0);
+		sInvisible.setIndication(sInvisible.x,sInvisible.y,250,150,"Pouvoir d'invisibilite! \nLes monstres ne devraient \nplus te voir!");
+		sDestructor.setIndication(sInvisible.x,sInvisible.y,250,150,"Pouvoir de destruction! \nTu peux detruire \ncertains obstacles!");
 	}
-
 }

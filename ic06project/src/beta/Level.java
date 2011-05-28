@@ -440,7 +440,7 @@ public class Level {
 				if(s.lightInDarkness && !s.isHidden()){
 					s.drawLight(g, true);				
 				}
-			}	  
+			}	
 			// Alpha blend drawing
 	        g.setDrawMode(Graphics.MODE_ALPHA_BLEND); 
 			backgroundImage.draw();
@@ -485,8 +485,8 @@ public class Level {
 				}
 			}
 			for(InGameIndication indication: indications){
-				indication.render(gc, sbg, g);
-			}	  
+				indication.renderAlpha(gc, sbg, g);
+			}   
 		}
 		// If no darkness we draw as usual
 		else {
@@ -496,9 +496,6 @@ public class Level {
 				Sprite s = backgroundSprites.get(i);
 				if(!s.isHidden()){
 					s.draw(gc, sbg, g);
-				}
-				if(s.getIndication()!=null){
-					s.getIndication().render(gc, sbg, g);
 				}
 			}
 			for(int i = 0 ; i < listeExit.size() ; ++i){
@@ -510,9 +507,6 @@ public class Level {
 				Sprite s = sprites.get(i);
 				if(!s.isHidden()){
 					s.draw(gc, sbg, g);
-				}
-				if(s.getIndication()!=null){
-					s.getIndication().render(gc, sbg, g);
 				}
 			}
 			for(InGameIndication indication: indications){
