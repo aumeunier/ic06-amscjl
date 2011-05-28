@@ -1,5 +1,8 @@
 package beta;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -14,6 +17,9 @@ public class InGameIndication {
 	private Image backgroundImage;
 	private TextField textField;
 	private int x,y,w,h;
+	private boolean activatedBefore = false;
+	private boolean activated = false;
+	protected Timer timer = null;
 
 	public InGameIndication(int _x, int _y, int _w, int _h, String _text){
 		backgroundImage = Global.setImage(DEFAULT_IMAGE);
@@ -23,8 +29,40 @@ public class InGameIndication {
 	protected String getTexte(){
 		return text;
 	}
+	
+	public void desactivate(){
+		activated = false;
+	}
+	public void activate(){
+		if(!activatedBefore){
+			activated = true;
+			activatedBefore = true;
+			if(this.timer == null){
+				this.timer = new Timer("indication");
+				timer.schedule(new TimerTask(){
+					@Override
+					public void run() {
+						desactivate();
+					}			
+				}, 5000);
+			}
+			else {
+				this.timer.cancel();
+				this.timer = new Timer("indication");
+				timer.schedule(new TimerTask(){
+					@Override
+					public void run() {
+						desactivate();
+					}			
+				}, 5000);
+			}
+		}
+	}
 
 	public void render(GameContainer container, StateBasedGame game, Graphics g) {		
+		if(!activated){
+			return;
+		}
 		if(textField == null){
 			textField = new TextField(container, container.getDefaultFont(),x,y,w,h);
 			textField.setBackgroundColor(new Color(0.0f,0.0f,0.0f,0.0f));

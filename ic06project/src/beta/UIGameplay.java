@@ -17,28 +17,26 @@ public class UIGameplay implements UIInterface {
 	final static int POWER_Y = 0;
 	final static int POWER_W = Global.WINDOW_HEIGHT - Global.GAMEPLAYHEIGHT - 40;
 	final static int POWER_H = Global.WINDOW_HEIGHT - Global.GAMEPLAYHEIGHT - 40;
-	protected Image backgroundImage;
-	protected Image leftPlayerImage;
-	protected Image rightPlayerImage;
-	protected Image menuBackgroundImage;
+	private Image backgroundImage;
+	private Image leftPlayerImage;
+	private Image rightPlayerImage;
 	
 	private Display display;
-	protected Label firstPlayerLabel;
-	protected Label secondPlayerLabel;
-	protected Label levelLabel;
-	protected Label unlockableKeysLabel;
-	protected Label unlockedKeysLabel;
-	protected Label allKeysLabel;
+	private Label firstPlayerLabel;
+	private Label secondPlayerLabel;
+	private Label levelLabel;
+	private Label unlockableKeysLabel;
+	private Label unlockedKeysLabel;
+	private Label allKeysLabel;
 	
-	protected int x, y, w, h;
-	protected int nbUnlockableKeys, nbUnlockedKeys;
-	protected Power p1power = Power.NONE, p2power = Power.NONE;
+	private int x, y, w, h;
+	private int nbUnlockedKeys;
+	private Power p1power = Power.NONE, p2power = Power.NONE;
 	
 	public UIGameplay(GameContainer gc) {
 		backgroundImage = Global.setImage(Global.DEFAULT_UIGAMEPLAY_BACKGROUND_IMAGE);
 		leftPlayerImage = Global.setImage(p1power.imageForPower());
 		rightPlayerImage = Global.setImage(p2power.imageForPower());
-		menuBackgroundImage = Global.setImage(Global.BUTTON_STANDARD_IMAGE);
 		this.x = 0; this.y = Global.GAMEPLAYHEIGHT;
 		this.w = Global.WINDOW_WIDTH; this.h = Global.WINDOW_HEIGHT-Global.GAMEPLAYHEIGHT;
 		
@@ -121,18 +119,19 @@ public class UIGameplay implements UIInterface {
 		unlockedKeysLabel.setImage(null);
 		unlockableKeysLabel.setText("Unlockable fruits:"+_nbUnlockableKeys);
 		unlockableKeysLabel.setImage(null);
+		nbUnlockedKeys = _nbUnlockedKeys;
 	}
 	public void setTempLevelInformation(Power powerPlayer1, Power powerPlayer2, int _nbUnlockedKeys){
-		unlockedKeysLabel.setText("Unlocked fruits:"+_nbUnlockedKeys);
+		unlockedKeysLabel.setText("Unlocked fruits:"+(_nbUnlockedKeys - nbUnlockedKeys));
 		allKeysLabel.setText("Nombre total de fruits Hapsten: "+	(Save.getInstance().getTotalNumberOfUnlockedKeys()+_nbUnlockedKeys)
 				+"/"+Save.getInstance().getTotalNumberOfKeys());
 		if(powerPlayer1.compareTo(p1power)!=0){
-			leftPlayerImage = Global.setImage(p1power.imageForPower());
 			this.p1power = powerPlayer1;
+			leftPlayerImage = Global.setImage(p1power.imageForPower());
 		}
 		if(powerPlayer2.compareTo(p2power)!=0){
-			rightPlayerImage = Global.setImage(p2power.imageForPower());
 			this.p2power = powerPlayer2;
+			rightPlayerImage = Global.setImage(p2power.imageForPower());
 		}
 	}
 	

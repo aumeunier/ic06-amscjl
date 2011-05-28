@@ -461,7 +461,7 @@ public class Level {
 				if(!s.isHidden()){
 					s.draw(gc, sbg, g);
 				}
-				if(s.getIndication()!=null && s.getIndicationActivated()){
+				if(s.getIndication()!=null){
 					s.getIndication().render(gc, sbg, g);
 				}
 			}
@@ -475,7 +475,7 @@ public class Level {
 				if(!s.isHidden()){
 					s.draw(gc, sbg, g);
 				}
-				if(s.getIndication()!=null && s.getIndicationActivated()){
+				if(s.getIndication()!=null){
 					s.getIndication().render(gc, sbg, g);
 				}
 			}

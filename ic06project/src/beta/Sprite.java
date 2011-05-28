@@ -1,8 +1,5 @@
 package beta;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import org.jbox2d.dynamics.Body;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
@@ -33,9 +30,6 @@ public class Sprite {
 	protected Image lightImage=Global.setImage(Global.DEFAULT_LIGHT_IMAGE);
 	protected Level level;
 	protected InGameIndication indication= null;
-	protected boolean IndicationActivated=false;
-	protected boolean IndicationActivatedBefore=false;
-	protected Timer timer = null;
 
 	public Sprite(){
 		this.x=0;
@@ -107,8 +101,8 @@ public class Sprite {
 		else if(image!=null){
 			image.draw(x, y, w, h);
 		}
-		if(this.getIndication()!=null && this.getIndicationActivated()){
-			this.getIndication().render(container, game, g);
+		if(this.indication!=null){
+			this.indication.render(container, game, g);
 		}
 	}
 	public void drawLight(Graphics g, boolean alphaMode){
@@ -119,47 +113,17 @@ public class Sprite {
 		this.lightSize = _lightSize;
 		this.lightImage = Global.setImage(Global.DEFAULT_LIGHT_IMAGE).getScaledCopy(lightSize, lightSize);
 	}
-
-	public boolean getShouldBeDestroy(){
-		return shouldBeDestroy;
-	}
-	public boolean getIndicationActivated(){
-		return IndicationActivated;
-	}
-
 	public InGameIndication getIndication(){
-		if(indication!=null)
-			System.out.println(IndicationActivated);
 		return indication;
 	}
 	public void activateIndication(){
-		if(IndicationActivatedBefore){
-			return;
-		}
-		IndicationActivated=true;
-		IndicationActivatedBefore=true;
-		if(this.timer == null){
-			this.timer = new Timer("indication");
-			timer.schedule(new TimerTask(){
-				@Override
-				public void run() {
-					desactivateIndication();
-				}			
-			}, 5000);
-		}
-		else {
-			this.timer.cancel();
-			this.timer = new Timer("indication");
-			timer.schedule(new TimerTask(){
-				@Override
-				public void run() {
-					desactivateIndication();
-				}			
-			}, 5000);
+		if(indication!=null){
+			indication.activate();
 		}
 	}
-	public void desactivateIndication(){
-		IndicationActivated = false;
+
+	public boolean getShouldBeDestroy(){
+		return shouldBeDestroy;
 	}
 
 	public void setShouldBeDestroy(){
