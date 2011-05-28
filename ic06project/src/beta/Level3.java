@@ -42,9 +42,9 @@ public class Level3 extends Level {
 		createSource(500,450,40,40,Power.FIRE);	
 		
 		//Création des petites plateformes
-		createGround(220,310,50,5); // plateforme levier 1
-		createGround(360,310,50,5); // plateforme levier 2
-		createGround(500,310,50,5); // plateforme levier 3
+		createGround(220,310,60,5); // plateforme levier 1
+		createGround(330,310,60,5); // plateforme levier 2
+		createGround(440,310,60,5); // plateforme levier 3
 		createGround(0,310,50,5); // plateforme source Gros
 	
 		
@@ -104,9 +104,9 @@ public class Level3 extends Level {
 		
 
 		
-		LevierCombi levier1=createLevierCombi(230,280,30,30,listB,listT);
-		LevierCombi levier2=createLevierCombi(370,280,30,30,listB,listT);
-		LevierCombi levier3=createLevierCombi(510,280,30,30,listB,listT);
+		LevierCombi levier1=createLevierCombi(240,280,30,30,listB,listT);
+		LevierCombi levier2=createLevierCombi(350,280,30,30,listB,listT);
+		LevierCombi levier3=createLevierCombi(460,280,30,30,listB,listT);
 		ArrayList<LevierCombi> L = new ArrayList<LevierCombi>();
 		L.add(levier1);
 		L.add(levier2);
@@ -144,8 +144,8 @@ public class Level3 extends Level {
 				200, 200, "Appuyez sur A\n ou sur Enter pour \nteleporter votre \nami a vos cotes");
 		
 		//escalier
-		createGround(80,180,60,5);
-		createGround(0,130,60,5);	
+		createGround(60,175,60,5);
+		createGround(0,125,60,5);	
 		// plateforme en haut
 		//createGround(45,70,50,5); 
 		
@@ -207,7 +207,7 @@ public class Level3 extends Level {
 		
 		// Place the first character
 		this.character1 = addCharacterWithPoints(10,330,0.75f);		
-		this.character2 = addCharacterWithPoints(200,330,0.75f);	
+		this.character2 = addCharacterWithPoints(200,190,0.75f);	
 		
 		this.setLevelForAllSprites();
 	}
