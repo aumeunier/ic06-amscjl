@@ -212,7 +212,7 @@ public class Level3 extends Level {
 		
 		// Place the first character
 		this.character1 = addCharacterWithPoints(10,330,0.75f);		
-		this.character2 = addCharacterWithPoints(200,190,0.75f);	
+		this.character2 = addCharacterWithPoints(200,330,0.75f);	
 		
 		this.setLevelForAllSprites();
 		sTp.setIndication(250,200,

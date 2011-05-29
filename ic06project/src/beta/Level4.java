@@ -92,7 +92,7 @@ public class Level4 extends Level {
 		// Place sources
 		Source sLight = createSource(340,90-42,60,60,Power.LIGHT);
 		sLight.setLightSize(100);
-		Source sInvisible = createSource(290,290,60,60,Power.INVISIBLE);
+		Source sInvisible = createSource(290,290,40,40,Power.INVISIBLE);
 		Source sDestructor = createSource(0,298,60,60,Power.DESTRUCTOR);
 		
 		// Place Sortie
