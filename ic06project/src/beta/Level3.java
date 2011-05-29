@@ -39,18 +39,25 @@ public class Level3 extends Level {
 			createGround(750,480,50,20); // Sol 5
 		
 		//Création de la source FEU
-		createSource(500,450,49,42,Power.FIRE);	
+		Source sourceFeu = createSource(500,450,49,42,Power.FIRE);	
+		InGameIndication indicationFeu = new InGameIndication(150, 150, 200, 150, 
+	    "Tu as maintenant le\npouvoir du feu, \nà quoi cela peut-il \nbien servir ?");  
+		createIndicationFromSprite(sourceFeu,indicationFeu);
 		
 		//Création des petites plateformes
 		createGround(220,310,60,5); // plateforme levier 1
 		createGround(330,310,60,5); // plateforme levier 2
 		createGround(440,310,60,5); // plateforme levier 3
 		createGround(0,310,50,5); // plateforme source Gros
+		
 	
 		
 		//Création des leviers et de ce qu'ils déclenchent
 		
 		Source sourceG = createSource(0,265,40,40,Power.FAT); 		//Pouvoir du Gros
+		InGameIndication indicationGros = new InGameIndication(150, 150, 200, 150, 
+	    "Tu as maintenant le\n pouvoir d'être plus\n lourd !");  
+		createIndicationFromSprite(sourceG,indicationGros);
 		Body sourceGBody = state.getBodyForUserData(sourceG); 			//Body du pouvoir du Gros
 		Wall wall = createWall(540,250,10,130);							//Mur plateforme sautante
 		Body wallBody = state.getBodyForUserData(wall);					//Body du Mur
