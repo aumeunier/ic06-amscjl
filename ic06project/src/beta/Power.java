@@ -32,13 +32,13 @@ public enum Power {
 			result = "powerFlying.png";
 			break;
 		case FAT:
-			result = "powerGros.png";
+			result = "grossir.png";
 			break;
 		case PETIT:
 			result = "powerPetit.png";
 			break;
 		case REBOND:
-			result = "powerRebond.png";
+			result = "rebondir.png";
 			break;
 		case FIRE:
 			result = "powerFire.png";
@@ -53,7 +53,7 @@ public enum Power {
 			result = "powerTeleportation.png";
 			break;
 		case ABSORBE:
-			result = "powerEmpty.png";
+			result = "voler-pouvoir.png";
 			break;
 		case DESTRUCTOR:
 			result = "powerDestructor.png";

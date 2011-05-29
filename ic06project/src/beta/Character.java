@@ -53,10 +53,10 @@ public class Character extends Sprite{
 			this.setFilter(new Color(255,51,51,255));
 		}
 		else if(isNage()){
-			this.setFilter(new Color(33,33,33,255));
+			this.setFilter(new Color(102,255,255,255));
 		}
 		else if(isRebond()){
-			this.setFilter(new Color(55,55,55,255));
+			this.setFilter(new Color(51,255,51,255));
 		}
 		else if(isFat()){
 			this.setFilter(Color.white);
@@ -66,10 +66,10 @@ public class Character extends Sprite{
 			this.setLightSize(3*this.h);
 		}
 		else if(canTeleport()){
-			this.setFilter(new Color(77,77,77,255));
+			this.setFilter(new Color(255,153,255,255));
 		}
 		else if(absorbe()){
-			this.setFilter(new Color(88,88,88,255));
+			this.setFilter(new Color(102,102,102,255));
 		}
 		else if(isInvisible()){
 			this.setFilter(new Color(150,150,150,100));

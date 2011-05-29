@@ -39,7 +39,7 @@ public class Level3 extends Level {
 			createGround(750,480,50,20); // Sol 5
 		
 		//Création de la source FEU
-		createSource(500,450,40,40,Power.FIRE);	
+		createSource(500,450,49,42,Power.FIRE);	
 		
 		//Création des petites plateformes
 		createGround(220,310,60,5); // plateforme levier 1

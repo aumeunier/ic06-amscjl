@@ -52,9 +52,9 @@ public class Level2 extends Level {
 
 		//source
 		createSource(750,150,60,60,Power.PETIT);
-		createSource(750,20,49,42,Power.REBOND);
+		createSource(750,20,60,60,Power.REBOND);
 		createSource(10,10,60,60,Power.NAGE);
-		createSource(350,450,49,42,Power.ABSORBE);
+		createSource(350,450,60,60,Power.ABSORBE);
 		
 		Exit exit = createExit(600,400,25,25);
 		
