@@ -1,4 +1,4 @@
-package beta;
+package gold;
 
 import java.util.ArrayList;
 
