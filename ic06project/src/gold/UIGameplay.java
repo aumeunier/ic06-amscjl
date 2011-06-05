@@ -32,6 +32,7 @@ public class UIGameplay implements UIInterface {
 	
 	private int x, y, w, h;
 	private int nbUnlockedKeys;
+	private int idLevel;
 	private Power p1power = Power.NONE, p2power = Power.NONE;
 	
 	public UIGameplay(GameContainer gc) {
@@ -117,7 +118,12 @@ public class UIGameplay implements UIInterface {
 		leftPlayerImage = Global.setImage(p1power.imageForPower());
 		rightPlayerImage = Global.setImage(p2power.imageForPower());;
 	}
-	public void setLevelInformation(String _levelName, int _nbUnlockedKeys, int _nbUnlockableKeys){
+	public void setLevelInformation(String _levelName, int _nbUnlockedKeys, int _nbUnlockableKeys, int id){
+		nbUnlockedKeys = _nbUnlockedKeys;
+		if(Save.getInstance().getLevelWithID(id)!=null){
+			nbUnlockedKeys = Save.getInstance().getLevelWithID(id).getUnlockedKeys();
+		}
+		idLevel=id;
 		levelLabel.setText(_levelName);
 		levelLabel.setImage(null);
 		unlockedKeysLabel.setText("Unlocked fruits:"+_nbUnlockedKeys);
@@ -125,10 +131,17 @@ public class UIGameplay implements UIInterface {
 		unlockableKeysLabel.setText("Unlockable fruits:"+_nbUnlockableKeys);
 		unlockableKeysLabel.setImage(null);
 		nbUnlockedKeys = _nbUnlockedKeys;
+		if(Save.getInstance().getLevelWithID(id)!=null){
+			nbUnlockedKeys = Save.getInstance().getLevelWithID(id).getUnlockedKeys();
+		}
+		idLevel=id;
 	}
+	
 	public void setTempLevelInformation(Power powerPlayer1, Power powerPlayer2, int _nbUnlockedKeys){
-		unlockedKeysLabel.setText("Unlocked fruits:"+(_nbUnlockedKeys - nbUnlockedKeys));
-		allKeysLabel.setText("Nombre total de fruits Hapsten: "+	(Save.getInstance().getTotalNumberOfUnlockedKeys()+_nbUnlockedKeys)
+		if(_nbUnlockedKeys>nbUnlockedKeys)
+			nbUnlockedKeys=_nbUnlockedKeys;
+		unlockedKeysLabel.setText("Unlocked fruits:"+(_nbUnlockedKeys));
+		allKeysLabel.setText("Nombre total de fruits Hapsten: "+	(Save.getInstance().getTotalNumberOfUnlockedKeys()+nbUnlockedKeys-Save.getInstance().getLevelWithID(idLevel).getUnlockedKeys())
 				+"/"+Save.getInstance().getTotalNumberOfKeys());
 		if(powerPlayer1.compareTo(p1power)!=0){
 			this.p1power = powerPlayer1;

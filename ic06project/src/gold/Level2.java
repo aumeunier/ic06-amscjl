@@ -40,18 +40,18 @@ public class Level2 extends Level {
 		
 		//Création de la source FEU
 		Source sourceFeu = createSource(500,450,49,42,Power.FIRE);	
-		
 		//Création des petites plateformes
-		createGround(220,310,60,5); // plateforme levier 1
-		createGround(330,310,60,5); // plateforme levier 2
-		createGround(440,310,60,5); // plateforme levier 3
-		createGround(0,310,50,5); // plateforme source Gros
+		createGround(220,310,50,5); // plateforme levier 1
+		createGround(330,310,50,5); // plateforme levier 2
+		createGround(440,310,50,5); // plateforme levier 3
+		createGround(0,310,40,5); // plateforme source Gros
 		
 	
 		
 		//Création des leviers et de ce qu'ils déclenchent
 		
 		Source sourceG = createSource(0,265,40,40,Power.FAT); 		//Pouvoir du Gros
+		sourceG.Hidden(true);
 		Body sourceGBody = state.getBodyForUserData(sourceG); 			//Body du pouvoir du Gros
 		Wall wall = createWall(540,250,10,130);							//Mur plateforme sautante
 		Body wallBody = state.getBodyForUserData(wall);					//Body du Mur
@@ -105,9 +105,9 @@ public class Level2 extends Level {
 		
 
 		
-		LevierCombi levier1=createLevierCombi(240,280,30,30,listB,listT);
-		LevierCombi levier2=createLevierCombi(350,280,30,30,listB,listT);
-		LevierCombi levier3=createLevierCombi(460,280,30,30,listB,listT);
+		LevierCombi levier1=createLevierCombi(235,280,30,30,listB,listT);
+		LevierCombi levier2=createLevierCombi(345,280,30,30,listB,listT);
+		LevierCombi levier3=createLevierCombi(455,280,30,30,listB,listT);
 		ArrayList<LevierCombi> L = new ArrayList<LevierCombi>();
 		L.add(levier1);
 		L.add(levier2);
@@ -117,8 +117,6 @@ public class Level2 extends Level {
 		levier2.SetListeLeviers(L);		//levier déclencheur du mur
 		levier3.SetListeLeviers(L);		//levier déclencheur du pouvoir
 		
-		levier1.activate();
-		levier1.activate();
 			
 		Ground solMouvant = createGround(570,373,50,7); 		// plateforme mouvante
 		Body bodyMouvant = state.getBodyForUserData(solMouvant);
@@ -145,8 +143,6 @@ public class Level2 extends Level {
 		//escalier
 		createGround(60,175,60,5);
 		createGround(0,125,60,5);	
-		// plateforme en haut
-		//createGround(45,70,50,5); 
 		
 		//construction de la pente la plus haute
 		ArrayList<Vec2> sol4Points = new ArrayList<Vec2>();
@@ -171,29 +167,13 @@ public class Level2 extends Level {
 		inter.addPointToShape(800,154);
 		inter.setSlippery(true, "left");
 		inter.setImage("snow.png");
-		inter.image = sol4.image.getSubImage(0,0,550,50);
+		inter.image = inter.image.getSubImage(0,10,230,70);
 		
 		
 		//creation bonus
 		createBonus(770,127,30,30); 
 		createBonus(760,450,30,30);
-		
-		/*//construction de la deuxieme pente ne marche pas
-		ArrayList<Vec2> sol4Points2 = new ArrayList<Vec2>();
-		sol4Points2.add(new Vec2(200,30));
-		sol4Points2.add(new Vec2(200,15));
-		sol4Points2.add(new Vec2(-200,-30));
-		sol4Points2.add(new Vec2(-200,-15));
-		
-		Ground sol42 = createGroundWithPoints(450,160,200,20,sol4Points2); // Sol 3
-		sol42.addPointToShape(450,165);
-		sol42.addPointToShape(450,180);
-		sol42.addPointToShape(650,175);
-		sol42.addPointToShape(650,160);
-		//Ground sol42 = createGround(400,160,400,10);
-		sol42.setSlippery(true, "left");*/
-		
-		
+
 		
 		createGround(680,105,120,5); // plateforme arrivée
 		Wall arriveeWall = createWall(Global.GAMEPLAYWIDTH-60,40,5,65);
@@ -205,18 +185,13 @@ public class Level2 extends Level {
 		createExit(Global.GAMEPLAYWIDTH-45,40,45,65);
 		
 		// Place the first character
-		this.character1 = addCharacterWithPoints(10,330,0.75f);		
-		this.character2 = addCharacterWithPoints(200,330,0.75f);	
+		this.character1 = addCharacterWithPoints(0,330,0.75f);		
+		this.character2 = addCharacterWithPoints(30,330,0.75f);	
 		
 		this.setLevelForAllSprites();
-		
-		sTp.setIndication(200, 200, "Appuyez sur A\n ou sur Enter pour \nteleporter votre \nami a vos cotes");
-		InGameIndication indicationFeu = new InGameIndication(200, 150, 
-	    "Tu as maintenant le\npouvoir du feu, \nà quoi cela peut-il \nbien servir ?");  
-		createIndicationFromSprite(sourceFeu,indicationFeu);
-		InGameIndication indicationGros = new InGameIndication(200, 150, 
-	    "Tu as maintenant le\n pouvoir d'être plus\n lourd !");  
-		createIndicationFromSprite(sourceG,indicationGros);
+		sourceG.setIndication(200, 150, "Tu as maintenant le\n pouvoir d'être plus\n lourd !");
+		sourceFeu.setIndication(200, 150,"Tu as maintenant le\npouvoir du feu, \nà quoi cela peut-il \nbien servir ?");
+		sTp.setIndication(200, 200,"Appuyez sur A\n ou sur Enter pour \nteleporter votre \nami a vos cotes");
 		
 		//TODO: indications
 	}

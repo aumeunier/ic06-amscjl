@@ -145,7 +145,7 @@ public class Save {
 	}
 	
 	/////// *** Getters *** ///////
-	private LevelSave getLevelWithID(int id){
+	public LevelSave getLevelWithID(int id){
 		for(LevelSave level: levels){
 			if(level.getID() == id){
 				return level;

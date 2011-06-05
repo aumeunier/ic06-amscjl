@@ -1,7 +1,6 @@
 package gold;
 
 import org.jbox2d.collision.Shape;
-import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.ContactFilter;
 
@@ -62,14 +61,15 @@ public class MyContactFilter implements ContactFilter {
 				// Premier cas s1 est ...
 				
 				if(s1.getClass().equals(Character.class)){
-					if(s2 instanceof Sprite && s2.getIndication()!=null ){
+					if(s2.isHidden()){
+						return false;
+					}
+					else if(s2 instanceof Sprite && s2.getIndication()!=null ){
+						System.out.println(s2.getClass());
 						s2.activateIndication();
 					}
 					if(((Character)s1).isIntangible()
 							&& (s2.getClass().equals(Obstacle.class))){
-						return false;
-					}
-					else if(s2.isHidden()){
 						return false;
 					}
 					else if((s2.getClass().equals(Monster.class))&&(((Character)(s1)).getPower() != Power.INVISIBLE)){
@@ -135,14 +135,15 @@ public class MyContactFilter implements ContactFilter {
 				}
 				// Deuxieme cas s2 est ...
 				else if(s2.getClass().equals(Character.class)){
-					if(s1 instanceof Sprite && s1.getIndication()!=null){
+					if(s1.isHidden()){
+						return false;
+					}
+					else if(s1 instanceof Sprite && s1.getIndication()!=null){
+						System.out.println(s1.getClass());
 						s1.activateIndication();
 					}
 					if(((Character)s2).isIntangible()
 							&& (s1.getClass().equals(Obstacle.class))){
-						return false;
-					}
-					else if(s1.isHidden()){
 						return false;
 					}
 					else if((s1.getClass().equals(Monster.class))&&(((Character)(s2)).getPower() != Power.INVISIBLE)){

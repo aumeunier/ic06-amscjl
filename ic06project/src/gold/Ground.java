@@ -39,6 +39,42 @@ public class Ground extends Sprite{
 	
 	public void setSlippery(boolean glisse){
 		slippery=glisse;
+		if(slippery){
+			setImage("snow.png");
+			shape=null;
+			if(x==80){
+				addPointToShape(80,70);
+				addPointToShape(80,90);
+				addPointToShape(550,105);
+				addPointToShape(550,85);
+				image = image.getSubImage(0,10,550,50);
+			}
+			else{
+				addPointToShape(570,157);
+				addPointToShape(570,172);
+				addPointToShape(800,169);
+				addPointToShape(800,154);
+				image = image.getSubImage(0,10,230,70);
+			}
+		}
+		else{
+			setImage(IM2);
+			shape=null;
+			if(x==80){
+				addPointToShape(80,70);
+				addPointToShape(80,75);
+				addPointToShape(550,90);
+				addPointToShape(550,85);
+				image = image.getSubImage(0,10,550,5);
+			}
+			else{
+				addPointToShape(570,157);
+				addPointToShape(570,162);
+				addPointToShape(800,159);
+				addPointToShape(800,154);
+				image = image.getSubImage(0,10,230,5);
+			}
+		}
 	}
 	
 	public boolean getSlippery(){
