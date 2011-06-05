@@ -49,9 +49,9 @@ public class Level3 extends Level {
 
 		//source
 		createSource(750,150,60,60,Power.PETIT);
-		createSource(750,20,60,60,Power.REBOND);
-		createSource(10,10,60,60,Power.NAGE);
-		createSource(350,450,60,60,Power.ABSORBE);
+		Source rebond =createSource(750,20,60,60,Power.REBOND);
+		Source nage =createSource(10,10,60,60,Power.NAGE);
+		Source absorbe =createSource(350,450,60,60,Power.ABSORBE);
 		
 		createExit(600,400,25,25);
 		
@@ -87,7 +87,7 @@ public class Level3 extends Level {
 		b3.add(oMurLevierBody4);
 		
 		//levier qui ouvre le mur
-		createLevier(460,295,30,30,b1); //levier x
+		Levier l1 = createLevier(460,295,30,30,b1); //levier x
 		createLevier(250,380,30,30,b2); //levier y
 		
 		
@@ -109,13 +109,13 @@ public class Level3 extends Level {
 		createBoutonPressoir(5,480,20,20,b3); //levier z
 		
 		//transporteur
-		createTransporter(790,450,10,42,300,280);
-		createTransporter(300,290,10,42,760,285);
+		Transporter t3 = createTransporter(790,450,10,42,300,280);
+		createTransporter(300,285,10,42,760,285);
 		createTransporter(790,280,10,42,120,370);
-		createTransporter(130,370,5,42,750,440);
+		createTransporter(130,370,10,42,750,440);
 		createTransporter(790,350,10,42,600,440);
 		createTransporter(545,280,10,42,10,250);
-		createTransporter(170,450,10,42,600,0);
+		createTransporter(180,460,10,42,600,0);
 		Transporter t1 = createTransporter(300,450,10,42,630,210);
 		Transporter t2 = createTransporter(720,215,10,42,350,450);
 		t1.setImage(null);
@@ -131,9 +131,10 @@ public class Level3 extends Level {
 		w4.setImage("newherbe2.png");
 		w4.image = w4.image.getSubImage(0,15,410,50);
 		
-		Wall w5 = createWall(380,100,40,10); 
+		Wall w5 = createWall(320,100,100,10); 
 		w5.setImage("newherbe2.png");
 		w5.image = w5.image.getSubImage(0,15,410,50);
+		
 		
 		createObstacle(420,10,10,90);
 		
@@ -148,6 +149,25 @@ public class Level3 extends Level {
 		
 		this.setLevelForAllSprites();
 		
+		InGameIndication indicationRebond = new InGameIndication(250, 100, 
+	    "Rebondir peut être util,\n prochaine étape : NAGER !!");  
+		createIndicationFromSprite(rebond,indicationRebond);
+		
+		InGameIndication indicationNage = new InGameIndication(350, 100, 
+	    "Nage et cherche le bouton !\n Après ça fais toi petite... !!");  
+		createIndicationFromSprite(nage,indicationNage);
+		
+		InGameIndication indicationAbsorbe = new InGameIndication(350, 100, 
+	    "Tu peux maintenant absorber le pouvoir \nde ton amie simplement en la touchant!!");  
+		createIndicationFromSprite(absorbe,indicationAbsorbe);
+		
+		InGameIndication indicationt3 = new InGameIndication(450, 100, 
+	    "Ceci est un téléporteur, touche le et tu seras téléporté,\n Mais attention certains téléporteurs sont cachés!!");  
+		createIndicationFromSprite(t3,indicationt3);
+		
+		InGameIndication indicationl1 = new InGameIndication(450, 100, 
+	    "Attention, il y a deux leviers, \n il faut trouver les bonnes combinaisons !");  
+		createIndicationFromSprite(l1,indicationl1);
 		// TODO: indications
 	}
 }

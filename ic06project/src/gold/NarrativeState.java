@@ -66,26 +66,49 @@ public class NarrativeState extends BasicGameState implements MouseListener {
 	public void ChooseLevel(int i){
 		switch(i){
 		case 1:
-			textToDisplay = "Il était une fois, un peuple de fées. Elles vivaient paisiblement\n depuis plusieurs milliers  d'années, dans une contrée lointaine \n à l'Ouest du royaume Bros. Leur village se situait dans la vallée \n de ‘Eel Ti Jut’...  Les fées se sont toujours tenus à l'écart du \n royaume de la sorcière (la sorcière ‘Ulna Rei’) située dans les \n contrées Est. La sorcière, elle, rêve depuis toujours de capturer\n le peuple des fées pour leur arracher leurs ailes qui possèdent \n des  particularités  surprenantes. Les fées peuvent effectivement\n grâce à leurs ailes absorber des pouvoirs dissimulés dans des \n zones magiques (que les fées arrivent à détecter par une aura \n étoilé). Comme chaque 1er jour de l'été les deux plus jeunes fées\n de la tribu ont la difficile tâche de récupérer un fruit très rare dont\n seules les fées connaissent l'existence : ce fruit qu'elles nomment \n ‘Hapsten’. Ce fruit est utilisé pour la cérémonie  annuelle féérique\n et permet, si le  nombre de fruit récolté est suffisant, de pouvoir\n être une source de pouvoir gigantesque ! Ce que ne savent pas \n nos deux fées c'est que cette année la récolte sera d'une\n importance capitale pour la survie de la tribu ! Et c'est donc ici que \n commence l'Histoire de nos 2 Super  Fairy Bros !";		
+			textToDisplay = "Il était une fois, un peuple de fées. Elles vivaient paisiblement\n" +
+					"depuis plusieurs milliers d'années, dans une contrée lointaine \n" +
+					"à l'Ouest du royaume Bros. Leur village se situait dans la vallée \n" +
+					"de ‘Eel Ti Jut’...  Les fées se sont toujours tenus à l'écart du \n" +
+					"royaume de la sorcière (la sorcière ‘Ulna Rei’) située dans les \n" +
+					"contrées Est. La sorcière, elle, rêve depuis toujours de capturer\n" +
+					"le peuple des fées pour leur arracher leurs ailes qui possèdent \n" +
+					"des  particularités  surprenantes. Les fées peuvent effectivement,\n" +
+					"grâce à leurs ailes, absorber des pouvoirs dissimulés dans des \n" +
+					"zones magiques (que les fées arrivent à détecter par une aura \n" +
+					"étoilée). Comme chaque 1er jour de l'été les deux plus jeunes \n" +
+					"fées de la tribu ont la difficile tâche de récupérer un fruit  \n" +
+					"très rare dont seules les fées connaissent l'existence : \n" +
+					" ce fruit qu'elles nomment ‘Hapsten’ est utilisé pour la\n" +
+					" cérémonie  annuelle féérique et permet, si le nombre de fruit \n" +
+					" récolté est suffisant, de pouvoir être une source de pouvoir \n" +
+					" gigantesque ! Ce que ne savent pas nos deux fées c'est que cette\n" +
+					" année la récolte sera d'une importance cruciale pour la survie de\n" +
+					"  la tribu ! Et c'est donc ici que commence l'Histoire de nos 2 \n" +
+					"   SUPER FAIRY BROS. !";		
 			break;
 		case 2:
-			textToDisplay = "Après avoir parcouru les plaines des contrées ouest de Bros nos \n " +
-							"deux fées ont aperçu leur village en feu ! Après une visite des \n " +
-							"lieux,  elles ont retrouvé le village désert et à moitié en ruine. \n " +
-							"Elles trouvèrent un message menaçant accroché à l’entrée du \n " +
-							"village : \n\n\n« J’ai fait prisonnière toutes  vos soeurs, j’ai récupéré " +
-							"leurs ailes et elles n’auront plus jamais aucun pouvoir !\n " +
-							"Bientôt votre tour viendra… La Sorcière ‘Ulna Rei’ » \n \n\n" +
-							"Nos deux fées ont donc décidé d’aller sauver les fées prisonnières " +
-							"de la sorcière : pour se faire elles vont réunir le plus possible" +
-							" de leur fruit magique ‘Hapsten’ afin de fabriquer une source de " +
-							" pouvoir très puissante et de pouvoir,  peut-être, " +
+			textToDisplay = "       Après avoir parcouru les plaines des contrées Ouest de Bros \n" +
+							"              nos deux fées ont aperçu leur village en feu !\n\n " +
+							"		Après une visite des lieux,  \n" +
+							"elles ont retrouvé le village désert et à moitié en ruine. \n " +
+							"Elles trouvèrent un message menaçant \n" +
+							"accroché à l’entrée du village : \n\n" +
+							"           « J’ai fait prisonnière toutes  vos soeurs, \n" +
+							"                 j’ai récupéré leurs ailes \n" +
+							"                       et elles n’auront plus jamais aucun pouvoir !\n " +
+							"                               Bientôt votre tour viendra… \n" +
+							"           La Sorcière ‘Ulna Rei’ » \n\n" +
+							"Nos deux fées ont donc décidé d’aller sauver les fées prisonnières\n " +
+							"de la sorcière : pour se faire elles vont réunir le plus possible\n" +
+							" de leur fruit magique ‘Hapsten’ afin de fabriquer une source de \n" +
+							" pouvoir très puissante et de pouvoir,  peut-être,\n " +
 							"sauver leurs sœurs et leurs mères. \n";
 			
 			
 			break;
 		case 3:
-			textToDisplay = "\n\n\n Nos deux fées doivent maintenant  traverser le mont ‘ Izapov’\n\n" +
+			textToDisplay = "\n\n\n Nos deux fées doivent maintenant  traverser la vallée ‘ Izapov’\n\n" +
 					" afin de rejoindre les  grottes  ‘d’ ArgennK ‘, n’oubliez pas de \n\n" +
 					"ramasser autant d’’Hapsten’ que possible. \n";			break;
 		case 4 :
@@ -104,7 +127,7 @@ public class NarrativeState extends BasicGameState implements MouseListener {
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
-		backgroundImage = Global.setImage("papyrus_page.png");
+		backgroundImage = Global.setImage("image_narration.png");
 		textBackgroundImage = Global.setImage("scroll_background_page_horizontal.png");
 		
 		display = new Display(container);
