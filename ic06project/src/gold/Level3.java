@@ -1,20 +1,17 @@
 package gold;
 
 import java.util.ArrayList;
-
-import org.jbox2d.collision.MassData;
-import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 
 public class Level3 extends Level {
 	public Level3(GameplayState state, LevelSave model){	
 		super(state,model);
 		this.levelID = 3; // Do not forget to update that !!
-		this.setBackgroundImage("5759438_s.jpg");
-		Ground.setim(Ground.IM2);
+		this.setBackgroundImage("6362779_s.jpg");
+		Ground.setim(Ground.IM1);
 
 		// Place a ground wall
-		createWall(0,Global.GAMEPLAYHEIGHT-2,Global.GAMEPLAYWIDTH,2);		
+		createWall(0,Global.GAMEPLAYHEIGHT-10,Global.GAMEPLAYWIDTH,10);		
 		// Left wall
 		createWall(-10,0,10,Global.GAMEPLAYHEIGHT);
 		// Right wall
@@ -22,202 +19,135 @@ public class Level3 extends Level {
 		// Celling
 		createWall(0,-10,Global.GAMEPLAYWIDTH,10);
 		
-		//Création des grounds
-			createGround(0,380,100,120); // Sol 1
-			Sprite w1 = new Sprite(0,380,100,50);
-			w1.setImage("snow.png");
-			w1.image = w1.image.getSubImage(0,17,100,50);
-			sprites.add(w1);
-			
-			createGround(150,380,600,50); // Sol 2
-			Sprite w2 = new Sprite(150,380,600,50);
-			w2.setImage("snow.png");
-			w2.image = w2.image.getSubImage(0,17,550,50);
-			sprites.add(w2);
-			
-			createGround(550,430,200,70); // Sol 4
-			createGround(750,480,50,20); // Sol 5
 		
-		//Création de la source FEU
-		Source sourceFeu = createSource(500,450,49,42,Power.FIRE);	
-		InGameIndication indicationFeu = new InGameIndication(150, 150, 200, 150, 
-	    "Tu as maintenant le\npouvoir du feu, \nà quoi cela peut-il \nbien servir ?");  
-		createIndicationFromSprite(sourceFeu,indicationFeu);
 		
-		//Création des petites plateformes
-		createGround(220,310,60,5); // plateforme levier 1
-		createGround(330,310,60,5); // plateforme levier 2
-		createGround(440,310,60,5); // plateforme levier 3
-		createGround(0,310,50,5); // plateforme source Gros
-		
-	
-		
-		//Création des leviers et de ce qu'ils déclenchent
-		
-		Source sourceG = createSource(0,265,40,40,Power.FAT); 		//Pouvoir du Gros
-		InGameIndication indicationGros = new InGameIndication(150, 150, 200, 150, 
-	    "Tu as maintenant le\n pouvoir d'être plus\n lourd !");  
-		createIndicationFromSprite(sourceG,indicationGros);
-		Body sourceGBody = state.getBodyForUserData(sourceG); 			//Body du pouvoir du Gros
-		Wall wall = createWall(540,250,10,130);							//Mur plateforme sautante
-		Body wallBody = state.getBodyForUserData(wall);					//Body du Mur
-		Wall wall2 = createWall(450,430,10,68);							//Mur pouvoir du feu
-		Body wallBody2 = state.getBodyForUserData(wall2);				//Body du Mur
-		
+		createGround(200,410,100,80); // Sol 3
+		createGround(100,410,100,20);
+		createGround(100,360,10,50); // Sol 2 petit a gauche
+		createGround(100,200,200,160); // Sol 1/4 gros en haut
+		createGround(290,360,10,50); // Sol 32 petit a droite
+		createGround(300,200,200,75); // Sol 5
+		createGround(300,325,200,110); // Sol 6
+		createGround(500,200,10,150); // Sol 7
+		createGround(500,350,10,85); // Sol 7 bis
+		createGround(530,200,10,150); // Sol 8
+		createGround(530,350,10,85); // Sol 8 bis
+		createGround(570,425,250,10); // Sol 11
+		createGround(630,390,190,35); // Sol 10
+		createGround(540,320,90,70); // Sol 12
+		createGround(540,200,90,70); // Sol 13
+		createGround(730,200,90,70); // Sol 15
+		createGround(730,320,90,10); // Sol 15
+		createGround(630,260,100,10);
+		createGround(0,350,40,10); // Sol 20 petite plateforme
+		Wall w1 = createWall(100,190,410,50); // bois au dessus pour éviter le bug
+		w1.setImage("newherbe2.png");
+		w1.image = w1.image.getSubImage(0,15,410,50);
+		Wall w2 = createWall(530,190,300,50); // bois au dessus pour éviter le bug
+		w2.setImage("newherbe2.png");
+		w2.image = w2.image.getSubImage(0,15,300,50);
 
+		//source
+		createSource(750,150,60,60,Power.PETIT);
+		createSource(750,20,60,60,Power.REBOND);
+		createSource(10,10,60,60,Power.NAGE);
+		createSource(350,450,60,60,Power.ABSORBE);
 		
-			//Création des combinaisons
-				//1ere
-				ArrayList<Body> listeB1= new ArrayList<Body>();
-				listeB1.add(sourceGBody);
-				ArrayList<Boolean> listeT1= new ArrayList<Boolean>();
-				listeT1.add(true);
-				listeT1.add(false);
-				listeT1.add(false);
-				//2eme
-				ArrayList<Body> listeB2= new ArrayList<Body>();
-				listeB2.add(wallBody);
-				ArrayList<Boolean> listeT2= new ArrayList<Boolean>();
-				listeT2.add(true);
-				listeT2.add(true);
-				listeT2.add(false);
-				//3eme
-				ArrayList<Body> listeB3= new ArrayList<Body>();
-				listeB3.add(wallBody2);
-				ArrayList<Boolean> listeT3= new ArrayList<Boolean>();
-				listeT3.add(true);
-				listeT3.add(true);
-				listeT3.add(true);
-				//4eme
-				ArrayList<Body> listeB4= new ArrayList<Body>();
-				listeB4.add(wallBody);
-				listeB4.add(wallBody2);
-				ArrayList<Boolean> listeT4= new ArrayList<Boolean>();
-				listeT4.add(true);
-				listeT4.add(false);
-				listeT4.add(true);
-			
-		//Création des listes de combi
-		ArrayList<ArrayList<Body> > listB = new ArrayList<ArrayList<Body> >();
-		listB.add(listeB1);
-		listB.add(listeB2);
-		listB.add(listeB3);
-		listB.add(listeB4);
-		ArrayList<ArrayList<Boolean> > listT = new ArrayList<ArrayList<Boolean> >();
-		listT.add(listeT1);
-		listT.add(listeT2);
-		listT.add(listeT3);
-		listT.add(listeT4);
+		createExit(600,400,25,25);
 		
-
+		//bonus
+		createBonus(10,300,25,25);
+		createBonus(650,215,25,25);
 		
-		LevierCombi levier1=createLevierCombi(240,280,30,30,listB,listT);
-		LevierCombi levier2=createLevierCombi(350,280,30,30,listB,listT);
-		LevierCombi levier3=createLevierCombi(460,280,30,30,listB,listT);
-		ArrayList<LevierCombi> L = new ArrayList<LevierCombi>();
-		L.add(levier1);
-		L.add(levier2);
-		L.add(levier3);
+		//mur levier x
+		Obstacle oMurLevier = new Obstacle(700,0,10,60);
+		sprites.add(oMurLevier);
+		Body oMurLevierBody = myState.addObstacle(oMurLevier);
+		ArrayList<Body> b1 = new ArrayList<Body>();
+		b1.add(oMurLevierBody);
 		
-		levier1.SetListeLeviers(L);		//levier déclencheur du mur
-		levier2.SetListeLeviers(L);		//levier déclencheur du mur
-		levier3.SetListeLeviers(L);		//levier déclencheur du pouvoir
+		Obstacle oMurLevier2 = new Obstacle(180,0,10,60);
+		oMurLevier2.Hidden(true);
+		sprites.add(oMurLevier2);
+		Body oMurLevierBody2 = myState.addObstacle(oMurLevier2);
+		b1.add(oMurLevierBody2);
 		
-		levier1.activate();
-		levier1.activate();
-			
-		Ground solMouvant = createGround(570,373,50,7); 		// plateforme mouvante
-		Body bodyMouvant = state.getBodyForUserData(solMouvant);
+		//mur levier y
+		Obstacle oMurLevier3 = new Obstacle(180,0,10,60);
+		sprites.add(oMurLevier3);
+		Body oMurLevierBody3 = myState.addObstacle(oMurLevier3);
 		ArrayList<Body> b2 = new ArrayList<Body>();
-		b2.add(bodyMouvant);
-		MassData md = new MassData();
-		md.mass = 100.0f;
-		bodyMouvant.setMass(md);
-		BoutonElevator B = createBoutonElevator(660, 362, 30, 18, b2, 2, 5000);	//bouton Elevator pour la plateforme
-		createGround(565,375,5,5);//cale1
-		createGround(620,375,5,5);//cale2
+		b2.add(oMurLevierBody3);
+		
+		//mur levier z
+		Obstacle oMurLevier4 = new Obstacle(500,435,10,55);
+		sprites.add(oMurLevier4);
+		Body oMurLevierBody4 = myState.addObstacle(oMurLevier4);
+		ArrayList<Body> b3 = new ArrayList<Body>();
+		b3.add(oMurLevierBody4);
+		
+		//levier qui ouvre le mur
+		createLevier(460,295,30,30,b1); //levier x
+		createLevier(250,380,30,30,b2); //levier y
 		
 		
+		//place l'eau
+		createSourceMortelle(25,Global.GAMEPLAYHEIGHT-20,175,10);
+		Sprite s6 = new Sprite(0,Global.GAMEPLAYHEIGHT-60,50,50);
+		sprites.add(s6);
+		s6.setAnimation("waves.png", 300, 300);
+		Sprite s7 = new Sprite(50,Global.GAMEPLAYHEIGHT-60,50,50);
+		sprites.add(s7);
+		s7.setAnimation("waves2.png", 300, 300);
+		Sprite s8 = new Sprite(100,Global.GAMEPLAYHEIGHT-60,50,50);
+		sprites.add(s8);
+		s8.setAnimation("waves.png", 300, 300);
+		Sprite s9 = new Sprite(150,Global.GAMEPLAYHEIGHT-60,50,50);
+		sprites.add(s9);
+		s9.setAnimation("waves2.png", 300, 300);
+		
+		createBoutonPressoir(5,480,20,20,b3); //levier z
+		
+		//transporteur
+		createTransporter(790,450,10,42,300,280);
+		createTransporter(300,290,10,42,760,285);
+		createTransporter(790,280,10,42,120,370);
+		createTransporter(130,370,5,42,750,440);
+		createTransporter(790,350,10,42,600,440);
+		createTransporter(545,280,10,42,10,250);
+		createTransporter(170,450,10,42,600,0);
+		Transporter t1 = createTransporter(300,450,10,42,630,210);
+		Transporter t2 = createTransporter(720,215,10,42,350,450);
+		t1.setImage(null);
+		t2.setImage(null);
 		
 		
-		createGround(0,240,550,10); // plateforme centrale
-		Sprite w3 = new Sprite(0,240,550,50);
-		w3.setImage("snow.png");
-		w3.image = w3.image.getSubImage(0,17,550,50);
-		sprites.add(w3);
+		//plateforme
+		Wall w3 = createWall(0,60,200,20); 
+		w3.setImage("newherbe2.png");
+		w3.image = w3.image.getSubImage(0,15,410,50);
 		
-		Source sTp = createSource(0,200,60,60,Power.TELEPORTATION);	//pouvoir de teleportation
+		Wall w4 = createWall(600,60,200,20); 
+		w4.setImage("newherbe2.png");
+		w4.image = w4.image.getSubImage(0,15,410,50);
 		
-		//escalier
-		createGround(60,175,60,5);
-		createGround(0,125,60,5);	
-		// plateforme en haut
-		//createGround(45,70,50,5); 
+		Wall w5 = createWall(380,100,40,10); 
+		w5.setImage("newherbe2.png");
+		w5.image = w5.image.getSubImage(0,15,410,50);
 		
-		//construction de la pente la plus haute
-		ArrayList<Vec2> sol4Points = new ArrayList<Vec2>();
-		sol4Points.add(new Vec2(-235,10));
-		sol4Points.add(new Vec2(-235,5));
-		sol4Points.add(new Vec2(235,-10));
-		sol4Points.add(new Vec2(235,-5));
-		Ground sol4 = createGroundWithPoints(80,70,470,20,sol4Points); // Sol 3
-		sol4.addPointToShape(80,70);
-		sol4.addPointToShape(80,90);
-		sol4.addPointToShape(550,105);
-		sol4.addPointToShape(550,85);
-		sol4.setSlippery(true, "right");
-		sol4.setImage("snow.png");
-		sol4.image = sol4.image.getSubImage(0,10,550,50);
-		
-		//plateforme intermédiaire
-		Ground inter = createGround(570,160,230,5); 
-		inter.addPointToShape(570,157);
-		inter.addPointToShape(570,172);
-		inter.addPointToShape(800,169);
-		inter.addPointToShape(800,154);
-		inter.setSlippery(true, "left");
-		inter.setImage("snow.png");
-		inter.image = sol4.image.getSubImage(0,0,550,50);
-		
-		
-		//creation bonus
-		createBonus(770,127,30,30); 
-		createBonus(760,450,30,30);
-		
-		/*//construction de la deuxieme pente ne marche pas
-		ArrayList<Vec2> sol4Points2 = new ArrayList<Vec2>();
-		sol4Points2.add(new Vec2(200,30));
-		sol4Points2.add(new Vec2(200,15));
-		sol4Points2.add(new Vec2(-200,-30));
-		sol4Points2.add(new Vec2(-200,-15));
-		
-		Ground sol42 = createGroundWithPoints(450,160,200,20,sol4Points2); // Sol 3
-		sol42.addPointToShape(450,165);
-		sol42.addPointToShape(450,180);
-		sol42.addPointToShape(650,175);
-		sol42.addPointToShape(650,160);
-		//Ground sol42 = createGround(400,160,400,10);
-		sol42.setSlippery(true, "left");*/
-		
-		
-		
-		createGround(680,105,120,5); // plateforme arrivée
-		Wall arriveeWall = createWall(Global.GAMEPLAYWIDTH-60,40,5,65);
-		Body arriveeBody = state.getBodyForUserData(arriveeWall);
-		ArrayList<Body> b4 = new ArrayList<Body>();
-		b4.add(arriveeBody);
-		BoutonPressoir B2 = createBoutonPressoir(680, 87, 30, 18, b4, 3);
-		B2.setResteActive(true);
-		createExit(Global.GAMEPLAYWIDTH-45,40,45,65);
+		createObstacle(420,10,10,90);
 		
 		// Place the first character
-		this.character1 = addCharacterWithPoints(10,330,0.75f);		
-		this.character2 = addCharacterWithPoints(200,330,0.75f);	
+		this.character1 = addCharacterWithPoints(600,0,0.75f);		
+		this.character2 = addCharacterWithPoints(550,450,0.75f);	
+		/*Body b = state.getBodyForUserData(this.character1);
+		state.modifyBodySize(b, 0.5f, 0.5f);
+		Body b2 = state.getBodyForUserData(this.character2);
+		state.modifyBodySize(b2, 0.5f, 0.5f);
+		*/
 		
 		this.setLevelForAllSprites();
-		sTp.setIndication(250,200,
-				200, 200, "Appuyez sur A\n ou sur Enter pour \nteleporter votre \nami a vos cotes");
 		
-		//TODO: indications
+		// TODO: indications
 	}
 }
