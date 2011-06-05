@@ -22,12 +22,14 @@ public class InGameIndication {
 	private boolean activated = false;
 	protected Timer timer = null;
 
-	public InGameIndication(int _x, int _y, int _w, int _h, String _text){
+	public InGameIndication(int _w, int _h, String _text){
 		backgroundImage = Global.setImage(DEFAULT_IMAGE);
 		text=_text;
-		x=_x;y=_y;w=_w;h=_h;
+		x=Global.WINDOW_WIDTH/2-_w/2;
+		y=Global.WINDOW_HEIGHT-_h*2/3;
+		w=_w;h=_h;
 		suiTextField = new mdes.slick.sui.TextField(_text);
-		suiTextField.setBounds(_x, _y, _w, _h/2);
+		suiTextField.setBounds(x, y, w, h);
 	}
 	protected String getTexte(){
 		return text;

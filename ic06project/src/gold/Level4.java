@@ -141,10 +141,10 @@ public class Level4 extends Level {
 		this.character2.setLightSize(this.character2.h);
 
 		this.setLevelForAllSprites();
-		InGameIndication indication0 = new InGameIndication(150, 300, 200, 150, 
+		InGameIndication indication0 = new InGameIndication(200, 150, 
 				"Il fait sombre!\n Trouve de la lumiere \npour mieux voir \nautour de toi!");
 		createIndicationSprite(this.character1.x+this.character1.w+20,this.character1.y, 40,40, indication0);
-		sInvisible.setIndication(sInvisible.x,sInvisible.y,250,150,"Pouvoir d'invisibilite! \nLes monstres ne devraient \nplus te voir!");
-		sDestructor.setIndication(sInvisible.x,sInvisible.y,250,150,"Pouvoir de destruction! \nTu peux detruire \ncertains obstacles!");
+		sInvisible.setIndication(250,150,"Pouvoir d'invisibilite! \nLes monstres ne devraient \nplus te voir!");
+		sDestructor.setIndication(250,150,"Pouvoir de destruction! \nTu peux detruire \ncertains obstacles!");
 	}
 }

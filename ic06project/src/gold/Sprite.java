@@ -126,13 +126,10 @@ public class Sprite {
 	public void setShouldBeDestroy(){
 		shouldBeDestroy=true;
 	}
-	public void setIndication(int x, int y, int w, int h, String msg){
-		indication = new InGameIndication(x,y,w,h,msg);
+	public void setIndication(int w, int h, String msg){
+		indication = new InGameIndication(w,h,msg);
 		if(this.level != null){
 			this.level.addIndication(indication);
-		}
-		else {
-			System.out.println("WTF");
 		}
 	}
 	public void setIndication(InGameIndication indic){

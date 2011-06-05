@@ -59,8 +59,8 @@ public class Level {
 		}
 	}
 
-	protected void addIndication(int x, int y, int w, int h, String text){
-		InGameIndication indication = new InGameIndication(x,y,w,h,text);
+	protected void addIndication(int w, int h, String text){
+		InGameIndication indication = new InGameIndication(w,h,text);
 		indications.add(indication);
 	}
 	protected void addIndication(InGameIndication indication){

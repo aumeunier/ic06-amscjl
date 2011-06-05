@@ -40,9 +40,6 @@ public class Level2 extends Level {
 		
 		//Création de la source FEU
 		Source sourceFeu = createSource(500,450,49,42,Power.FIRE);	
-		InGameIndication indicationFeu = new InGameIndication(150, 150, 200, 150, 
-	    "Tu as maintenant le\npouvoir du feu, \nà quoi cela peut-il \nbien servir ?");  
-		createIndicationFromSprite(sourceFeu,indicationFeu);
 		
 		//Création des petites plateformes
 		createGround(220,310,60,5); // plateforme levier 1
@@ -55,9 +52,6 @@ public class Level2 extends Level {
 		//Création des leviers et de ce qu'ils déclenchent
 		
 		Source sourceG = createSource(0,265,40,40,Power.FAT); 		//Pouvoir du Gros
-		InGameIndication indicationGros = new InGameIndication(150, 150, 200, 150, 
-	    "Tu as maintenant le\n pouvoir d'être plus\n lourd !");  
-		createIndicationFromSprite(sourceG,indicationGros);
 		Body sourceGBody = state.getBodyForUserData(sourceG); 			//Body du pouvoir du Gros
 		Wall wall = createWall(540,250,10,130);							//Mur plateforme sautante
 		Body wallBody = state.getBodyForUserData(wall);					//Body du Mur
@@ -215,8 +209,14 @@ public class Level2 extends Level {
 		this.character2 = addCharacterWithPoints(200,330,0.75f);	
 		
 		this.setLevelForAllSprites();
-		sTp.setIndication(250,200,
-				200, 200, "Appuyez sur A\n ou sur Enter pour \nteleporter votre \nami a vos cotes");
+		
+		sTp.setIndication(200, 200, "Appuyez sur A\n ou sur Enter pour \nteleporter votre \nami a vos cotes");
+		InGameIndication indicationFeu = new InGameIndication(200, 150, 
+	    "Tu as maintenant le\npouvoir du feu, \nà quoi cela peut-il \nbien servir ?");  
+		createIndicationFromSprite(sourceFeu,indicationFeu);
+		InGameIndication indicationGros = new InGameIndication(200, 150, 
+	    "Tu as maintenant le\n pouvoir d'être plus\n lourd !");  
+		createIndicationFromSprite(sourceG,indicationGros);
 		
 		//TODO: indications
 	}
