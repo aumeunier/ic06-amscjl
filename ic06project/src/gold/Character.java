@@ -15,6 +15,7 @@ public class Character extends Sprite{
 	private boolean isAtExit = false;
 	private boolean isTransported = false;
 	private boolean destructionPowerActivated = false;
+	private boolean shouldJumpAfterRebound = false;
 	private int boutonpressoir = 0;
 	public int X_transported = 0;
 	public int Y_transported = 0;
@@ -229,13 +230,19 @@ public class Character extends Sprite{
 	public void changeAvoidDoubleFlagState(){
 		avoidDoubleChangeFlag=!avoidDoubleChangeFlag;
 	}
-
 	
 	public int getBouton(){
 		return boutonpressoir;
 	}
 	public void setBouton(int n){
 		boutonpressoir=n;
+	}
+	
+	public void setJumpAfterRebound(boolean flag){
+		this.shouldJumpAfterRebound = flag;
+	}
+	public boolean shouldJumpAfterRebound(){
+		return shouldJumpAfterRebound;
 	}
 	 
 }

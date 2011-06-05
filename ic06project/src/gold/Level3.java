@@ -133,10 +133,8 @@ public class Level3 extends Level {
 		
 		Wall w5 = createWall(320,100,100,10); 
 		w5.setImage("newherbe2.png");
-		w5.image = w5.image.getSubImage(0,15,410,50);
-		
-		
-		createObstacle(420,10,10,90);
+		w5.image = w5.image.getSubImage(0,15,410,50);		
+		//createObstacle(420,10,10,90);
 		
 		// Place the first character
 		this.character1 = addCharacterWithPoints(550,450,0.75f);		

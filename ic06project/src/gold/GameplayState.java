@@ -249,6 +249,15 @@ public class GameplayState extends BasicGameState implements MouseListener{
 				ch1_body.applyImpulse(new Vec2(0, SPEED_JUMP), ch1_body.getWorldCenter());	
 				char1.isFalling = true;
 			}
+			else if(char1.shouldJumpAfterRebound()){
+				ch1_body.applyImpulse(new Vec2(0, SPEED_JUMP/3), ch1_body.getWorldCenter());	
+				char1.setJumpAfterRebound(false);
+			}
+		}
+		else if(!char1.isSlipping && char1.isRebond()){
+			if(input.isKeyDown(Input.KEY_Z)){
+				char1.setJumpAfterRebound(true);		
+			}
 		}
 		if(((input.isKeyDown(Input.KEY_Q)) && char1CanMove)||(char1.isGoingLeft&&char1.isSlipping)){
 			ch1_body.m_linearVelocity.x = -SPEED_X;			
@@ -277,6 +286,15 @@ public class GameplayState extends BasicGameState implements MouseListener{
 				ch2_body.applyImpulse(new Vec2(0, SPEED_JUMP), ch2_body.getWorldCenter());	
 				char2.isFalling = true;
 			}
+			else if(char2.shouldJumpAfterRebound()){
+				ch2_body.applyImpulse(new Vec2(0, SPEED_JUMP/3), ch2_body.getWorldCenter());	
+				char2.setJumpAfterRebound(false);
+			}
+		}
+		else if(!char2.isSlipping && char2.isRebond()){
+			if(input.isKeyDown(Input.KEY_Z)){
+				char2.setJumpAfterRebound(true);		
+			}
 		}
 		if(((input.isKeyDown(Input.KEY_LEFT)) && char2CanMove)||(char2.isGoingLeft&&char2.isSlipping)){
 			ch2_body.m_linearVelocity.x = -SPEED_X;			
@@ -293,54 +311,6 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			ch2_body.m_linearVelocity.x = 0;			
 			char2.straight();
 		}
-		
-		/*
-		if((input.isKeyPressed(Input.KEY_Z)) && char1CanJump){
-			ch1_body.applyImpulse(new Vec2(0, SPEED_JUMP), ch1_body.getWorldCenter());	
-			char1.isFalling = true;
-		}
-		if((input.isKeyDown(Input.KEY_UP)) && char2CanJump){
-			ch2_body.m_linearVelocity.y = +SPEED_X;			
-			char2.isFalling = true;
-		}	
-		else if(((input.isKeyDown(Input.KEY_Q)) && char1CanMove)||(char1.isGoingLeft&&char1.isSlipping)){
-			ch1_body.m_linearVelocity.x = -SPEED_X;			
-			char1.goLeft();
-		}
-		else if(((input.isKeyDown(Input.KEY_D)) && char1CanMove)||(char1.isGoingRight&&char1.isSlipping)){
-			ch1_body.m_linearVelocity.x = SPEED_X;			
-			char1.goRight();
-		}
-		else if((input.isKeyPressed(Input.KEY_A)) && char1.canTeleport()){
-			char2.setTransported(true, char1.x, char1.y);
-		}
-		else if(!char1.isFalling){
-			ch1_body.m_linearVelocity.x = 0;			
-			char1.straight();
-		}
-		
-		if((input.isKeyPressed(Input.KEY_UP)) && char2CanJump){
-			ch2_body.applyImpulse(new Vec2(0, SPEED_JUMP), ch2_body.getWorldCenter());	
-			char2.isFalling = true;
-		}		
-		else if(((input.isKeyDown(Input.KEY_LEFT)) && char2CanMove)||(char2.isGoingLeft&&char2.isSlipping)){
-			ch2_body.m_linearVelocity.x = -SPEED_X;			
-			char2.goLeft();
-		}
-		else if(((input.isKeyDown(Input.KEY_RIGHT)) && char2CanMove)||(char2.isGoingRight&&char2.isSlipping)){
-			ch2_body.m_linearVelocity.x = SPEED_X;			
-			char2.goRight();
-		}
-		else if((input.isKeyPressed(Input.KEY_ENTER)) && char2.canTeleport()){
-			char1.setTransported(true, char2.x, char2.y);
-		}
-		else if(!char2.isFalling){
-			ch2_body.m_linearVelocity.x = 0;			
-			char2.straight();
-		}
-		*/
-		
-		
 		
 		if((char1.isPetit())&&(char1.shouldChangeSize)){
 			modifyBodySize(getBodyForUserData(char1),(float)0.5,(float)0.5);
