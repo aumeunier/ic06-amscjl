@@ -33,15 +33,26 @@ public class MainMenuGameStateNew extends BasicGameState implements
 	private static final int MAP_BUTTON_W = 70;
 	private static final int MAP_BUTTON_H = 70;
 	private static final int MAP_BUTTON_W_SPACE = 10;
-	private static final int MAP_BUTTON_H_SPACE = 10;
+	private static final int MAP_BUTTON_H_SPACE = 10;	
+	private final static String level1imageDefault = "accueil/1-rouge.png";
+	private final static String level2imageDefault = "accueil/2-rouge.png";
+	private final static String level3imageDefault = "accueil/3-rouge.png";
+	private final static String level4imageDefault = "accueil/4-rouge.png";
+	private final static String level5imageDefault = "accueil/5-rouge.png";
+	private final static String level1imageUnlocked = "accueil/1-jaune.png";
+	private final static String level2imageUnlocked = "accueil/2-jaune.png";
+	private final static String level3imageUnlocked = "accueil/3-jaune.png";
+	private final static String level4imageUnlocked = "accueil/4-jaune.png";
+	private final static String level5imageUnlocked = "accueil/5-jaune.png";
+	private final static String level1imageFinished = "accueil/1.png";
+	private final static String level2imageFinished = "accueil/2.png";
+	private final static String level3imageFinished = "accueil/3.png";
+	private final static String level4imageFinished = "accueil/4.png";
+	private final static String level5imageFinished = "accueil/5.png";
 	private int stateID;
 	private int selection;
 	int levelSelection;
 	Image backgroundImage;
-	Image mapLvlDefaultImage;	
-	Image mapLvlUnlockedImage;	
-	Image mapLvlUnlockedFinishedImage;	
-	Image mapLvlFinishedImage;
 	Image level1image;
 	Image level2image;
 	Image level3image;
@@ -62,16 +73,11 @@ public class MainMenuGameStateNew extends BasicGameState implements
 	throws SlickException {
 		// Images
 		backgroundImage = Global.setImage("accueil/fond.png");
-		//TODO: change background images
-		mapLvlDefaultImage = Global.setImage("accueil/1.png");
-		mapLvlUnlockedImage = Global.setImage("accueil/2.png");
-		mapLvlUnlockedFinishedImage = Global.setImage("accueil/3.png");
-		mapLvlFinishedImage = Global.setImage("accueil/3.png");
-		level1image = Global.setImage("accueil/1.png");
-		level2image = Global.setImage("accueil/2.png");
-		level3image = Global.setImage("accueil/3.png");
-		level4image = Global.setImage("accueil/4.png");
-		level5image = Global.setImage("accueil/5.png");
+		level1image = Global.setImage(level1imageDefault);
+		level2image = Global.setImage(level2imageDefault);
+		level3image = Global.setImage(level3imageDefault);
+		level4image = Global.setImage(level4imageDefault);
+		level5image = Global.setImage(level5imageDefault);
 		
 		display = new Display(gc);
 		Image labelImage = Global.setImage(Global.BUTTON_STANDARD_IMAGE);
@@ -85,6 +91,99 @@ public class MainMenuGameStateNew extends BasicGameState implements
 	}
 
 	@Override
+	public void enter(GameContainer container, StateBasedGame game) {
+		Save s = Save.getInstance();
+		if(s.hasSaveLoaded()){
+			int[] ids = s.getAllIds();
+			for(int i = 0 ; i < ids.length ; i++){
+				int[] mapLvl = s.mapPointForLevelID(ids[i]);
+				switch(i){
+				case 1:
+					switch(s.getFinishedStateForLevelID(i)){
+					case 0:
+						level1image = Global.setImage(level1imageDefault);
+						break;
+					case 1:
+						level1image = Global.setImage(level1imageUnlocked);
+						break;
+					case 3:
+						level1image = Global.setImage(level1imageFinished);
+						break;
+					default:
+						level1image = Global.setImage(level1imageDefault);
+						break;
+					}
+					break;
+				case 2:
+					switch(s.getFinishedStateForLevelID(i)){
+					case 0:
+						level2image = Global.setImage(level2imageDefault);
+						break;
+					case 1:
+						level2image = Global.setImage(level2imageUnlocked);
+						break;
+					case 3:
+						level2image = Global.setImage(level2imageFinished);
+						break;
+					default:
+						level2image = Global.setImage(level2imageDefault);
+						break;
+					}
+					break;
+				case 3:
+					switch(s.getFinishedStateForLevelID(i)){
+					case 0:
+						level3image = Global.setImage(level3imageDefault);
+						break;
+					case 1:
+						level3image = Global.setImage(level3imageUnlocked);
+						break;
+					case 3:
+						level3image = Global.setImage(level3imageFinished);
+						break;
+					default:
+						level3image = Global.setImage(level3imageDefault);
+						break;
+					}
+					break;
+				case 4:
+					switch(s.getFinishedStateForLevelID(i)){
+					case 0:
+						level4image = Global.setImage(level4imageDefault);
+						break;
+					case 1:
+						level4image = Global.setImage(level4imageUnlocked);
+						break;
+					case 3:
+						level4image = Global.setImage(level4imageFinished);
+						break;
+					default:
+						level4image = Global.setImage(level4imageDefault);
+						break;
+					}
+					break;
+				case 5:
+					switch(s.getFinishedStateForLevelID(i)){
+					case 0:
+						level5image = Global.setImage(level5imageDefault);
+						break;
+					case 1:
+						level5image = Global.setImage(level5imageUnlocked);
+						break;
+					case 3:
+						level5image = Global.setImage(level5imageFinished);
+						break;
+					default:
+						level5image = Global.setImage(level5imageDefault);
+						break;
+					}
+					break;
+				}
+			}
+		}		
+	}
+
+	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 	throws SlickException {
 		g.setColor(Color.black);
@@ -93,44 +192,19 @@ public class MainMenuGameStateNew extends BasicGameState implements
 		backgroundImage.draw();
 
 		// Draw the level images
-		// Draw the background of the levels window ?
-		Save s = Save.getInstance();
-		if(s.hasSaveLoaded()){
-			int[] ids = s.getAllIds();
-			int x = MAP_X;
-			int y = MAP_Y;
-			for(int i = 0 ; i < ids.length ; i++){
-				int[] mapLvl = s.mapPointForLevelID(ids[i]);
-				// Draw the level background image
-				if(mapLvl!=null){
-					switch(s.getFinishedStateForLevelID(ids[i])){
-					case 0:
-						mapLvlDefaultImage.draw(x,y,MAP_BUTTON_W,MAP_BUTTON_H);
-						break;
-					case 1:
-						mapLvlUnlockedImage.draw(x,y,MAP_BUTTON_W,MAP_BUTTON_H);
-						break;
-					case 2:
-						mapLvlFinishedImage.draw(x,y,MAP_BUTTON_W,MAP_BUTTON_H);
-						break;
-					case 3:
-						mapLvlUnlockedFinishedImage.draw(x,y,MAP_BUTTON_W,MAP_BUTTON_H);
-						break;
-					default:
-						break;
-					}
-					x+=MAP_BUTTON_W+MAP_BUTTON_W_SPACE;
-					if((i+1)%3 == 0){
-						y+=MAP_BUTTON_H+MAP_BUTTON_H_SPACE;
-						x=MAP_X;
-					}
-				}
-				// Draw the map numbers
-				//TODO:
-			}
-		}
+		int x = MAP_X;
+		int y = MAP_Y;
+		level1image.draw(x,y,MAP_BUTTON_W,MAP_BUTTON_H);
+		x+=MAP_BUTTON_W+MAP_BUTTON_W_SPACE;
+		level2image.draw(x,y,MAP_BUTTON_W,MAP_BUTTON_H);
+		x+=MAP_BUTTON_W+MAP_BUTTON_W_SPACE;
+		level3image.draw(x,y,MAP_BUTTON_W,MAP_BUTTON_H);
+		y+=MAP_BUTTON_H+MAP_BUTTON_H_SPACE;
+		x=MAP_X;
+		level4image.draw(x,y,MAP_BUTTON_W,MAP_BUTTON_H);
+		x+=MAP_BUTTON_W+MAP_BUTTON_W_SPACE;
+		//level5image.draw(x,y,MAP_BUTTON_W,MAP_BUTTON_H);
 		
-
 		display.render(gc, g);
 	}
 

@@ -11,18 +11,18 @@
 		},
 		{
 			"id":2,
-			"levelName":"Sous la Terre d'Eel ti Jut",
-			"music":"onlymeith_-_Dance_of_Light_Pixies-4.ogg",
-			"numberOfKeys":2,
-			"areaOnMap":[150, 50, 50, 50]		
-			
-		},
-		{
-			"id":3,
 			"levelName":"Le mont Izapov",
 			"music":"jaspertine_-_Waiting_to_Come_Back_Down-1.ogg",
 			"numberOfKeys":2,
 			"areaOnMap":[250, 100, 50, 50]		
+			
+		},
+		{
+			"id":3,
+			"levelName":"Sous la Terre d'Eel ti Jut",
+			"music":"onlymeith_-_Dance_of_Light_Pixies-4.ogg",
+			"numberOfKeys":2,
+			"areaOnMap":[150, 50, 50, 50]		
 			
 		},
 		{

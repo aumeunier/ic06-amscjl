@@ -131,9 +131,6 @@ public class Sprite {
 		if(this.level != null){
 			this.level.addIndication(indication);
 		}
-		else {
-			System.out.println("WTF");
-		}
 	}
 	public void setIndication(InGameIndication indic){
 		indication=indic;
