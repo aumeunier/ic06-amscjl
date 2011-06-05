@@ -104,22 +104,22 @@ public class Level4 extends Level {
 		createBonus(290,225,25,25);
 		
 		// Place les monstres
-		Monster m1 = createMonster(565,74,30,30);
+		Monster m1 = createMonster(565,74,30,30,0.2f);
 		m1.setImage("6241879_s.jpg");
 		m1.setSpeed(new Vec2(-10,+1.0f));
 		m1.setBorns(new Vec2(565,74-1), new Vec2(800-m1.w-1,74+4));
 		
-		Monster m2 = createMonster(520,134,30,30);
+		Monster m2 = createMonster(520,134,30,30,0.2f);
 		m2.setImage("6241879_s.jpg");
 		m2.setSpeed(new Vec2(10,+1.0f));
 		m2.setBorns(new Vec2(m2.x,133), new Vec2(800-m2.w-1,138));
 
-		Monster m3 = createMonster(340,220,30,30);
+		Monster m3 = createMonster(340,220,30,30,1.0f);
 		m3.setImage("6241879_s.jpg");
 		m3.setSpeed(new Vec2(10,0));
 		m3.setBorns(new Vec2(m3.x,0), new Vec2(740-m3.w-1,0));
 		
-		Monster m = createMonster(Global.GAMEPLAYWIDTH-120,Global.GAMEPLAYHEIGHT-70,50,60);
+		Monster m = createMonster(Global.GAMEPLAYWIDTH-120,Global.GAMEPLAYHEIGHT-70,50,60,1.0f);
 		//m.setSpeed(new Vec2(-8,0));
 		//m.setBorns(new Vec2(m.x-300,m.y), new Vec2(m.x,m.y));
 		

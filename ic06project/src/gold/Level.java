@@ -356,7 +356,7 @@ public class Level {
 		return indic;		
 	}
 	
-	protected Monster createMonster(int x, int y, int w, int h){
+	protected Monster createMonster(int x, int y, int w, int h, float coef){
 		
 		// Create a bonus object
 		Monster monster = new Monster(x,y,w,h);
@@ -365,7 +365,7 @@ public class Level {
 		sprites.add(monster);
 		
 		// Create the source body
-		myState.addMonster(monster);
+		myState.addMonster(monster, coef);
 		
 		return monster;
 	}

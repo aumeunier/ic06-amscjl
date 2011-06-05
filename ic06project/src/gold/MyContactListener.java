@@ -61,10 +61,14 @@ public class MyContactListener implements ContactListener {
 			else if(s1 instanceof Character && s2 instanceof Exit){
 				((Character)s1).setAtExit(true);
 			}
-			else if((s1 instanceof Wall || s1 instanceof Obstacle || s1 instanceof Ground) && s2 instanceof Character){
+			else if((s1 instanceof Wall || s1 instanceof Obstacle || s1 instanceof Ground
+					|| s1 instanceof BoutonPressoir || s1 instanceof BoutonElevator)
+					&& s2 instanceof Character){
 				((Character)s2).isColliding = true;
 			}
-			else if(s1 instanceof Character && (s2 instanceof Wall || s2 instanceof Obstacle || s2 instanceof Ground)){
+			else if(s1 instanceof Character && 
+					(s2 instanceof Wall || s2 instanceof Obstacle || s2 instanceof Ground
+					|| s2 instanceof BoutonPressoir || s2 instanceof BoutonElevator)){
 				((Character)s1).isColliding = true;
 			}
 		}

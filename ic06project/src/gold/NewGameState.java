@@ -6,6 +6,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.MouseListener;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.gui.TextField;
@@ -30,12 +31,13 @@ public class NewGameState extends BasicGameState implements MouseListener {
 	static final int BACK_X = 75;
 	static final int BACK_Y = 50;
 	private int stateID;
-	int selection;
-	TextField name1textField;
-	TextField name2textField;
-	Image backgroundImage;
-	boolean hasError;
-	String errorString;
+	private int selection;
+	private TextField name1textField;
+	private TextField name2textField;
+	private Image backgroundImage;
+	private boolean hasError;
+	private String errorString;
+	private int labelSelected = 0;
 	
 	public NewGameState(int id){
 		super();
@@ -45,6 +47,9 @@ public class NewGameState extends BasicGameState implements MouseListener {
 	@Override
 	public void enter(GameContainer container, StateBasedGame game) {
 		container.getInput();
+		Input input = container.getInput();
+		input.addListener(name1textField);	
+		name1textField.setFocus(true);	
 	}
 	
 	@Override
@@ -63,7 +68,6 @@ public class NewGameState extends BasicGameState implements MouseListener {
 			throws SlickException {
 		name1textField = new TextField(arg0, arg0.getDefaultFont(), NAMEFIELD1_X, NAMEFIELD1_Y, 
 				NAMEFIELD_W, NAMEFIELD_H);
-		name1textField.setConsumeEvents(true);
 		name2textField = new TextField(arg0, arg0.getDefaultFont(), NAMEFIELD2_X, NAMEFIELD2_Y, 
 				NAMEFIELD_W, NAMEFIELD_H);
 		backgroundImage = new Image(Global.PATH_IMAGES_RESSOURCES+"7711466_s.jpg");
@@ -99,6 +103,27 @@ public class NewGameState extends BasicGameState implements MouseListener {
 			((NarrativeState)(arg1.getState(Game.NARRATIVE_STATE))).ChooseLevel(1);
 			arg1.enterState(Game.NARRATIVE_STATE);
 			Global.CURRENT_GAME_FILENAME = name1textField.getText()+"_"+name2textField.getText();
+		}
+		Input input = arg0.getInput();
+		if(input.isKeyPressed(Input.KEY_TAB)){
+			if(labelSelected <= 1){
+				name1textField.setFocus(false);
+				name2textField.setFocus(true);
+				labelSelected = 2;				
+			}
+			else {
+				name1textField.setFocus(true);
+				name2textField.setFocus(false);
+				labelSelected = 1;				
+			}
+		}
+		else {
+			if(labelSelected > 1){	
+				input.addListener(name2textField);	
+			}
+			else {
+				input.addListener(name1textField);			
+			}
 		}
 		selection = -1;
 	}
@@ -137,11 +162,13 @@ public class NewGameState extends BasicGameState implements MouseListener {
 				&&	(y >= NAMETEXT1_Y && y <= (NAMETEXT1_Y + 25))){
 			name1textField.setFocus(true);
 			name2textField.setFocus(false);
+			labelSelected = 1;
 		}
 		else if((x >= NAMETEXT2_X && x <= (NAMETEXT2_X + 50)) 
 				&&	(y >= NAMETEXT2_Y && y <= (NAMETEXT2_Y + 25))){
 			name1textField.setFocus(false);
 			name2textField.setFocus(true);
+			labelSelected = 2;
 		}
 	}
 	
