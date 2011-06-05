@@ -136,7 +136,10 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		
 		// Si un changement d'etat a ete demande, l'effectuer
 		if(this.selection != -1){
-			sbg.enterState(selection);			
+			if(selection == Game.NARRATIVE_STATE){
+				((NarrativeState)(sbg.getState(selection))).ChooseLevel(this.currentLevel.getLevelID());				
+			}
+			sbg.enterState(selection);	
 		}
 		
 		// Change la musique quand le niveau change 
@@ -949,7 +952,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			if(selection == Game.GO_TO_NEXT_LEVEL){
 				this.ChooseLevel(this.currentLevel.getLevelID()+1);
 				this.music_changed = true;
-				selection = -1;
+				selection = Game.NARRATIVE_STATE;	
 			}		
 		}
 		else if(this.isPaused){
@@ -965,7 +968,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		else if(y >= Global.GAMEPLAYHEIGHT){
 			selection = this.uiGameplay.mouseClicked(button, x, y, clickCount, this);
 		}
-		if(selection == Game.SHOULD_RESTART){
+		if(selection == Game.SHOULD_RESTART && this.currentLevel != null){
 			this.ChooseLevel(this.currentLevel.getLevelID());
 			selection = -1;
 		}
