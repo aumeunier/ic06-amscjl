@@ -31,6 +31,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	private World world;
 	private Body ch1_body;
 	private Body ch2_body;
+	private Body exit;
 	private ArrayList<Body> spriteBodies;
 	private ArrayList<Body> monsterBodies;
 	private UIGameplay uiGameplay;
@@ -192,6 +193,22 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			input.consumeEvent();
 			return;
 		}
+		
+		
+		
+		/*else if(s1 instanceof Exit && s2 instanceof Character){*/
+		if (!((Character)this.ch1_body.getUserData()).rectCollideWithOther((Sprite)(exit.getUserData()))){
+			((Character)this.ch1_body.getUserData()).setAtExit(false);
+		}
+		if (!((Character)this.ch2_body.getUserData()).rectCollideWithOther((Sprite)(exit.getUserData()))){
+			((Character)this.ch2_body.getUserData()).setAtExit(false);
+		}
+	/*}
+	else if(s1 instanceof Character && s2 instanceof Exit){
+		if (!s1.rectCollideWithOther(s2)){
+			((Character)s1).setAtExit(false);
+		}
+	}*/
 		
 		if(((Character)this.ch1_body.getUserData()).isAtExit() && ((Character)this.ch2_body.getUserData()).isAtExit()){
 			this.isFinished = true;
@@ -606,6 +623,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		sd.isSensor=true;
 		newBody.createShape(sd);
 		spriteBodies.add(newBody);
+		exit=newBody;
 		newBody.putToSleep();
 		return newBody;
 	}

@@ -138,7 +138,7 @@ public class MyContactListener implements ContactListener {
 			}
 
 			// Character not in Exit body anymore
-			else if(s1 instanceof Exit && s2 instanceof Character){
+			/*else if(s1 instanceof Exit && s2 instanceof Character){
 				if (!s1.rectCollideWithOther(s2)){
 					((Character)s2).setAtExit(false);
 				}
@@ -147,7 +147,7 @@ public class MyContactListener implements ContactListener {
 				if (!s1.rectCollideWithOther(s2)){
 					((Character)s1).setAtExit(false);
 				}
-			}
+			}*/
 
 			// Character collides with ground or wall or obstacle
 			else {

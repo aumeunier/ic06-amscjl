@@ -53,7 +53,7 @@ public class Level3 extends Level {
 		Source nage =createSource(10,10,60,60,Power.NAGE);
 		Source absorbe =createSource(350,450,60,60,Power.ABSORBE);
 		
-		createExit(600,400,25,25);
+		createExit(590,395,40,30);
 		
 		//bonus
 		createBonus(10,300,25,25);
@@ -139,8 +139,10 @@ public class Level3 extends Level {
 		createObstacle(420,10,10,90);
 		
 		// Place the first character
-		this.character1 = addCharacterWithPoints(600,0,0.75f);		
+		this.character1 = addCharacterWithPoints(550,450,0.75f);		
 		this.character2 = addCharacterWithPoints(550,450,0.75f);	
+		character1.setPower(Power.PETIT);
+		character2.setPower(Power.PETIT);
 		/*Body b = state.getBodyForUserData(this.character1);
 		state.modifyBodySize(b, 0.5f, 0.5f);
 		Body b2 = state.getBodyForUserData(this.character2);
