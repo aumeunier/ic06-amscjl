@@ -165,7 +165,6 @@ public class Save {
 		byte b1 = (byte)((lvl.isUnlocked)?1:0);
 		byte b2 = (byte)((lvl.isFinished)?1:0);
 		byte b3 = (byte)((((lvl.getUnlockedKeys()-lvl.getUnlockableKeys()) >= 0))?1:0);
-		System.out.println((((b3<< 1) << 1) + (b2 << 1) + b1));
 		return ((b3<< 1) << 1) + (b2 << 1) + b1;
 	}
 	public int[] getAllIds(){

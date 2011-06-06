@@ -92,6 +92,7 @@ public class MainMenuGameStateNew extends BasicGameState implements
 
 	@Override
 	public void enter(GameContainer container, StateBasedGame game) {
+		mapErrorLabel.setText("");
 		Save s = Save.getInstance();
 		if(s.hasSaveLoaded()){
 			int[] ids = s.getAllIds();
@@ -242,6 +243,9 @@ public class MainMenuGameStateNew extends BasicGameState implements
 			}
 			else if(id > maxId){
 				mapErrorLabel.setText("Niveau pas encore developpe !");				
+			}
+			else if (id > -1){
+				mapErrorLabel.setText("Niveau pas encore debloque!");
 			}
 		}
 		else {
