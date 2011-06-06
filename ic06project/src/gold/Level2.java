@@ -189,9 +189,9 @@ public class Level2 extends Level {
 		this.character2 = addCharacterWithPoints(30,330,0.75f);	
 		
 		this.setLevelForAllSprites();
-		sourceG.setIndication(200, 150, "Tu as maintenant le\n pouvoir d'être plus\n lourd !");
-		sourceFeu.setIndication(200, 150,"Tu as maintenant le\npouvoir du feu, \nà quoi cela peut-il \nbien servir ?");
-		sTp.setIndication(200, 200,"Appuyez sur A\n ou sur Enter pour \nteleporter votre \nami a vos cotes");
+		sourceG.setIndication(300, 100, "Tu as maintenant le pouvoir \nd'etre plus lourd !");
+		sourceFeu.setIndication(300, 100,"Tu as maintenant le pouvoir \ndu feu, a quoi cela peut-il \nbien servir ?");
+		sTp.setIndication(300, 100,"Appuyez sur A ou sur Entree\n pour teleporter votre \nami a vos cotes");
 		
 		//TODO: indications
 	}

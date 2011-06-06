@@ -119,13 +119,9 @@ public class Level4 extends Level {
 		m3.setSpeed(new Vec2(10,0));
 		m3.setBorns(new Vec2(m3.x,0), new Vec2(740-m3.w-1,0));
 		
-		Monster m = createMonster(Global.GAMEPLAYWIDTH-120,Global.GAMEPLAYHEIGHT-70,50,60,1.0f);
-		//m.setSpeed(new Vec2(-8,0));
-		//m.setBorns(new Vec2(m.x-300,m.y), new Vec2(m.x,m.y));
+		createMonster(Global.GAMEPLAYWIDTH-120,Global.GAMEPLAYHEIGHT-70,50,60,1.0f);
 		
 		// Place des torches
-		
-		// place entree
 		Torch torch0 = new Torch(10,44);
 		this.backgroundSprites.add(torch0);
 		Torch torch1 = new Torch(280,210);
@@ -141,10 +137,11 @@ public class Level4 extends Level {
 		this.character2.setLightSize(this.character2.h);
 
 		this.setLevelForAllSprites();
-		InGameIndication indication0 = new InGameIndication(200, 150, 
-				"Il fait sombre!\n Trouve de la lumiere \npour mieux voir \nautour de toi!");
+		InGameIndication indication0 = new InGameIndication(300, 100, 
+				"Il fait sombre! Trouve de la lumiere \npour mieux voir autour de toi!");
 		createIndicationSprite(this.character1.x+this.character1.w+20,this.character1.y, 40,40, indication0);
-		sInvisible.setIndication(250,150,"Pouvoir d'invisibilite! \nLes monstres ne devraient \nplus te voir!");
-		sDestructor.setIndication(250,150,"Pouvoir de destruction! \nTu peux detruire \ncertains obstacles!");
+		sLight.setIndication(300,100,"Tu as trouve de la lumiere! \nLa lumiere reste si tu prends \nun autre pouvoir!");
+		sInvisible.setIndication(300,100,"Pouvoir d'invisibilite! \nLes monstres ne devraient plus te voir!");
+		sDestructor.setIndication(300,100,"Pouvoir de destruction! \nTu peux detruire certains obstacles!");
 	}
 }

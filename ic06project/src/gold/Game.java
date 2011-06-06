@@ -14,6 +14,7 @@ public class Game extends StateBasedGame implements MusicListener {
 	public static final int LOADGAME_STATE = 3;
 	public static final int OPTIONSGAME_STATE = 4;
 	public static final int NARRATIVE_STATE = 5;
+	public static final int HELP_STATE = 6;
 	public static final int GO_TO_NEXT_LEVEL = -100;
 	public static final int SHOULD_RESTART = -200;
 	public static final int STOP_PLAY_MUSIC = -300;
@@ -39,6 +40,7 @@ public class Game extends StateBasedGame implements MusicListener {
 		addState(new NewGameState(NEWGAME_STATE));
 		addState(new LoadGameState(LOADGAME_STATE));
 		addState(new OptionsGameState(OPTIONSGAME_STATE));
+		addState(new HelpState(HELP_STATE));
 		addState(NarrativeState.getInstance());
 		
 		// Initialize the music

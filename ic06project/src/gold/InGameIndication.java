@@ -29,7 +29,7 @@ public class InGameIndication {
 		y=Global.WINDOW_HEIGHT-_h*2/3;
 		w=_w;h=_h;
 		suiTextField = new mdes.slick.sui.TextField(_text);
-		suiTextField.setBounds(x, y, w, h);
+		suiTextField.setBounds(x, y, w, 60);
 	}
 	protected String getTexte(){
 		return text;
@@ -72,7 +72,7 @@ public class InGameIndication {
 			textField = new TextField(container, container.getDefaultFont(),x,y,w,h);
 			textField.setBackgroundColor(new Color(0.0f,0.0f,0.0f,0.0f));
 			textField.setBorderColor(new Color(0.0f,0.0f,0.0f,0.0f));
-			textField.setTextColor(Color.blue);
+			textField.setTextColor(Color.black);
 			textField.setAcceptingInput(false);
 			textField.setText(text);
 		}
@@ -90,7 +90,7 @@ public class InGameIndication {
 			textField = new TextField(container, container.getDefaultFont(),x,y,w,h);
 			textField.setBackgroundColor(new Color(0.0f,0.0f,0.0f,0.0f));
 			textField.setBorderColor(new Color(0.0f,0.0f,0.0f,0.0f));
-			textField.setTextColor(Color.blue);
+			textField.setTextColor(Color.black);
 			textField.setAcceptingInput(false);
 			textField.setText(text);
 		}

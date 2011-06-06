@@ -137,9 +137,11 @@ public class Level3 extends Level {
 		//createObstacle(420,10,10,90);
 		
 		// Place the first character
-		this.character1 = addCharacterWithPoints(550,450,0.75f);		
+		this.character1 = addCharacterWithPoints(600,0,0.75f);
+		Body b = state.getBodyForUserData(this.character1);
+		//state.modifyBodySize(b, 0.8f, 0.8f);		
 		this.character2 = addCharacterWithPoints(550,450,0.75f);	
-		character1.setPower(Power.PETIT);
+		//character1.setPower(Power.PETIT);
 		character2.setPower(Power.PETIT);
 		/*Body b = state.getBodyForUserData(this.character1);
 		state.modifyBodySize(b, 0.5f, 0.5f);
@@ -150,7 +152,7 @@ public class Level3 extends Level {
 		this.setLevelForAllSprites();
 		
 		InGameIndication indicationRebond = new InGameIndication(250, 100, 
-	    "Rebondir peut être util,\n prochaine étape : NAGER !!");  
+	    "Rebondir peut être utile,\n prochaine étape : NAGER !!");  
 		createIndicationFromSprite(rebond,indicationRebond);
 		
 		InGameIndication indicationNage = new InGameIndication(350, 100, 
@@ -158,11 +160,11 @@ public class Level3 extends Level {
 		createIndicationFromSprite(nage,indicationNage);
 		
 		InGameIndication indicationAbsorbe = new InGameIndication(350, 100, 
-	    "Tu peux maintenant absorber le pouvoir \nde ton amie simplement en la touchant!!");  
+	    "Tu peux maintenant absorber le pouvoir \nde ton amie simplement en la touchant!");  
 		createIndicationFromSprite(absorbe,indicationAbsorbe);
 		
 		InGameIndication indicationt3 = new InGameIndication(450, 100, 
-	    "Ceci est un téléporteur, touche le et tu seras téléporté,\n Mais attention certains téléporteurs sont cachés!!");  
+	    "Ceci est un téléporteur, touche le et tu seras \ntéléporté, Mais attention certains \ntéléporteurs sont cachés!!");  
 		createIndicationFromSprite(t3,indicationt3);
 		
 		InGameIndication indicationl1 = new InGameIndication(450, 100, 

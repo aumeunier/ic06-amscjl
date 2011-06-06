@@ -140,11 +140,14 @@ public class Level1 extends Level {
 		this.setLevelForAllSprites();
 		
 		// indication
-		testSprite.setIndication(200, 100, "Appuyez sur Q Z D ou \nsur les fleches\n pour vous deplacer");
-		l1.setIndication(200, 150,"Ceci est un levier, \nil peut ouvrir une \nou plusieurs portes, \nil a 2 positions");
-		s1.setIndication(200, 150,"ceci est une source, \nelle apporte un \npouvoir particulier,\n regardez les dessins!");
-		InGameIndication indication3 = new InGameIndication(200, 150, 
-				"Ceci est un fruit, \nramasse les tous pour\n sauver tes amis!");		
+		testSprite.setIndication(300, 100, "Appuyez sur Q Z D ou \nsur les flèches\n pour vous déplacer");
+		l1.setIndication(300, 100,"Ceci est un levier, il peut \nouvrir une ou plusieurs portes, \nil a 2 positions");
+		s1.setIndication(300, 100,"Ceci est une source, elle apporte \nun pouvoir particulier. \nRegardez les dessins!");
+		InGameIndication indication3 = new InGameIndication(300, 100, 
+		"Ceci est un fruit, ramasse les \ntous pour sauver tes amis!");		
 		createIndicationFromSprite(b3,indication3);
+		InGameIndication indication4 = new InGameIndication(350, 100, 
+		"Ceci est une sortie! \nLes deux fées doivent être à la \nporte pour finir le niveau ");		
+		createIndicationSprite(exit.x - 60, exit.y+30, 20,20, indication4);
 	}
 }

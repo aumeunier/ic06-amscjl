@@ -140,6 +140,10 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			if(selection == Game.NARRATIVE_STATE){
 				((NarrativeState)(sbg.getState(selection))).ChooseLevel(this.currentLevel.getLevelID());				
 			}
+			else if(selection == Game.HELP_STATE){
+				System.out.println("test");
+				((HelpState)(sbg.getState(selection))).setPreviousState(this.getID());
+			}
 			sbg.enterState(selection);	
 		}
 		

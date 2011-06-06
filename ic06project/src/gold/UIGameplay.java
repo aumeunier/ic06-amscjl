@@ -10,10 +10,10 @@ import org.newdawn.slick.Image;
 
 public class UIGameplay implements UIInterface {
 	final static int MENU_X = Global.WINDOW_WIDTH/2-50;
-	final static int MENU_Y = Global.GAMEPLAYHEIGHT+80;
-	final static int RESTART_Y = Global.GAMEPLAYHEIGHT+45;
+	final static int MENU_Y = Global.GAMEPLAYHEIGHT+60;
+	final static int RESTART_Y = Global.GAMEPLAYHEIGHT+20;
 	final static int MENU_W = 100;
-	final static int MENU_H = 15;
+	final static int MENU_H = 30;
 	final static int POWER_X = 10;
 	final static int POWER_Y = 0;
 	final static int POWER_W = Global.WINDOW_HEIGHT - Global.GAMEPLAYHEIGHT - 40;
@@ -126,9 +126,9 @@ public class UIGameplay implements UIInterface {
 		idLevel=id;
 		levelLabel.setText(_levelName);
 		levelLabel.setImage(null);
-		unlockedKeysLabel.setText("Unlocked fruits:"+_nbUnlockedKeys);
+		unlockedKeysLabel.setText("Fruits trouves:"+_nbUnlockedKeys);
 		unlockedKeysLabel.setImage(null);
-		unlockableKeysLabel.setText("Unlockable fruits:"+_nbUnlockableKeys);
+		unlockableKeysLabel.setText("Fruits a trouver:"+_nbUnlockableKeys);
 		unlockableKeysLabel.setImage(null);
 		nbUnlockedKeys = _nbUnlockedKeys;
 		if(Save.getInstance().getLevelWithID(id)!=null){
@@ -140,7 +140,7 @@ public class UIGameplay implements UIInterface {
 	public void setTempLevelInformation(Power powerPlayer1, Power powerPlayer2, int _nbUnlockedKeys){
 		if(_nbUnlockedKeys>nbUnlockedKeys)
 			nbUnlockedKeys=_nbUnlockedKeys;
-		unlockedKeysLabel.setText("Unlocked fruits:"+(_nbUnlockedKeys));
+		unlockedKeysLabel.setText("Fruits trouves:"+(_nbUnlockedKeys));
 		allKeysLabel.setText("Nombre total de fruits Hapsten: "+	(Save.getInstance().getTotalNumberOfUnlockedKeys()+nbUnlockedKeys-Save.getInstance().getLevelWithID(idLevel).getUnlockedKeys())
 				+"/"+Save.getInstance().getTotalNumberOfKeys());
 		if(powerPlayer1.compareTo(p1power)!=0){
