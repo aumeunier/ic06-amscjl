@@ -203,7 +203,7 @@ public class MainMenuGameStateNew extends BasicGameState implements
 		x=MAP_X;
 		level4image.draw(x,y,MAP_BUTTON_W,MAP_BUTTON_H);
 		x+=MAP_BUTTON_W+MAP_BUTTON_W_SPACE;
-		//level5image.draw(x,y,MAP_BUTTON_W,MAP_BUTTON_H);
+		level5image.draw(x,y,MAP_BUTTON_W,MAP_BUTTON_H);
 		
 		display.render(gc, g);
 	}
