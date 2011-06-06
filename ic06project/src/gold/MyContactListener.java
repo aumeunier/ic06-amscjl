@@ -150,11 +150,11 @@ public class MyContactListener implements ContactListener {
 			}*/
 
 			// Character collides with ground or wall or obstacle
-			else {
+			//else {
 				// FIXME: parfois, si personnage en contact avec deux obstacles,
 				// les deux obstacles se bloquent mutuellement
 				if((s1 instanceof Wall || s1 instanceof Obstacle || s1 instanceof Ground
-						|| s2 instanceof Declencheur)
+						|| s1 instanceof Declencheur)
 						&& (s2.getClass().equals(Character.class)) ){
 					boolean noHardCollision = true;
 					for(ContactPoint c: contactPoints){
@@ -206,7 +206,7 @@ public class MyContactListener implements ContactListener {
 					}					
 				}
 			}			
-		}
+		//}
 		for(int i = contactPoints.size() - 1; i >= 0; --i){
 			ContactPoint p = contactPoints.get(i);
 			if((point.shape1.equals(p.shape1) && point.shape2.equals(p.shape2))
