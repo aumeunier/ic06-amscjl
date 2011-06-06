@@ -16,7 +16,6 @@ public class BoutonCharge extends BoutonPressoir{
 		for (Body bx : relatedBody) {
 			if(((PlateformeMissile)(bx.getUserData())).getMissile()==null)
 			{
-				System.out.println("le missile est null");
 				((PlateformeMissile)(bx.getUserData())).recharge();
 			}
 		}

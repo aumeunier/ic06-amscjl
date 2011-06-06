@@ -8,18 +8,23 @@ import org.jbox2d.dynamics.Body;
 public class BoutonDeplace extends BoutonPressoir {
 	
 	String sens ;
+	Body theBody;
+	boolean deplace;
 	
 	public BoutonDeplace(int _x, int _y, int _w, int _h, ArrayList<Body> b, String s){
 		super(_x, _y, _w, _h, b, 1);
+		for (Body bx : relatedBody) {
+			theBody=bx;
+		}
 		sens = s;
+		deplace=false;
 	}
 
 	public void activate(){
 		this.setActivated(true);	
-		System.out.println(sens);
-		for (Body bx : relatedBody) {
+		/*for (Body bx : relatedBody) {
 				((PlateformeMissile)bx.getUserData()).bouge(sens);
-		}
+		}*/
 		
 		if(poids==1)
 			this.setImage("Boutonactif1.png");
@@ -38,5 +43,16 @@ public class BoutonDeplace extends BoutonPressoir {
 			this.setImage("Bouton2.png");
 		else if(poids==3)
 			this.setImage("Bouton3.png");
+	}
+	
+	public String getsens(){
+		return sens;
+	}
+	public Body getTheRelatedBody(){
+		return theBody;
+	}
+	public boolean getDeplace(){
+		deplace=!deplace;
+		return deplace;
 	}
 }

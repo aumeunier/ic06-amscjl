@@ -17,7 +17,7 @@ public class PlateformeMissile extends Ground{
 		shouldBeRecharged = false;
 	}
 	
-	public void bouge(String s){
+	/*public void bouge(String s){
 		if(s=="left")
 		{
 			xStop=x-10;
@@ -33,30 +33,33 @@ public class PlateformeMissile extends Ground{
 			}
 		}
 		shouldMove=true;
-	}
+	}*/
 	
-	public boolean shouldMove(){
+	/*public boolean shouldMove(){
 		return shouldMove;
 	}
 	public int xMove(){
 		return xStop;
-	}
+	}*/
 	
 	
 	public void setMissile(Body b){
 		if(b==null){
-			System.out.println("b null");
 		}
 		monmissile=b;
 		shouldBeRecharged=false;
 	}
+	
 	public Body getMissile(){
 		return monmissile;
 	}
+	
 	public void recharge(){
 		shouldBeRecharged=true;
 	}
+	
 	public boolean shouldRecharge(){
 		return shouldBeRecharged;
 	}
+	
 }

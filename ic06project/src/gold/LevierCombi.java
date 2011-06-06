@@ -32,7 +32,6 @@ public class LevierCombi extends Declencheur{
 	}
 
 	public void endOfTimer(){
-		System.out.println("test4");
 		timer.stop();
 	}
 	

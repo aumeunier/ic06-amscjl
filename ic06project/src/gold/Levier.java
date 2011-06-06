@@ -47,7 +47,6 @@ public class Levier extends Declencheur {
 		
 	}
 	public void endOfTimer(){
-		System.out.println("test4");
 		timer.stop();
 	}
 }

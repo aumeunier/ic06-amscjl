@@ -44,7 +44,6 @@ public class BoutonBombarde extends BoutonPressoir {
 	}
 	
 	public void bombarde(){
-		System.out.println("bombarde");
 		shouldBombard=false;
 		((PlateformeMissile)(aBombarde.getUserData())).setMissile(null);
 		aBombarde=null;

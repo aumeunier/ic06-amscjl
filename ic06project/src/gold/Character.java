@@ -91,6 +91,9 @@ public class Character extends Sprite{
 		else if(isInvisible()){
 			this.setFilter(new Color(150,150,150,100));
 		}
+		else if(dedouble()){
+			this.setFilter(new Color(44,210,44,255));
+		}
 		else {
 			setAnimation("fee-de-face.png",CHAR_W,CHAR_H);
 			this.setFilter(Color.white);
@@ -193,6 +196,9 @@ public class Character extends Sprite{
 	}
 	public boolean absorbe(){
 		return power==Power.ABSORBE;
+	}
+	public boolean dedouble(){
+		return power==Power.DOUBLE;
 	}
 	public void setDead(boolean _dead){
 		isDead = _dead;

@@ -144,7 +144,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 				((NarrativeState)(sbg.getState(selection))).ChooseLevel(this.currentLevel.getLevelID());				
 			}
 			else if(selection == Game.HELP_STATE){
-				System.out.println("test");
+				
 				((HelpState)(sbg.getState(selection))).setPreviousState(this.getID());
 			}
 			sbg.enterState(selection);	
@@ -411,15 +411,36 @@ public class GameplayState extends BasicGameState implements MouseListener{
 				((BoutonBombarde)theSprite).bombarde();
 			}
 			//doivent bouger
-			if(theSprite instanceof PlateformeMissile && ((PlateformeMissile)theSprite).shouldMove())
+			//if(theSprite instanceof PlateformeMissile && ((PlateformeMissile)theSprite).shouldMove())
+			if(theSprite instanceof BoutonDeplace && ((BoutonDeplace)theSprite).isActivated())
 			{
-				Vec2 b2dcoord = Global.getBox2DCoordinates(((PlateformeMissile)theSprite).xMove(), ((PlateformeMissile)theSprite).Y());
-				Vec2 position = new Vec2(b2dcoord.x+((PlateformeMissile)theSprite).w/2, b2dcoord.y-((PlateformeMissile)theSprite).h/2);
-				tempBody.setXForm(position,0);
-				if(((PlateformeMissile)theSprite).getMissile()!=null)
+				if(((BoutonDeplace)theSprite).getDeplace())
 				{
-					Vec2 pos2 = new Vec2(b2dcoord.x+((PlateformeMissile)theSprite).w/2, b2dcoord.y-((PlateformeMissile)theSprite).h -((Sprite)(((PlateformeMissile)theSprite).getMissile().getUserData())).h/2);
-					((PlateformeMissile)theSprite).getMissile().setXForm(pos2, 0);
+					Vec2 b2dcoord;
+					int newX, newY;
+					PlateformeMissile plateforme=(PlateformeMissile)(((BoutonDeplace)theSprite).getTheRelatedBody().getUserData());
+					//Vec2 b2dcoord = Global.getBox2DCoordinates(((PlateformeMissile)theSprite).xMove(), ((PlateformeMissile)theSprite).Y());
+					if(((BoutonDeplace)theSprite).getsens()=="left")
+					{
+						newX=plateforme.X()-1;
+						if(newX<0)
+							newX=0;
+					}
+					else 
+					{
+						newX=plateforme.X()+1;
+						if(newX>800-plateforme.W())
+							newX=800-plateforme.W();
+					}
+					newY=plateforme.Y();
+					b2dcoord = Global.getBox2DCoordinates(newX, newY);
+					Vec2 position = new Vec2(b2dcoord.x+plateforme.w/2, b2dcoord.y-plateforme.h/2);
+					((BoutonDeplace)theSprite).getTheRelatedBody().setXForm(position,0);
+					if(plateforme.getMissile()!=null)
+					{
+						Vec2 pos2 = new Vec2(b2dcoord.x+plateforme.w/2, b2dcoord.y-plateforme.h -((Sprite)(plateforme.getMissile().getUserData())).h/2);
+						plateforme.getMissile().setXForm(pos2, 0);
+					}
 				}
 			}
 			//doivent être rechargés
