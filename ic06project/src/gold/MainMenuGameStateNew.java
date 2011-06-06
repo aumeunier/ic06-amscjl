@@ -95,8 +95,7 @@ public class MainMenuGameStateNew extends BasicGameState implements
 		Save s = Save.getInstance();
 		if(s.hasSaveLoaded()){
 			int[] ids = s.getAllIds();
-			for(int i = 0 ; i < ids.length ; i++){
-				int[] mapLvl = s.mapPointForLevelID(ids[i]);
+			for(int i = 1 ; i <= ids.length ; i++){
 				switch(i){
 				case 1:
 					switch(s.getFinishedStateForLevelID(i)){
