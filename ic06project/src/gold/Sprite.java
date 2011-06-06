@@ -8,7 +8,9 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
+import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Polygon;
+import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class Sprite {
@@ -18,7 +20,7 @@ public class Sprite {
 	protected int h;
 	protected Image image = null;
 	protected Animation animation = null;
-	protected Polygon shape = null;
+	protected Shape shape = null;
 	protected boolean shouldBeDestroy=false;
 	protected boolean shouldChangeSize=false;
 	protected boolean shouldRebond=false;
@@ -88,7 +90,12 @@ public class Sprite {
 		if(shape==null){
 			shape = new Polygon();
 		}
-		shape.addPoint(x, y);
+		if(shape instanceof Polygon){
+			((Polygon)shape).addPoint(x, y);			
+		}
+	}
+	public void setCircleShapeO(float radius){
+		shape = new Circle(x+w/2,y+h/2,radius);
 	}
 
 	public void draw(GameContainer container, StateBasedGame game, Graphics g){

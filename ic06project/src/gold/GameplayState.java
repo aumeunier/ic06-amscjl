@@ -365,7 +365,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			Body b = monsterBodies.get(i);
 			Monster m = (Monster)b.getUserData();
 			b.setLinearVelocity(m.getSpeed());	
-			((Monster)b.getUserData()).step();
+			((Monster)b.getUserData()).step(delta);
 			m.setCoordinatesFromBody(b);
 			if (m.getShouldBeDestroy()){
 				currentLevel.sprites.remove(m);
@@ -597,6 +597,18 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		sd.friction = 0.5f;
 
 		sd.radius=destructibleData.w/2;
+		newBody.createShape(sd);
+		spriteBodies.add(newBody);
+		return newBody;
+	}
+	public Body addFireBall(FireBall fireballData, float p){
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.userData = fireballData;
+		Vec2 b2dcoord = Global.getBox2DCoordinates(fireballData.x, fireballData.y);
+		bodyDef.position = new Vec2(b2dcoord.x+fireballData.w/2,b2dcoord.y-fireballData.h/2);
+		Body newBody = world.createBody(bodyDef);
+		CircleDef sd = new CircleDef();		
+		sd.radius=fireballData.w/2;
 		newBody.createShape(sd);
 		spriteBodies.add(newBody);
 		return newBody;

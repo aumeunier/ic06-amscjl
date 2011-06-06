@@ -28,8 +28,10 @@ public class MyContactFilter implements ContactFilter {
 				((BoutonPressoir)s1).check();
 			}		
 		}
+
 		Object b1d = b1.getUserData();
 		Object b2d = b2.getUserData();
+		/* Rencontres Destructible - other */
 		if((b1d!=null && b2d!=null)
 				&& (b1d instanceof Sprite && b2d instanceof Sprite)
 				&& (((b1d instanceof Destructible) && !b2d.getClass().equals(Character.class))
@@ -40,116 +42,131 @@ public class MyContactFilter implements ContactFilter {
 				if(d.isDeadly()){
 					((Monster)other).loseHealth(1);	
 				}				
+				return false;
 			}
 			else if(other.getClass().equals(Wall.class)){
 				d.setDeadly(false);
+				return true;
 			}
 		}
 
-		else {
-			if(b1d!=null && b2d!=null){
-				Sprite s1 = (Sprite)b1d;
-				Sprite s2 = (Sprite)b2d;
+		if(b1d!=null && b2d!=null && (b1d instanceof Sprite && b2d instanceof Sprite)){
+			Sprite s1 = (Sprite)b1d;
+			Sprite s2 = (Sprite)b2d;
 
-				/* Collisions concernant les personnage */	
-				if(s1.getClass().equals(Character.class) || s2.getClass().equals(Character.class)){
-					Character character = null;
-					Sprite other = null;
-					if(s1.getClass().equals(Character.class)){
-						character = (Character)s1;
-						other = s2;
-					}
-					else {
-						character = (Character)s2;
-						other = s1;						
-					}					
-					
-					if(other.isHidden()){
-						return false;
-					}
-					else if(other.getIndication()!=null ){
-						other.activateIndication();
-					}
-					if(character.isIntangible()
-							&& (other.getClass().equals(Obstacle.class))){
-						return false;
-					}
-					else if((other.getClass().equals(Monster.class))&& (character.getPower() != Power.INVISIBLE)){
-						character.setDead(true);
-						return false;
-					}
-					else if((other.getClass().equals(Monster.class))&& (character.getPower() == Power.INVISIBLE)){
-						return false;
-					}
-					else if((other.getClass().equals(SourceMortelle.class))&& (character.getPower()!= Power.NAGE)){
-						character.setDead(true);
-						return false;
-					}
-					else if((other.getClass().equals(SourceMortelle.class)) && (character.getPower()== Power.NAGE)){
-						character.isFalling=false;
-						return false;
-					}
-					else if((other.getClass().equals(Destructible.class)) && (((Destructible)other).isDeadly())){
-						character.setDead(true);
-						return false;
-					}
-					else if((other.getClass().equals(Destructible.class)) && (character.getPower()== Power.DESTRUCTOR)){
-						other.shouldBeDestroy=true;
-						((Destructible)other).setDestructiblesDeadly();
-						character.isFalling=false;
-						return false;
-					}
-					else if(other.getClass().equals(IndicationSprite.class)){
-						((IndicationSprite)other).activateIndication();
-						other.setShouldBeDestroy();
-						return false;
-					}
-					else if(other.getClass().equals(Source.class)){
-						Source source = (Source)other;
-						character.setPower(source.power);
-						return false;
-					}
-					else if(other.getClass().equals(Transporter.class)){
-						character.setTransported(true,((Transporter)other).new_x,((Transporter)other).new_y);
-						return true;
-					}
-					else if(other.getClass().equals(Character.class)){
-						if(character.absorbe())
-							character.setPower(character.getPower());
-						else if(character.absorbe())
-							character.setPower(character.getPower());
-						return false;
-					}
-					else if(other.getClass().equals(Levier.class)){
-						((Levier)other).activate();
-						return false;
-					}
-					else if(other.getClass().equals(LevierCombi.class)){
-						((LevierCombi)other).activate();
-						return false;
-					}
-					else if(other.getClass().equals(Bonus.class)){
-						((Bonus)other).obtained();
-						return false;						
-					}
+			/* Collisions concernant les personnage */	
+			if(s1.getClass().equals(Character.class) || s2.getClass().equals(Character.class)){
+				Character character = null;
+				Sprite other = null;
+				if(s1.getClass().equals(Character.class)){
+					character = (Character)s1;
+					other = s2;
 				}
-				
-				// Les IndicationSprite ne collide pas
 				else {
-					if(s1.getClass().equals(IndicationSprite.class)){
-						return false;
+					character = (Character)s2;
+					other = s1;						
+				}					
+
+				if(other.isHidden()){
+					return false;
+				}
+				else if(other.getIndication()!=null ){
+					other.activateIndication();
+				}
+				if(character.isIntangible()
+						&& (other.getClass().equals(Obstacle.class))){
+					return false;
+				}
+				else if((other.getClass().equals(Monster.class))&& (character.getPower() != Power.INVISIBLE)){
+					character.setDead(true);
+					return false;
+				}
+				else if((other.getClass().equals(Monster.class))&& (character.getPower() == Power.INVISIBLE)){
+					return false;
+				}
+				else if((other.getClass().equals(SourceMortelle.class))&& (character.getPower()!= Power.NAGE)){
+					character.setDead(true);
+					return false;
+				}
+				else if((other.getClass().equals(SourceMortelle.class)) && (character.getPower()== Power.NAGE)){
+					character.isFalling=false;
+					return false;
+				}
+				else if((other.getClass().equals(Destructible.class)) && (((Destructible)other).isDeadly())){
+					character.setDead(true);
+					return false;
+				}
+				else if((other.getClass().equals(Destructible.class)) && (character.getPower()== Power.DESTRUCTOR)){
+					other.shouldBeDestroy=true;
+					((Destructible)other).setDestructiblesDeadly();
+					character.isFalling=false;
+					return false;
+				}
+				else if(other.getClass().equals(IndicationSprite.class)){
+					((IndicationSprite)other).activateIndication();
+					other.setShouldBeDestroy();
+					return false;
+				}
+				else if(other.getClass().equals(Source.class)){
+					Source source = (Source)other;
+					character.setPower(source.power);
+					return false;
+				}
+				else if(other.getClass().equals(Transporter.class)){
+					character.setTransported(true,((Transporter)other).new_x,((Transporter)other).new_y);
+					return true;
+				}
+				else if(other.getClass().equals(Character.class)){
+					if(character.absorbe())
+						character.setPower(character.getPower());
+					else if(character.absorbe())
+						character.setPower(character.getPower());
+					return false;
+				}
+				else if(other.getClass().equals(Levier.class)){
+					((Levier)other).activate();
+					return false;
+				}
+				else if(other.getClass().equals(LevierCombi.class)){
+					((LevierCombi)other).activate();
+					return false;
+				}
+				else if(other.getClass().equals(Bonus.class)){
+					((Bonus)other).obtained();
+					return false;						
+				}
+				else if(other.getClass().equals(FireBall.class)){
+					((FireBall)other).setShouldBeDestroy();
+					return false;
+				}
+			}
+
+			// Rencontres entre d'autres corps
+			else {
+				// Les IndicationSprite ne collide pas
+				if((s1.getClass().equals(IndicationSprite.class))
+						|| (s2.getClass().equals(IndicationSprite.class))){
+					return false;
+				}
+				// Les FireBall ne collide pas mais blessent le premier character qu'ils touchent
+				else if((s1.getClass().equals(FireBall.class))
+						|| (s2.getClass().equals(FireBall.class))){
+					FireBall fb = (FireBall) ((s1.getClass().equals(FireBall.class))?s1:s2);
+					Sprite other = ((s1.getClass().equals(FireBall.class))?s2:s1);
+					if(other instanceof Character){
+						if(fb.hurtCharacter((Character)other)){
+							fb.setShouldBeDestroy();
+						}
 					}
-					else if(s2.getClass().equals(IndicationSprite.class)){
-						return false;
-					}
-					if(s1 instanceof Witch && s2 instanceof Ground){
-						((Witch)s1).inverseXspeed();
-						return false;
-					}
-					else if(s2 instanceof Witch && s1 instanceof Ground){
-						((Witch)s2).inverseXspeed();
-						return false;
-					}
+					return false;
+				}
+				if(s1 instanceof Witch && s2 instanceof Ground){
+					((Witch)s1).inverseXspeed();
+					return false;
+				}
+				else if(s2 instanceof Witch && s1 instanceof Ground){
+					((Witch)s2).inverseXspeed();
+					return false;
 				}
 			}
 		}

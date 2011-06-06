@@ -14,7 +14,7 @@ public class Monster extends Character {
 		staticMonster = true;
 	}	
 	
-	public void step(){
+	public void step(int delta){
 		if(staticMonster || start == null || end == null){
 			return;
 		}
