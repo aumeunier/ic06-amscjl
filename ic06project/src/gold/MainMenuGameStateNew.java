@@ -102,14 +102,11 @@ public class MainMenuGameStateNew extends BasicGameState implements
 					case 0:
 						level1image = Global.setImage(level1imageDefault);
 						break;
-					case 1:
-						level1image = Global.setImage(level1imageUnlocked);
-						break;
-					case 3:
+					case 7:
 						level1image = Global.setImage(level1imageFinished);
 						break;
 					default:
-						level1image = Global.setImage(level1imageDefault);
+						level1image = Global.setImage(level1imageUnlocked);
 						break;
 					}
 					break;
@@ -118,14 +115,11 @@ public class MainMenuGameStateNew extends BasicGameState implements
 					case 0:
 						level2image = Global.setImage(level2imageDefault);
 						break;
-					case 1:
-						level2image = Global.setImage(level2imageUnlocked);
-						break;
-					case 3:
+					case 7:
 						level2image = Global.setImage(level2imageFinished);
 						break;
 					default:
-						level2image = Global.setImage(level2imageDefault);
+						level2image = Global.setImage(level2imageUnlocked);
 						break;
 					}
 					break;
@@ -134,14 +128,11 @@ public class MainMenuGameStateNew extends BasicGameState implements
 					case 0:
 						level3image = Global.setImage(level3imageDefault);
 						break;
-					case 1:
-						level3image = Global.setImage(level3imageUnlocked);
-						break;
-					case 3:
+					case 7:
 						level3image = Global.setImage(level3imageFinished);
 						break;
 					default:
-						level3image = Global.setImage(level3imageDefault);
+						level3image = Global.setImage(level3imageUnlocked);
 						break;
 					}
 					break;
@@ -150,26 +141,20 @@ public class MainMenuGameStateNew extends BasicGameState implements
 					case 0:
 						level4image = Global.setImage(level4imageDefault);
 						break;
-					case 1:
-						level4image = Global.setImage(level4imageUnlocked);
-						break;
-					case 3:
+					case 7:
 						level4image = Global.setImage(level4imageFinished);
 						break;
 					default:
-						level4image = Global.setImage(level4imageDefault);
+						level4image = Global.setImage(level4imageUnlocked);
 						break;
 					}
 					break;
 				case 5:
 					switch(s.getFinishedStateForLevelID(i)){
-					case 0:
-						level5image = Global.setImage(level5imageDefault);
-						break;
-					case 1:
+					case 5:
 						level5image = Global.setImage(level5imageUnlocked);
 						break;
-					case 3:
+					case 7:
 						level5image = Global.setImage(level5imageFinished);
 						break;
 					default:

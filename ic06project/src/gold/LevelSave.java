@@ -41,7 +41,7 @@ public class LevelSave {
 	 * @param levelFinished
 	 */
 	public void setSavedLevelDataFromSave(int unlocked, boolean levelUnlocked, boolean levelFinished){
-		unlockedKeys = (unlockedKeys >= unlocked)?unlockedKeys:unlocked;
+		unlockedKeys = unlocked;
 		isUnlocked = levelUnlocked;
 		isFinished = levelFinished;
 	}

@@ -140,7 +140,11 @@ public class Save {
 		this.player1name = name1;
 		this.player2name = name2;
 		this.saveFilename = Global.PATH_SAVES+name1+"_"+name2+".save";
-		getLevelWithID(1).setSavedLevelData(0, true, false);
+		getLevelWithID(1).setSavedLevelDataFromSave(0, true, false);
+		getLevelWithID(2).setSavedLevelDataFromSave(0, false, false);
+		getLevelWithID(3).setSavedLevelDataFromSave(0, false, false);
+		getLevelWithID(4).setSavedLevelDataFromSave(0, false, false);
+		getLevelWithID(5).setSavedLevelDataFromSave(0, false, false);
 		save();
 	}
 	
@@ -153,13 +157,16 @@ public class Save {
 		}
 		return null;
 	}
+	// 00 == Non disponible, non fini ; 01 == disponible, non fini ; 
+	// 11 == disponible, fini
+	// 111 == disponible, fini, tous les fruits
 	public int getFinishedStateForLevelID(int index){
 		LevelSave lvl = this.getLevelWithID(index);
 		byte b1 = (byte)((lvl.isUnlocked)?1:0);
-		//byte b2 = (byte)((lvl.isFinished)?1:0);
-		byte b2 = (byte)((((lvl.getUnlockableKeys() > 0)&&(lvl.getUnlockedKeys()-lvl.getUnlockableKeys()) >= 0))?1:0);
-		// 00 == Non disponible, non fini ; 01 == disponible, non fini ; 10 == non disponible, fini ; 11 == disponible, fini
-		return (b2 << 1) + b1;
+		byte b2 = (byte)((lvl.isFinished)?1:0);
+		byte b3 = (byte)((((lvl.getUnlockedKeys()-lvl.getUnlockableKeys()) >= 0))?1:0);
+		System.out.println((((b3<< 1) << 1) + (b2 << 1) + b1));
+		return ((b3<< 1) << 1) + (b2 << 1) + b1;
 	}
 	public int[] getAllIds(){
 		int[] temp = new int[levels.size()];
