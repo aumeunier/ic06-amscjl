@@ -34,7 +34,7 @@ public class Level4 extends Level {
 		createGround(380,160,140,40); // 7
 		createGround(565,110,235,10); // 8
 		createGround(700,170,100,20); // 9
-		createGround(500,170,150,30); // 10
+		createGround(520,170,130,30); // 10
 		createGround(320,190,60,10); // 11
 		createGround(255,180,65,20); // 12
 		createGround(255,200,25,130); // 13

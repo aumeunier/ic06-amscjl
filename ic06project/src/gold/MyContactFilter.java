@@ -210,6 +210,14 @@ public class MyContactFilter implements ContactFilter {
 					else if(s2.getClass().equals(IndicationSprite.class)){
 						return false;
 					}
+					if(s1 instanceof Witch && s2 instanceof Ground){
+						((Witch)s1).inverseXspeed();
+						return false;
+					}
+					else if(s2 instanceof Witch && s1 instanceof Ground){
+						((Witch)s2).inverseXspeed();
+						return false;
+					}
 				}
 			}
 		}

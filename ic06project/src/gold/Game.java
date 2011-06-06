@@ -55,7 +55,7 @@ public class Game extends StateBasedGame implements MusicListener {
 	 */
 	public static void main(String[] args) throws SlickException {
 		AppGameContainer app = new AppGameContainer(new Game("Super Fairy Bros"));
-		//Save.getInstance().loadSave("./saves/cheat_cheater.save"); //FIXME: remove
+		Save.getInstance().loadSave("./saves/cheat_cheater.save"); //FIXME: remove
 	 
 		// Application properties
 		app.setDisplayMode(800, 600, displayFullScreen);
@@ -76,10 +76,10 @@ public class Game extends StateBasedGame implements MusicListener {
 		return this.music.playing();
 	}
 	public void playMusic(){
-		this.music.play();
+		//this.music.play(); //TODO:
 	}
 	public void loopMusic(){
-		this.music.loop();
+		//this.music.loop(); //TODO:
 	}
 	public void stopMusic(){
 		this.music.stop();

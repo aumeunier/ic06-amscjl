@@ -1,7 +1,6 @@
 package gold;
 
-import java.util.ArrayList;
-import org.jbox2d.dynamics.Body;
+import org.jbox2d.common.Vec2;
 
 public class Level5 extends Level {
 	public Level5(GameplayState state, LevelSave model){	
@@ -39,13 +38,22 @@ public class Level5 extends Level {
 		createGround(Global.GAMEPLAYWIDTH-100,Global.GAMEPLAYHEIGHT-50,50,50);
 		
 		
+		createGround(Global.GAMEPLAYWIDTH/2,Global.GAMEPLAYHEIGHT-50,50,50);
+		
+		
 		
 		
 		
 		// Place the first character
-		this.character1 = addCharacterWithPoints(550,450,0.75f);		
-		this.character2 = addCharacterWithPoints(550,450,0.75f);	
+		this.character1 = addCharacterWithPoints(550,0,0.75f);		
+		this.character2 = addCharacterWithPoints(550,0,0.75f);
 		
+
+		Witch boss = new Witch(550,450,50,50);
+		sprites.add(boss);
+		myState.addMonster(boss, 1.0f);	
+		boss.setBorns(new Vec2(0,450), new Vec2(800,450));
+		boss.setSpeed(new Vec2(-10,0));
 		
 		this.setLevelForAllSprites();
 		

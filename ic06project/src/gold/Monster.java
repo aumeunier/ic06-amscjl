@@ -3,10 +3,10 @@ package gold;
 import org.jbox2d.common.Vec2;
 
 public class Monster extends Character {
-	private Vec2 speed = new Vec2(0,0);
-	private Vec2 start;
-	private Vec2 end;
-	private boolean staticMonster;
+	protected Vec2 speed = new Vec2(0,0);
+	protected Vec2 start;
+	protected Vec2 end;
+	protected boolean staticMonster;
 	
 	public Monster(int _x, int _y, int _w, int _h){
 		super(_x,_y,_w,_h);
@@ -15,21 +15,27 @@ public class Monster extends Character {
 	}	
 
 	public void step(){
-		if(staticMonster){
+		if(staticMonster || start == null || end == null){
 			return;
 		}
 		if(x < start.x && speed.x < 0){
-			speed.x = -speed.x;
+			inverseXspeed();
 		}
 		else if(x > end.x && speed.x > 0){
-			speed.x = -speed.x;
+			inverseXspeed();
 		}
 		if(y < start.y && speed.y > 0){
-			speed.y = -speed.y;
+			inverseYspeed();
 		}
 		else if(y > end.y && speed.y < 0){
-			speed.y = -speed.y;
+			inverseYspeed();
 		}
+	}
+	public void inverseXspeed(){
+		speed.x = - speed.x;
+	}
+	public void inverseYspeed(){
+		speed.y = - speed.y;
 	}
 	public void setStatic(){
 		staticMonster = true;
