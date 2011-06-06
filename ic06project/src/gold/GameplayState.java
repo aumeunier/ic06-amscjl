@@ -82,7 +82,9 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			this.currentLevel = new Level4(this,save);
 			break;
 			
-
+		case 5:
+			this.currentLevel = new Level5(this, save);
+			break;
 		default:
 			this.currentLevel = null;
 			break;
@@ -201,11 +203,14 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		
 		
 		/*else if(s1 instanceof Exit && s2 instanceof Character){*/
-		if (!((Character)this.ch1_body.getUserData()).rectCollideWithOther((Sprite)(exit.getUserData()))){
-			((Character)this.ch1_body.getUserData()).setAtExit(false);
-		}
-		if (!((Character)this.ch2_body.getUserData()).rectCollideWithOther((Sprite)(exit.getUserData()))){
-			((Character)this.ch2_body.getUserData()).setAtExit(false);
+		if(exit!=null)
+			{
+			if (!((Character)this.ch1_body.getUserData()).rectCollideWithOther((Sprite)(exit.getUserData()))){
+				((Character)this.ch1_body.getUserData()).setAtExit(false);
+			}
+			if (!((Character)this.ch2_body.getUserData()).rectCollideWithOther((Sprite)(exit.getUserData()))){
+				((Character)this.ch2_body.getUserData()).setAtExit(false);
+			}
 		}
 	/*}
 	else if(s1 instanceof Character && s2 instanceof Exit){

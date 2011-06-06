@@ -14,6 +14,7 @@ public enum Power {
 	ABSORBE,
 	TELEPORTATION,
 	DESTRUCTOR,
+	DOUBLE,
 	INVISIBLE;
 	
 	public String imageForPower() {
@@ -57,6 +58,9 @@ public enum Power {
 			break;
 		case DESTRUCTOR:
 			result = "powerDestructor.png";
+			break;
+		case DOUBLE:
+			result = "powerDouble.png";
 			break;
 		case INVISIBLE:
 			result = "powerInvisible.png";
