@@ -19,6 +19,7 @@ public class Character extends Sprite{
 	private int boutonpressoir = 0;
 	public int X_transported = 0;
 	public int Y_transported = 0;
+	protected int health = 1;
 	private boolean avoidDoubleChangeFlag = true;
 	private final static int FEE_PNG_W = 348;
 	private final static int FEE_PNG_H = 260;
@@ -42,6 +43,21 @@ public class Character extends Sprite{
 		super(_x,_y,(int)(CHAR_W*ratio),(int)(CHAR_H*ratio));
 		setAnimation("fee-de-face.png",CHAR_W,CHAR_H);
 	}
+
+	public void setHealth(int _health){
+		this.health = _health;
+	}
+	public int getHealth(){
+		return health;
+	}
+	public void loseHealth(int nb){
+		this.health -= nb;
+		if(this.health <= 0){
+			this.setDead(true);
+			this.setShouldBeDestroy();
+		}
+	}
+	
 	public void changePower(){
 		this.setFilter(Color.white);
 		if(isIntangible()){

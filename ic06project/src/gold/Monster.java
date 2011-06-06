@@ -13,7 +13,7 @@ public class Monster extends Character {
 		this.setImage("Behemoth.png");
 		staticMonster = true;
 	}	
-
+	
 	public void step(){
 		if(staticMonster || start == null || end == null){
 			return;

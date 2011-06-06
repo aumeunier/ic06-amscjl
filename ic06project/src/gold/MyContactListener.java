@@ -88,7 +88,7 @@ public class MyContactListener implements ContactListener {
 				((Character) point.shape2.getBody().getUserData()).isFalling = false;
 			}
 		}
-		/*
+		//*
 		else {
 			Sprite s1 = (Sprite)point.shape1.getBody().getUserData();
 			Sprite s2 = (Sprite)point.shape2.getBody().getUserData();
@@ -100,7 +100,7 @@ public class MyContactListener implements ContactListener {
 				((Character)s1).isColliding = true;
 			}
 		}
-		*/
+		//*/
 	}
 
 	@Override
@@ -113,6 +113,7 @@ public class MyContactListener implements ContactListener {
 				if((s instanceof Ground)&& (((Ground)s).sens!=null) && ((Character)point.shape1.getBody().getUserData()).isFire())
 					((Ground)s).setSlippery(true);
 				((Character) point.shape1.getBody().getUserData()).isFalling = true;
+				((Character) point.shape1.getBody().getUserData()).isColliding = false;
 			}	
 		}
 		else if (o2 == GameplayState.GROUND_SENSOR_NAME){
@@ -121,6 +122,7 @@ public class MyContactListener implements ContactListener {
 				if((s instanceof Ground)&& (((Ground)s).sens!=null)&&((Character)point.shape2.getBody().getUserData()).isFire())
 					((Ground)s).setSlippery(true);
 				((Character) point.shape2.getBody().getUserData()).isFalling = true;
+				((Character) point.shape2.getBody().getUserData()).isColliding = false;
 			}
 		}
 		else {
@@ -149,6 +151,7 @@ public class MyContactListener implements ContactListener {
 				}
 			}*/
 
+			/*
 			// Character collides with ground or wall or obstacle
 			//else {
 				// FIXME: parfois, si personnage en contact avec deux obstacles,
@@ -205,8 +208,9 @@ public class MyContactListener implements ContactListener {
 						((Character)s1).isColliding = false;
 					}					
 				}
-			}			
-		//}
+			}	
+		 */		
+		}
 		for(int i = contactPoints.size() - 1; i >= 0; --i){
 			ContactPoint p = contactPoints.get(i);
 			if((point.shape1.equals(p.shape1) && point.shape2.equals(p.shape2))

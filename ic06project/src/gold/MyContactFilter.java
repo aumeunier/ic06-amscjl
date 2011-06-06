@@ -31,176 +31,108 @@ public class MyContactFilter implements ContactFilter {
 		Object b1d = b1.getUserData();
 		Object b2d = b2.getUserData();
 		if((b1d!=null && b2d!=null)
-				&& ((b1d.getClass().equals(Destructible.class) && !b2d.getClass().equals(Character.class))
-						|| (b2d.getClass().equals(Destructible.class) && !b1d.getClass().equals(Character.class)))){
-			if((b1d.getClass().equals(Monster.class) && b2d.getClass().equals(Destructible.class))){
-				if(((Destructible)b2d).isDeadly()){
-					((Monster)b1d).setDead(true);
-					((Monster)b1d).shouldBeDestroy=true;	
-				}
-			}
-			else if((b2d.getClass().equals(Monster.class) && b1d.getClass().equals(Destructible.class))){
-				if(((Destructible)b1d).isDeadly()){
-					((Monster)b2d).setDead(true);
-					((Monster)b2d).shouldBeDestroy=true;
+				&& (b1d instanceof Sprite && b2d instanceof Sprite)
+				&& (((b1d instanceof Destructible) && !b2d.getClass().equals(Character.class))
+						|| ((b2d instanceof Destructible) && !b1d.getClass().equals(Character.class)))){
+			Destructible d = (Destructible) ((b1d instanceof Destructible)?b1d:b2d);
+			Sprite other = (Sprite) ((b1d instanceof Destructible)?b2d:b1d);
+			if(other instanceof Monster){
+				if(d.isDeadly()){
+					((Monster)other).loseHealth(1);	
 				}				
 			}
-			else if((b1d.getClass().equals(Wall.class) && b2d.getClass().equals(Destructible.class))){
-				((Destructible)b2d).setDeadly(false);
-			}
-			else if((b2d.getClass().equals(Wall.class) && b1d.getClass().equals(Destructible.class))){
-				((Destructible)b1d).setDeadly(false);				
+			else if(other.getClass().equals(Wall.class)){
+				d.setDeadly(false);
 			}
 		}
 
-		/* Collisions concernant le personnage */
 		else {
 			if(b1d!=null && b2d!=null){
 				Sprite s1 = (Sprite)b1d;
 				Sprite s2 = (Sprite)b2d;
-				// Premier cas s1 est ...
-				
-				if(s1.getClass().equals(Character.class)){
-					if(s2.isHidden()){
+
+				/* Collisions concernant les personnage */	
+				if(s1.getClass().equals(Character.class) || s2.getClass().equals(Character.class)){
+					Character character = null;
+					Sprite other = null;
+					if(s1.getClass().equals(Character.class)){
+						character = (Character)s1;
+						other = s2;
+					}
+					else {
+						character = (Character)s2;
+						other = s1;						
+					}					
+					
+					if(other.isHidden()){
 						return false;
 					}
-					else if(s2 instanceof Sprite && s2.getIndication()!=null ){
-						System.out.println(s2.getClass());
-						s2.activateIndication();
+					else if(other.getIndication()!=null ){
+						other.activateIndication();
 					}
-					if(((Character)s1).isIntangible()
-							&& (s2.getClass().equals(Obstacle.class))){
+					if(character.isIntangible()
+							&& (other.getClass().equals(Obstacle.class))){
 						return false;
 					}
-					else if((s2.getClass().equals(Monster.class))&&(((Character)(s1)).getPower() != Power.INVISIBLE)){
-						((Character)(s1)).setDead(true);
+					else if((other.getClass().equals(Monster.class))&& (character.getPower() != Power.INVISIBLE)){
+						character.setDead(true);
 						return false;
 					}
-					else if((s2.getClass().equals(Monster.class))&&(((Character)(s1)).getPower() == Power.INVISIBLE)){
+					else if((other.getClass().equals(Monster.class))&& (character.getPower() == Power.INVISIBLE)){
 						return false;
 					}
-					else if((s2.getClass().equals(SourceMortelle.class))&&(((Character)(s1)).getPower()!= Power.NAGE)){
-						((Character)(s1)).setDead(true);
+					else if((other.getClass().equals(SourceMortelle.class))&& (character.getPower()!= Power.NAGE)){
+						character.setDead(true);
 						return false;
 					}
-					else if((s2.getClass().equals(SourceMortelle.class)) && (((Character)(s1)).getPower()== Power.NAGE)){
-						((Character)(s1)).isFalling=false;
+					else if((other.getClass().equals(SourceMortelle.class)) && (character.getPower()== Power.NAGE)){
+						character.isFalling=false;
 						return false;
 					}
-					else if((s2.getClass().equals(Destructible.class)) && (((Destructible)s2).isDeadly())){
-						((Character)s1).setDead(true);
+					else if((other.getClass().equals(Destructible.class)) && (((Destructible)other).isDeadly())){
+						character.setDead(true);
 						return false;
 					}
-					else if((s2.getClass().equals(Destructible.class)) && (((Character)(s1)).getPower()== Power.DESTRUCTOR)){
-						s2.shouldBeDestroy=true;
-						((Destructible)s2).setDestructiblesDeadly();
-						((Character)(s1)).isFalling=false;
+					else if((other.getClass().equals(Destructible.class)) && (character.getPower()== Power.DESTRUCTOR)){
+						other.shouldBeDestroy=true;
+						((Destructible)other).setDestructiblesDeadly();
+						character.isFalling=false;
 						return false;
 					}
-					else if(s2.getClass().equals(IndicationSprite.class)){
-						((IndicationSprite)s2).activateIndication();
-						s2.setShouldBeDestroy();
+					else if(other.getClass().equals(IndicationSprite.class)){
+						((IndicationSprite)other).activateIndication();
+						other.setShouldBeDestroy();
 						return false;
 					}
-					else if(s2.getClass().equals(Source.class)){
-						Source source = (Source)s2;
-						Character character = (Character)s1;
+					else if(other.getClass().equals(Source.class)){
+						Source source = (Source)other;
 						character.setPower(source.power);
 						return false;
 					}
-					else if(s2.getClass().equals(Transporter.class)){
-						((Character)s1).setTransported(true,((Transporter)s2).new_x,((Transporter)s2).new_y);
+					else if(other.getClass().equals(Transporter.class)){
+						character.setTransported(true,((Transporter)other).new_x,((Transporter)other).new_y);
 						return true;
 					}
-					else if(s2.getClass().equals(Character.class)){
-						if(((Character)s1).absorbe())
-							((Character)s1).setPower(((Character)s2).getPower());
-						else if(((Character)s2).absorbe())
-							((Character)s2).setPower(((Character)s1).getPower());
+					else if(other.getClass().equals(Character.class)){
+						if(character.absorbe())
+							character.setPower(character.getPower());
+						else if(character.absorbe())
+							character.setPower(character.getPower());
 						return false;
 					}
-					else if(s2.getClass().equals(Levier.class)){
-						((Levier)s2).activate();
+					else if(other.getClass().equals(Levier.class)){
+						((Levier)other).activate();
 						return false;
 					}
-					else if(s2.getClass().equals(LevierCombi.class)){
-						((LevierCombi)s2).activate();
+					else if(other.getClass().equals(LevierCombi.class)){
+						((LevierCombi)other).activate();
 						return false;
 					}
-					else if(s2.getClass().equals(Bonus.class)){
-						((Bonus)s2).obtained();
-
-						
+					else if(other.getClass().equals(Bonus.class)){
+						((Bonus)other).obtained();
+						return false;						
 					}
 				}
-				// Deuxieme cas s2 est ...
-				else if(s2.getClass().equals(Character.class)){
-					if(s1.isHidden()){
-						return false;
-					}
-					else if(s1 instanceof Sprite && s1.getIndication()!=null){
-						System.out.println(s1.getClass());
-						s1.activateIndication();
-					}
-					if(((Character)s2).isIntangible()
-							&& (s1.getClass().equals(Obstacle.class))){
-						return false;
-					}
-					else if((s1.getClass().equals(Monster.class))&&(((Character)(s2)).getPower() != Power.INVISIBLE)){
-						((Character)(s2)).setDead(true);
-						return false;
-					}
-					else if((s1.getClass().equals(Monster.class))&&(((Character)(s2)).getPower() == Power.INVISIBLE)){
-						return false;
-					}
-					else if((s1.getClass().equals(SourceMortelle.class)) && (((Character)(s2)).getPower()!= Power.NAGE)){
-						((Character)(s2)).setDead(true);	
-						return false;
-					}
-					else if((s1.getClass().equals(SourceMortelle.class)) && (((Character)(s2)).getPower()== Power.NAGE)){
-						((Character)(s2)).isFalling=false;		
-						return false;
-					}
-					else if((s1.getClass().equals(Destructible.class)) && (((Destructible)s1).isDeadly())){
-						((Character)s2).setDead(true);
-						return false;
-					}
-					else if((s1.getClass().equals(Destructible.class)) && (((Character)(s2)).getPower()== Power.DESTRUCTOR)){
-						s1.shouldBeDestroy=true;
-						((Destructible)s1).setDestructiblesDeadly();
-						((Character)(s2)).isFalling=false;
-						return false;
-					}
-					else if(s1.getClass().equals(IndicationSprite.class)){
-						((IndicationSprite)s1).activateIndication();
-						s1.setShouldBeDestroy();
-						return false;
-					}
-					else if(s1.getClass().equals(Source.class)){
-						Source source = (Source)s1;
-						Character character = (Character)s2;
-						character.setPower(source.power);
-						return false;
-					}
-					else if(s1.getClass().equals(Transporter.class)){
-						((Character)s2).setTransported(true,((Transporter)s1).new_x,((Transporter)s1).new_y);
-						return true;
-					}
-
-					else if(s1.getClass().equals(Levier.class)){
-						((Levier)s1).activate();
-						return false;
-					}
-					else if(s1.getClass().equals(LevierCombi.class)){
-						((LevierCombi)s1).activate();
-						return false;
-					}
-					else if(s1.getClass().equals(Bonus.class)){
-						((Bonus)s1).obtained();
-
-						
-					}
-				}	
 				
 				// Les IndicationSprite ne collide pas
 				else {
