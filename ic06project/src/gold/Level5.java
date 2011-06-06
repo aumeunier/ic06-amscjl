@@ -26,7 +26,13 @@ public class Level5 extends Level {
 		//Pouvoir du dédoublement
 		Source dedouble = createSource(0,40,60,60,Power.DOUBLE);
 		
-		
+		Missile missile = createMissile(0,110,50,50,0.0f);
+		Body monmissile = state.getBodyForUserData(missile);
+		ArrayList<Body> miss=new ArrayList<Body>() ;
+		miss.add(monmissile);
+		createBoutonBombarde(110,Global.GAMEPLAYHEIGHT-30,30,30,miss);
+		createBoutonDeplace(220,Global.GAMEPLAYHEIGHT-30,30,30,miss,"left");
+		createBoutonDeplace(330,Global.GAMEPLAYHEIGHT-30,30,30,miss,"right");
 		
 		// bloc en bas à gauche
 		createGround(0,Global.GAMEPLAYHEIGHT-100,50,100);		

@@ -7,7 +7,6 @@ import org.newdawn.slick.Color;
 
 public class BoutonPressoir extends Declencheur {
 	protected ArrayList<Body> relatedBody;
-	
 	protected int poids;
 	static private int cpt=0;
 	private int num;

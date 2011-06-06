@@ -156,6 +156,21 @@ public class Sprite {
 		}
 	}
 	
+	public int X(){
+		return x;
+	}
+	
+	public int Y(){
+		return y;
+	}
+	
+	public int W(){
+		return w;
+	}
+	
+	public int H(){
+		return h;
+	}
 
 
 }

@@ -3,6 +3,7 @@ package gold;
 import java.util.ArrayList;
 
 import org.jbox2d.collision.AABB;
+import org.jbox2d.collision.CircleDef;
 import org.jbox2d.collision.MassData;
 import org.jbox2d.collision.PolygonDef;
 import org.jbox2d.collision.PolygonShape;
@@ -399,6 +400,20 @@ public class GameplayState extends BasicGameState implements MouseListener{
 				if(!(theSprite instanceof Levier)&&!(theSprite instanceof LevierCombi))
 					theSprite.setCoordinatesFromBody(tempBody);
 			}
+			if(theSprite instanceof BoutonBombarde && ((BoutonBombarde)theSprite).shouldBombarde())
+			{
+				Sprite temp = ((Sprite) (((BoutonBombarde)theSprite).bombardement().getUserData()));
+				System.out.println(temp.X());
+				System.out.println(temp.Y());
+				currentLevel.createMissile(temp.X(),temp.Y()+2,temp.W(),temp.H(),100.0f);
+				((BoutonBombarde)theSprite).bombarde();
+			}
+			if(theSprite instanceof Missile && ((Missile)theSprite).shouldMove())
+			{
+				Vec2 b2dcoord = Global.getBox2DCoordinates(((Missile)theSprite).xMove(), ((Missile)theSprite).Y());
+				Vec2 position = new Vec2(b2dcoord.x+((Missile)theSprite).w/2, b2dcoord.y-((Missile)theSprite).h/2);
+				tempBody.setXForm(position,0);
+			}
 		}	
 		for(int i = 0 ; i < tempList.size() ; ++i){
 			Body tempBody = spriteBodies.get((tempList.get(i))-i);
@@ -568,6 +583,25 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		spriteBodies.add(newBody);
 		return newBody;
 	}
+	public Body addMissile(Missile destructibleData, float p){
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.userData = destructibleData;
+		Vec2 b2dcoord = Global.getBox2DCoordinates(destructibleData.x, destructibleData.y);
+		bodyDef.position = new Vec2(b2dcoord.x+destructibleData.w/2,b2dcoord.y-destructibleData.h/2);
+		MassData md = new MassData();
+		md.mass = p;
+		bodyDef.massData = md;
+		Body newBody = world.createBody(bodyDef);
+		CircleDef sd = new CircleDef();		
+		sd.density = 5000.0f;
+		sd.friction = 0.5f;
+
+		sd.radius=destructibleData.w/2;
+		newBody.createShape(sd);
+		spriteBodies.add(newBody);
+		return newBody;
+	}
+	
 	public Body addObstacleWithPoints(Obstacle obstacleData, ArrayList<Vec2> list){
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.userData = obstacleData;

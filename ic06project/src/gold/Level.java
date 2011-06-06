@@ -169,6 +169,21 @@ public class Level {
 		
 		return destructible;
 	}
+	
+protected Missile createMissile(int x, int y, int w, int h, float p){
+		
+		// Create a wall object
+		Missile missile = new Missile(x,y,w,h);
+
+		// Add it to the list of sprites of the level
+		sprites.add(missile);
+		
+		// Create the obstacle body
+		myState.addMissile(missile,p);
+		
+		return missile;
+	}
+
 	protected Obstacle createObstacleWithPoints(int x, int y, int w, int h, ArrayList<Vec2> point){
 		
 		// Create a wall object
@@ -253,6 +268,34 @@ public class Level {
 		
 		// Create a boutonpressoir object
 		BoutonPressoir bouton = new BoutonPressoir(x,y,w,h,b,p);
+		
+		// Add it to the list of sprites of this level
+		sprites.add(bouton);
+		
+		// Create the source body
+		myState.addBoutonPressoir(bouton);
+		
+		return bouton;
+	}
+	
+	protected BoutonBombarde createBoutonBombarde(int x, int y, int w, int h, ArrayList<Body> b){
+		
+		// Create a boutonBombarde object
+		BoutonBombarde bouton = new BoutonBombarde(x,y,w,h,b);
+		
+		// Add it to the list of sprites of this level
+		sprites.add(bouton);
+		
+		// Create the source body
+		myState.addBoutonPressoir(bouton);
+		
+		return bouton;
+	}
+	
+protected BoutonDeplace createBoutonDeplace(int x, int y, int w, int h, ArrayList<Body> b, String s){
+		
+		// Create a boutonBombarde object
+		BoutonDeplace bouton = new BoutonDeplace(x,y,w,h,b,s);
 		
 		// Add it to the list of sprites of this level
 		sprites.add(bouton);
