@@ -2,23 +2,23 @@ package gold;
 
 import java.util.ArrayList;
 
-import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 
-public class BoutonDeplace extends BoutonPressoir {
-	
-	String sens ;
-	
-	public BoutonDeplace(int _x, int _y, int _w, int _h, ArrayList<Body> b, String s){
-		super(_x, _y, _w, _h, b, 1);
-		sens = s;
-	}
+public class BoutonCharge extends BoutonPressoir{
 
+	public BoutonCharge(int _x, int _y, int _w, int _h, ArrayList<Body> b){
+		super(_x, _y, _w, _h, b, 1);
+	}
+	
 	public void activate(){
-		this.setActivated(true);	
-		System.out.println(sens);
+		this.setActivated(true);
+		
 		for (Body bx : relatedBody) {
-				((PlateformeMissile)bx.getUserData()).bouge(sens);
+			if(((PlateformeMissile)(bx.getUserData())).getMissile()==null)
+			{
+				System.out.println("le missile est null");
+				((PlateformeMissile)(bx.getUserData())).recharge();
+			}
 		}
 		
 		if(poids==1)
@@ -39,4 +39,5 @@ public class BoutonDeplace extends BoutonPressoir {
 		else if(poids==3)
 			this.setImage("Bouton3.png");
 	}
+	
 }

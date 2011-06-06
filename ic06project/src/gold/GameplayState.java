@@ -400,19 +400,33 @@ public class GameplayState extends BasicGameState implements MouseListener{
 				if(!(theSprite instanceof Levier)&&!(theSprite instanceof LevierCombi))
 					theSprite.setCoordinatesFromBody(tempBody);
 			}
+			//Missiles
+			//doivent tomber
 			if(theSprite instanceof BoutonBombarde && ((BoutonBombarde)theSprite).shouldBombarde())
 			{
-				Sprite temp = ((Sprite) (((BoutonBombarde)theSprite).bombardement().getUserData()));
-				System.out.println(temp.X());
-				System.out.println(temp.Y());
-				currentLevel.createMissile(temp.X(),temp.Y()+2,temp.W(),temp.H(),100.0f);
+				//Sprite temp = ((Sprite) (((BoutonBombarde)theSprite).bombardement().getUserData()));
+				//currentLevel.createMissile(temp.X(),temp.Y()+2,temp.W(),temp.H(),100.0f);
+				//((BoutonBombarde)theSprite).bombarde();
+				((PlateformeMissile)((BoutonBombarde)theSprite).bombardement().getUserData()).getMissile().wakeUp();
 				((BoutonBombarde)theSprite).bombarde();
 			}
-			if(theSprite instanceof Missile && ((Missile)theSprite).shouldMove())
+			//doivent bouger
+			if(theSprite instanceof PlateformeMissile && ((PlateformeMissile)theSprite).shouldMove())
 			{
-				Vec2 b2dcoord = Global.getBox2DCoordinates(((Missile)theSprite).xMove(), ((Missile)theSprite).Y());
-				Vec2 position = new Vec2(b2dcoord.x+((Missile)theSprite).w/2, b2dcoord.y-((Missile)theSprite).h/2);
+				Vec2 b2dcoord = Global.getBox2DCoordinates(((PlateformeMissile)theSprite).xMove(), ((PlateformeMissile)theSprite).Y());
+				Vec2 position = new Vec2(b2dcoord.x+((PlateformeMissile)theSprite).w/2, b2dcoord.y-((PlateformeMissile)theSprite).h/2);
 				tempBody.setXForm(position,0);
+				if(((PlateformeMissile)theSprite).getMissile()!=null)
+				{
+					Vec2 pos2 = new Vec2(b2dcoord.x+((PlateformeMissile)theSprite).w/2, b2dcoord.y-((PlateformeMissile)theSprite).h -((Sprite)(((PlateformeMissile)theSprite).getMissile().getUserData())).h/2);
+					((PlateformeMissile)theSprite).getMissile().setXForm(pos2, 0);
+				}
+			}
+			//doivent être rechargés
+			if(theSprite instanceof PlateformeMissile && ((PlateformeMissile)theSprite).shouldRecharge()){
+				Missile missile = currentLevel.createMissile(0,110,50,50,((PlateformeMissile)theSprite));
+				Body monmissile = getBodyForUserData(missile);
+				((PlateformeMissile)theSprite).setMissile(monmissile);
 			}
 		}	
 		for(int i = 0 ; i < tempList.size() ; ++i){
@@ -583,15 +597,16 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		spriteBodies.add(newBody);
 		return newBody;
 	}
-	public Body addMissile(Missile destructibleData, float p){
+	public Body addMissile(Missile destructibleData){
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.userData = destructibleData;
 		Vec2 b2dcoord = Global.getBox2DCoordinates(destructibleData.x, destructibleData.y);
 		bodyDef.position = new Vec2(b2dcoord.x+destructibleData.w/2,b2dcoord.y-destructibleData.h/2);
 		MassData md = new MassData();
-		md.mass = p;
+		md.mass = 100.0f;
 		bodyDef.massData = md;
 		Body newBody = world.createBody(bodyDef);
+		newBody.putToSleep();
 		CircleDef sd = new CircleDef();		
 		sd.density = 5000.0f;
 		sd.friction = 0.5f;

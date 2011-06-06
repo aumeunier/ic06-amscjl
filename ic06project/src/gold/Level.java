@@ -170,16 +170,16 @@ public class Level {
 		return destructible;
 	}
 	
-protected Missile createMissile(int x, int y, int w, int h, float p){
+protected Missile createMissile(int x, int y, int w, int h, PlateformeMissile p){
 		
 		// Create a wall object
-		Missile missile = new Missile(x,y,w,h);
+		Missile missile = new Missile(x,y,w,h,p);
 
 		// Add it to the list of sprites of the level
 		sprites.add(missile);
 		
 		// Create the obstacle body
-		myState.addMissile(missile,p);
+		myState.addMissile(missile);
 		
 		return missile;
 	}

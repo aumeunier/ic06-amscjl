@@ -17,10 +17,12 @@ public class BoutonBombarde extends BoutonPressoir {
 	}
 
 	public void activate(){
-		this.setActivated(true);		
+		this.setActivated(true);	
 		for (Body bx : relatedBody) {
-			shouldBombard=true;
-			aBombarde=bx;
+			if( (  (PlateformeMissile)(bx.getUserData())).getMissile()!=null){
+				shouldBombard=true;
+				aBombarde=bx;
+			}
 		}
 		if(poids==1)
 			this.setImage("Boutonactif1.png");
@@ -42,7 +44,10 @@ public class BoutonBombarde extends BoutonPressoir {
 	}
 	
 	public void bombarde(){
+		System.out.println("bombarde");
 		shouldBombard=false;
+		((PlateformeMissile)(aBombarde.getUserData())).setMissile(null);
+		aBombarde=null;
 	}
 	
 	public boolean shouldBombarde(){
