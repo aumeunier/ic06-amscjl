@@ -3,6 +3,7 @@ package gold;
 import org.jbox2d.common.Vec2;
 
 public class Witch extends Monster {
+	private final static boolean ISDEBUG = true;
 	private final static int FIREBALL_RATE = 3000;
 	private int fireballPreparation = 0;
 
@@ -24,7 +25,9 @@ public class Witch extends Monster {
 		if(fireballPreparation > FIREBALL_RATE){
 			fireballPreparation-=FIREBALL_RATE;
 			Vec2 target = target();			
-			FireBall f = this.level.addFireball(x,y,target,this);
+			if(!ISDEBUG){
+				FireBall f = this.level.addFireball(x,y,target,this);
+			}
 		}
 		
 	}
