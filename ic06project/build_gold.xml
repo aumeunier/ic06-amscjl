@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="ic06project" default="Engine" basedir="bin"><!-- This where to be export to the local dir --> 
+<description>Ant targets for Engine into jar</description>
+
+<target name="Engine" description="Make the engine">
+   <!-- Export File for jar --> 
+   <jar jarfile="ic06project_gold.jar" basedir=".">
+       <manifest>
+         <attribute name="Class-Path" value="lwjgl.jar ibxm.jar jackson-all-1.8.0.jar jbox2d-2.0.1-full.jar jogg-0.0.7.jar jorbis-0.0.15.jar slick.jar sui.jar"/>
+         <!-- Main Class to Run Program -->
+         <attribute name="Main-Class" value="gold.Game"/>
+       </manifest>
+    </jar>
+</target> 
+</project>
