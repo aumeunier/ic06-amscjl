@@ -26,8 +26,6 @@ public class Level5 extends Level {
 		//plateforme en haut à droite
 		createGround(200,100,Global.GAMEPLAYWIDTH-200,10);	
 		
-		
-		
 		PlateformeMissile platmiss=new PlateformeMissile(0,110,80,10);
 		ArrayList<Vec2> shape = new ArrayList<Vec2>();
 		shape.add(new Vec2(-25,-5));

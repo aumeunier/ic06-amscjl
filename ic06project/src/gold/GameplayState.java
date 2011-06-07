@@ -684,7 +684,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		bodyDef.position = new Vec2(b2dcoord.x+fireballData.w/2,b2dcoord.y-fireballData.h/2);
 		Body newBody = world.createBody(bodyDef);
 		CircleDef sd = new CircleDef();		
-		sd.radius=fireballData.w/2;
+		sd.radius=fireballData.w/6;
 		newBody.createShape(sd);
 		spriteBodies.add(newBody);
 		return newBody;
@@ -1000,7 +1000,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		int newW = (int) (userData.w*w);
 		int newH = (int) (userData.h*h);
 		userData.x = userData.x - (newW - userData.w)/2;
-		userData.y = userData.y - (newH - userData.h); //nb : je ne pense pas qu'il faille diviser par 2(sinon grandit dans le sol)
+		userData.y = userData.y - (newH - userData.h); 
 		userData.w = newW;
 		userData.h = newH;
 		
