@@ -80,7 +80,7 @@ public class Character extends Sprite{
 			setAnimation("grosse-vache.png",CHAR_W, CHAR_H);
 		}
 		else if(isLight()){
-			this.setLightSize(3*this.h);
+			this.setLightSize((int) (3*this.h));
 		}
 		else if(canTeleport()){
 			this.setFilter(new Color(255,153,255,255));
@@ -220,10 +220,10 @@ public class Character extends Sprite{
 		X_transported=x;
 		Y_transported=y;
 	}
-	public int getCharWidth(){
+	public float getCharWidth(){
 		return this.w;
 	}
-	public int getCharHeight(){
+	public float getCharHeight(){
 		return this.h;
 	}
 	public int getCharBodyWidth(){

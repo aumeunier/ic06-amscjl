@@ -148,6 +148,6 @@ public class Level1 extends Level {
 		createIndicationFromSprite(b3,indication3);
 		InGameIndication indication4 = new InGameIndication(350, 100, 
 		"Ceci est une sortie! \nLes deux fées doivent être à la \nporte pour finir le niveau ");		
-		createIndicationSprite(exit.x - 60, exit.y+30, 20,20, indication4);
+		createIndicationSprite((int)(exit.x - 60), (int)(exit.y+30), 20,20, indication4);
 	}
 }

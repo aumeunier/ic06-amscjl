@@ -144,7 +144,6 @@ public class GameplayState extends BasicGameState implements MouseListener{
 				((NarrativeState)(sbg.getState(selection))).ChooseLevel(this.currentLevel.getLevelID());				
 			}
 			else if(selection == Game.HELP_STATE){
-				
 				((HelpState)(sbg.getState(selection))).setPreviousState(this.getID());
 			}
 			sbg.enterState(selection);	
@@ -278,7 +277,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			char1.goRight();
 		}
 		else if((input.isKeyPressed(Input.KEY_A)) && char1.canTeleport()){
-			char2.setTransported(true, char1.x, char1.y);
+			char2.setTransported(true, (int)char1.x, (int)char1.y);
 		}
 		else if(!char1.isFalling){
 			ch1_body.m_linearVelocity.x = 0;			
@@ -315,7 +314,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			char2.goRight();
 		}
 		else if((input.isKeyPressed(Input.KEY_ENTER)) && char2.canTeleport()){
-			char1.setTransported(true, char2.x, char2.y);
+			char1.setTransported(true, (int)char2.x, (int)char2.y);
 		}
 		else if(!char2.isFalling){
 			ch2_body.m_linearVelocity.x = 0;			
@@ -354,7 +353,6 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			modifyBodyRebond(getBodyForUserData(char2),(float)0.0);
 			char2.shouldNage=false;
 		}
-		
 		
 		char1.setCoordinatesFromBody(ch1_body);
 		char2.setCoordinatesFromBody(ch2_body);	
@@ -448,6 +446,21 @@ public class GameplayState extends BasicGameState implements MouseListener{
 				Missile missile = currentLevel.createMissile(0,110,50,50,((PlateformeMissile)theSprite));
 				Body monmissile = getBodyForUserData(missile);
 				((PlateformeMissile)theSprite).setMissile(monmissile);
+			}
+			//*
+			if(theSprite instanceof FireBall)
+			{
+				Vec2 slickcoord = ((FireBall)theSprite).getNextPosition(delta);
+				//float angle = ((FireBall)theSprite).getAngle();
+				Vec2 b2dcoord = Global.getBox2DCoordinates((int)slickcoord.x,(int)slickcoord.y);
+				Vec2 position = new Vec2(b2dcoord.x+theSprite.w/2, b2dcoord.y-theSprite.h/2);
+				if(slickcoord.x < 0 || slickcoord.x > Global.GAMEPLAYWIDTH
+						|| slickcoord.y < 0 || slickcoord.y > Global.GAMEPLAYHEIGHT){
+					theSprite.setShouldBeDestroy();
+				}
+				else {
+					tempBody.setXForm(position, 0);					
+				}
 			}
 		}	
 		for(int i = 0 ; i < tempList.size() ; ++i){
@@ -637,7 +650,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		spriteBodies.add(newBody);
 		return newBody;
 	}
-	public Body addFireBall(FireBall fireballData, float p){
+	public Body addFireBall(FireBall fireballData){
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.userData = fireballData;
 		Vec2 b2dcoord = Global.getBox2DCoordinates(fireballData.x, fireballData.y);

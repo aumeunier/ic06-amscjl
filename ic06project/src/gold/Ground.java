@@ -25,7 +25,7 @@ public class Ground extends Sprite{
 	protected void setImage(String filename){
 		try {
 			this.image = new Image(Global.PATH_IMAGES_RESSOURCES+filename);
-			this.image = this.image.getSubImage(x,y,w,h);
+			this.image = this.image.getSubImage((int)x,(int)y,(int)w,(int)h);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

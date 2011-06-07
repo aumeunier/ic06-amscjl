@@ -26,6 +26,9 @@ public class Global {
 	public static Vec2 getBox2DCoordinates(int worldX, int worldY){
 		return new Vec2(worldX,Global.GAMEPLAYHEIGHT-worldY);
 	}
+	public static Vec2 getBox2DCoordinates(float worldX, float worldY){
+		return new Vec2(worldX,Global.GAMEPLAYHEIGHT-worldY);
+	}
 
 	public static Image setImage(String filename){
 		try {

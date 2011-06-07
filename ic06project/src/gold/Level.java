@@ -443,6 +443,12 @@ protected BoutonDeplace createBoutonDeplace(int x, int y, int w, int h, ArrayLis
 
 		return ch;
 	}
+	protected FireBall addFireball(int x, int y, Vec2 speed, Sprite owner){
+		FireBall f = new FireBall(x,y,speed,owner);
+		sprites.add(f);
+		myState.addFireBall(f);
+		return f;
+	}
 
 	public Character getFirstCharacter(){
 		return this.character1;

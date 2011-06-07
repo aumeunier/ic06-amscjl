@@ -6,14 +6,22 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class FireBall extends Sprite {
+	protected float x, y, w, h;
 	private Sprite owner;
 	private int powerPerHit = 1;
 	private int nbHits = 0;
 	private int maxNbHits = 1;
-	protected Vec2 speed = new Vec2(0,0);
+	private float speedValue = 0.0001f;
+	protected Vec2 speed = new Vec2(0.0f,0.0f);
+	protected Vec2 target = new Vec2(0.0f,0.0f);
+	private int deltaCumulated = 0;
+	private final int DELTA_CUMULATED_MAX = 5;
 	
-	public FireBall(int x, int y, Vec2 _speed, Sprite _owner){
-		super(x,y,10,10);
+	public FireBall(float x, float y, Vec2 _speed, Sprite _owner){
+		this.x = x;
+		this.y = y;
+		this.w = 10;
+		this.h = 10;
 		this.owner = _owner;
 		this.speed = _speed;
 		this.setImage("fireball.png");
@@ -24,6 +32,9 @@ public class FireBall extends Sprite {
 	}
 	public Vec2 getSpeed(){
 		return speed;
+	}
+	public int getPower(){
+		return powerPerHit;
 	}
 	public void setMaxNbHits(int nb){
 		this.maxNbHits = nb;
@@ -40,7 +51,21 @@ public class FireBall extends Sprite {
 		}
 		return false;
 	}
+	
+	public Vec2 getNextPosition(int delta){
+		deltaCumulated+=delta;
+		if(deltaCumulated >= DELTA_CUMULATED_MAX){
+			deltaCumulated-=DELTA_CUMULATED_MAX;
+			
+			x+=((float)(speed.x))*speedValue;
+			y+=((float)(speed.y))*speedValue;
+		}
+		return new Vec2(x,y);
+	}
 
+	public float getAngle(){
+		return (float) Math.cos(-y/x);
+	}
 	@Override
 	public void draw(GameContainer container, StateBasedGame game, Graphics g){
 		if(animation!=null){

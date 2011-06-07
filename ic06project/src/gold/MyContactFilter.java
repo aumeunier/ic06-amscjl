@@ -77,11 +77,11 @@ public class MyContactFilter implements ContactFilter {
 						&& (other.getClass().equals(Obstacle.class))){
 					return false;
 				}
-				else if((other.getClass().equals(Monster.class))&& (character.getPower() != Power.INVISIBLE)){
+				else if((other instanceof Monster) && (character.getPower() != Power.INVISIBLE)){
 					character.setDead(true);
 					return false;
 				}
-				else if((other.getClass().equals(Monster.class))&& (character.getPower() == Power.INVISIBLE)){
+				else if((other instanceof Monster) && (character.getPower() == Power.INVISIBLE)){
 					return false;
 				}
 				else if((other.getClass().equals(SourceMortelle.class))&& (character.getPower()!= Power.NAGE)){
@@ -137,6 +137,7 @@ public class MyContactFilter implements ContactFilter {
 				}
 				else if(other.getClass().equals(FireBall.class)){
 					((FireBall)other).setShouldBeDestroy();
+					character.loseHealth(((FireBall)other).getPower());
 					return false;
 				}
 			}

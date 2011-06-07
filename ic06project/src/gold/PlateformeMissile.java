@@ -20,14 +20,14 @@ public class PlateformeMissile extends Ground{
 	/*public void bouge(String s){
 		if(s=="left")
 		{
-			xStop=x-10;
+			xStop=(int) (x-10);
 			if(xStop<0){
 				xStop=0;
 			}
 		}
 		else if (s=="right")
 		{
-			xStop=x+10;
+			xStop=(int) (x+10);
 			if(xStop>800){
 				xStop=800;
 			}

@@ -65,7 +65,7 @@ public class Level4 extends Level {
 
 		Obstacle o2 = createObstacle(40,270,60,70);
 		o2.setImage("sol-pourri-v56.png");
-		o2.image = o2.image.getSubImage(o2.x,250,o2.w,o2.h);
+		o2.image = o2.image.getSubImage((int)o2.x,250,(int)o2.w,(int)o2.h);
 		ArrayList<Body> b2 = new ArrayList<Body>();
 		b2.add(myState.getBodyForUserData(o2));
 		createLevier(120,135,30,30,b2);
@@ -133,13 +133,13 @@ public class Level4 extends Level {
 		// Place the first character
 		this.character1 = addCharacterWithPoints(10,50,0.7f);		
 		this.character2 = addCharacterWithPoints(10,50,0.7f);	
-		this.character1.setLightSize(this.character1.h);
-		this.character2.setLightSize(this.character2.h);
+		this.character1.setLightSize((int) this.character1.h);
+		this.character2.setLightSize((int) this.character2.h);
 
 		this.setLevelForAllSprites();
 		InGameIndication indication0 = new InGameIndication(300, 100, 
 				"Il fait sombre! Trouve de la lumiere \npour mieux voir autour de toi!");
-		createIndicationSprite(this.character1.x+this.character1.w+20,this.character1.y, 40,40, indication0);
+		createIndicationSprite((int) (this.character1.x+this.character1.w+20),(int)this.character1.y, 40,40, indication0);
 		sLight.setIndication(300,100,"Tu as trouve de la lumiere! \nLa lumiere reste si tu prends \nun autre pouvoir!");
 		sInvisible.setIndication(300,100,"Pouvoir d'invisibilite! \nLes monstres ne devraient plus te voir!");
 		sDestructor.setIndication(300,100,"Pouvoir de destruction! \nTu peux detruire certains obstacles!");
