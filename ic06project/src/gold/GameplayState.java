@@ -472,6 +472,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 				Missile missile = currentLevel.createMissile(((PlateformeMissile)theSprite).X()+(((PlateformeMissile)theSprite).W()-50)/2,((PlateformeMissile)theSprite).Y()+((PlateformeMissile)theSprite).H(),50,50,((PlateformeMissile)theSprite));
 				Body monmissile = getBodyForUserData(missile);
 				((PlateformeMissile)theSprite).setMissile(monmissile);
+				missile.setDeadly(true);
 			}
 			//*
 			if(theSprite instanceof FireBall)

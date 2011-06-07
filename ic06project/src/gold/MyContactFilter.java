@@ -32,10 +32,9 @@ public class MyContactFilter implements ContactFilter {
 		Object b1d = b1.getUserData();
 		Object b2d = b2.getUserData();
 		/* Rencontres Destructible - other */
-		if((b1d!=null && b2d!=null)
-				&& (b1d instanceof Sprite && b2d instanceof Sprite)
-				&& (((b1d instanceof Destructible) && !b2d.getClass().equals(Character.class))
-						|| ((b2d instanceof Destructible) && !b1d.getClass().equals(Character.class)))){
+		if((b1d!=null && b2d!=null)&& (b1d instanceof Sprite && b2d instanceof Sprite)
+			&& (((b1d instanceof Destructible) && !b2d.getClass().equals(Character.class))
+				|| ((b2d instanceof Destructible) && !b1d.getClass().equals(Character.class)))){
 			Destructible d = (Destructible) ((b1d instanceof Destructible)?b1d:b2d);
 			Sprite other = (Sprite) ((b1d instanceof Destructible)?b2d:b1d);
 			if(other instanceof Monster){
@@ -44,9 +43,15 @@ public class MyContactFilter implements ContactFilter {
 				}				
 				return false;
 			}
+			else if((other.getClass().equals(Wall.class)||other.getClass().equals(Ground.class)) && d.getClass().equals(Missile.class)){
+				d.setShouldBeDestroy();
+			}
 			else if(other.getClass().equals(Wall.class)){
 				d.setDeadly(false);
 				return true;
+			}
+			else if(other.getClass().equals(Ground2.class)){
+				return false;
 			}
 		}
 

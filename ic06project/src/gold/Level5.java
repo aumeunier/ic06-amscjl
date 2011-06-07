@@ -26,8 +26,7 @@ public class Level5 extends Level {
 		//plateforme en haut à droite
 		createGround(200,100,Global.GAMEPLAYWIDTH-200,10);	
 		
-		//Pouvoir du dédoublement
-		Source dedouble = createSource(0,40,60,60,Power.DOUBLE);
+		
 		
 		PlateformeMissile platmiss=new PlateformeMissile(0,110,80,10);
 		ArrayList<Vec2> shape = new ArrayList<Vec2>();
@@ -42,30 +41,46 @@ public class Level5 extends Level {
 		Body maplat = state.getBodyForUserData(platmiss);
 		ArrayList<Body> miss=new ArrayList<Body>() ;
 		miss.add(maplat);
-		createBoutonBombarde(Global.GAMEPLAYWIDTH-100,85,30,15,miss);
+		createBoutonBombarde(10,85,30,15,miss);
 		createBoutonDeplace(0,Global.GAMEPLAYHEIGHT-115,30,15,miss,"left");
 		createBoutonDeplace(Global.GAMEPLAYWIDTH-30,Global.GAMEPLAYHEIGHT-115,30,15,miss,"right");
-		BoutonCharge bouton=new BoutonCharge(Global.GAMEPLAYWIDTH-30,85,30,15,miss);
+		BoutonCharge bouton=new BoutonCharge(Global.GAMEPLAYWIDTH-100,85,30,15,miss);
 		sprites.add(bouton);
 		myState.addBoutonPressoir(bouton);
 		
 		// bloc en bas à gauche
-		createGround(0,Global.GAMEPLAYHEIGHT-100,50,100);		
+		createGround(0,Global.GAMEPLAYHEIGHT-100,100,100);		
 		// bloc en bas à droite
-		createGround(Global.GAMEPLAYWIDTH-50,Global.GAMEPLAYHEIGHT-100,50,100);
+		createGround(Global.GAMEPLAYWIDTH-100,Global.GAMEPLAYHEIGHT-100,100,100);
 		//petit bloc en bas à gauche
-		createGround(50,Global.GAMEPLAYHEIGHT-50,50,50);	
+		createGround(100,Global.GAMEPLAYHEIGHT-50,50,50);	
 		//petit bloc en bas à droite
-		createGround(Global.GAMEPLAYWIDTH-100,Global.GAMEPLAYHEIGHT-50,50,50);
+		createGround(Global.GAMEPLAYWIDTH-150,Global.GAMEPLAYHEIGHT-50,50,50);
 		
 		
-		Ground2 g1 = new Ground2(120,Global.GAMEPLAYHEIGHT-180,100,10);
+		Ground2 g1 = new Ground2(120,Global.GAMEPLAYHEIGHT-170,80,10);
 		sprites.add(g1);
 		myState.addGround(g1);
-		Ground2 g2 = new Ground2(280,Global.GAMEPLAYHEIGHT-220,100,10);
+		Ground2 g2 = new Ground2(280,Global.GAMEPLAYHEIGHT-230,80,10);
 		sprites.add(g2);
 		myState.addGround(g2);
-		
+		Ground2 g3 = new Ground2(440,Global.GAMEPLAYHEIGHT-155,80,10);
+		sprites.add(g3);
+		myState.addGround(g3);
+		Ground2 g4 = new Ground2(580,Global.GAMEPLAYHEIGHT-140,80,10);
+		sprites.add(g4);
+		myState.addGround(g4);
+		Ground2 g5 = new Ground2(440,Global.GAMEPLAYHEIGHT-280,80,10);
+		sprites.add(g5);
+		myState.addGround(g5);
+		Ground2 g6 = new Ground2(600,Global.GAMEPLAYHEIGHT-270,80,10);
+		sprites.add(g6);
+		myState.addGround(g6);
+		Ground2 g7 = new Ground2(0,Global.GAMEPLAYHEIGHT-240,50,10);
+		sprites.add(g7);
+		myState.addGround(g7);
+		//Pouvoir du dédoublement
+		Source dedouble = createSource(0,Global.GAMEPLAYHEIGHT-300,60,60,Power.DOUBLE);
 		
 		
 		
