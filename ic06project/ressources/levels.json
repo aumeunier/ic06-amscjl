@@ -12,7 +12,7 @@
 		{
 			"id":2,
 			"levelName":"Le mont Izapov",
-			"music":"jaspertine_-_Waiting_to_Come_Back_Down-1.ogg",
+			"music":"jaspertine_-_Waiting_to_Come_Back_Down-trimmed.ogg",
 			"numberOfKeys":2,
 			"areaOnMap":[250, 100, 50, 50]		
 			
@@ -36,7 +36,7 @@
 		{
 			"id":5,
 			"levelName":"chateau",
-			"music":"gmz_-_Between_Me_and_Myself.ogg",
+			"music":"7OOP3D_-_Feeling_Dark_(Behind_The_Mask).ogg",
 			"numberOfKeys":0,
 			"areaOnMap":[2000, 50, 50, 50]		
 			
