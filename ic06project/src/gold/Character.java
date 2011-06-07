@@ -1,5 +1,10 @@
 package gold;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.Timer;
+
 import org.jbox2d.collision.Shape;
 import org.newdawn.slick.Color;
 
@@ -27,6 +32,7 @@ public class Character extends Sprite{
 	private final static int CHAR_H = (int) (FEE_PNG_H/4);
 	private final static float CHAR_W_BODY_RATIO = 0.5f;
 	private final static float CHAR_H_BODY_RATIO = 1.0f;
+	private Timer timer;
 	
 	public Character(){
 		super(0,0,CHAR_W,CHAR_H);
@@ -98,6 +104,19 @@ public class Character extends Sprite{
 			setAnimation("fee-de-face.png",CHAR_W,CHAR_H);
 			this.setFilter(Color.white);
 		}
+	}
+	public void initTimer(){
+		timer = new Timer(10000, new ActionListener(){
+			public void actionPerformed(ActionEvent evt) {
+				endOfTimer();
+			}			
+		});
+		timer.start();
+	}
+	
+	public void endOfTimer(){
+		shouldBeDestroy = true;
+		timer.stop();
 	}
 	
 	private void changeDirection(){

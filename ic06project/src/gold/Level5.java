@@ -29,7 +29,14 @@ public class Level5 extends Level {
 		//Pouvoir du dédoublement
 		Source dedouble = createSource(0,40,60,60,Power.DOUBLE);
 		
-		PlateformeMissile platmiss=new PlateformeMissile(0,110,50,10);
+		PlateformeMissile platmiss=new PlateformeMissile(0,110,80,10);
+		ArrayList<Vec2> shape = new ArrayList<Vec2>();
+		shape.add(new Vec2(-25,-5));
+		shape.add(new Vec2(-25,5));
+		shape.add(new Vec2(25,5));
+		shape.add(new Vec2(25,-5));
+		shape.add(new Vec2(0,0));
+		
 		sprites.add(platmiss);
 		myState.addGround(platmiss);
 		Body maplat = state.getBodyForUserData(platmiss);
@@ -52,7 +59,12 @@ public class Level5 extends Level {
 		createGround(Global.GAMEPLAYWIDTH-100,Global.GAMEPLAYHEIGHT-50,50,50);
 		
 		
-		createGround(Global.GAMEPLAYWIDTH/2,Global.GAMEPLAYHEIGHT-50,50,50);
+		Ground2 g1 = new Ground2(120,Global.GAMEPLAYHEIGHT-180,100,10);
+		sprites.add(g1);
+		myState.addGround(g1);
+		Ground2 g2 = new Ground2(280,Global.GAMEPLAYHEIGHT-220,100,10);
+		sprites.add(g2);
+		myState.addGround(g2);
 		
 		
 		
@@ -73,7 +85,7 @@ public class Level5 extends Level {
 		
 		
 		//indications
-		dedouble.setIndication(200, 150, "Appuyez sur A\n ou sur Enter pour \ncreer votre \ndouble a vos cotes");
+		dedouble.setIndication(420, 120, "Appuyez sur A ou sur Enter pour creer votre \ndouble a vos cotes pendant 10 secondes.\nAttention une fois utilise vous n'avez plus\n le pouvoir !");
 		
 		// TODO: indications
 	}

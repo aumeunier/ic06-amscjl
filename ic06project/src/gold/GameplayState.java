@@ -276,14 +276,23 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			ch1_body.m_linearVelocity.x = SPEED_X;			
 			char1.goRight();
 		}
-		else if((input.isKeyPressed(Input.KEY_A)) && char1.canTeleport()){
-			char2.setTransported(true, (int)char1.x, (int)char1.y);
+		else if(input.isKeyPressed(Input.KEY_A)){
+			if(char1.canTeleport()){
+				System.out.println("téléportation");
+				char2.setTransported(true, char1.x, char1.y);
+			}
+			else if(char1.dedouble()){
+				System.out.println("création d'un nouveau perso");
+				Character ch = currentLevel.addCharacterWithPoints(char1.X(), char1.Y(), 0.75f);
+				currentLevel.sprites.add(ch);
+				ch.initTimer();
+				char1.setPower(Power.NONE);
+			}
 		}
 		else if(!char1.isFalling){
 			ch1_body.m_linearVelocity.x = 0;			
 			char1.straight();
 		}
-
 		if(char2CanJump){
 			if(char2.isFlying()){
 				if(input.isKeyDown(Input.KEY_UP)){
@@ -313,8 +322,16 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			ch2_body.m_linearVelocity.x = SPEED_X;			
 			char2.goRight();
 		}
-		else if((input.isKeyPressed(Input.KEY_ENTER)) && char2.canTeleport()){
-			char1.setTransported(true, (int)char2.x, (int)char2.y);
+		else if(input.isKeyPressed(Input.KEY_ENTER)){
+			if(char2.canTeleport())
+				char1.setTransported(true, char2.x, char2.y);
+			else if(char2.dedouble()){
+			Character ch = currentLevel.addCharacterWithPoints(char2.X(), char2.Y(), 0.75f);
+			currentLevel.sprites.add(ch);
+			ch.initTimer();
+			char2.setPower(Power.NONE);
+			}
+
 		}
 		else if(!char2.isFalling){
 			ch2_body.m_linearVelocity.x = 0;			
@@ -443,7 +460,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			}
 			//doivent être rechargés
 			if(theSprite instanceof PlateformeMissile && ((PlateformeMissile)theSprite).shouldRecharge()){
-				Missile missile = currentLevel.createMissile(0,110,50,50,((PlateformeMissile)theSprite));
+				Missile missile = currentLevel.createMissile(((PlateformeMissile)theSprite).X()+(((PlateformeMissile)theSprite).W()-50)/2,((PlateformeMissile)theSprite).Y()+((PlateformeMissile)theSprite).H(),50,50,((PlateformeMissile)theSprite));
 				Body monmissile = getBodyForUserData(missile);
 				((PlateformeMissile)theSprite).setMissile(monmissile);
 			}
@@ -887,12 +904,21 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			ch1_body.wakeUp();
 			return ch1_body;
 		}
-		else {
+		else if(ch2_body==null){
 			ch2_body = world.createBody(bodyDef);
 			ch2_body.createShape(sd);
 			ch2_body.createShape(groundSensor);
 			ch2_body.wakeUp();
 			return ch2_body;
+		}
+		else{
+			System.out.println("new perso");
+			Body perso = world.createBody(bodyDef);
+			perso.createShape(sd);
+			perso.createShape(groundSensor);
+			perso.wakeUp();
+			spriteBodies.add(perso);
+			return perso;
 		}
 	}
 	public Body modifyBodyRebond(Body body, float R)
