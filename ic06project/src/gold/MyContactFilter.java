@@ -122,10 +122,12 @@ public class MyContactFilter implements ContactFilter {
 					return true;
 				}
 				else if(other.getClass().equals(Character.class)){
-					if(character.absorbe())
-						character.setPower(character.getPower());
-					else if(character.absorbe())
-						character.setPower(character.getPower());
+					if(character.absorbe()){
+						character.setPower(((Character)other).getPower());
+					}
+					else if(character.absorbe()){
+						character.setPower(((Character)other).getPower());
+					}
 					return false;
 				}
 				else if(other.getClass().equals(Levier.class)){

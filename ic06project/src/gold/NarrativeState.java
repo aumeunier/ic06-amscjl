@@ -31,6 +31,7 @@ public class NarrativeState extends BasicGameState implements MouseListener {
 	TextField textField;
 	Display display;
 	String textToDisplay = "";
+	int chosenId = 1;
 
 	@Override
 	public int getID() {
@@ -64,6 +65,7 @@ public class NarrativeState extends BasicGameState implements MouseListener {
 		}
 	}
 	public void ChooseLevel(int i){
+		chosenId = i;
 		switch(i){
 		case 1:
 			textToDisplay = "Il était une fois, un peuple de fées. Elles vivaient paisiblement\n" +
@@ -115,6 +117,23 @@ public class NarrativeState extends BasicGameState implements MouseListener {
 			textToDisplay = "\n\n\nToujours en allant vers l’Est nos deux fées traversent les grottes \n\n" +
 					"qui n’abritent pas toujours de doux compagnons… \n\n" +
 					"Juste derrière ces grottes nous trouveront la Sorcière…";	break;
+		case 5:
+			
+			textToDisplay = "\n\n\nNos deux héros ont réussi à atteindre le repère de la sorcière!\n\n" +
+					"Une dure bataille les attend maintenant. Si elles parviennent \n\n" +
+					"à se débarasser de la sorcière, elles pourront libérer leurs amis!!";
+			break;
+		case 6:
+			textToDisplay = "\n\n\nNos deux vaillantes fées ont atteint leur objectif:\n\n" +
+					"elles ont sauvé leurs amies et la sorcière devrait les laisser tranquilles\n\n" +
+					"pour un moment. Cependant, quelques fées sont encore empoisonnées,\n\n" +
+					"Il faut récupérer tous les fruits Hapsten!!";
+			break;
+		case 7:
+			textToDisplay = "\n\n\nLa sorcière a été vaincue et les fées sont donc libres.\n\n" +
+					"De plus, à l'aide des fruits Hapsten, toutes les fées ont été guéries!\n\n" +
+					"Bravo!";
+			break;
 		default:
 			textToDisplay = "Pas de description pour ce niveau! :(";
 			break;
@@ -174,7 +193,10 @@ public class NarrativeState extends BasicGameState implements MouseListener {
 	public void mouseClicked(int button, int x, int y, int clickCount){
 		if((x >= CONTINUE_X && x <= (CONTINUE_X + CONTINUE_W)) 
 				&&	(y >= CONTINUE_Y && y <= (CONTINUE_Y + CONTINUE_H))){
-			this.selection = Game.GAMEPLAY_STATE;			
+			this.selection = Game.GAMEPLAY_STATE;	
+			if(chosenId > 5){
+				this.selection = Game.MAINMENU_STATE;
+			}
 		}			
 	}
 }

@@ -28,6 +28,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	private int stateID;
 	private int selection;
 	private Level currentLevel;
+	private int lvlIdForNarrative;
 	private LevelState currentLevelState;
 	private World world;
 	private Body ch1_body;
@@ -46,6 +47,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	private boolean levelJustCreated;
 	private boolean stop_play_music;
 	private boolean music_changed;
+	private boolean endOfGame = false;
 
 	public GameplayState(int id){
 		super();
@@ -62,33 +64,35 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	public void ChooseLevel(int levelIndex){
 		LevelSave save = Save.getInstance().levelSaveForLevelID(levelIndex);
 		this.currentLevelState = new LevelState();
-		this.uiGameplay.setLevelInformation(save.getName(), 0, save.getUnlockableKeys(), levelIndex);
 		this.cleanAllBodies();
 		this.isFinished = false;
-		this.uiGameplay.onEnter();
 		switch(levelIndex){
 		case 1:
 			this.currentLevel = new Level1(this,save);
 			break;
-			
+
 		case 2:
 			this.currentLevel = new Level2(this,save);
 			break;
-			
+
 		case 3:
 			this.currentLevel = new Level3(this,save);
 			break;
-			
+
 		case 4:
 			this.currentLevel = new Level4(this,save);
 			break;
-			
+
 		case 5:
 			this.currentLevel = new Level5(this, save);
 			break;
 		default:
 			this.currentLevel = null;
 			break;
+		}
+		if(this.currentLevel !=null){
+			this.uiGameplay.setLevelInformation(save.getName(), 0, save.getUnlockableKeys(), levelIndex);
+			this.uiGameplay.onEnter();
 		}
 		levelJustCreated = true;
 	}
@@ -137,18 +141,31 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 	throws SlickException {
-		
+
 		// Si un changement d'etat a ete demande, l'effectuer
 		if(this.selection != -1){
 			if(selection == Game.NARRATIVE_STATE){
-				((NarrativeState)(sbg.getState(selection))).ChooseLevel(this.currentLevel.getLevelID());				
+				int id = 1;
+				if(endOfGame){
+					if(Save.getInstance().getTotalNumberOfUnlockedKeys()
+							- Save.getInstance().getTotalNumberOfKeys() >= 0){
+						id=7;
+					}
+					else {
+						id=6;
+					}
+				}
+				else {
+					id = this.currentLevel.getLevelID();
+				}
+				((NarrativeState)(sbg.getState(selection))).ChooseLevel(id);				
 			}
 			else if(selection == Game.HELP_STATE){
 				((HelpState)(sbg.getState(selection))).setPreviousState(this.getID());
 			}
 			sbg.enterState(selection);	
 		}
-		
+
 		// Change la musique quand le niveau change 
 		if(this.music_changed){
 			((Game)sbg).changeGameplayMusic();
@@ -164,7 +181,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			}
 			this.stop_play_music = false;
 		}
-		
+
 		// Si aucun niveau n'est charge ou que le niveau est fini, aucun interet a faire des calculs
 		if(this.currentLevel == null){
 			return;
@@ -173,38 +190,40 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			this.levelJustCreated = false;
 			this.currentLevel.setDisplay(gc);
 		}
-		
+
 		if(this.isFinished){
 			LevelSave lvlSave = Save.getInstance().levelSaveForLevelID(this.currentLevel.getLevelID());
 			lvlSave.setSavedLevelData(currentLevel.nbBonus, true, true);
-			LevelSave nextLvlSave = Save.getInstance().levelSaveForLevelID(this.currentLevel.getLevelID()+1);
-			nextLvlSave.setSavedLevelData(0, true, false);
+			if(lvlSave.getID() < 5){
+				LevelSave nextLvlSave = Save.getInstance().levelSaveForLevelID(this.currentLevel.getLevelID()+1);
+				nextLvlSave.setSavedLevelData(0, true, false);
+			}
 			Save.getInstance().save();
 			return;			
 		}
-		
+
 		// Si les joueurs etaient morts et veulent recommencer le niveau
 		if(this.arePlayersDead() && (this.startAgain || this.alwaysStartAgain)){
 			this.ChooseLevel(this.currentLevel.getLevelID());
 			this.startAgain = false;
 			return;
 		}
-		
+
 		Character char1 = this.currentLevel.getFirstCharacter();
 		Character char2 = this.currentLevel.getSecondCharacter();
 		Input input = gc.getInput();
-		
+
 		// Si un des personnages est mort ou que le menu a ete demande, ne pas faire tourner les calculs
 		if(this.arePlayersDead() || this.isPaused){	
 			input.consumeEvent();
 			return;
 		}
-		
-		
-		
+
+
+
 		/*else if(s1 instanceof Exit && s2 instanceof Character){*/
 		if(exit!=null)
-			{
+		{
 			if (!((Character)this.ch1_body.getUserData()).rectCollideWithOther((Sprite)(exit.getUserData()))){
 				((Character)this.ch1_body.getUserData()).setAtExit(false);
 			}
@@ -212,18 +231,18 @@ public class GameplayState extends BasicGameState implements MouseListener{
 				((Character)this.ch2_body.getUserData()).setAtExit(false);
 			}
 		}
-	/*}
+		/*}
 	else if(s1 instanceof Character && s2 instanceof Exit){
 		if (!s1.rectCollideWithOther(s2)){
 			((Character)s1).setAtExit(false);
 		}
 	}*/
-		
+
 		if(((Character)this.ch1_body.getUserData()).isAtExit() && ((Character)this.ch2_body.getUserData()).isAtExit()){
 			this.isFinished = true;
 			return;
 		}
-		
+
 		if(((Character)this.ch1_body.getUserData()).isTransported() ){
 			Vec2 b2dcoord = Global.getBox2DCoordinates(((Character)ch1_body.getUserData()).X_transported, ((Character)ch1_body.getUserData()).Y_transported);
 			Vec2 position = new Vec2(b2dcoord.x+((Character)ch1_body.getUserData()).w/2, b2dcoord.y-((Character)ch1_body.getUserData()).h/2);
@@ -231,7 +250,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			((Character)ch1_body.getUserData()).setTransported(false,0,0);
 			return;
 		}
-		
+
 		if(((Character)this.ch2_body.getUserData()).isTransported() ){
 			Vec2 b2dcoord = Global.getBox2DCoordinates(((Character)ch2_body.getUserData()).X_transported, ((Character)ch2_body.getUserData()).Y_transported);
 			Vec2 position = new Vec2(b2dcoord.x+((Character)ch2_body.getUserData()).w/2, b2dcoord.y-((Character)ch2_body.getUserData()).h/2);
@@ -239,13 +258,13 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			((Character)ch2_body.getUserData()).setTransported(false,0,0);
 			return;
 		}
-		
+
 		// Sinon effectuer les traitements d'inputs et l'update du world / des sprites
 		boolean char1CanJump = (char1.isFlying() || !char1.isFalling) && !char1.isSlipping;
 		boolean char2CanJump = (char2.isFlying() || !char2.isFalling) && !char2.isSlipping;
 		boolean char1CanMove = (char1CanJump || !char1.isColliding) && !char1.isSlipping;
 		boolean char2CanMove = (char2CanJump || !char2.isColliding) && !char2.isSlipping;
-		
+
 		if(char1CanJump){
 			if(char1.isFlying()){
 				if(input.isKeyDown(Input.KEY_Z)){
@@ -254,19 +273,17 @@ public class GameplayState extends BasicGameState implements MouseListener{
 				}
 			}
 			else if(input.isKeyPressed(Input.KEY_Z)){
-				System.out.println("KEY_Z_normal");
 				ch1_body.applyImpulse(new Vec2(0, SPEED_JUMP), ch1_body.getWorldCenter());	
 				char1.isFalling = true;
 			}
 			else if(char1.shouldJumpAfterRebound()){
-				System.out.println("KEY_Z_jump");
-				ch1_body.applyImpulse(new Vec2(0, SPEED_JUMP/3), ch1_body.getWorldCenter());	
+				ch1_body.applyImpulse(new Vec2(0, 2*SPEED_JUMP), ch1_body.getWorldCenter());	
 				char1.setJumpAfterRebound(false);
+				char1.isFalling = true;
 			}
 		}
 		else if(!char1.isSlipping && char1.isRebond()){
-			if(input.isKeyDown(Input.KEY_Z)){
-				System.out.println("KEY_Z_isrebond");
+			if(input.isKeyPressed(Input.KEY_Z)){
 				char1.setJumpAfterRebound(true);		
 			}
 		}
@@ -280,11 +297,9 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		}
 		else if(input.isKeyPressed(Input.KEY_A)){
 			if(char1.canTeleport()){
-				System.out.println("téléportation");
 				char2.setTransported(true, char1.x, char1.y);
 			}
 			else if(char1.dedouble()){
-				System.out.println("création d'un nouveau perso");
 				Character ch = currentLevel.addCharacterWithPoints(char1.X(), char1.Y(), 0.75f);
 				currentLevel.sprites.add(ch);
 				ch.initTimer();
@@ -303,19 +318,16 @@ public class GameplayState extends BasicGameState implements MouseListener{
 				}
 			}
 			else if(input.isKeyPressed(Input.KEY_UP)){
-				System.out.println("KEY_up_normal");
 				ch2_body.applyImpulse(new Vec2(0, SPEED_JUMP), ch2_body.getWorldCenter());	
 				char2.isFalling = true;
 			}
 			else if(char2.shouldJumpAfterRebound()){
-				System.out.println("KEY_Up_jump");
 				ch2_body.applyImpulse(new Vec2(0, SPEED_JUMP/3), ch2_body.getWorldCenter());	
 				char2.setJumpAfterRebound(false);
 			}
 		}
 		else if(!char2.isSlipping && char2.isRebond()){
 			if(input.isKeyDown(Input.KEY_UP)){
-				System.out.println("KEY_Z_isrebond");
 				char2.setJumpAfterRebound(true);		
 			}
 		}
@@ -331,10 +343,10 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			if(char2.canTeleport())
 				char1.setTransported(true, char2.x, char2.y);
 			else if(char2.dedouble()){
-			Character ch = currentLevel.addCharacterWithPoints(char2.X(), char2.Y(), 0.75f);
-			currentLevel.sprites.add(ch);
-			ch.initTimer();
-			char2.setPower(Power.NONE);
+				Character ch = currentLevel.addCharacterWithPoints(char2.X(), char2.Y(), 0.75f);
+				currentLevel.sprites.add(ch);
+				ch.initTimer();
+				char2.setPower(Power.NONE);
 			}
 
 		}
@@ -342,11 +354,11 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			ch2_body.m_linearVelocity.x = 0;			
 			char2.straight();
 		}
-		
+
 		// Remove the unhandled events
 		input.clearKeyPressedRecord();
 
-		
+
 		if((char1.isPetit())&&(char1.shouldChangeSize)){
 			modifyBodySize(getBodyForUserData(char1),(float)0.5,(float)0.5);
 			char1.shouldChangeSize=false;
@@ -379,10 +391,10 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			modifyBodyRebond(getBodyForUserData(char2),(float)0.0);
 			char2.shouldNage=false;
 		}
-		
+
 		char1.setCoordinatesFromBody(ch1_body);
 		char2.setCoordinatesFromBody(ch2_body);	
-		
+
 		// Update the monster's speed
 		ArrayList<Integer> tempList = new ArrayList<Integer>();
 		for(int i = 0 ; i < monsterBodies.size() ; ++i){
@@ -394,6 +406,9 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			if (m.getShouldBeDestroy()){
 				currentLevel.sprites.remove(m);
 				tempList.add(i);
+				if(m instanceof Witch){
+					this.isFinished = true;
+				}
 			}
 		}
 		for(int i = 0 ; i < tempList.size() ; ++i){
@@ -404,7 +419,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			this.currentLevelState.setNbKeysUnlocked(currentLevel.nbBonus);
 		}
 		tempList.clear();
-		
+
 		// Simulation sur 0.1s dans notre box2D world
 		world.step((float)delta/100, 100);
 
@@ -508,7 +523,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		uiGameplay.render(gc, g);
 		if(currentLevel !=null){
 			currentLevel.render(gc, sbg, g);
-			
+
 			// Si un des personnages est mort, afficher le menu de mort
 			if(this.currentLevel.getFirstCharacter().isDead() || this.currentLevel.getSecondCharacter().isDead()){	
 				this.uiDeath.render(gc, g);
@@ -532,7 +547,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		world.setContactListener(new MyContactListener());
 		world.setContactFilter(new MyContactFilter());
 	}
-	
+
 	private void cleanAllBodies(){
 		for(Body b:spriteBodies){
 			world.destroyBody(b);
@@ -558,7 +573,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		Vec2 b2dcoord = Global.getBox2DCoordinates(wallData.x, wallData.y);
 		bodyDef.position = new Vec2(b2dcoord.x+wallData.w/2,b2dcoord.y-wallData.h/2);
 		Body newBody = world.createBody(bodyDef);
-		
+
 		PolygonDef sd = new PolygonDef();		
 		sd.density = 5.0f;
 		sd.friction = 0.5f;
@@ -568,14 +583,14 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		spriteBodies.add(newBody);
 		return newBody;
 	}
-	
+
 	public Body addGround(Ground groundData){
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.userData = groundData;
 		Vec2 b2dcoord = Global.getBox2DCoordinates(groundData.x, groundData.y);
 		bodyDef.position = new Vec2(b2dcoord.x+groundData.w/2,b2dcoord.y-groundData.h/2);
 		Body newBody = world.createBody(bodyDef);
-		
+
 		PolygonDef sd = new PolygonDef();		
 		sd.density = 5.0f;
 		sd.friction = 0.5f;
@@ -585,7 +600,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		spriteBodies.add(newBody);
 		return newBody;
 	}
-	
+
 	public Body addGroundWithPoints(Ground groundData, ArrayList<Vec2> list){
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.userData = groundData;
@@ -604,7 +619,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		spriteBodies.add(newBody);
 		return newBody;
 	}
-	
+
 	public Body addWallWithPoints(Wall wallData, ArrayList<Vec2> list){
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.userData = wallData;
@@ -684,12 +699,12 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		bodyDef.position = new Vec2(b2dcoord.x+fireballData.w/2,b2dcoord.y-fireballData.h/2);
 		Body newBody = world.createBody(bodyDef);
 		CircleDef sd = new CircleDef();		
-		sd.radius=fireballData.w/6;
+		sd.radius=fireballData.w/8;
 		newBody.createShape(sd);
 		spriteBodies.add(newBody);
 		return newBody;
 	}
-	
+
 	public Body addObstacleWithPoints(Obstacle obstacleData, ArrayList<Vec2> list){
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.userData = obstacleData;
@@ -709,14 +724,14 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		spriteBodies.add(newBody);
 		return newBody;
 	}
-	
+
 	public Body addExit(Exit exitData){
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.userData = exitData;
 		Vec2 b2dcoord = Global.getBox2DCoordinates(exitData.x, exitData.y);
 		bodyDef.position = new Vec2(b2dcoord.x+exitData.w/2,b2dcoord.y-exitData.h/2);
 		Body newBody = world.createBody(bodyDef);
-		
+
 		PolygonDef sd = new PolygonDef();		
 		sd.density = 5000.0f;
 		sd.friction = 1.0f;
@@ -728,7 +743,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		newBody.putToSleep();
 		return newBody;
 	}
-	
+
 	public Body addBonus(Bonus bonusData){
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.userData = bonusData;
@@ -738,7 +753,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		md.mass = 100.0f;
 		bodyDef.massData = md;
 		Body newBody = world.createBody(bodyDef);
-		
+
 		PolygonDef sd = new PolygonDef();		
 		sd.density = 5000.0f;
 		sd.friction = 1.0f;
@@ -785,7 +800,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		spriteBodies.add(newBody);		
 		return newBody;
 	}
-	
+
 	public Body addBoutonPressoir(BoutonPressoir bouton){
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.userData = bouton;
@@ -801,7 +816,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		spriteBodies.add(newBody);
 		return newBody;
 	}
-	
+
 	public Body addLevier(Levier levier){
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.userData = levier;
@@ -817,7 +832,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		spriteBodies.add(newBody);
 		return newBody;
 	}
-	
+
 	public Body addLevier(LevierCombi levier){
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.userData = levier;
@@ -833,7 +848,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		spriteBodies.add(newBody);
 		return newBody;
 	}
-	
+
 	public Body addIndicationSprite(IndicationSprite indic){
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.userData = indic;
@@ -853,7 +868,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		newBody.putToSleep();
 		return newBody;
 	}
-	
+
 	public Body addMonster(Monster monsterData, float coef){
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.userData = monsterData;
@@ -863,7 +878,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		md.mass = 100.0f;
 		bodyDef.massData = md;
 		Body newBody = world.createBody(bodyDef);
-		
+
 		PolygonDef sd = new PolygonDef();		
 		sd.density = 5000.0f;
 		sd.friction = 1.0f;
@@ -894,7 +909,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		else {
 			sd.setAsBox(characterData.getCharBodyWidth()/2, characterData.getCharBodyHeight()/2);
 		}
-		
+
 		// Ajoute un Sensor pour savoir si le character est au sol
 		PolygonDef groundSensor = new PolygonDef();
 		groundSensor.isSensor=true;
@@ -922,7 +937,6 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			return ch2_body;
 		}
 		else{
-			System.out.println("new perso");
 			Body perso = world.createBody(bodyDef);
 			perso.createShape(sd);
 			perso.createShape(groundSensor);
@@ -936,7 +950,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		if(!(body.getUserData() instanceof Sprite)){
 			return null;
 		}
-		
+
 		Sprite userData = (Sprite)body.getUserData();
 		//int newW = (int) (userData.w*w);
 		//int newH = (int) (userData.h*h);
@@ -944,7 +958,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		//userData.y = userData.y - (newH - userData.h); //nb : je ne pense pas qu'il faille diviser par 2(sinon grandit dans le sol)
 		//userData.w = newW;
 		//userData.h = newH;
-		
+
 		Vec2 b2dcoord = Global.getBox2DCoordinates(((Sprite)userData).x, ((Sprite)userData).y);
 		Vec2 b2position = new Vec2(b2dcoord.x+((Sprite)userData).w/2, b2dcoord.y-((Sprite)userData).h/2);
 		BodyDef bodyDef = new BodyDef();
@@ -953,7 +967,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		MassData md = new MassData();
 		md.mass = body.getMass();
 		bodyDef.massData = md;
-		
+
 		Body newBody = world.createBody(bodyDef);		
 		Shape shape = body.getShapeList();
 		do {
@@ -970,7 +984,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			newBody.createShape(sd);			
 			shape = shape.getNext();
 		} while(shape!=null);
-		
+
 		if(ch1_body.equals(body)){
 			ch1_body = newBody;
 		}
@@ -984,10 +998,10 @@ public class GameplayState extends BasicGameState implements MouseListener{
 				}
 			}
 		}
-		
+
 		world.destroyBody(body);
 		body = null;
-		
+
 		return newBody;
 	}
 	public Body modifyBodySize(Body body, float h, float w)//nb : rajout d'un parametre pour pouvoir grossir uniquement
@@ -995,7 +1009,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		if(!(body.getUserData() instanceof Sprite)){
 			return null;
 		}
-		
+
 		Sprite userData = (Sprite)body.getUserData();
 		int newW = (int) (userData.w*w);
 		int newH = (int) (userData.h*h);
@@ -1003,7 +1017,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		userData.y = userData.y - (newH - userData.h); 
 		userData.w = newW;
 		userData.h = newH;
-		
+
 		Vec2 b2dcoord = Global.getBox2DCoordinates(((Sprite)userData).x, ((Sprite)userData).y);
 		Vec2 b2position = new Vec2(b2dcoord.x+((Sprite)userData).w/2, b2dcoord.y-((Sprite)userData).h/2);
 		BodyDef bodyDef = new BodyDef();
@@ -1012,10 +1026,10 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		MassData md = new MassData();
 		md.mass = body.getMass();
 		bodyDef.massData = md;
-		
+
 		Body newBody = world.createBody(bodyDef);		
 		Shape shape = body.getShapeList();
-			
+
 		while(shape!=null){
 			PolygonDef sd = new PolygonDef();
 			sd.density = shape.m_density;
@@ -1030,7 +1044,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			newBody.createShape(sd);			
 			shape = shape.getNext();
 		}
-		
+
 		if(ch1_body.equals(body)){
 			ch1_body = newBody;
 		}
@@ -1044,10 +1058,10 @@ public class GameplayState extends BasicGameState implements MouseListener{
 				}
 			}
 		}
-		
+
 		world.destroyBody(body);
 		body = null;
-		
+
 		return newBody;
 	}
 	public Body getBodyForUserData(Object userData){
@@ -1069,16 +1083,30 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		}		
 		return null;
 	}
-	
+
 	@Override
 	public void mouseClicked(int button, int x, int y, int clickCount){
 		if(this.isFinished){
 			Save.getInstance().levelSaveForLevelID(this.currentLevel.getLevelID()).
-				setSavedLevelData(this.currentLevelState.getNbKeys(), true, true);
+			setSavedLevelData(this.currentLevelState.getNbKeys(), true, true);
 			Save.getInstance().save();
 			selection = this.uiWin.mouseClicked(button, x, y, clickCount, this);
 			if(selection == Game.GO_TO_NEXT_LEVEL){
-				this.ChooseLevel(this.currentLevel.getLevelID()+1);
+				int id = this.currentLevel.getLevelID();
+				if(id == 5){
+					if(Save.getInstance().getTotalNumberOfUnlockedKeys()
+							- Save.getInstance().getTotalNumberOfKeys() >= 0){
+						id = 7;
+					}
+					else {
+						id = 6;
+					}
+					endOfGame = true;
+				}
+				else {
+					id++;
+				}
+				this.ChooseLevel(id);
 				this.music_changed = true;
 				selection = Game.NARRATIVE_STATE;	
 			}		

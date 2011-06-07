@@ -66,14 +66,14 @@ public class Level3 extends Level {
 		ArrayList<Body> b1 = new ArrayList<Body>();
 		b1.add(oMurLevierBody);
 		
-		Obstacle oMurLevier2 = new Obstacle(180,0,10,60);
+		Obstacle oMurLevier2 = new Obstacle(140,0,10,60);
 		oMurLevier2.Hidden(true);
 		sprites.add(oMurLevier2);
 		Body oMurLevierBody2 = myState.addObstacle(oMurLevier2);
 		b1.add(oMurLevierBody2);
 		
 		//mur levier y
-		Obstacle oMurLevier3 = new Obstacle(180,0,10,60);
+		Obstacle oMurLevier3 = new Obstacle(140,0,10,60);
 		sprites.add(oMurLevier3);
 		Body oMurLevierBody3 = myState.addObstacle(oMurLevier3);
 		ArrayList<Body> b2 = new ArrayList<Body>();
@@ -123,7 +123,7 @@ public class Level3 extends Level {
 		
 		
 		//plateforme
-		Wall w3 = createWall(0,60,200,20); 
+		Wall w3 = createWall(0,60,150,20); 
 		w3.setImage("newherbe2.png");
 		w3.image = w3.image.getSubImage(0,15,410,50);
 		
@@ -131,7 +131,7 @@ public class Level3 extends Level {
 		w4.setImage("newherbe2.png");
 		w4.image = w4.image.getSubImage(0,15,410,50);
 		
-		Wall w5 = createWall(320,100,100,10); 
+		Wall w5 = createWall(310,105,100,10); 
 		w5.setImage("newherbe2.png");
 		w5.image = w5.image.getSubImage(0,15,410,50);		
 		//createObstacle(420,10,10,90);
@@ -142,7 +142,7 @@ public class Level3 extends Level {
 		//state.modifyBodySize(b, 0.8f, 0.8f);		
 		this.character2 = addCharacterWithPoints(550,450,0.75f);	
 		//character1.setPower(Power.PETIT);
-		character2.setPower(Power.PETIT);
+		//character2.setPower(Power.PETIT);
 		/*Body b = state.getBodyForUserData(this.character1);
 		state.modifyBodySize(b, 0.5f, 0.5f);
 		Body b2 = state.getBodyForUserData(this.character2);

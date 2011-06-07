@@ -6,9 +6,9 @@ import org.jbox2d.common.Vec2;
 
 public class Witch extends Monster {
 	private final static boolean ISDEBUG = false;
-	private final static int FIREBALL_RATE_SLOW = 1000;
+	private final static int FIREBALL_RATE_SLOW = 5000;
 	private final static int FIREBALL_RATE_NORMAL = 3000;
-	private final static int FIREBALL_RATE_FAST = 5000;
+	private final static int FIREBALL_RATE_FAST = 1000;
 	private int fireballPreparation = 0;
 	private int currentPreparationTime = FIREBALL_RATE_SLOW;
 
