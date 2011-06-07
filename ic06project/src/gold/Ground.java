@@ -10,6 +10,7 @@ public class Ground extends Sprite{
 	protected static String im="sol-pourri-v56.png";
 	protected static final String IM1="sol-pourri-v56.png";
 	protected static final String IM2="sol-un-peu-mieux-v2.png";
+	protected static final String IM3="sol-niveau5.png";
 	
 	public Ground(){
 		super();

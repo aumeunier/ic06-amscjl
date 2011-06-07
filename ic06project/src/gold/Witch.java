@@ -16,6 +16,7 @@ public class Witch extends Monster {
 		super(_x, _y, _w, _h);
 		this.staticMonster = false;
 		this.setHealth(5);
+		this.setImage("dragon.png");
 	}
 	
 	@Override

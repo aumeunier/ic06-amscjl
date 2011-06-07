@@ -9,8 +9,8 @@ public class Level5 extends Level {
 	public Level5(GameplayState state, LevelSave model){	
 		super(state,model);
 		this.levelID = 5; // Do not forget to update that !!
-		this.setBackgroundImage("6362779_s.jpg");
-		Ground.setim(Ground.IM1);
+		this.setBackgroundImage("58a8ac8efbea1e681975348d60b40915.jpg");
+		Ground.setim(Ground.IM3);
 
 		// Place a ground wall
 		createWall(0,Global.GAMEPLAYHEIGHT-10,Global.GAMEPLAYWIDTH,10);		
@@ -88,7 +88,7 @@ public class Level5 extends Level {
 		this.character2 = addCharacterWithPoints(550,0,0.75f);
 		
 
-		Witch boss = new Witch(550,450,50,50);
+		Witch boss = new Witch(550,450,80,80);
 		sprites.add(boss);
 		myState.addMonster(boss, 1.0f);	
 		boss.setBorns(new Vec2(0,450), new Vec2(800,450));
