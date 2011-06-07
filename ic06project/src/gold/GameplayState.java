@@ -246,7 +246,6 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		boolean char1CanMove = (char1CanJump || !char1.isColliding) && !char1.isSlipping;
 		boolean char2CanMove = (char2CanJump || !char2.isColliding) && !char2.isSlipping;
 		
-
 		if(char1CanJump){
 			if(char1.isFlying()){
 				if(input.isKeyDown(Input.KEY_Z)){
@@ -255,16 +254,19 @@ public class GameplayState extends BasicGameState implements MouseListener{
 				}
 			}
 			else if(input.isKeyPressed(Input.KEY_Z)){
+				System.out.println("KEY_Z_normal");
 				ch1_body.applyImpulse(new Vec2(0, SPEED_JUMP), ch1_body.getWorldCenter());	
 				char1.isFalling = true;
 			}
 			else if(char1.shouldJumpAfterRebound()){
+				System.out.println("KEY_Z_jump");
 				ch1_body.applyImpulse(new Vec2(0, SPEED_JUMP/3), ch1_body.getWorldCenter());	
 				char1.setJumpAfterRebound(false);
 			}
 		}
 		else if(!char1.isSlipping && char1.isRebond()){
 			if(input.isKeyDown(Input.KEY_Z)){
+				System.out.println("KEY_Z_isrebond");
 				char1.setJumpAfterRebound(true);		
 			}
 		}
@@ -301,16 +303,19 @@ public class GameplayState extends BasicGameState implements MouseListener{
 				}
 			}
 			else if(input.isKeyPressed(Input.KEY_UP)){
+				System.out.println("KEY_up_normal");
 				ch2_body.applyImpulse(new Vec2(0, SPEED_JUMP), ch2_body.getWorldCenter());	
 				char2.isFalling = true;
 			}
 			else if(char2.shouldJumpAfterRebound()){
+				System.out.println("KEY_Up_jump");
 				ch2_body.applyImpulse(new Vec2(0, SPEED_JUMP/3), ch2_body.getWorldCenter());	
 				char2.setJumpAfterRebound(false);
 			}
 		}
 		else if(!char2.isSlipping && char2.isRebond()){
-			if(input.isKeyDown(Input.KEY_Z)){
+			if(input.isKeyDown(Input.KEY_UP)){
+				System.out.println("KEY_Z_isrebond");
 				char2.setJumpAfterRebound(true);		
 			}
 		}
@@ -337,6 +342,10 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			ch2_body.m_linearVelocity.x = 0;			
 			char2.straight();
 		}
+		
+		// Remove the unhandled events
+		input.clearKeyPressedRecord();
+
 		
 		if((char1.isPetit())&&(char1.shouldChangeSize)){
 			modifyBodySize(getBodyForUserData(char1),(float)0.5,(float)0.5);

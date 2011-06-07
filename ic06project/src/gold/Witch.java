@@ -3,7 +3,7 @@ package gold;
 import org.jbox2d.common.Vec2;
 
 public class Witch extends Monster {
-	private final static boolean ISDEBUG = true;
+	private final static boolean ISDEBUG = false;
 	private final static int FIREBALL_RATE = 3000;
 	private int fireballPreparation = 0;
 

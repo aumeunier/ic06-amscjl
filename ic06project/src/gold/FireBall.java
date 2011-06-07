@@ -64,6 +64,9 @@ public class FireBall extends Sprite {
 	}
 
 	public float getAngle(){
+		if(x==0){
+			return 90;
+		}
 		return (float) Math.cos(-y/x);
 	}
 	@Override
