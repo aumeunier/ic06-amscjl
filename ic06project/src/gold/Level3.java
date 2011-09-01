@@ -67,7 +67,7 @@ public class Level3 extends Level {
 		b1.add(oMurLevierBody);
 		
 		Obstacle oMurLevier2 = new Obstacle(140,0,10,60);
-		oMurLevier2.Hidden(true);
+		oMurLevier2.setHidden(true);
 		sprites.add(oMurLevier2);
 		Body oMurLevierBody2 = myState.addObstacle(oMurLevier2);
 		b1.add(oMurLevierBody2);
@@ -138,7 +138,7 @@ public class Level3 extends Level {
 		
 		// Place the first character
 		this.character1 = addCharacterWithPoints(600,0,0.75f);
-		Body b = state.getBodyForUserData(this.character1);
+		//Body b = state.getBodyForUserData(this.character1);
 		//state.modifyBodySize(b, 0.8f, 0.8f);		
 		this.character2 = addCharacterWithPoints(550,450,0.75f);	
 		//character1.setPower(Power.PETIT);

@@ -2,10 +2,9 @@ package gold;
 
 import java.util.ArrayList;
 
-import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 
-public class BoutonDeplace extends BoutonPressoir {
+public class BoutonDeplace extends Button {
 	
 	String sens ;
 	Body theBody;
@@ -25,24 +24,12 @@ public class BoutonDeplace extends BoutonPressoir {
 		/*for (Body bx : relatedBody) {
 				((PlateformeMissile)bx.getUserData()).bouge(sens);
 		}*/
-		
-		if(poids==1)
-			this.setImage("Boutonactif1.png");
-		else if(poids==2)
-			this.setImage("Boutonactif2.png");
-		else if(poids==3)
-			this.setImage("Boutonactif3.png");
+		this.updateImage();
 	}
 
 	public void desactivate(){
 		this.setActivated(false);
-		
-		if(poids==1)
-			this.setImage("Bouton1.png");
-		else if(poids==2)
-			this.setImage("Bouton2.png");
-		else if(poids==3)
-			this.setImage("Bouton3.png");
+		this.updateImage();
 	}
 	
 	public String getsens(){

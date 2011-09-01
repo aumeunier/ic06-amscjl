@@ -2,7 +2,6 @@ package gold;
 
 import java.util.ArrayList;
 
-import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.ContactListener;
 import org.jbox2d.dynamics.contacts.ContactPoint;
 import org.jbox2d.dynamics.contacts.ContactResult;
@@ -62,13 +61,13 @@ public class MyContactListener implements ContactListener {
 				((Character)s1).setAtExit(true);
 			}
 			else if((s1 instanceof Wall || s1 instanceof Obstacle || s1 instanceof Ground
-					|| s1 instanceof BoutonPressoir || s1 instanceof BoutonElevator)
+					|| s1 instanceof Button || s1 instanceof BoutonElevator)
 					&& s2 instanceof Character){
 				((Character)s2).isColliding = true;
 			}
 			else if(s1 instanceof Character && 
 					(s2 instanceof Wall || s2 instanceof Obstacle || s2 instanceof Ground
-					|| s2 instanceof BoutonPressoir || s2 instanceof BoutonElevator)){
+					|| s2 instanceof Button || s2 instanceof BoutonElevator)){
 				((Character)s1).isColliding = true;
 			}
 		}
@@ -130,13 +129,13 @@ public class MyContactListener implements ContactListener {
 			Sprite s2 = (Sprite)point.shape2.getBody().getUserData();
 
 			// Character not on BouttonPressoir anymore
-			if(s1 instanceof BoutonPressoir && s2 instanceof Character){
+			if(s1 instanceof Button && s2 instanceof Character){
 				((Character)s2).setBouton(0);
-				((BoutonPressoir)s1).check();			
+				((Button)s1).check();			
 			}
-			else if(s1 instanceof Character && s2 instanceof BoutonPressoir){
+			else if(s1 instanceof Character && s2 instanceof Button){
 				((Character)s1).setBouton(0);
-				((BoutonPressoir)s2).check();		
+				((Button)s2).check();		
 			}
 
 			// Character not in Exit body anymore

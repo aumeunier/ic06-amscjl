@@ -1,7 +1,5 @@
 package gold;
 
-import org.jbox2d.dynamics.Body;
-import java.util.ArrayList;
 
 public abstract class Declencheur extends Sprite {
 	protected boolean isActivated;

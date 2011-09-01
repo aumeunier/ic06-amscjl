@@ -24,7 +24,9 @@ public class Level5 extends Level {
 		//plateforme en haut à gauche
 		createGround(0,100,100,10);	
 		//plateforme en haut à droite
-		createGround(200,100,Global.GAMEPLAYWIDTH-200,10);	
+		createGround(200,100,Global.GAMEPLAYWIDTH-300,10);	
+		createGround(690,110,10,50);	
+		createGround(700,150,100,10);	
 		
 		PlateformeMissile platmiss=new PlateformeMissile(0,110,80,10);
 		ArrayList<Vec2> shape = new ArrayList<Vec2>();
@@ -42,7 +44,7 @@ public class Level5 extends Level {
 		createBoutonBombarde(10,85,30,15,miss);
 		createBoutonDeplace(0,Global.GAMEPLAYHEIGHT-115,30,15,miss,"left");
 		createBoutonDeplace(Global.GAMEPLAYWIDTH-30,Global.GAMEPLAYHEIGHT-115,30,15,miss,"right");
-		BoutonCharge bouton=new BoutonCharge(Global.GAMEPLAYWIDTH-100,85,30,15,miss);
+		BoutonCharge bouton=new BoutonCharge(Global.GAMEPLAYWIDTH-100+30,150-15,30,15,miss);
 		sprites.add(bouton);
 		myState.addBoutonPressoir(bouton);
 		
@@ -62,7 +64,7 @@ public class Level5 extends Level {
 		Ground2 g2 = new Ground2(280,Global.GAMEPLAYHEIGHT-230,80,10);
 		sprites.add(g2);
 		myState.addGround(g2);
-		Ground2 g3 = new Ground2(440,Global.GAMEPLAYHEIGHT-155,80,10);
+		Ground2 g3 = new Ground2(420,Global.GAMEPLAYHEIGHT-155,100,10);
 		sprites.add(g3);
 		myState.addGround(g3);
 		Ground2 g4 = new Ground2(580,Global.GAMEPLAYHEIGHT-140,80,10);
@@ -71,7 +73,7 @@ public class Level5 extends Level {
 		Ground2 g5 = new Ground2(440,Global.GAMEPLAYHEIGHT-280,80,10);
 		sprites.add(g5);
 		myState.addGround(g5);
-		Ground2 g6 = new Ground2(600,Global.GAMEPLAYHEIGHT-270,80,10);
+		Ground2 g6 = new Ground2(590,Global.GAMEPLAYHEIGHT-260,80,10);
 		sprites.add(g6);
 		myState.addGround(g6);
 		Ground2 g7 = new Ground2(0,Global.GAMEPLAYHEIGHT-240,50,10);

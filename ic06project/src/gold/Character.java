@@ -5,34 +5,41 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
-import org.jbox2d.collision.Shape;
 import org.newdawn.slick.Color;
 
 
 public class Character extends Sprite{
-	private Power power = Power.NONE;
-	public boolean isGoingRight = false;
-	public boolean isGoingLeft = false;
-	public boolean isFalling = false;
-	public boolean isColliding = false;
-	public boolean isSlipping = false;
-	private boolean isDead = false;
-	private boolean isAtExit = false;
-	private boolean isTransported = false;
-	private boolean destructionPowerActivated = false;
-	private boolean shouldJumpAfterRebound = false;
-	private int boutonpressoir = 0;
-	public int X_transported = 0;
-	public int Y_transported = 0;
-	protected int health = 1;
-	private boolean avoidDoubleChangeFlag = true;
 	private final static int FEE_PNG_W = 348;
 	private final static int FEE_PNG_H = 260;
 	private final static int CHAR_W = (int) (FEE_PNG_W/4);
 	private final static int CHAR_H = (int) (FEE_PNG_H/4);
 	private final static float CHAR_W_BODY_RATIO = 0.5f;
 	private final static float CHAR_H_BODY_RATIO = 1.0f;
-	private Timer timer;
+	
+	// Booleans on the movement state of the Character
+	// TODO: use bytes
+	public boolean isGoingRight = false;
+	public boolean isGoingLeft = false;
+	public boolean isFalling = false;
+	public boolean isColliding = false;
+	public boolean isSlipping = false;
+	private boolean isAtExit = false;
+	private boolean isTransported = false;
+	protected boolean isSwimming=false;
+	private boolean shouldJumpAfterRebound = false;
+	
+	// Character Health 
+	protected int health = 1;
+	private boolean isDead = false;
+	private Timer timer; /* Used for self destruction (clones) */
+	// Character power
+	private Power power = Power.NONE; /* The current Power of the Character */
+	private boolean destructionPowerActivated = false;
+
+	private int boutonpressoir = 0; /* Strength put on the button pressoir */
+	// Teleportation stuff TODO rename/remove
+	public int X_transported = 0;
+	public int Y_transported = 0;
 	
 	public Character(){
 		super(0,0,CHAR_W,CHAR_H);
@@ -50,6 +57,8 @@ public class Character extends Sprite{
 		setAnimation("fee-de-face.png",CHAR_W,CHAR_H);
 	}
 
+	
+	// Health management
 	public void setHealth(int _health){
 		this.health = _health;
 	}
@@ -64,6 +73,8 @@ public class Character extends Sprite{
 		}
 	}
 	
+	
+	// Power management
 	public void changePower(){
 		this.setFilter(Color.white);
 		if(isIntangible()){
@@ -105,6 +116,8 @@ public class Character extends Sprite{
 			this.setFilter(Color.white);
 		}
 	}
+	
+	/** Self destruction after 10s (used for double) */
 	public void initTimer(){
 		timer = new Timer(10000, new ActionListener(){
 			public void actionPerformed(ActionEvent evt) {
@@ -113,12 +126,35 @@ public class Character extends Sprite{
 		});
 		timer.start();
 	}
-	
+	/** Self-destruction */
 	public void endOfTimer(){
 		shouldBeDestroy = true;
 		timer.stop();
 	}
-	
+
+	// Directions
+	public void goLeft(){
+		if(!isGoingLeft){			
+			isGoingRight = false;
+			isGoingLeft = true;
+			changeDirection();
+		}
+	}	
+	public void goRight(){
+		if(!isGoingRight){			
+			isGoingRight = true;
+			isGoingLeft = false;
+			changeDirection();
+		}
+	}	
+	public void straight(){
+		if(isGoingRight || isGoingLeft){			
+			isGoingRight = false;
+			isGoingLeft = false;
+			changeDirection();
+		}
+	}
+	/** Change the image depending on the direction of the character */
 	private void changeDirection(){
 		if(isGoingLeft && isFat()){
 			setAnimation("grosse-vache-incoming.png",CHAR_W,CHAR_H);
@@ -149,31 +185,7 @@ public class Character extends Sprite{
 		}
 	}
 	
-	
-	public void goLeft(){
-		if(!isGoingLeft){			
-			isGoingRight = false;
-			isGoingLeft = true;
-			changeDirection();
-		}
-	}
-	
-	public void goRight(){
-		if(!isGoingRight){			
-			isGoingRight = true;
-			isGoingLeft = false;
-			changeDirection();
-		}
-	}
-	
-	public void straight(){
-		if(isGoingRight || isGoingLeft){			
-			isGoingRight = false;
-			isGoingLeft = false;
-			changeDirection();
-		}
-	}
-	
+	// Getters
 	public boolean isFlying(){
 		return power==Power.FLYING;
 	}
@@ -219,25 +231,14 @@ public class Character extends Sprite{
 	public boolean dedouble(){
 		return power==Power.DOUBLE;
 	}
-	public void setDead(boolean _dead){
-		isDead = _dead;
-	}
 	public Power getPower(){
 		return power;
 	}
 	public boolean isAtExit(){
 		return isAtExit;
 	}
-	public void setAtExit(boolean b){
-		isAtExit = b;
-	}
 	public boolean isTransported(){
 		return isTransported;
-	}
-	public void setTransported(boolean b, int x, int y){
-		isTransported = b;
-		X_transported=x;
-		Y_transported=y;
 	}
 	public float getCharWidth(){
 		return this.w;
@@ -251,7 +252,23 @@ public class Character extends Sprite{
 	public int getCharBodyHeight(){
 		return (int) (this.h*CHAR_H_BODY_RATIO);		
 	}
+	public int getBouton(){
+		return boutonpressoir;
+	}
 	
+
+	// Setters
+	public void setDead(boolean _dead){
+		isDead = _dead;
+	}
+	public void setAtExit(boolean b){
+		isAtExit = b;
+	}
+	public void setTransported(boolean b, int x, int y){
+		isTransported = b;
+		X_transported=x;
+		Y_transported=y;
+	}
 	public void setPower(Power _power){
 
 		if((_power==Power.PETIT && power!=Power.PETIT) ||(power==Power.PETIT && _power!=Power.PETIT)){
@@ -260,30 +277,19 @@ public class Character extends Sprite{
 		else if(((_power==Power.REBOND) && (power!=Power.REBOND)))
 			shouldRebond=true;
 		else if(((_power==Power.NAGE) && (power!=Power.NAGE)))
-			shouldNage=true;
+			isSwimming=true;
 		
 		power = _power;
 		changePower();
 	}
-	public boolean getAvoidDoubleFlag(){
-		return avoidDoubleChangeFlag;
-	}
-	public void changeAvoidDoubleFlagState(){
-		avoidDoubleChangeFlag=!avoidDoubleChangeFlag;
-	}
-	
-	public int getBouton(){
-		return boutonpressoir;
-	}
-	public void setBouton(int n){
-		boutonpressoir=n;
-	}
-	
 	public void setJumpAfterRebound(boolean flag){
 		this.shouldJumpAfterRebound = flag;
 	}
 	public boolean shouldJumpAfterRebound(){
 		return shouldJumpAfterRebound;
+	}
+	public void setBouton(int n){
+		boutonpressoir=n;
 	}
 	 
 }

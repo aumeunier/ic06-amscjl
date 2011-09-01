@@ -2,10 +2,9 @@ package gold;
 
 import java.util.ArrayList;
 
-import org.jbox2d.collision.MassData;
 import org.jbox2d.dynamics.Body;
 
-public class BoutonBombarde extends BoutonPressoir {
+public class BoutonBombarde extends Button {
 	
 	boolean shouldBombard;
 	Body aBombarde;
@@ -24,23 +23,12 @@ public class BoutonBombarde extends BoutonPressoir {
 				aBombarde=bx;
 			}
 		}
-		if(poids==1)
-			this.setImage("Boutonactif1.png");
-		else if(poids==2)
-			this.setImage("Boutonactif2.png");
-		else if(poids==3)
-			this.setImage("Boutonactif3.png");
+		this.updateImage();
 	}
 
 	public void desactivate(){
 		this.setActivated(false);
-		
-		if(poids==1)
-			this.setImage("Bouton1.png");
-		else if(poids==2)
-			this.setImage("Bouton2.png");
-		else if(poids==3)
-			this.setImage("Bouton3.png");
+		this.updateImage();
 	}
 	
 	public void bombarde(){

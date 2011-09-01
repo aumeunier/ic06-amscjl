@@ -1,7 +1,5 @@
 package gold;
 
-import java.util.ArrayList;
-
 import org.jbox2d.common.Vec2;
 
 public class Witch extends Monster {

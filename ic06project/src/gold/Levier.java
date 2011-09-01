@@ -33,11 +33,11 @@ public class Levier extends Declencheur {
 			
 			if(isActivated)
 			{
-				((Sprite)(bx.getUserData())).Hidden(!((Sprite)(bx.getUserData())).isHidden());
+				((Sprite)(bx.getUserData())).setHidden(!((Sprite)(bx.getUserData())).isHidden());
 				this.setImage("levier-2.png");	
 			}
 			else{
-				((Sprite)(bx.getUserData())).Hidden(!((Sprite)(bx.getUserData())).isHidden());
+				((Sprite)(bx.getUserData())).setHidden(!((Sprite)(bx.getUserData())).isHidden());
 				this.setImage("levier-1.png");
 			}			 
 		}		

@@ -12,6 +12,11 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+/**
+ * @deprecated
+ * @author aurelien
+ *
+ */
 public class MainMenuGameState extends BasicGameState implements MouseListener {
 	static final boolean optionsActivated = false;
 	static final float SCALE_DOWN_W = 300.0f/500.0f;
@@ -100,7 +105,7 @@ public class MainMenuGameState extends BasicGameState implements MouseListener {
 		titleImage.draw(TITLE_X,TITLE_Y);
 		newGameImage.draw(NEWGAME_X,NEWGAME_Y);
 		loadGameImage.draw(LOADGAME_X,LOADGAME_Y);
-		if(this.optionsActivated){
+		if(MainMenuGameState.optionsActivated){
 			optionsImage.draw(OPTIONS_X,OPTIONS_Y);
 		}
 

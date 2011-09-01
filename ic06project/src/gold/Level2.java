@@ -51,7 +51,7 @@ public class Level2 extends Level {
 		//Création des leviers et de ce qu'ils déclenchent
 		
 		Source sourceG = createSource(0,265,40,40,Power.FAT); 		//Pouvoir du Gros
-		sourceG.Hidden(true);
+		sourceG.setHidden(true);
 		Body sourceGBody = state.getBodyForUserData(sourceG); 			//Body du pouvoir du Gros
 		Wall wall = createWall(540,250,10,130);							//Mur plateforme sautante
 		Body wallBody = state.getBodyForUserData(wall);					//Body du Mur
@@ -180,8 +180,8 @@ public class Level2 extends Level {
 		Body arriveeBody = state.getBodyForUserData(arriveeWall);
 		ArrayList<Body> b4 = new ArrayList<Body>();
 		b4.add(arriveeBody);
-		BoutonPressoir B2 = createBoutonPressoir(680, 87, 30, 18, b4, 3);
-		B2.setResteActive(true);
+		Button B2 = createBoutonPressoir(680, 87, 30, 18, b4, 3);
+		B2.setStayActive(true);
 		createExit(Global.GAMEPLAYWIDTH-45,40,45,65);
 		
 		// Place the first character

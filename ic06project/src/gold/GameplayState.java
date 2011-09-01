@@ -28,7 +28,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	private int stateID;
 	private int selection;
 	private Level currentLevel;
-	private int lvlIdForNarrative;
+	//private int lvlIdForNarrative;
 	private LevelState currentLevelState;
 	private World world;
 	private Body ch1_body;
@@ -161,7 +161,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 				((NarrativeState)(sbg.getState(selection))).ChooseLevel(id);				
 			}
 			else if(selection == Game.HELP_STATE){
-				((HelpState)(sbg.getState(selection))).setPreviousState(this.getID());
+				((HelpState)(sbg.getState(selection))).setPreviousState(Game.GAMEPLAY_STATE);
 			}
 			sbg.enterState(selection);	
 		}
@@ -383,13 +383,13 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			modifyBodyRebond(getBodyForUserData(char2),(float)0.9);
 			char2.shouldRebond=false;
 		}
-		if((char1.isNage())&& char1.shouldNage){
+		if((char1.isNage())&& char1.isSwimming){
 			modifyBodyRebond(getBodyForUserData(char1),(float)0.0);
-			char1.shouldNage=false;
+			char1.isSwimming=false;
 		}
-		if((char2.isNage())&& char2.shouldNage){
+		if((char2.isNage())&& char2.isSwimming){
 			modifyBodyRebond(getBodyForUserData(char2),(float)0.0);
-			char2.shouldNage=false;
+			char2.isSwimming=false;
 		}
 
 		char1.setCoordinatesFromBody(ch1_body);
@@ -801,7 +801,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		return newBody;
 	}
 
-	public Body addBoutonPressoir(BoutonPressoir bouton){
+	public Body addBoutonPressoir(Button bouton){
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.userData = bouton;
 		Vec2 b2dcoord = Global.getBox2DCoordinates(bouton.x, bouton.y);

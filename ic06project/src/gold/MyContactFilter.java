@@ -15,17 +15,17 @@ public class MyContactFilter implements ContactFilter {
 		// Premier cas b1 est le groundsensor
 		if(shape1.getUserData()==GameplayState.GROUND_SENSOR_NAME){
 			Sprite s2 = (Sprite)b2.getUserData();
-			if(s2 instanceof BoutonPressoir){
-				((Character)b1.getUserData()).setBouton(((BoutonPressoir)s2).getNum());
-				((BoutonPressoir)s2).check();
+			if(s2 instanceof Button){
+				((Character)b1.getUserData()).setBouton(((Button)s2).getButtonID());
+				((Button)s2).check();
 			}
 		}
 		// Deuxieme cas b2 est le groundsensor
 		else if(shape2.getUserData()==GameplayState.GROUND_SENSOR_NAME){
 			Sprite s1 = (Sprite)b1.getUserData();
-			if(s1 instanceof BoutonPressoir){
-				((Character)b2.getUserData()).setBouton(((BoutonPressoir)s1).getNum());
-				((BoutonPressoir)s1).check();
+			if(s1 instanceof Button){
+				((Character)b2.getUserData()).setBouton(((Button)s1).getButtonID());
+				((Button)s1).check();
 			}		
 		}
 

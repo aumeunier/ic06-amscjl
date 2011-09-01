@@ -251,10 +251,10 @@ protected Missile createMissile(int x, int y, int w, int h, PlateformeMissile p)
 		
 		return source;
 	}
-	protected BoutonPressoir createBoutonPressoir(int x, int y, int w, int h, ArrayList<Body> b){
+	protected Button createBoutonPressoir(int x, int y, int w, int h, ArrayList<Body> b){
 		
 		// Create a boutonpressoir object
-		BoutonPressoir bouton = new BoutonPressoir(x,y,w,h,b,1);
+		Button bouton = new Button(x,y,w,h,b,1);
 		
 		// Add it to the list of sprites of this level
 		sprites.add(bouton);
@@ -264,10 +264,10 @@ protected Missile createMissile(int x, int y, int w, int h, PlateformeMissile p)
 		
 		return bouton;
 	}
-	protected BoutonPressoir createBoutonPressoir(int x, int y, int w, int h, ArrayList<Body> b, int p){
+	protected Button createBoutonPressoir(int x, int y, int w, int h, ArrayList<Body> b, int p){
 		
 		// Create a boutonpressoir object
-		BoutonPressoir bouton = new BoutonPressoir(x,y,w,h,b,p);
+		Button bouton = new Button(x,y,w,h,b,p);
 		
 		// Add it to the list of sprites of this level
 		sprites.add(bouton);

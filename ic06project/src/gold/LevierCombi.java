@@ -51,9 +51,9 @@ public class LevierCombi extends Declencheur{
 			for (Body bx : tempBodies) 
 			{			
 				if((Sprite)(bx.getUserData()) instanceof Source) 	//doit etre caché
-						((Sprite)(bx.getUserData())).Hidden(true);
+						((Sprite)(bx.getUserData())).setHidden(true);
 				else													//doit etre affiché
-					((Sprite)(bx.getUserData())).Hidden(false);
+					((Sprite)(bx.getUserData())).setHidden(false);
 			}
 		}
 		
@@ -77,9 +77,9 @@ public class LevierCombi extends Declencheur{
 				ArrayList<Body> tempBodies = relatedBody.get(n);
 				for (Body bx : tempBodies) {
 					if((Sprite)(bx.getUserData()) instanceof Source) 	//doit etre affiché
-						((Sprite)(bx.getUserData())).Hidden(false);
+						((Sprite)(bx.getUserData())).setHidden(false);
 					else													//doit etre caché
-					((Sprite)(bx.getUserData())).Hidden(true);
+					((Sprite)(bx.getUserData())).setHidden(true);
 				}
 				break;
 			}

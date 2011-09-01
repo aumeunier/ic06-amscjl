@@ -34,6 +34,8 @@ public class MainMenuGameStateNew extends BasicGameState implements
 	private static final int MAP_BUTTON_H = 70;
 	private static final int MAP_BUTTON_W_SPACE = 10;
 	private static final int MAP_BUTTON_H_SPACE = 10;	
+	private static final int CREDITS_X = 700;
+	private static final int CREDITS_Y = 575;
 	private final static String level1imageDefault = "accueil/1-rouge.png";
 	private final static String level2imageDefault = "accueil/2-rouge.png";
 	private final static String level3imageDefault = "accueil/3-rouge.png";
@@ -191,6 +193,8 @@ public class MainMenuGameStateNew extends BasicGameState implements
 		level5image.draw(x,y,MAP_BUTTON_W,MAP_BUTTON_H);
 		
 		display.render(gc, g);
+		
+		g.drawString("Crédits", CREDITS_X, CREDITS_Y);
 	}
 
 	@Override
@@ -215,7 +219,6 @@ public class MainMenuGameStateNew extends BasicGameState implements
 	public void mouseMoved(int oldx, int oldy, int newX, int newY){
 	}
 
-	@SuppressWarnings("unused")
 	public void mouseClicked(int button, int x, int y, int clickCount){
 		int maxId = Save.getInstance().getNumberOfLoadedLevels();
 		if((x >= NEWGAME_X && x <= (NEWGAME_X + NEWGAME_W)) 
@@ -225,6 +228,10 @@ public class MainMenuGameStateNew extends BasicGameState implements
 		else if((x >= LOADGAME_X && x <= (LOADGAME_X + LOADGAME_W)) 
 				&&	(y >= LOADGAME_Y && y <= (LOADGAME_Y + LOADGAME_H))){
 			selection = Game.LOADGAME_STATE;
+		}
+		else if((x >= CREDITS_X && x <= (CREDITS_X + 100)) 
+				&&	(y >= CREDITS_Y && y <= (CREDITS_Y + 50))){
+			selection = Game.CREDITS_STATE;
 		}
 		else if((x >= MAP_X && x <= (MAP_X+3*(MAP_BUTTON_W+MAP_BUTTON_W_SPACE)))
 				&& (y >= MAP_Y && y <= (MAP_Y+(maxId/3+((maxId%3>0)?1:0))*(MAP_BUTTON_H+MAP_BUTTON_H_SPACE))) ){

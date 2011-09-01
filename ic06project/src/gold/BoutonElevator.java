@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 
-public class BoutonElevator extends BoutonPressoir {
+public class BoutonElevator extends Button {
 	
 	protected int puissance;
 	
@@ -20,12 +20,7 @@ public class BoutonElevator extends BoutonPressoir {
 			
 			bx.applyImpulse(new Vec2(0, puissance), bx.getWorldCenter());
 		}
-		if(poids==1)
-			this.setImage("Boutonactif1.png");
-		else if(poids==2)
-			this.setImage("Boutonactif2.png");
-		else if(poids==3)
-			this.setImage("Boutonactif3.png");
+		this.updateImage();
 	}
 
 	public void desactivate(){
@@ -34,12 +29,7 @@ public class BoutonElevator extends BoutonPressoir {
 			
 			bx.applyImpulse(new Vec2(0, -200), bx.getWorldCenter());
 		}
-		
-		if(poids==1)
-			this.setImage("Bouton1.png");
-		else if(poids==2)
-			this.setImage("Bouton2.png");
-		else if(poids==3)
-			this.setImage("Bouton3.png");
+		this.updateImage();
 	}
+	
 }

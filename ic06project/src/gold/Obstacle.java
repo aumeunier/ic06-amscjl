@@ -1,8 +1,5 @@
 package gold;
 
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.geom.Polygon;
-import org.newdawn.slick.geom.Shape;
 
 
 public class Obstacle extends Sprite{
