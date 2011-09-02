@@ -24,7 +24,7 @@ public class PushButtonMove extends PushButton {
 		direction = s;
 		dirtyMove = false;
 	}
-
+	
 	public String getDirection(){
 		return direction;
 	}
@@ -41,11 +41,16 @@ public class PushButtonMove extends PushButton {
 				//Vec2 b2dcoord = Global.getBox2DCoordinates(((PlateformeMissile)theSprite).xMove(), ((PlateformeMissile)theSprite).Y());
 				if(getDirection()=="left") {
 					newX = plateforme.X()-1;
-					if(newX<0) {newX = 0;}
+					if(newX<plateforme.getMinX()) {newX = plateforme.getMinX();}
+				}
+				else if(getDirection()=="right"){
+					newX=plateforme.X()+1;
+					newY = plateforme.Y();
+					//if(newX>800-plateforme.W()) {newX=800-plateforme.W();}
+					if(newX>plateforme.getMaxX()) {newX = plateforme.getMaxX();}
 				}
 				else {
-					newX=plateforme.X()+1;
-					if(newX>800-plateforme.W()) {newX=800-plateforme.W();}
+					newX = plateforme.X();
 				}
 				newY=plateforme.Y();
 				b2dcoord = Global.getBox2DCoordinates(newX, newY);

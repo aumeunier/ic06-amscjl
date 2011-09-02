@@ -1,6 +1,7 @@
 package version1.sprites.alive.monsters;
 
 import org.jbox2d.common.Vec2;
+import org.newdawn.slick.Color;
 
 import version1.sprites.Sprite;
 import version1.sprites.alive.Creature;
@@ -12,8 +13,8 @@ import version1.sprites.alive.Creature;
  */
 public class Witch extends Monster {
 	// Rates, in ms
-	private final static int FIREBALL_RATE_SLOW = 5000;
-	private final static int FIREBALL_RATE_NORMAL = 3000;
+	private final static int FIREBALL_RATE_SLOW = 4000;
+	private final static int FIREBALL_RATE_NORMAL = 2800;
 	private final static int FIREBALL_RATE_FAST = 1000;
 	
 	/** 
@@ -35,22 +36,32 @@ public class Witch extends Monster {
 	 * The Witch has a different shooting speed depending on its health
 	 */
 	public void loseHealth(int nb){
+		int goingLeft = (this.isGoingLeft())?-1:+1;
 		super.loseHealth(nb);
 		switch(this.health){
 		case 4:
-			currentPreparationTime = FIREBALL_RATE_NORMAL;
+			currentPreparationTime = FIREBALL_RATE_FAST;
+			this.setSpeed(new Vec2(goingLeft*5,0));
+			setFilter(Color.gray);
 			break;
 		case 3:
 			currentPreparationTime = FIREBALL_RATE_SLOW;
+			this.setSpeed(new Vec2(goingLeft*20,0));
+			setFilter(Color.yellow);
 			break;
 		case 2:
 			currentPreparationTime = FIREBALL_RATE_NORMAL;
+			this.setSpeed(new Vec2(goingLeft*10,0));
+			setFilter(Color.orange);			
 			break;
 		case 1:
 			currentPreparationTime = FIREBALL_RATE_FAST;
+			this.setSpeed(new Vec2(goingLeft*20,0));
+			setFilter(Color.red);
 			break;
 		default:
 			currentPreparationTime = FIREBALL_RATE_NORMAL;
+			this.setSpeed(new Vec2(goingLeft*10,0));
 			break;
 		}
 	}

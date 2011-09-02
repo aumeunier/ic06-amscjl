@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
+import org.newdawn.slick.Color;
 
 import version1.Global;
 import version1.data.LevelSave;
@@ -12,6 +13,7 @@ import version1.sprites.alive.monsters.Witch;
 import version1.sprites.decor.Ground;
 import version1.sprites.decor.GroundBackground;
 import version1.sprites.interaction.MissilePlatform;
+import version1.sprites.interaction.Transporter;
 import version1.sprites.interaction.sources.Source;
 import version1.sprites.interaction.trigger.buttons.PushButtonCharge;
 import version1.states.GameplayState;
@@ -41,13 +43,19 @@ public class Level5 extends Level {
 		createWall(0,-10,Global.GAMEPLAYWIDTH,10);
 		
 		// Top platforms
-		createGround(0,100,100,10);
-		createGround(200,100,Global.GAMEPLAYWIDTH-300,10);
+		createGround(0,150,110,10); //0,100,100,10
+		createGround(100,100,10,50);
+		createGround(110,100,100,10);//
+		createGround(320,100,Global.GAMEPLAYWIDTH-420,10);//200 au lieu de 320 -300 / -420
 		createGround(690,110,10,50);
 		createGround(700,150,100,10);	
 		
 		// Platform that can be moved and can fire missiles
-		MissilePlatform platmiss=new MissilePlatform(0,110,80,10);
+		MissilePlatform platmiss=new MissilePlatform(110,110,80,10);
+		platmiss.setFilter(Color.red);
+		platmiss.setMinX(110);
+		platmiss.setMaxX(690-80);
+		
 		ArrayList<Vec2> shape = new ArrayList<Vec2>();
 		shape.add(new Vec2(-25,-5));
 		shape.add(new Vec2(-25,5));
@@ -90,19 +98,21 @@ public class Level5 extends Level {
 		Body maplat = state.getBodyForUserData(platmiss);
 		ArrayList<Body> miss=new ArrayList<Body>() ;
 		miss.add(maplat);
-		createBoutonBombarde(10,85,30,15,miss); // Button to fire the missile
+		createBoutonBombarde(10,150-15,30,15,miss); // Button to fire the missile
 		createBoutonDeplace(0,Global.GAMEPLAYHEIGHT-115,30,15,miss,"left"); // Move left
 		createBoutonDeplace(Global.GAMEPLAYWIDTH-30,Global.GAMEPLAYHEIGHT-115,30,15,miss,"right"); // Move right
-		PushButtonCharge bouton=new PushButtonCharge(Global.GAMEPLAYWIDTH-100+30,150-15,30,15,miss); // Charge a missile
+		PushButtonCharge bouton=new PushButtonCharge(Global.GAMEPLAYWIDTH-40,150-15,30,15,miss); // Charge a missile
 		sprites.add(bouton);
 		myState.addPushButton(bouton);
 		
 		// Place sources
-		Source dedouble = createSource(0,Global.GAMEPLAYHEIGHT-300,60,60,Power.DOUBLE);		
+		Source dedouble = createSource(0,Global.GAMEPLAYHEIGHT-300,60,60,Power.DOUBLE);	
+		Transporter t1 = createTransporter(400,430,20,62,550,20);	
+		t1.setFilter(Color.red);
 		
 		// Place characters
-		this.character1 = addCharacterWithPoints(550,0,0.75f);		
-		this.character2 = addCharacterWithPoints(550,0,0.75f);
+		this.character1 = addCharacterWithPoints(550,20,0.75f);		
+		this.character2 = addCharacterWithPoints(550,20,0.75f);
 		
 		// Monster
 		Witch boss = new Witch(550,450,80,80);

@@ -29,10 +29,10 @@ public class Save {
 	String player2name;
 	/** The list of levels available to this game */
 	ArrayList<LevelSave> levels;
-	/** The number of keys unlockable in this game */
-	int totalNumberOfKeys;
-	/** The number of keys unlocked in this game */
-	int totalNumberOfUnlockedKeys;
+	/** The number of bonus unlockable in this game */
+	int totalNumberOfBonus;
+	/** The number of bonus unlocked in this game */
+	int totalNumberOfUnlockedBonus;
 	
 	// Singleton
     public static Save getInstance() {
@@ -45,8 +45,8 @@ public class Save {
 	private Save(){
 		super();
 		levels = new ArrayList<LevelSave>();
-		totalNumberOfKeys = 0;
-		totalNumberOfUnlockedKeys =0;
+		totalNumberOfBonus = 0;
+		totalNumberOfUnlockedBonus =0;
 		saveFilename = null;
 		player1name = null;
 		player2name = null;
@@ -74,7 +74,7 @@ public class Save {
 				int tempId = lvl.path("id").getIntValue();
 				String tempName = lvl.path("levelName").getValueAsText();
 				String musicFilename = lvl.path("music").getValueAsText();
-				int tempKeys = lvl.path("numberOfKeys").getIntValue();
+				int tempBonus = lvl.path("numberOfBonus").getIntValue();
 				Iterator<JsonNode> it = lvl.path("areaOnMap").getElements();
 				int[] tempArea = new int[4];
 				int i = 0;
@@ -82,9 +82,9 @@ public class Save {
 					tempArea[i] = it.next().getIntValue();
 					i++;
 				}
-				LevelSave newLevel = new LevelSave(tempId, tempName, musicFilename, tempKeys, tempArea);
+				LevelSave newLevel = new LevelSave(tempId, tempName, musicFilename, tempBonus, tempArea);
 				levels.add(newLevel);
-				totalNumberOfKeys+=tempKeys;
+				totalNumberOfBonus+=tempBonus;
 			}
 		} catch (JsonParseException e) {
 			e.printStackTrace();
@@ -95,12 +95,12 @@ public class Save {
 		}
 	}
 	/**
-	 * Load a save file and update the current names and keys information
+	 * Load a save file and update the current names and bonus information
 	 * @param filename The name of the save
 	 */
 	public void loadSave(String filename){
 		saveFilename = filename;
-		totalNumberOfUnlockedKeys = 0;
+		totalNumberOfUnlockedBonus = 0;
 		try {
 			JsonNode rootNode = loadJson(filename);
 			player1name = rootNode.path("name1").getValueAsText();
@@ -112,11 +112,11 @@ public class Save {
 				int tempId = lvl.path("id").getIntValue();
 				boolean tempUnlocked = lvl.path("unlocked").getBooleanValue();
 				boolean tempFinished = lvl.path("finished").getBooleanValue();
-				int tempKeys = lvl.path("keys").getIntValue();
+				int tempBonus = lvl.path("bonus").getIntValue();
 				LevelSave level = getLevelWithID(tempId);
 				if(level != null){
-					level.setSavedLevelDataFromSave(tempKeys, tempUnlocked, tempFinished);
-					totalNumberOfUnlockedKeys+=level.getUnlockedKeys();
+					level.setSavedLevelDataFromSave(tempBonus, tempUnlocked, tempFinished);
+					totalNumberOfUnlockedBonus+=level.getUnlockedBonus();
 				}
 			}			
 		} catch (JsonParseException e) {
@@ -131,9 +131,9 @@ public class Save {
 	 * Save the current game
 	 */
 	public void save(){
-		totalNumberOfUnlockedKeys = 0;
+		totalNumberOfUnlockedBonus = 0;
 		for(LevelSave lvlSave: levels){
-			totalNumberOfUnlockedKeys+=lvlSave.getUnlockedKeys();
+			totalNumberOfUnlockedBonus+=lvlSave.getUnlockedBonus();
 		}
 	    File file = new File(saveFilename);
 	    try {
@@ -187,7 +187,7 @@ public class Save {
 		LevelSave lvl = this.getLevelWithID(index);
 		byte b1 = (byte)((lvl.isUnlocked())?1:0);
 		byte b2 = (byte)((lvl.isFinished())?1:0);
-		byte b3 = (byte)((((lvl.getUnlockedKeys()-lvl.getUnlockableKeys()) >= 0))?1:0);
+		byte b3 = (byte)((((lvl.getUnlockedBonus()-lvl.getUnlockableBonus()) >= 0))?1:0);
 		return ((b3<< 1) << 1) + (b2 << 1) + b1;
 	}
 	/** @return the ids of all the levels */
@@ -200,33 +200,33 @@ public class Save {
 		}
 		return temp;
 	}
-	/** @return the number of keys unlockable in this game */
-	public int getTotalNumberOfKeys(){
-		return totalNumberOfKeys;
+	/** @return the number of bonus unlockable in this game */
+	public int getTotalNumberOfBonus(){
+		return totalNumberOfBonus;
 	}
-	/** @return the number of keys unlocked in this game */
-	public int getTotalNumberOfUnlockedKeys(){
-		return totalNumberOfUnlockedKeys;
+	/** @return the number of bonus unlocked in this game */
+	public int getTotalNumberOfUnlockedBonus(){
+		return totalNumberOfUnlockedBonus;
 	}	
 	/** 
 	 * @param id the level's id
-	 * @return the number of keys unlockable in the given level
+	 * @return the number of bonus unlockable in the given level
 	 */
-	public int getUnlockableKeysForLevelID(int id){	
+	public int getUnlockableBonusForLevelID(int id){	
 		LevelSave level = getLevelWithID(id);
 		if(level != null){
-			return level.getUnlockableKeys();
+			return level.getUnlockableBonus();
 		}
 		return 0;
 	}
 	/**
 	 * @param id the level's id
-	 * @return the number of keys already unlocked in the given level
+	 * @return the number of bonus already unlocked in the given level
 	 */
-	public int getUnlockedKeysForLevelID(int id){
+	public int getUnlockedBonusForLevelID(int id){
 		LevelSave level = getLevelWithID(id);
 		if(level != null){
-			return level.getUnlockedKeys();
+			return level.getUnlockedBonus();
 		}
 		return 0;
 	}

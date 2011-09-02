@@ -70,6 +70,7 @@ import version1.ui.UIPause;
  *
  */
 public class GameplayState extends BasicGameState implements MouseListener{
+	static int ij = 0;
 	public final static float LOW_BODY_CHARACTER_RATIO = 1.0f/8.0f;
 	private final static int SPEED_X = 20;
 	private final static int SPEED_JUMP = 400;
@@ -203,7 +204,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			break;
 		}
 		if(this.currentLevel !=null){
-			this.uiGameplay.setLevelInformation(save.getName(), 0, save.getUnlockableKeys(), levelIndex);
+			this.uiGameplay.setLevelInformation(save.getName(), 0, save.getUnlockableBonus(), levelIndex);
 			this.uiGameplay.onEnter();
 		}
 	}
@@ -222,7 +223,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		if(this.isFinished){
 			// We save the result
 			Save.getInstance().levelSaveForLevelID(this.currentLevel.getLevelID()).
-			setSavedLevelData(this.currentLevelState.getNbKeys(), true, true);
+			setSavedLevelData(this.currentLevelState.getNbBonus(), true, true);
 			Save.getInstance().save();
 			selection = this.uiWin.mouseClicked(button, x, y, clickCount, this);
 			
@@ -232,8 +233,8 @@ public class GameplayState extends BasicGameState implements MouseListener{
 				
 				// If it was the last level, we display an ending screen depending on the number of collected bonuses
 				if(id == 5){
-					if(Save.getInstance().getTotalNumberOfUnlockedKeys()
-							- Save.getInstance().getTotalNumberOfKeys() >= 0){
+					if(Save.getInstance().getTotalNumberOfUnlockedBonus()
+							- Save.getInstance().getTotalNumberOfBonus() >= 0){
 						id = 7;
 					}
 					else {
@@ -292,8 +293,8 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			if(selection == Game.NARRATIVE_STATE){
 				int id = 1;
 				if(endOfGame){
-					if(Save.getInstance().getTotalNumberOfUnlockedKeys()
-							- Save.getInstance().getTotalNumberOfKeys() >= 0){
+					if(Save.getInstance().getTotalNumberOfUnlockedBonus()
+							- Save.getInstance().getTotalNumberOfBonus() >= 0){
 						id=7;
 					}
 					else {
@@ -510,7 +511,6 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			char1.setShouldChangeSize(false);
 		}
 		if((char2.isPetit())&&(char2.getShouldChangeSize())){
-			System.out.println("char 2 petit + change");
 			modifyBodySize(getBodyForUserData(char2),(float)0.5,(float)0.5);
 			char2.setShouldChangeSize(false);
 		}
@@ -566,7 +566,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			this.monsterBodies.remove(tempBody);
 			this.world.destroyBody(tempBody);
 			currentLevel.incrementNbBonus(); // Every monster killed gives a fruit
-			this.currentLevelState.setNbKeysUnlocked(currentLevel.getNbBonus());
+			this.currentLevelState.setNbBonusUnlocked(currentLevel.getNbBonus());
 		}
 		tempList.clear();
 
@@ -580,9 +580,8 @@ public class GameplayState extends BasicGameState implements MouseListener{
 			if (theSprite.getShouldBeDestroy()){
 				if(theSprite instanceof Bonus && ((Bonus)theSprite).isObtained()){
 					currentLevel.incrementNbBonus();
-					this.currentLevelState.setNbKeysUnlocked(currentLevel.getNbBonus());
+					this.currentLevelState.setNbBonusUnlocked(currentLevel.getNbBonus());
 				}
-				currentLevel.getSprites().remove(theSprite);
 				tempList.add(i);
 			}
 			else {
@@ -596,8 +595,11 @@ public class GameplayState extends BasicGameState implements MouseListener{
 				((PushButtonShoot)theSprite).shoot();
 			}
 			// If a move button has been pushed, we move the platforms
-			if(theSprite instanceof PushButtonMove && ((PushButtonMove)theSprite).isEnabled()){
-				((PushButtonMove)theSprite).move();
+			if(theSprite instanceof PushButtonMove){
+				if(((PushButtonMove)theSprite).isEnabled()){
+					((PushButtonMove)theSprite).move();
+				}
+
 			}
 			// If a charge button has been pushed, we charge the platform
 			if(theSprite instanceof MissilePlatform && ((MissilePlatform)theSprite).shouldRecharge()){
@@ -625,6 +627,8 @@ public class GameplayState extends BasicGameState implements MouseListener{
 		// Actually remove the sprites
 		for(int i = 0 ; i < tempList.size() ; ++i){
 			Body tempBody = spriteBodies.get((tempList.get(i))-i);
+			Sprite theSprite = (Sprite)tempBody.getUserData();
+			currentLevel.getSprites().remove(theSprite);
 			this.spriteBodies.remove(tempBody);
 			this.world.destroyBody(tempBody);
 		}		
@@ -647,7 +651,7 @@ public class GameplayState extends BasicGameState implements MouseListener{
 	/** Create the Box2D environment with some standard gravity */
 	private void createWorld(){
 		Vec2 v = new Vec2(0.0f,-10.0f);
-		AABB aabb = new AABB(new Vec2(-10.0f,-10.0f), new Vec2((float)Global.GAMEPLAYWIDTH+10,(float)Global.GAMEPLAYHEIGHT+10));
+		AABB aabb = new AABB(new Vec2(-10.0f,-10.0f), new Vec2((float)Global.GAMEPLAYWIDTH+20,(float)Global.GAMEPLAYHEIGHT+10));
 		world = new World(aabb,v,false);
 		world.setContactListener(new MyContactListener());
 		world.setContactFilter(new MyContactFilter());

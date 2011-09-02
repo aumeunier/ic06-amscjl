@@ -3,10 +3,10 @@ package version1.data;
 public class LevelSave {
 	/** Unique identifier for this level */
 	private int levelID;
-	/** Number of unlockable keys in this level */
-	private int unlockableKeys;
-	/** Number of already unlocked keys*/
-	private int unlockedKeys;
+	/** Number of unlockable bonus in this level */
+	private int unlockableBonus;
+	/** Number of already unlocked bonus*/
+	private int unlockedBonus;
 	/** Whether the level has been unlocked */
 	private boolean isUnlocked;
 	/** Whether the level has been finished at least once (went through exit) */
@@ -23,8 +23,8 @@ public class LevelSave {
 	public LevelSave(int id, String name, String music, int unlockable, int[] area){
 		super();
 		levelID = id;
-		unlockedKeys = 0;
-		unlockableKeys = unlockable;
+		unlockedBonus = 0;
+		unlockableBonus = unlockable;
 		levelName = name;
 		musicFilename = music;
 		areaOnMap = area;
@@ -38,7 +38,7 @@ public class LevelSave {
 	 * @param levelFinished
 	 */
 	public void setSavedLevelData(int unlocked, boolean levelUnlocked, boolean levelFinished){
-		unlockedKeys = (unlockedKeys >= unlocked)?unlockedKeys:unlocked;
+		unlockedBonus = (unlockedBonus >= unlocked)?unlockedBonus:unlocked;
 		isUnlocked = isUnlocked || levelUnlocked;
 		isFinished = isFinished || levelFinished;
 	}
@@ -49,7 +49,7 @@ public class LevelSave {
 	 * @param levelFinished
 	 */
 	public void setSavedLevelDataFromSave(int unlocked, boolean levelUnlocked, boolean levelFinished){
-		unlockedKeys = unlocked;
+		unlockedBonus = unlocked;
 		isUnlocked = levelUnlocked;
 		isFinished = levelFinished;
 	}
@@ -59,11 +59,11 @@ public class LevelSave {
 	public String getMusicName(){
 		return musicFilename;
 	}
-	public int getUnlockableKeys(){
-		return unlockableKeys;
+	public int getUnlockableBonus(){
+		return unlockableBonus;
 	}
-	public int getUnlockedKeys(){
-		return unlockedKeys;
+	public int getUnlockedBonus(){
+		return unlockedBonus;
 	}
 	public boolean isFinished(){
 		return isFinished;
@@ -86,13 +86,13 @@ public class LevelSave {
 	public String toString(){
 		return "ID:"+levelID+" Name:"+levelName+"\n"
 			+"Unlocked:"+((isUnlocked)?"Yes":"No")+" Finished:"+((isFinished)?"Yes":"No")+"\n"
-			+"Keys:"+unlockableKeys+" Unlocked:"+unlockedKeys+"\n"
+			+"Bonus:"+unlockableBonus+" Unlocked:"+unlockedBonus+"\n"
 			+"AreaOnMap:"+areaOnMap[0]+","+areaOnMap[1]+","+areaOnMap[2]+","+areaOnMap[3];
 	}
 	public String toJson(String prefix){
 		String result=prefix+"{\n";
 		result+=prefix+"\t"+"\"id\":"+levelID+",\n";
-		result+=prefix+"\t"+"\"keys\":"+unlockedKeys+",\n";
+		result+=prefix+"\t"+"\"bonus\":"+unlockedBonus+",\n";
 		result+=prefix+"\t"+"\"unlocked\":"+((isUnlocked)?"true":"false")+",\n";
 		result+=prefix+"\t"+"\"finished\":"+((isFinished)?"true":"false")+"\n";
 		result+=prefix+"}";

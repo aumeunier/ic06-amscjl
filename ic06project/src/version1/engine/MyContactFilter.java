@@ -4,6 +4,8 @@ import org.jbox2d.collision.Shape;
 import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.ContactFilter;
 
+import beta.Global;
+
 import version1.sprites.Sprite;
 import version1.sprites.alive.Creature;
 import version1.sprites.alive.monsters.Monster;
@@ -84,8 +86,9 @@ public class MyContactFilter implements ContactFilter {
 				return true;
 			}
 			
-			// A Destructible falls through background platforms (doesn't stop it)
-			else if(other.getClass().equals(GroundBackground.class)){
+			// A Destructible falls through background platforms and transporters (doesn't stop it)
+			else if(other.getClass().equals(GroundBackground.class) 
+					|| other.getClass().equals(Transporter.class)){
 				return false;
 			}
 		}
@@ -195,7 +198,10 @@ public class MyContactFilter implements ContactFilter {
 				// If a player is hit by a fireball, he loses health
 				else if(other.getClass().equals(FireBall.class)){
 					((FireBall)other).setShouldBeDestroy();
-					character.loseHealth(((FireBall)other).getPower());
+					if(other.X() > 0 && other.Y() > 0 
+							&& other.X() < Global.GAMEPLAYWIDTH && other.Y() < Global.GAMEPLAYWIDTH) {
+						character.loseHealth(((FireBall)other).getPower());
+					}
 					return false;
 				}
 				// We don't want the player to push a missile
@@ -230,6 +236,13 @@ public class MyContactFilter implements ContactFilter {
 				}
 				else if(s2 instanceof Witch && s1 instanceof Ground){
 					((Witch)s2).inverseXspeed();
+					return false;
+				}
+				// Monsters don't go through teleporters
+				if(s1 instanceof Monster && s2 instanceof Transporter){
+					return false;
+				}
+				else if(s2 instanceof Monster && s1 instanceof Transporter){
 					return false;
 				}
 			}

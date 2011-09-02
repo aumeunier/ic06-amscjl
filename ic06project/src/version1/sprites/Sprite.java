@@ -312,7 +312,7 @@ public class Sprite {
 			g.texture(shape, image, true);
 		}
 		else if(image!=null){
-			image.draw(x, y, w, h);
+			image.draw(x, y, w, h, colorFilter);
 		}
 	}
 	/** Method called when we are in alpha mode */

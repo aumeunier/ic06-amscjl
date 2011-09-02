@@ -122,7 +122,8 @@ public class NarrativeState extends BasicGameState implements MouseListener {
 			
 			textToDisplay = "\n\n\nNos deux héros ont réussi à atteindre le repère de la sorcière!\n\n" +
 					"Une dure bataille les attend maintenant. Si elles parviennent \n\n" +
-					"à se débarasser de la sorcière, elles pourront libérer leurs amis!!";
+					"à se débarasser de la sorcière, elles pourront libérer leurs amis!!\n\n"+
+					"Cependant, la sorcière se transforme sous leurs yeux en dragon!!";
 			break;
 		case 6:
 			textToDisplay = "\n\n\nNos deux vaillantes fées ont atteint leur objectif:\n\n" +
@@ -132,7 +133,7 @@ public class NarrativeState extends BasicGameState implements MouseListener {
 			break;
 		case 7:
 			textToDisplay = "\n\n\nLa sorcière a été vaincue et les fées sont donc libres.\n\n" +
-					"De plus, à l'aide des fruits Hapsten, toutes les fées ont été guéries!\n\n" +
+					"De plus, vous avez récupéré tous les fruits Hapsten,\n\n toutes les fées ont été guéries!\n\n" +
 					"Bravo!";
 			break;
 		default:

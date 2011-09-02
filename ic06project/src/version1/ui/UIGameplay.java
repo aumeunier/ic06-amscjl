@@ -39,12 +39,12 @@ public class UIGameplay implements UIInterface {
 	private Label firstPlayerLabel;
 	private Label secondPlayerLabel;
 	private Label levelLabel;
-	private Label unlockableKeysLabel;
-	private Label unlockedKeysLabel;
-	private Label allKeysLabel;
+	private Label unlockableBonusLabel;
+	private Label unlockedBonusLabel;
+	private Label allBonusLabel;
 	
 	private int x, y, w, h;
-	private int nbUnlockedKeys;
+	private int nbUnlockedBonus;
 	private int idLevel;
 	private Power p1power = Power.NONE, p2power = Power.NONE;
 	
@@ -83,33 +83,33 @@ public class UIGameplay implements UIInterface {
 		levelLabel.pack();
 		this.display.add(levelLabel);
 
-		Image keysTotalLabelImage = labelImage.getScaledCopy(MENU_W/2, MENU_H);
-		allKeysLabel = new Label(keysTotalLabelImage,"Nombre total de fruits Hapsten: "+
-				Save.getInstance().getTotalNumberOfUnlockedKeys()+"/"+Save.getInstance().getTotalNumberOfKeys());
-		allKeysLabel.setBounds(MENU_X+MENU_W+10, MENU_Y, MENU_X-(POWER_X+POWER_W+10), MENU_H);
-		allKeysLabel.setForeground(Color.black);
-		allKeysLabel.setHorizontalAlignment(Label.LEFT_ALIGNMENT);
-		allKeysLabel.updateAppearance();
-		allKeysLabel.pack();
-		this.display.add(allKeysLabel);
-		allKeysLabel.setImage(null);
+		Image bonusTotalLabelImage = labelImage.getScaledCopy(MENU_W/2, MENU_H);
+		allBonusLabel = new Label(bonusTotalLabelImage,"Nombre total de fruits Hapsten: "+
+				Save.getInstance().getTotalNumberOfUnlockedBonus()+"/"+Save.getInstance().getTotalNumberOfBonus());
+		allBonusLabel.setBounds(MENU_X+MENU_W+10, MENU_Y, MENU_X-(POWER_X+POWER_W+10), MENU_H);
+		allBonusLabel.setForeground(Color.black);
+		allBonusLabel.setHorizontalAlignment(Label.LEFT_ALIGNMENT);
+		allBonusLabel.updateAppearance();
+		allBonusLabel.pack();
+		this.display.add(allBonusLabel);
+		allBonusLabel.setImage(null);
 
 		Image keyLabelImage = labelImage.getScaledCopy(MENU_W/2, 25);
-		unlockedKeysLabel = new Label(keyLabelImage,null);
-		unlockedKeysLabel.setBounds(MENU_X-(MENU_W/2+10), RESTART_Y-5, MENU_W/2, MENU_H);
-		unlockedKeysLabel.setForeground(Color.black);
-		unlockedKeysLabel.setHorizontalAlignment(Label.RIGHT_ALIGNMENT);
-		unlockedKeysLabel.updateAppearance();
-		unlockedKeysLabel.pack();
-		this.display.add(unlockedKeysLabel);
+		unlockedBonusLabel = new Label(keyLabelImage,null);
+		unlockedBonusLabel.setBounds(MENU_X-(MENU_W/2+10), RESTART_Y-5, MENU_W/2, MENU_H);
+		unlockedBonusLabel.setForeground(Color.black);
+		unlockedBonusLabel.setHorizontalAlignment(Label.RIGHT_ALIGNMENT);
+		unlockedBonusLabel.updateAppearance();
+		unlockedBonusLabel.pack();
+		this.display.add(unlockedBonusLabel);
 
-		unlockableKeysLabel = new Label(keyLabelImage,null);
-		unlockableKeysLabel.setBounds(MENU_X+(MENU_W+10), RESTART_Y-5, MENU_W/2, MENU_H);
-		unlockableKeysLabel.setForeground(Color.black);
-		unlockableKeysLabel.setHorizontalAlignment(Label.LEFT_ALIGNMENT);
-		unlockableKeysLabel.updateAppearance();
-		unlockableKeysLabel.pack();
-		this.display.add(unlockableKeysLabel);
+		unlockableBonusLabel = new Label(keyLabelImage,null);
+		unlockableBonusLabel.setBounds(MENU_X+(MENU_W+10), RESTART_Y-5, MENU_W/2, MENU_H);
+		unlockableBonusLabel.setForeground(Color.black);
+		unlockableBonusLabel.setHorizontalAlignment(Label.LEFT_ALIGNMENT);
+		unlockableBonusLabel.updateAppearance();
+		unlockableBonusLabel.pack();
+		this.display.add(unlockableBonusLabel);
 		
 		// Buttons
 		Image menuImage = labelImage.getScaledCopy(MENU_W, MENU_H);
@@ -124,38 +124,39 @@ public class UIGameplay implements UIInterface {
 		this.display.add(restartLabel);
 	}
 	public void onEnter(){
-		allKeysLabel.setText("Nombre total de fruits Hapsten: "+
-				Save.getInstance().getTotalNumberOfUnlockedKeys()+"/"+Save.getInstance().getTotalNumberOfKeys());
+		allBonusLabel.setText("Nombre total de fruits Hapsten: "+
+				Save.getInstance().getTotalNumberOfUnlockedBonus()+"/"+Save.getInstance().getTotalNumberOfBonus());
 		firstPlayerLabel.setText(Save.getInstance().getFirstPlayerName());
 		secondPlayerLabel.setText(Save.getInstance().getSecondPlayerName());
 		leftPlayerImage = Global.getImage(p1power.imageForPower());
 		rightPlayerImage = Global.getImage(p2power.imageForPower());;
 	}
-	public void setLevelInformation(String _levelName, int _nbUnlockedKeys, int _nbUnlockableKeys, int id){
-		nbUnlockedKeys = _nbUnlockedKeys;
+	public void setLevelInformation(String _levelName, int _nbUnlockedBonus, int _nbUnlockableBonus, int id){
+		nbUnlockedBonus = _nbUnlockedBonus;
 		if(Save.getInstance().getLevelWithID(id)!=null){
-			nbUnlockedKeys = Save.getInstance().getLevelWithID(id).getUnlockedKeys();
+			nbUnlockedBonus = Save.getInstance().getLevelWithID(id).getUnlockedBonus();
 		}
 		idLevel=id;
 		levelLabel.setText(_levelName);
 		levelLabel.setImage(null);
-		unlockedKeysLabel.setText("Fruits trouves:"+_nbUnlockedKeys);
-		unlockedKeysLabel.setImage(null);
-		unlockableKeysLabel.setText("Fruits a trouver:"+_nbUnlockableKeys);
-		unlockableKeysLabel.setImage(null);
-		nbUnlockedKeys = _nbUnlockedKeys;
+		unlockedBonusLabel.setText("Fruits trouves:"+_nbUnlockedBonus);
+		unlockedBonusLabel.setImage(null);
+		unlockableBonusLabel.setText("Fruits a trouver:"+_nbUnlockableBonus);
+		unlockableBonusLabel.setImage(null);
+		nbUnlockedBonus = _nbUnlockedBonus;
 		if(Save.getInstance().getLevelWithID(id)!=null){
-			nbUnlockedKeys = Save.getInstance().getLevelWithID(id).getUnlockedKeys();
+			nbUnlockedBonus = Save.getInstance().getLevelWithID(id).getUnlockedBonus();
 		}
 		idLevel=id;
 	}
 	
-	public void setTempLevelInformation(Power powerPlayer1, Power powerPlayer2, int _nbUnlockedKeys){
-		if(_nbUnlockedKeys>nbUnlockedKeys)
-			nbUnlockedKeys=_nbUnlockedKeys;
-		unlockedKeysLabel.setText("Fruits trouves:"+(_nbUnlockedKeys));
-		allKeysLabel.setText("Nombre total de fruits Hapsten: "+	(Save.getInstance().getTotalNumberOfUnlockedKeys()+nbUnlockedKeys-Save.getInstance().getLevelWithID(idLevel).getUnlockedKeys())
-				+"/"+Save.getInstance().getTotalNumberOfKeys());
+	public void setTempLevelInformation(Power powerPlayer1, Power powerPlayer2, int _nbUnlockedBonus){
+		if(_nbUnlockedBonus>nbUnlockedBonus)
+			nbUnlockedBonus = _nbUnlockedBonus;
+		unlockedBonusLabel.setText("Fruits trouves:"+(_nbUnlockedBonus));
+		allBonusLabel.setText("Nombre total de fruits Hapsten: "+	(Save.getInstance().getTotalNumberOfUnlockedBonus()
+				+nbUnlockedBonus-Save.getInstance().getLevelWithID(idLevel).getUnlockedBonus())
+				+"/"+Save.getInstance().getTotalNumberOfBonus());
 		if(powerPlayer1.compareTo(p1power)!=0){
 			this.p1power = powerPlayer1;
 			leftPlayerImage = Global.getImage(p1power.imageForPower());
