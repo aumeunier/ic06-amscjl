@@ -166,9 +166,9 @@ public class Level2 extends Level {
 		listT.add(listeT4);
 
 		//Switch creation
-		LeverCombination levier1=createLevierCombi(235,280,30,30,listB,listT);
-		LeverCombination levier2=createLevierCombi(345,280,30,30,listB,listT);
-		LeverCombination levier3=createLevierCombi(455,280,30,30,listB,listT);
+		LeverCombination levier1=createLeverCombination(235,280,30,30,listB,listT);
+		LeverCombination levier2=createLeverCombination(345,280,30,30,listB,listT);
+		LeverCombination levier3=createLeverCombination(455,280,30,30,listB,listT);
 		ArrayList<LeverCombination> L = new ArrayList<LeverCombination>();
 		L.add(levier1);
 		L.add(levier2);
@@ -186,7 +186,7 @@ public class Level2 extends Level {
 		MassData md = new MassData();
 		md.mass = 100.0f;
 		bodyMouvant.setMass(md);
-		createBoutonElevator(660, 362, 30, 18, b2, 2, 5000);// Switch of the elevator
+		createElevatorButton(660, 362, 30, 18, b2, 2, 5000);// Switch of the elevator
 		createGround(565,375,5,5);//cale1
 		createGround(620,375,5,5);//cale2
 		

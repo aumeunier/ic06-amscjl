@@ -98,7 +98,7 @@ public class Level1 extends Level {
 		Body oMurSortieBody = myState.addObstacle(oMurSortie);
 		ArrayList<Body> b2 = new ArrayList<Body>();
 		b2.add(oMurSortieBody);
-		Lever l1 = createLevier(Global.GAMEPLAYWIDTH-40,195,30,30,b2); // the switch open the wall
+		Lever l1 = createLever(Global.GAMEPLAYWIDTH-40,195,30,30,b2); // the switch open the wall
 		
 		// Wall before the switch
 		Obstacle oMurLevier = new Obstacle(Global.GAMEPLAYWIDTH-130,85,30,135);

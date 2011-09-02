@@ -115,8 +115,8 @@ public class Level3 extends Level {
 		b3.add(oMurLevierBody4);
 		
 		// Switches
-		Lever l1 = createLevier(460,295,30,30,b1); 
-		createLevier(250,380,30,30,b2); 
+		Lever l1 = createLever(460,295,30,30,b1); 
+		createLever(250,380,30,30,b2); 
 		createPushButton(5,480,20,20,b3); 
 		
 		// Teleporters
@@ -151,16 +151,16 @@ public class Level3 extends Level {
 
 		// Place sources
 		createSource(750,150,60,60,Power.SMALL);
-		Source rebond =createSource(750,20,60,60,Power.REBOND);
+		Source rebond =createSource(750,10,60,60,Power.REBOND);
 		Source nage =createSource(10,10,60,60,Power.SWIM);
 		Source absorbe =createSource(350,450,60,60,Power.ABSORB);
 		
 		// Place bonuses
-		createBonus(10,300,25,25);
+		createBonus(10,320,25,25);
 		createBonus(650,215,25,25);
 		
 		// Place the characters
-		this.character1 = addCharacterWithPoints(600,0,0.75f);
+		this.character1 = addCharacterWithPoints(600,10,0.75f);
 		this.character2 = addCharacterWithPoints(550,450,0.75f);
 		
 		// Place indications

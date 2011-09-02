@@ -85,20 +85,20 @@ public class Level4 extends Level {
 		o1.setImage("arbre-horizontal.png");
 		ArrayList<Body> b1 = new ArrayList<Body>();
 		b1.add(myState.getBodyForUserData(o1));
-		createLevier(420,130,30,30,b1);
+		createLever(420,130,30,30,b1);
 
 		Obstacle o2 = createObstacle(40,270,60,70);
 		o2.setImage("sol-pourri-v56.png");
 		o2.setCroppedImage((int)o2.X(),250,(int)o2.W(),(int)o2.H());
 		ArrayList<Body> b2 = new ArrayList<Body>();
 		b2.add(myState.getBodyForUserData(o2));
-		createLevier(120,135,30,30,b2);
+		createLever(120,135,30,30,b2);
 
 		Obstacle o3 = createObstacle(540,270,40,50);
 		o3.setImage("arbre-droit.png");
 		ArrayList<Body> b3 = new ArrayList<Body>();
 		b3.add(myState.getBodyForUserData(o3));
-		createLevier(120,460,30,30,b3);
+		createLever(120,460,30,30,b3);
 		
 		// Place Obstacles that can be destructed
 		Destructible d1 = createDestructible(42,360,76,70);

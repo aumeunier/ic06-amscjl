@@ -256,32 +256,33 @@ public class Level {
 		myState.addPushButton(bouton);
 		return bouton;
 	}	
-	protected PushButtonShoot createBoutonBombarde(int x, int y, int w, int h, ArrayList<Body> b){
+	protected PushButtonShoot createShootButton(int x, int y, int w, int h, ArrayList<Body> b){
 		PushButtonShoot bouton = new PushButtonShoot(x,y,w,h,b);
 		sprites.add(bouton);
 		myState.addPushButton(bouton);
 		return bouton;
 	}
-	protected PushButtonMove createBoutonDeplace(int x, int y, int w, int h, ArrayList<Body> b, String s){
+	protected PushButtonMove createMoveButton(int x, int y, int w, int h, ArrayList<Body> b, String s){
 		PushButtonMove bouton = new PushButtonMove(x,y,w,h,b,s);
 		sprites.add(bouton);
 		myState.addPushButton(bouton);
 		return bouton;
 	}
 	/** @param pu Power of the button */
-	protected PushButtonElevator createBoutonElevator(int x, int y, int w, int h, ArrayList<Body> b, int weight, int pu){
+	protected PushButtonElevator createElevatorButton(int x, int y, int w, int h, ArrayList<Body> b, int weight, int pu){
 		PushButtonElevator bouton = new PushButtonElevator(x,y,w,h,b,weight,pu);
 		sprites.add(bouton);
 		myState.addPushButton(bouton);
 		return bouton;
 	}
-	protected Lever createLevier(int x, int y, int w, int h, ArrayList<Body> b){
+	protected Lever createLever(int x, int y, int w, int h, ArrayList<Body> b){
 		Lever levier = new Lever(x,y,w,h,b);
 		sprites.add(levier);
 		myState.addLever(levier);
 		return levier;
 	}
-	protected LeverCombination createLevierCombi(int x, int y, int w, int h, ArrayList<ArrayList<Body> > b, ArrayList<ArrayList<Boolean> > test){
+	protected LeverCombination createLeverCombination(int x, int y, int w, int h, 
+			ArrayList<ArrayList<Body> > b, ArrayList<ArrayList<Boolean> > test){
 		LeverCombination levier = new LeverCombination(x,y,w,h,b,test);
 		sprites.add(levier);
 		myState.addLever(levier);

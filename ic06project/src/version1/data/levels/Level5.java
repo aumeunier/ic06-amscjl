@@ -98,9 +98,9 @@ public class Level5 extends Level {
 		Body maplat = state.getBodyForUserData(platmiss);
 		ArrayList<Body> miss=new ArrayList<Body>() ;
 		miss.add(maplat);
-		createBoutonBombarde(10,150-15,30,15,miss); // Button to fire the missile
-		createBoutonDeplace(0,Global.GAMEPLAYHEIGHT-115,30,15,miss,"left"); // Move left
-		createBoutonDeplace(Global.GAMEPLAYWIDTH-30,Global.GAMEPLAYHEIGHT-115,30,15,miss,"right"); // Move right
+		createShootButton(10,150-15,30,15,miss); // Button to fire the missile
+		createMoveButton(0,Global.GAMEPLAYHEIGHT-115,30,15,miss,"left"); // Move left
+		createMoveButton(Global.GAMEPLAYWIDTH-30,Global.GAMEPLAYHEIGHT-115,30,15,miss,"right"); // Move right
 		PushButtonCharge bouton=new PushButtonCharge(Global.GAMEPLAYWIDTH-40,150-15,30,15,miss); // Charge a missile
 		sprites.add(bouton);
 		myState.addPushButton(bouton);
